@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginPage = () => {
+const Login = () => {
   return (
     <div style={styles.container}>
       <div style={styles.leftPanel}>
@@ -32,7 +32,7 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;
 
 // Estilos CSS en línea
 const styles = {
@@ -56,9 +56,11 @@ const styles = {
     padding: '40px',
   },
   imageLeft: {
+    display: 'block',
     width: '100%',
     height: '100%',
     objectFit: 'cover',
+    padding: 0,
   },
   imageTopRight: {
     width: '20%',
