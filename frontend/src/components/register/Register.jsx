@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate  = useNavigate();
+  
   return (
     <div className="flex h-screen">
       <div className="flex-1.618 flex justify-center items-center">
@@ -50,7 +53,7 @@ const Login = () => {
           Register
         </button>
         <br/>
-        <p className="underline ... hover:underline-offset-4 hover:text-green-500 ">Already have an account?</p>
+        <p className="underline ... hover:underline-offset-4 hover:text-green-500 " onClick={() => navigate("/login")}>Already have an account?</p>
       </div>
     </div>
   );

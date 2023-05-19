@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex h-screen">
       <div className="flex-1.618 flex justify-center items-center">
@@ -34,9 +37,9 @@ const Login = () => {
           Login
         </button>
         <br/>
-        <p className="underline ...">Recover password</p>
+        <p className="underline ... hover:underline-offset-4 hover:text-green-500 " onClick={() => navigate("/recoverpassword")}>Recover password</p>
         <br/>
-        <p className="underline ...">Don't have an account?</p>
+        <p className="underline ... hover:underline-offset-4 hover:text-green-500 " onClick={() => navigate("/register")}>Don't have an account?</p>
       </div>
     </div>
   );
