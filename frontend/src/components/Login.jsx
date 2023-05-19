@@ -2,91 +2,40 @@ import React from 'react';
 
 const Login = () => {
   return (
-    <div style={styles.container}>
-      <div style={styles.leftPanel}>
+    <div className="flex h-screen">
+      <div className="flex-1.618 flex justify-center items-center">
         <img
-          src={require('./plaza_san_pedro.jpg')}// Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+          src={require('./plaza_san_pedro.jpg')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen de fondo"
-          style={styles.imageLeft}
+          className="block w-full h-full object-cover"
         />
       </div>
-      <div style={styles.rightPanel}>
+      <div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
         <img
-          src={require('./luperca.jpg')}// Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+          src={require('./luperca.jpg')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen en el top right"
-          style={styles.imageTopRight}
+          className="h-auto max-w-90 object-cover"
         />
-        <br>
-        </br>
-        <div style={styles.inputGroup}>
-          
-          <input type="text" style={styles.input} placeholder="Username" />
+        <div className="mb-4">
+          <input
+            type="text"
+            className="w-full px-4 py-2 text-gray-700 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            placeholder="Username"
+          />
         </div>
-        <div style={styles.inputGroup}>
-          
-          <input type="password" style={styles.input} placeholder="Password" />
+        <div className="mb-4">
+          <input
+            type="password"
+            className="w-full px-4 py-2 text-gray-700 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            placeholder="Password"
+          />
         </div>
-        <button style={styles.loginButton}>Login</button>
+        <button className="px-4 py-2 text-white bg-blue-500 rounded-lg cursor-pointer">
+          Login
+        </button>
       </div>
     </div>
   );
 };
 
 export default Login;
-
-// Estilos CSS en línea
-const styles = {
-  container: {
-    display: 'flex',
-    height: '100vh',
-  },
-  leftPanel: {
-    flex: '1.618',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rightPanel: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f1f1f1',
-    padding: '40px',
-  },
-  imageLeft: {
-    display: 'block',
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    padding: 0,
-  },
-  imageTopRight: {
-    height: 'auto',
-    maxWidth: '90%',
-    objectFit: 'cover',
-},
-  inputGroup: {
-    marginBottom: '20px',
-  },
-  label: {
-    fontSize: '16px',
-    fontWeight: 'bold',
-  },
-  input: {
-    width: '100%',
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-  },
-  loginButton: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    backgroundColor: 'lightblue',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-};
