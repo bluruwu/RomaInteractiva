@@ -34,9 +34,9 @@ const Login = () => {
           Login
         </button>
         <br/>
-        <p class="underline ...">Recover password</p>
+        <p className="underline ...">Recover password</p>
         <br/>
-        <p class="underline ...">Don't have an accou</p>
+        <p className="underline ...">Don't have an accou</p>
       </div>
     </div>
   );
