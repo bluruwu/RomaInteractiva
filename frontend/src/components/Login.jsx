@@ -7,14 +7,14 @@ const Login = () => {
         <img
           src={require('./plaza_san_pedro.jpg')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen de fondo"
-          className="block w-full h-full object-cover"
+          className="block w-full h-full object-cover "
         />
       </div>
       <div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
         <img
           src={require('./luperca.jpg')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen en el top right"
-          className="h-auto max-w-90 object-cover"
+          className="h-max max-w-200 object-cover h-auto max-w-prose"
         />
         <div className="mb-4">
           <input
@@ -30,7 +30,7 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <button className="px-4 py-2 text-white bg-blue-500 rounded-lg cursor-pointer">
+        <button className="px-4 py-2 text-white bg-red-500 rounded-lg cursor-pointer">
           Login
         </button>
       </div>
