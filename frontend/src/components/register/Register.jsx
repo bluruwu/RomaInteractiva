@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate  = useNavigate();
-  
+
   return (
     <div className="flex h-screen">
       <div className="flex-1.618 flex justify-center items-center">
@@ -17,7 +17,7 @@ const Login = () => {
         <img
           src={require('./spqr.png')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen en el top right"
-          className="h-auto w-auto max-w-30 object-cover "
+          className="h-max max-w-200 object-cover h-auto max-w-prose"
         />
         <br/>
         <br/>
