@@ -12,7 +12,7 @@ const Login = () => {
       </div>
       <div style={styles.rightPanel}>
         <img
-          src={require('./plaza_san_pedro.jpg')}// Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+          src={require('./luperca.jpg')}// Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen en el top right"
           style={styles.imageTopRight}
         />
@@ -63,10 +63,10 @@ const styles = {
     padding: 0,
   },
   imageTopRight: {
-    width: '20%',
-    height: '5%',
+    height: 'auto',
+    maxWidth: '90%',
     objectFit: 'cover',
-  },
+},
   inputGroup: {
     marginBottom: '20px',
   },
