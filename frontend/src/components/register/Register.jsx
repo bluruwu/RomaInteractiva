@@ -17,7 +17,7 @@ const Login = () => {
         <img
           src={require('./spqr.png')} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
           alt="Imagen en el top right"
-          className="h-max max-w-200 object-cover h-auto max-w-prose"
+          className="max-w-200 max-h-200 object-cover h-auto"
         />
         <br/>
         <br/>
