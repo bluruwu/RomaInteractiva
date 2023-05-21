@@ -5,6 +5,7 @@ import { postData } from '../../conections/requests';
 const Register = () => {
   const navigate = useNavigate();
 
+  //data that is going to be sent to the backend
   const [formData, setFormData] = useState({
     email: '',
     nombre_usuario: '',
@@ -12,12 +13,44 @@ const Register = () => {
     contrasena: '',
   });
 
+  const [confirmedPassword, setConfirmedPassword] = useState()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform form submission logic here
     console.log(formData);
+   
+    if(formData['contrasena'].length < 8){
+      alert("Password is too short")
+      return
+    }
 
-    postData(formData);
+    if(formData['contrasena'] != confirmedPassword){
+      alert("Passwords are not the same")
+      return
+    }
+
+    if(formData['nombre_usuario'].length < 8){
+      alert("Username is too short")
+      return
+    }
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData['email']) == false){
+      alert("Email is not valid")
+      return
+    }
+
+    const myresponse = async () => {
+      const req_succesful = await postData(formData);
+      if (req_succesful === 'Data submitted successfully'){
+          alert("Register succesful")
+          navigate("/login")
+      }else{
+          alert("email or username already taken")
+      }
+    }
+    myresponse()
+
   };
 
 
@@ -68,7 +101,7 @@ const Register = () => {
               type="password"
               className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Repeat Password"
-              onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
+              onChange={(e) => setConfirmedPassword(e.target.value)}
             />
           </div>
           <button
