@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { postData } from '../../conections/requests';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -7,14 +8,16 @@ const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     nombre_usuario: '',
-    password: '',
-    repeatPassword: ''
+    nombre: '',
+    contrasena: '',
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform form submission logic here
     console.log(formData);
+
+    postData(formData);
   };
 
 
@@ -41,7 +44,6 @@ const Register = () => {
               type="text"
               className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Username"
-
               onChange={(e) => setFormData({ ...formData, nombre_usuario: e.target.value })}
             />
           </div>
@@ -50,7 +52,6 @@ const Register = () => {
               type="email"
               className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="email"
-
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
@@ -59,8 +60,7 @@ const Register = () => {
               type="password"
               className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Password"
-
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
             />
           </div>
           <div className="mb-6">
@@ -68,8 +68,7 @@ const Register = () => {
               type="password"
               className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Repeat Password"
-
-              onChange={(e) => setFormData({ ...formData, repeatPassword: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
             />
           </div>
           <button
