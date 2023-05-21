@@ -12,7 +12,8 @@ export const postData = async (mydata) => {
           console.log('Data submitted successfully');
           // Perform additional actions after successful submission
         } else {
-          console.error('Error:', response.status);
+          const aerror = await response.json()
+          console.error(aerror);
           // Handle error response
         }
       } catch (error) {

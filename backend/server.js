@@ -52,7 +52,6 @@ app.get('/create/tables', async (req, res) => {
     console.error(error);
     res.status(500).send('Error en el servidor');
   }
-  
 });
 
 // Ruta para registrar un usuario
@@ -67,14 +66,6 @@ app.post('/register/user', async (req, res) => {
     // Consulta para insertar el nuevo usuario en la tabla
     const insertQuery = `INSERT INTO Usuarios (email, nombre_usuario, nombre, contrasena)
     VALUES ('${email}', '${nombre_usuario}', '${nombre}', '${contrasena}');`;
-
-    // Parámetros de la consulta
-    const parameters = [
-      { name: 'email', value: email },
-      { name: 'nombre_usuario', value: nombre_usuario },
-      { name: 'nombre', value: nombre },
-      { name: 'contrasena', value: contrasena }
-    ];
 
     // Ejecutar la consulta con los parámetros
     await sql.query(insertQuery);
@@ -105,7 +96,7 @@ app.get('/users', async (req, res) => {
     res.json(users);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error en el servidor');
+    res.status(500).send(error.message);
   }
 });
 
