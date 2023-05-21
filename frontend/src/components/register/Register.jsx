@@ -9,7 +9,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     email: "",
     nombre_usuario: "",
-    nombre: "",
+    nickname: "",
     contrasena: "",
   });
 
@@ -32,6 +32,11 @@ const Register = () => {
 
     if (formData["nombre_usuario"].length < 8) {
       alert("Username is too short");
+      return;
+    }
+
+    if (formData["nickname"].length < 5) {
+      alert("Nickname is too short");
       return;
     }
 
@@ -83,7 +88,7 @@ const Register = () => {
               type="text"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Nickname"
-              onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
             />
           </div>
           <div className="mb-4">
