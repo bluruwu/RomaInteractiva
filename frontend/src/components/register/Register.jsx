@@ -44,6 +44,7 @@ const Register = () => {
       const req_succesful = await postData(formData);
       if (req_succesful === 'Data submitted successfully'){
           alert("Register succesful")
+          navigate("/login")
       }else{
           alert("email or username already taken")
       }
