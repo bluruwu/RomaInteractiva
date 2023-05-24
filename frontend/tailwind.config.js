@@ -4,7 +4,21 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        custom: {
+          'dorado': '#FFAD1B',
+          'rojo' : '#8E0000',
+        }
+      },
+      fontFamily: {
+        text: ['Merriweather'],
+      },
+      fontWeight: {
+        regular: 400,
+        bold: 700,
+      },
+    },
   },
   plugins: [],
 }
