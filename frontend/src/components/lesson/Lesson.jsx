@@ -10,7 +10,9 @@ const Lesson = () => {
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mb-4 flex flex-col md:flex-row bg-gray-100">
+				{/* Contenido de la columna izquierda (Boton HOME, titulo y contenido de la leccion) */}
 				<div className=" w-full md:w-1/2 p-14">
+					{/* Icono y titulo de HOME */}
 					<div className="mb-4 ">
 						<img
 							src={require("./homeicon.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
@@ -22,9 +24,13 @@ const Lesson = () => {
 							Home
 						</p>
 					</div>
+
+					{/* Titulo de la leccion */}
 					<div className="mb-10 text-3xl">
 						<p className=" font-bold text-center">Fundación de Roma</p>
 					</div>
+
+					{/* Contenido - texto de la leccion */}
 					<div>
 						<p className="text-justify mb-4">
 							La fundación de Roma como una monarquía es un tema enraizado en la mitología y la
@@ -55,6 +61,8 @@ const Lesson = () => {
 						</p>
 					</div>
 				</div>
+
+				{/* Columna derecha que contiene el modelo 3D y la descripcion en el recuadro amarillo */}
 				<div className="w-full md:w-1/2 flex relative">
 					<img
 						src={require("./plaza_san_pedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
@@ -69,26 +77,34 @@ const Lesson = () => {
 
 			{/* Parte inferior para el cambio de lecciones */}
 			<div className="flex flex-col md:flex-row bg-red-100">
+				{/* Leccion anterior */}
 				<div className="w-full md:w-1/2 h-32 relative" onClick={() => navigate("/home")}>
 					<img
 						src={require("./plaza_san_pedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 						alt="Anterior leccion"
 						className="block w-full h-full object-cover"
 					/>
+					{/* Opacidad de la imagen */}
 					<div className="absolute inset-0 bg-black opacity-50"></div>
+
+					{/* Texto que aparece sobre la imagen */}
 					<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 						<p className="text-lg font-bold text-white">Anterior</p>
 						<p className="text-lg font-bold text-white">VOLVER A INICIO</p>
 					</div>
 				</div>
 
+				{/* Leccion siguiente */}
 				<div className="w-full md:w-1/2 h-32 relative" onClick={() => navigate("/lesson")}>
 					<img
 						src={require("./monarquia2.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 						alt="Siguiente leccion"
 						className="block w-full h-full object-cover"
 					/>
+					{/* Opacidad de la imagen */}
 					<div className="absolute inset-0 bg-black opacity-50"></div>
+
+					{/* Texto que aparece sobre la imagen */}
 					<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 						<p className="text-lg font-bold text-white">Siguiente</p>
 						<p className="text-lg font-bold text-white">REYES DE LA MONARQUÍA</p>
