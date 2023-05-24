@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../navbar/navbar";
+import Navbar from "../../utilities/Navbar";
 
 const Lesson = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div>
+		<div className="font-text">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
-			<div className="mb-4 flex flex-col md:flex-row bg-gray-100">
+			<div className="mb-4 flex flex-col md:flex-row  ">
 				{/* Contenido de la columna izquierda (Boton HOME, titulo y contenido de la leccion) */}
 				<div className=" w-full md:w-1/2 p-14">
 					{/* Icono y titulo de HOME */}
@@ -17,17 +17,17 @@ const Lesson = () => {
 						<img
 							src={require("./homeicon.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 							alt="Imagen de fondo"
-							className="block  object-cover w-11 h-11"
+							className="block  object-cover w-11 h-11 cursor-pointer"
 							onClick={() => navigate("/home")}
 						/>
-						<p className=" font-bold" onClick={() => navigate("/home")}>
+						<p className=" font-bold cursor-pointer" onClick={() => navigate("/home")}>
 							Home
 						</p>
 					</div>
 
 					{/* Titulo de la leccion */}
-					<div className="mb-10 text-3xl">
-						<p className=" font-bold text-center">Fundación de Roma</p>
+					<div className="mb-10 text-3xl ">
+						<p className=" font-bold text-center filter drop-shadow-lg">Fundación de Roma</p>
 					</div>
 
 					{/* Contenido - texto de la leccion */}
@@ -69,7 +69,8 @@ const Lesson = () => {
 						alt="Imagen de fondo"
 						className="block w-full h-full object-cover"
 					/>
-					<div className="flex items-end justify-end absolute bottom-8 right-8 p-2 bg-yellow-400 rounded-md">
+					{/* Descripcion del modelo 3D */}
+					<div className="flex items-end justify-end absolute bottom-8 right-8 p-2 bg-custom-dorado rounded-md">
 						<p>Descripción modelo 3D</p>
 					</div>
 				</div>
@@ -78,7 +79,10 @@ const Lesson = () => {
 			{/* Parte inferior para el cambio de lecciones */}
 			<div className="flex flex-col md:flex-row bg-red-100">
 				{/* Leccion anterior */}
-				<div className="w-full md:w-1/2 h-32 relative" onClick={() => navigate("/home")}>
+				<div
+					className="w-full md:w-1/2 h-32 relative cursor-pointer"
+					onClick={() => navigate("/home")}
+				>
 					<img
 						src={require("./plaza_san_pedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 						alt="Anterior leccion"
@@ -95,7 +99,10 @@ const Lesson = () => {
 				</div>
 
 				{/* Leccion siguiente */}
-				<div className="w-full md:w-1/2 h-32 relative" onClick={() => navigate("/lesson")}>
+				<div
+					className="w-full md:w-1/2 h-32 relative cursor-pointer"
+					onClick={() => navigate("/lesson")}
+				>
 					<img
 						src={require("./monarquia2.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 						alt="Siguiente leccion"
