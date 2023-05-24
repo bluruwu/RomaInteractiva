@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../utilities/Navbar";
+import HomeButton from "../../utilities/HomeButton";
 
 const Lesson = () => {
 	const navigate = useNavigate();
@@ -13,17 +14,8 @@ const Lesson = () => {
 				{/* Contenido de la columna izquierda (Boton HOME, titulo y contenido de la leccion) */}
 				<div className=" w-full md:w-1/2 p-14">
 					{/* Icono y titulo de HOME */}
-					<div className="mb-4 ">
-						<img
-							src={require("./homeicon.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
-							alt="Imagen de fondo"
-							className="block  object-cover w-11 h-11 cursor-pointer"
-							onClick={() => navigate("/home")}
-						/>
-						<p className=" font-bold cursor-pointer" onClick={() => navigate("/home")}>
-							Home
-						</p>
-					</div>
+
+					<HomeButton />
 
 					{/* Titulo de la leccion */}
 					<div className="mb-10 text-3xl ">
@@ -33,31 +25,29 @@ const Lesson = () => {
 					{/* Contenido - texto de la leccion */}
 					<div>
 						<p className="text-justify mb-4">
-							La fundación de Roma como una monarquía es un tema enraizado en la mitología y la
-							historia antigua. Según la tradición, la ciudad de Roma fue fundada en el año 753 a.C.
-							por Rómulo, quien se convirtió en su primer rey.
+							La fundación de Roma como una monarquía se remonta a la antigüedad y está envuelta en
+							leyendas y mitos. Según la tradición, la ciudad de Roma fue fundada en el año 753 a.C.
+							por Rómulo, quien se convirtió en el primer rey. La historia temprana de Roma se basa
+							en gran medida en la obra "Ab urbe condita" escrita por Tito Livio. Aunque muchas de
+							las historias anteriores a la República temprana son consideradas legendarias, se cree
+							que Rómulo estableció las bases de la estructura política y social de la incipiente
+							ciudad. Dividió la población en tribus y curias, y estableció un senado compuesto por
+							líderes locales.
 						</p>
 						<p className="text-justify mb-4">
-							La historia temprana de Roma se describe en gran parte en la obra "Ab urbe condita"
-							(Desde la fundación de la ciudad) escrita por Tito Livio, un historiador romano del
-							siglo I a.C., aunque muchas de las historias y eventos anteriores a la República
-							temprana son considerados legendarios.
+							La leyenda cuenta que Rómulo y su hermano Remo fueron abandonados en el río Tíber y
+							criados por una loba. Al crecer, decidieron fundar una ciudad en el lugar donde fueron
+							encontrados. Sin embargo, surgieron disputas entre los hermanos sobre quién gobernaría
+							la nueva ciudad. La disputa terminó trágicamente cuando Rómulo mató a Remo y se
+							convirtió en el primer rey de Roma. Bajo su reinado, se estableció la monarquía y se
+							sentaron las bases para el futuro desarrollo de la ciudad.
 						</p>
 						<p className="text-justify mb-4">
-							La disputa llegó a su fin cuando Rómulo mató a Remo y se convirtió en el primer rey de
-							Roma. Rómulo gobernó como un monarca absoluto y estableció las bases de la estructura
-							política y social de la incipiente ciudad. Según la tradición, Rómulo también fue
-							responsable de dividir la población en tribus y curias, y estableció un senado
-							compuesto por líderes locales.
-						</p>
-						<p className="text-justify">
-							El reinado de Rómulo fue seguido por una serie de reyes, conocidos como los siete
-							reyes de Roma. Cada uno de estos reyes gobernó durante un período de tiempo variable y
-							se les atribuyeron diferentes logros en la historia temprana de Roma. Algunos de los
-							reyes más conocidos incluyen a Numa Pompilio, quien se dice que introdujo las
-							instituciones religiosas y legales, y Tarquinio el Soberbio, quien fue el último rey
-							antes de la expulsión de la monarquía y el establecimiento de la República en el año
-							509 a.C.
+							Aunque la fundación de Roma como una monarquía se basa en la tradición y la mitología,
+							ha dejado un impacto duradero en la historia y la cultura romanas. La monarquía romana
+							sentó las bases de la futura República y posteriormente del Imperio, y su legado
+							continúa influyendo en la concepción del poder y la organización política en el mundo
+							antiguo y más allá.
 						</p>
 					</div>
 				</div>
