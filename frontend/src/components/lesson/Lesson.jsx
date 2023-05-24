@@ -53,15 +53,32 @@ const Lesson = () => {
 				</div>
 
 				{/* Columna derecha que contiene el modelo 3D y la descripcion en el recuadro amarillo */}
-				<div className="w-full md:w-1/2 flex relative">
-					<img
+				<div className="w-full md:w-1/2 flex relative sketchfab-embed-wrapper">
+					{" "}
+					<iframe
+						title="Romulus & Remus"
+						frameborder="0"
+						allowfullscreen
+						mozallowfullscreen="true"
+						webkitallowfullscreen="true"
+						allow="autoplay; fullscreen; xr-spatial-tracking"
+						xr-spatial-tracking
+						execution-while-out-of-viewport
+						execution-while-not-rendered
+						web-share
+						src="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
+						className="w-full"
+					>
+						{" "}
+					</iframe>{" "}
+					{/* <img
 						src={require("./plaza_san_pedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
 						alt="Imagen de fondo"
 						className="block w-full h-full object-cover"
-					/>
+					/> */}
 					{/* Descripcion del modelo 3D */}
-					<div className="flex items-end justify-end absolute bottom-8 right-8 p-2 bg-custom-dorado rounded-md">
-						<p>Descripción modelo 3D</p>
+					<div className="flex font-bold items-end justify-end absolute bottom-14 right-8 p-3 bg-custom-dorado rounded-md shadow-xl ">
+						<p>Rómulo y Remo criados por una loba</p>
 					</div>
 				</div>
 			</div>
@@ -107,6 +124,27 @@ const Lesson = () => {
 						<p className="text-lg font-bold text-white">REYES DE LA MONARQUÍA</p>
 					</div>
 				</div>
+
+				{/* PRUEBA */}
+				{/* <div class="sketchfab-embed-wrapper">
+					{" "}
+					<iframe
+						title="Romulus & Remus"
+						frameborder="0"
+						allowfullscreen
+						mozallowfullscreen="true"
+						webkitallowfullscreen="true"
+						allow="autoplay; fullscreen; xr-spatial-tracking"
+						xr-spatial-tracking
+						execution-while-out-of-viewport
+						execution-while-not-rendered
+						web-share
+						src="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
+					>
+						{" "}
+					</iframe>{" "}
+				</div> */}
+				{/* AAA */}
 			</div>
 		</div>
 	);
