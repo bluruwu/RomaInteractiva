@@ -4,8 +4,8 @@ import logo from '../media/logo.png'
 const Navbar = () => {
   return (
     <nav className="bg-red-800">
-      <div className="flex justify-between mr-20">
-        <div className="flex items-center -space-x-8">
+      <div className="flex justify-between mx-20">
+        <div className="flex items-center -space-x-3">
           <img src={logo} alt="Logo" className="w-32 h-auto"></img>
           <span className="text-white text-lg ml-2">Roma Interactiva</span>
         </div>

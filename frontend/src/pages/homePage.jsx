@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../utilities/Navbar';
+import Footbar from '../utilities/Footbar';
 import Button from '../components/lessonButton';
-
 
 const HomePage = () => {
 
@@ -42,6 +42,9 @@ const HomePage = () => {
           </div>
         </section>
       </main>
+      <footer> 
+            <Footbar/>
+        </footer>
     </div>
   );
 };
