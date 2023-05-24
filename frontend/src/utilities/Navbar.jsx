@@ -7,17 +7,14 @@ const Navbar = () => {
       <div className="flex justify-between mx-20">
         <div className="flex items-center -space-x-3">
           <img src={logo} alt="Logo" className="w-32 h-auto"></img>
-          <span className="text-white text-lg ml-2">Roma Interactiva</span>
+          <span className="text-lg ml-2 font-text font-regular text-custom-dorado">Roma Interactiva</span>
         </div>
         <ul className="flex space-x-4 items-center">
           <li>
-            <a href="/" className="text-white hover:text-gray-300">Inicio</a>
+            <a href="/login" className="font-text font-regular text-custom-dorado hover:text-gray-300">Iniciar sesión</a>
           </li>
           <li>
-            <a href="/acerca" className="text-white hover:text-gray-300">Acerca</a>
-          </li>
-          <li>
-            <a href="/contacto" className="text-white hover:text-gray-300">Contacto</a>
+            <div class="w-14 h-14 rounded-full bg-gray-300"></div>
           </li>
         </ul>
       </div>
