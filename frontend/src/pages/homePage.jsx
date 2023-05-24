@@ -16,6 +16,7 @@ const HomePage = () => {
         <div className="relative z-10 flex items-center justify-center h-full">
           <h1 className="font-bold text-4xl text-white">¡Bienvenido a nuestra página sobre la gloriosa cultura Romana!</h1>
         </div>
+
       </div>
     );
   };

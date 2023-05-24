@@ -4,6 +4,7 @@ import logo from '../media/logo.png'
 const Footbar = () => {
   return (
     <footer className="bg-black  py-8 bottom-0 w-full">
+
     <div className="flex justify-between mx-20">
         <div className=' font-regular font-text'> 
             <p className='text-white text-center'> Sobre nosotros </p>
