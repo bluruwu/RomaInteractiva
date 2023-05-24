@@ -1,13 +1,15 @@
 import React from 'react';
 import Navbar from '../utilities/Navbar';
+import Footbar from '../utilities/Footbar';
 
 const HomePage = () => {
     return (
       <div>
         <Navbar />
-        <div>
-          <h1>¡Hola!</h1>
-        </div>
+
+        <footer> 
+            <Footbar/>
+        </footer>
       </div>
     );
 };
