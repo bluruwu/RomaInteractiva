@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getLogin } from "../../conections/requests";
+import { getLogin } from "../conections/requests";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ const Login = () => {
       <div className="flex h-screen">
         <div className="flex-1.618 flex justify-center items-center">
           <img
-            src={require("./plaza_san_pedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/plazaSanPedro.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen de fondo"
             className="block w-full h-full object-cover"
           />
         </div>
         <div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
           <img
-            src={require("./luperca.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/luperca.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen en el top right"
             className="max-w-200 max-h-200 object-cover h-auto max-w-prose"
           />

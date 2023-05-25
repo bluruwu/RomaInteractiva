@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postData } from "../../conections/requests";
+import { postData } from "../conections/requests";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -62,14 +62,14 @@ const Register = () => {
       <div className="flex h-screen">
         <div className="flex-1.618 flex justify-center items-center">
           <img
-            src={require("./coliseo.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/coliseo.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen de fondo"
             className="block w-full h-full object-cover"
           />
         </div>
         <div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
           <img
-            src={require("./spqr.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/spqr.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen en el top right"
             className="max-w-200 max-h-200 object-cover h-auto"
           />
