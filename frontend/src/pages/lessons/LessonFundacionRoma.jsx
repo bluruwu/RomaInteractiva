@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../utilities/Navbar";
-import LessonText from "../components/lesson/LessonText";
-import LessonModel from "../components/lesson/LessonModel";
-import LessonNav from "../components/lesson/LessonNav";
+import Navbar from "../../utilities/Navbar";
+import LessonText from "../../components/lesson/LessonText";
+import LessonModel from "../../components/lesson/LessonModel";
+import LessonNav from "../../components/lesson/LessonNav";
 
 const first = `La fundación de Roma como una monarquía se remonta a la antigüedad y está envuelta en
 				leyendas y mitos. Según la tradición, la ciudad de Roma fue fundada en el año 753 a.C.
