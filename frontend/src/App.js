@@ -12,6 +12,7 @@ import QuizMonarquia5 from "./pages/quizmonarquia/QuizMonarquia5";
 
 import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
 import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
+import LessonFinalMonarquia from "./pages/lessons/LessonFinalMonarquia";
 
 const App = () => {
 	return (
@@ -21,7 +22,6 @@ const App = () => {
 			<Route path="/" element={<HomePage />} />
 			<Route path="/home" element={<HomePage />} />
 
-			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia1 />} />
 			<Route path="Quiz_monarquia_2" element={<QuizMonarquia2 />} />
 			<Route path="Quiz_monarquia_3" element={<QuizMonarquia3 />} />
@@ -30,6 +30,7 @@ const App = () => {
 
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
 			<Route path="/Julio_Cesar" element={<LessonJulioCesar />} />
+			<Route path="/Final_Monarquia" element={<LessonFinalMonarquia/>} />
 		</Routes>
 	);
 };

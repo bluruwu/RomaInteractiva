@@ -41,7 +41,7 @@ const LessonFundacionRoma = () => {
 				<LessonModel description="Rómulo y Remo criados por una loba" titleModel="Romulus & Remus" source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"/>
 			</div>
 			<LessonNav urlbef="/home" mediabef="plazaSanPedro.jpg" titlebef="VOLVER A INICIO" 
-			           urlnxt="/Fundacion_de_Roma" medianxt="monarquia2.png"  titlenxt="REYES DE LA MONARQUIA"/>
+			           urlnxt="/Fundacion_de_Roma" medianxt="monarquia2.png"  titlenxt="REYES DE LA MONARQUÍA"/>
 		</div>
 	);
 };
