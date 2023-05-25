@@ -22,7 +22,7 @@ const Navbar = () => {
 						</a>
 					</li>
 					<li>
-						<div class="w-14 h-14 rounded-full bg-gray-300"></div>
+						<div className="w-14 h-14 rounded-full bg-gray-300"></div>
 					</li>
 				</ul>
 			</div>

@@ -1,10 +1,10 @@
 import React from "react";
-import Login from "./components/login/Login";
-import Register from "./components/register/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
-import Lesson from "./components/lesson/Lesson";
 import HomePage from "./pages/homePage";
 import Quiz from "./components/quiz/Quiz";
+import LessonFundacionRoma from "./pages/LessonFundacionRoma";
 
 const App = () => {
 	return (
@@ -13,8 +13,8 @@ const App = () => {
 			<Route path="/register" element={<Register />} />
 			<Route path="/" element={<Login />} />
 			<Route path="/home" element={<HomePage />} />
-			<Route path="/lesson" element={<Lesson />} />
 			<Route path="/quiz" element={<Quiz />} />
+			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma/>} />
 		</Routes>
 	);
 };
