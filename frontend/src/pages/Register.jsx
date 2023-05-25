@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postData } from "../conections/requests";
+import { postData } from "../../conections/requests";
+import HomeButton from "../../utilities/HomeButton";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -60,14 +61,17 @@ const Register = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex h-screen">
-        <div className="flex-1.618 flex justify-center items-center">
+        <div className="flex-1.618 flex justify-center items-centers">
           <img
             src={require("../media/coliseo.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen de fondo"
             className="block w-full h-full object-cover"
           />
         </div>
-        <div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
+        <div className="font-text flex-1 flex flex-col justify-center items-center bg-gray-100 p-20 w-2/3">
+          <div className="w-full flex justify-end">
+            <HomeButton />
+          </div>
           <img
             src={require("../media/spqr.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
             alt="Imagen en el top right"
@@ -78,7 +82,7 @@ const Register = () => {
           <div className="mb-4">
             <input
               type="text"
-              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Full name"
               onChange={(e) => setFormData({ ...formData, nombre_usuario: e.target.value })}
             />
@@ -86,7 +90,7 @@ const Register = () => {
           <div className="mb-4">
             <input
               type="text"
-              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Nickname"
               onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
             />
@@ -94,7 +98,7 @@ const Register = () => {
           <div className="mb-4">
             <input
               type="email"
-              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Email"
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
@@ -102,7 +106,7 @@ const Register = () => {
           <div className="mb-4">
             <input
               type="password"
-              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Password"
               onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
             />
@@ -110,7 +114,7 @@ const Register = () => {
           <div className="mb-4">
             <input
               type="password"
-              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+              className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Repeat Password"
               onChange={(e) => setConfirmedPassword(e.target.value)}
             />
