@@ -4,7 +4,8 @@ import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import Quiz from "./components/quiz/Quiz";
-import LessonFundacionRoma from "./pages/LessonFundacionRoma";
+import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
+import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
 
 const App = () => {
 	return (
@@ -15,6 +16,7 @@ const App = () => {
 			<Route path="/home" element={<HomePage />} />
 			<Route path="/quiz" element={<Quiz />} />
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma/>} />
+			<Route path="/Julio_Cesar" element={<LessonJulioCesar/>} />
 		</Routes>
 	);
 };
