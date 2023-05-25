@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postData } from "../../conections/requests";
-import HomeButton from "../../utilities/HomeButton";
+import { postData } from "../conections/requests";
+import HomeButton from "../utilities/HomeButton";
 
 const Register = () => {
   const navigate = useNavigate();
