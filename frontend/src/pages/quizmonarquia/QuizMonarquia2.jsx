@@ -9,8 +9,8 @@ const firstoption = `Establecimiento de la República`;
 const secondoption = `Desarrollo de la cultura romana`;
 const thirdoption = `Influencia en la concepción del poder político`;
 const fourthoption = `Todas las anteriores`;
-const buttonbef = "Volver a lección";
-const buttonnxt = "Siguiente";
+const buttonbef = "Anterior pregunta";
+const buttonnxt = "Siguiente pregunta";
 const urlbef = "/quiz_monarquia_1";
 const urlnxt = "/quiz_monarquia_3";
 

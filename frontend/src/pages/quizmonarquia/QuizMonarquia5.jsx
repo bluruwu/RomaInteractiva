@@ -9,8 +9,8 @@ const firstoption = `QUESTION`;
 const secondoption = `QUESTION`;
 const thirdoption = `QUESTION`;
 const fourthoption = `QUESTION`;
-const buttonbef = "Volver a lección";
-const buttonnxt = "Siguiente";
+const buttonbef = "Anterior pregunta";
+const buttonnxt = "Terminar quiz";
 const urlbef = "/quiz_monarquia_4";
 const urlnxt = "/home";
 
