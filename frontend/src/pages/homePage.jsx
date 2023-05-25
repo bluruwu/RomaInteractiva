@@ -11,6 +11,7 @@ import coliseoImage from "../media/prev5.png";
 import domusImage from "../media/prev6.png";
 
 const HomePage = () => {
+	const navigate = useNavigate();
 	const Title = () => {
 		return (
 			<div className="relative h-80 font-text">
@@ -41,7 +42,7 @@ const HomePage = () => {
 						<Button
 							image={"images/monarquia.jpeg"}
 							hoverImage={monarquiaImage}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/fundacion_de_roma")}
 							buttonText={"La Monarquía"}
 							number={4}
 						/>
