@@ -1,9 +1,10 @@
-# RomaInteractiva
+# Roma Interactiva
 
 <div align="center">
   <img src="frontend/src/media/roma-interactiva-logo.png" alt="Logo" />
 </div>
 
+#
 Explora la Antigua Roma de manera innovadora.
 
 ¡Bienvenido a Roma Interactiva! Nuestro objetivo es hacer que el fascinante mundo de la Antigua Roma sea accesible para todas las personas de una manera interactiva e innovadora.
