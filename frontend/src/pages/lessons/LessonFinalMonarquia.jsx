@@ -32,7 +32,7 @@ const LessonFinalMonarquia = () => {
 				<LessonModel description="Ultima construcción hecha en la monarquia por Tarquinius el soberbio" titleModel="Jupiter Óptimo Máximo Capitolino" source="https://sketchfab.com/models/52851fd49e994a3e9f4e1df9ab681756/embed?dnt=1"/>
 			</div>
 			<LessonNav urlbef="/Reyes_de_Roma" mediabef="monarquia2.png" titlebef="REYES DE ROMA" 
-			           urlnxt="/Final_Monarquia" medianxt="republica.jpg"  titlenxt="LA REPÚBLICA"/>
+			           urlnxt="/Quiz_monarquia_1" medianxt="quiz.jpg"  titlenxt="QUIZ (MONARQUIA)"/>
 		</div>
 	);
 };
