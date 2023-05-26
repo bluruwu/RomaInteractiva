@@ -39,7 +39,7 @@ app.get("/create/tables", async (req, res) => {
       id_user INT DEFAULT (NEXT VALUE FOR UserSequenceq) PRIMARY KEY,
       email VARCHAR(100) UNIQUE NOT NULL,
       nombre_usuario VARCHAR(100) UNIQUE NOT NULL,
-      nickname VARCHAR(100) NOT NULL,
+      nickname VARCHAR(100) UNIQUE NOT NULL,
       contrasena VARCHAR(255) NOT NULL
   );
     `; //NOTA IMPORTANTE: SI USTED VA A COLCOAR PK, SEPA, QUE MUY PROBABLEMENTE NO VA A PODER (HAGA DOS POST)

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../conections/requests";
 import HomeButton from "../utilities/HomeButton";
+import Swal from 'sweetalert2'
 
 const Register = () => {
   const navigate = useNavigate();
-
   //data that is going to be sent to the backend
   const [formData, setFormData] = useState({
     email: "",
@@ -22,37 +22,66 @@ const Register = () => {
     console.log(formData);
 
     if (formData["contrasena"].length < 8) {
-      alert("Password is too short");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Password is too short',
+      })
       return;
     }
 
     if (formData["contrasena"] != confirmedPassword) {
-      alert("Passwords are not the same");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Passwords are not the same',
+      })
       return;
     }
 
     if (formData["nombre_usuario"].length < 8) {
-      alert("Username is too short");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Username is too short',
+      })
       return;
     }
 
     if (formData["nickname"].length < 5) {
-      alert("Nickname is too short");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Nickname is too short',
+      })
       return;
     }
 
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData["email"]) == false) {
-      alert("Email is not valid");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email is not valid',
+      })
       return;
     }
 
     const myresponse = async () => {
       const req_succesful = await postData(formData);
       if (req_succesful === "Data submitted successfully") {
-        alert("Register succesful");
+        Swal.fire(
+          'Congrats!',
+          'You have succesfully been register!',
+          'success'
+        )
+        //alert("Register succesful");
         navigate("/login");
       } else {
-        alert("email or username already taken");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Email or username already taken',
+        })
       }
     };
     myresponse();
@@ -63,7 +92,7 @@ const Register = () => {
       <div className="flex h-screen">
         <div className="flex-1.618 flex justify-center items-centers">
           <img
-            src={require("../media/coliseo.jpg")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/coliseo.jpg")}
             alt="Imagen de fondo"
             className="block w-full h-full object-cover"
           />
@@ -73,7 +102,7 @@ const Register = () => {
             <HomeButton />
           </div>
           <img
-            src={require("../media/spqr.png")} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+            src={require("../media/spqr.png")}
             alt="Imagen en el top right"
             className="max-w-200 max-h-200 object-cover h-auto"
           />
