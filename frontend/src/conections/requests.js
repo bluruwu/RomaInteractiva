@@ -1,6 +1,6 @@
 export const postData = async (mydata) => {
   try {
-    const response = await fetch("http://localhost:9000/register/user", {
+    const response = await fetch("https://roma-api2.azurewebsites.net/register/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const postData = async (mydata) => {
 
 export const getLogin = async (mydata) => {
   try {
-    const response = await fetch("http://localhost:9000/users");
+    const response = await fetch("https://roma-api2.azurewebsites.net/users");
     const jsonData = await response.json();
 
     if (response.ok) {
