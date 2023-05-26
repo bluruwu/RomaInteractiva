@@ -10,24 +10,24 @@ const second = ``
 
 const third = ``
 
-const LessonRecreacion = () => {
+const LessonViviendas = () => {
 
 	return (
 		<div className="font-text"> {/* Div principal */}
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
 				<LessonText 
-					title="Recreación en la Antigua Roma" 
+					title="Viviendas en la Antigua Roma" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
 				/> 
 				<LessonModel description="" titleModel="" source=""/>
 			</div>
-			<LessonNav urlbef="/Educacion" mediabef="educacion.png" titlebef="LA EDUCACIÓN EN LA ANTIGUA ROMA" 
-			           urlnxt="/Quiz_Cultura" medianxt="quiz.jpg"  titlenxt="QUIZ (CULTURA)"/>
+			<LessonNav urlbef="/Acueducto_Romano" mediabef="acueducto.jpg" titlebef="ACUEDUCTO DE LA ANTIGUA ROMA" 
+			           urlnxt="/Educacion" medianxt="educacion.png"  titlenxt="LA EDUCACIÓN EN LA ANTIGUA ROMA"/>
 		</div>
 	);
 };
 
-export default LessonRecreacion;
+export default LessonViviendas;

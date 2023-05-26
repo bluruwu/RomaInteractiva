@@ -24,8 +24,8 @@ const LessonArmasImperio = () => {
 				/> 
 				<LessonModel description="" titleModel="" source=""/>
 			</div>
-			<LessonNav urlbef="/Cristianismo_Imperio" mediabef="cristianismo.jpg" titlebef="CRISTIANISMO EN EL IMPERIO" 
-			           urlnxt="/Final_Imperio" medianxt="finalimperio.jpg"  titlenxt="FINAL DEL IMPERIO"/>
+			<LessonNav urlbef="/Cristianismo_Imperio" mediabef="cristianismo.jpg" titlebef="CRISTIANISMO EN EL IMPERIO ROMANO" 
+			           urlnxt="/Final_Imperio" medianxt="finalimperio.jpg"  titlenxt="FINAL DEL IMPERIO ROMANO"/>
 		</div>
 	);
 };

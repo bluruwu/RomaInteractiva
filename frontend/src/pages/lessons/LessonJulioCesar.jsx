@@ -26,7 +26,7 @@ const LessonJulioCesar = () => {
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
 				<LessonText 
-					title="Julio Cesar" 
+					title="Julio César" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
