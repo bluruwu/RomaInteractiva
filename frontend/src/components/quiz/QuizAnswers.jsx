@@ -1,34 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import Option from "../../components/quizOption";
 
 //Div con los 4 botones de las opciones de respuesta
 
 const QuizAnswers = ({ firstoption, secondoption, thirdoption, fourthoption }) => {
+
+	const [selectedOption, setSelectedOption] = useState(null);
+
+	const handleOptionSelect = (option) => {
+		setSelectedOption(option);
+	};
+
 	return (
 		<div className="flex flex-col  items-center mb-12">
-			<button
-				className="mb-4 h-10 border border-gray-500 bg-custom-rojo text-white  rounded-3xl shadow-xl transform transition duration-300 hover:scale-105"
-				style={{ minWidth: "25rem" }}
-			>
-				{firstoption}
-			</button>
-			<button
-				className="mb-4 h-10 border border-gray-500 bg-custom-rojo text-white  rounded-3xl shadow-xl transform transition duration-300 hover:scale-105"
-				style={{ minWidth: "25rem" }}
-			>
-				{secondoption}
-			</button>
-			<button
-				className="mb-4 h-10 border border-gray-500 bg-custom-rojo text-white  rounded-3xl shadow-xl transform transition duration-300 hover:scale-105"
-				style={{ minWidth: "25rem" }}
-			>
-				{thirdoption}
-			</button>
-			<button
-				className="mb-4 h-10 border border-gray-500 bg-custom-rojo text-white  rounded-3xl shadow-xl transform transition duration-300 hover:scale-105 "
-				style={{ minWidth: "25rem" }}
-			>
-				{fourthoption}
-			</button>
+			<Option
+				option={firstoption}
+				selectedOption={selectedOption}
+				handleOptionSelect={handleOptionSelect}
+				optionNumber={1}
+			/>
+			<Option
+				option={secondoption}
+				selectedOption={selectedOption}
+				handleOptionSelect={handleOptionSelect}
+				optionNumber={2}
+			/>
+			<Option
+				option={thirdoption}
+				selectedOption={selectedOption}
+				handleOptionSelect={handleOptionSelect}
+				optionNumber={3}
+			/>
+			<Option
+				option={fourthoption}
+				selectedOption={selectedOption}
+				handleOptionSelect={handleOptionSelect}
+				optionNumber={4}
+			/>
 		</div>
 	);
 };

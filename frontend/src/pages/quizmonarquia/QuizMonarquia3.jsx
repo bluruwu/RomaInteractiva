@@ -4,11 +4,11 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import QuizAnswers from "../../components/quiz/QuizAnswers";
 import QuizNav from "../../components/quiz/QuizNav";
 
-const question = `QUESTION3`;
-const firstoption = `QUESTION`;
-const secondoption = `QUESTION`;
-const thirdoption = `QUESTION`;
-const fourthoption = `QUESTION`;
+const question = `¿Qué características se atribuyen a Numa Pompilio durante su reinado?`;
+const firstoption = `Sabiduría y piedad religiosa`;
+const secondoption = `Violencia y opresión`;
+const thirdoption = `Ambición y conquista militar`;
+const fourthoption = `Comercio y prosperidad económica`;
 const buttonbef = "Anterior pregunta";
 const buttonnxt = "Siguiente pregunta";
 const urlbef = "/quiz_monarquia_2";

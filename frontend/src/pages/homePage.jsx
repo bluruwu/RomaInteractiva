@@ -49,14 +49,14 @@ const HomePage = () => {
 						<Button
 							image={"images/republica.jpg"}
 							hoverImage={republicaImage}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/Fundacion_Republica")}
 							buttonText={"La República"}
 							number={2}
 						/>
 						<Button
 							image={"images/imperio.jpg"}
 							hoverImage={imperioImage}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/Cristianismo_Imperio")}
 							buttonText={"El Imperio"}
 							number={5}
 						/>
@@ -69,14 +69,14 @@ const HomePage = () => {
 					<div className="flex justify-center gap-x-24 mt-8">
 						<Button
 							image={"images/julio.png"}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
 							buttonText={"Personajes"}
 							number={3}
 						/>
 						<Button
 							image={"images/coliseo.jpg"}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/Coliseo_Romano")}
 							hoverImage={coliseoImage}
 							buttonText={"Arquitectura"}
 							number={4}
@@ -84,7 +84,7 @@ const HomePage = () => {
 						<Button
 							image={"images/cultura.jpg"}
 							hoverImage={domusImage}
-							onClick={console.log("jeje")}
+							onClick={() => navigate("/Viviendas")}
 							buttonText={"Cultura"}
 							number={1}
 						/>

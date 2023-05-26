@@ -18,6 +18,9 @@ module.exports = {
 				regular: 400,
 				bold: 700,
 			},
+			width: {
+				'128': '32rem'
+			}
 		},
 	},
 	plugins: [],
