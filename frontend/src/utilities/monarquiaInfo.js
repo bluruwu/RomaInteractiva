@@ -5,7 +5,7 @@ export const INFORMATION = [
         option2: "Rómulo",
         option3: "Tito Livio",
         option4: "Un líder local",
-        respuesta: 3,
+        respuesta: 2,
         urlbef: "/fundacion_de_roma"
     },
     { //1
@@ -30,7 +30,7 @@ export const INFORMATION = [
         option2: "Remo",
         option3: "Tarquinio",
         option4: "Tulio Hostilio​",
-        respuesta: 1
+        respuesta: 3
     },  
     { //4
         title: "¿En qué año se finalizó la monarquía en Roma?",

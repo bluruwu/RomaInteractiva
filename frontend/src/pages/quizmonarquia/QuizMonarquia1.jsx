@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../utilities/Navbar";
 import QuizQuestion from "../../components/quiz/QuizQuestion";
 import Option from "../../components/quizOption";
+import Swal from 'sweetalert2'
 import { INFORMATION } from "../../utilities/monarquiaInfo";
 import { useNavigate } from "react-router-dom";
 
@@ -28,6 +29,9 @@ const QuizMonarquia1 = () => {
 
 	const handleOptionSelect = (option) => {
 		setSelectedOption(option);
+		if (questionNumber == 4) {
+			guardarOpcionMarcada(4, option);
+		}
 	};
 
 	const handleClickButton1 = () => {
@@ -36,10 +40,12 @@ const QuizMonarquia1 = () => {
 		if (questionNumber != 0) {
 			if (checkedOptions[questionNumber - 1] == 0) {
 				setSelectedOption(0);
+				guardarOpcionMarcada(questionNumber - 1, 0);
 			}
 			else {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
 			}
+			guardarOpcionMarcada(questionNumber - 1, 0);
 			setQuestionNumber(questionNumber - 1);
 		}
 		else {
@@ -59,15 +65,25 @@ const QuizMonarquia1 = () => {
 			setQuestionNumber(questionNumber + 1);
 		}
 		else {
-			let respuestasCorrectas = 0;
-			for (let i = 0; i < 5; i++) {
-				if (checkedOptions[i] === INFORMATION[i].respuesta) {
-					respuestasCorrectas++;
-				}
-			}
-			//Hacer alerta Aqui jeje
 
-			navigate(INFORMATION[questionNumber].urlnxt)
+			Swal.fire({
+				title: '¿Quieres terminar el intento?',
+				showCancelButton: true,
+				confirmButtonText: 'Sí',
+			}).then((result) => {
+				let respuestasCorrectas = 0;
+				for (let i = 0; i < 5; i++) {
+					if (checkedOptions[i] === INFORMATION[i].respuesta) {
+						respuestasCorrectas++;
+					}
+				}
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					Swal.fire(`Tu puntaje fue ${respuestasCorrectas}/5`);
+					navigate(INFORMATION[questionNumber].urlnxt);
+				}
+			})
+
 		}
 	}
 
