@@ -33,8 +33,8 @@ const LessonJulioCesar = () => {
 				/> 
 				<LessonModel description="Estatua de Julio Cesar" titleModel="Julio Cesar" source="https://sketchfab.com/models/dcd1c9c12ab44b8daca06481f6cdc78f/embed?ui_infos=0"/>
 			</div>
-			<LessonNav urlbef="/Julio_Cesar" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
-			           urlnxt="/Julio_Cesar" medianxt="augustus.jpg"  titlenxt="AUGUSTO"/>
+			<LessonNav urlbef="/Romulo_Remo" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
+			           urlnxt="/Augusto" medianxt="augustus.jpg"  titlenxt="AUGUSTO"/>
 		</div>
 	);
 };
