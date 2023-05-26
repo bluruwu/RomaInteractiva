@@ -40,8 +40,8 @@ const LessonReyesDeRoma = () => {
 				/> 
 				<LessonModel description="Templo de Vesta, fundado por Numa Pompilio" titleModel="Temple of Vesta" source="https://sketchfab.com/models/8bdf295b9ff04e3a9fe0f62a0017c120/embed"/>
 			</div>
-			<LessonNav urlbef="/Fundacion_de_Roma" mediabef="plazaSanPedro.jpg" titlebef="FUNDACIÓN DE ROMA" 
-			           urlnxt="/Final_Monarquia" medianxt="monarquia2.png"  titlenxt="FINALIZACIÓN DE LA MONARQUÍA"/>
+			<LessonNav urlbef="/Fundacion_de_Roma" mediabef="fundacionroma.jpg" titlebef="FUNDACIÓN DE ROMA" 
+			           urlnxt="/Final_Monarquia" medianxt="finalmonarquia.jpg"  titlenxt="FINALIZACIÓN DE LA MONARQUÍA"/>
 		</div>
 	);
 };

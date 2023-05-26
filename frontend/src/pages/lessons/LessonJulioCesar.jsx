@@ -26,15 +26,15 @@ const LessonJulioCesar = () => {
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
 				<LessonText 
-					title="Julio Cesar" 
+					title="Julio César" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
 				/> 
 				<LessonModel description="Estatua de Julio Cesar" titleModel="Julio Cesar" source="https://sketchfab.com/models/dcd1c9c12ab44b8daca06481f6cdc78f/embed?ui_infos=0"/>
 			</div>
-			<LessonNav urlbef="/Julio_Cesar" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
-			           urlnxt="/Julio_Cesar" medianxt="augustus.jpg"  titlenxt="AUGUSTO"/>
+			<LessonNav urlbef="/Romulo_Remo" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
+			           urlnxt="/Augusto" medianxt="augustus.jpg"  titlenxt="AUGUSTO"/>
 		</div>
 	);
 };
