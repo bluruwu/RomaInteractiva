@@ -34,13 +34,13 @@ const QuizMonarquia1 = () => {
 
 		guardarOpcionMarcada(questionNumber, selectedOption);
 		if (questionNumber != 0) {
-			if (checkedOptions[questionNumber-1] == 0) {
+			if (checkedOptions[questionNumber - 1] == 0) {
 				setSelectedOption(0);
 			}
 			else {
-				setSelectedOption(checkedOptions[questionNumber-1]);
+				setSelectedOption(checkedOptions[questionNumber - 1]);
 			}
-			setQuestionNumber(questionNumber-1);
+			setQuestionNumber(questionNumber - 1);
 		}
 		else {
 			navigate(INFORMATION[questionNumber].urlbef)
@@ -50,15 +50,23 @@ const QuizMonarquia1 = () => {
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
 		if (questionNumber != 4) {
-			if (checkedOptions[questionNumber-1] == 0) {
+			if (checkedOptions[questionNumber - 1] == 0) {
 				setSelectedOption(0);
 			}
 			else {
-				setSelectedOption(checkedOptions[questionNumber+1]);
+				setSelectedOption(checkedOptions[questionNumber + 1]);
 			}
-			setQuestionNumber(questionNumber+1);
+			setQuestionNumber(questionNumber + 1);
 		}
 		else {
+			let respuestasCorrectas = 0;
+			for (let i = 0; i < 5; i++) {
+				if (checkedOptions[i] === INFORMATION[i].respuesta) {
+					respuestasCorrectas++;
+				}
+			}
+			//Hacer alerta Aqui jeje
+
 			navigate(INFORMATION[questionNumber].urlnxt)
 		}
 	}
