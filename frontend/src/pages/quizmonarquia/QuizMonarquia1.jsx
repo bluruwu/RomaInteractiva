@@ -13,7 +13,7 @@ const QuizMonarquia1 = () => {
 
 	const [questionNumber, setQuestionNumber] = useState(0);
 
-	const [checkedOptions, setCheckedOptions] = useState([0, 0, 0, 0]);
+	const [checkedOptions, setCheckedOptions] = useState([0, 0, 0, 0, 0]);
 
 	const guardarOpcionMarcada = (index, valor) => {
 		// Clonar el arreglo existente
