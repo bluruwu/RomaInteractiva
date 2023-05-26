@@ -49,7 +49,7 @@ const QuizMonarquia1 = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		if (questionNumber != 3) {
+		if (questionNumber != 4) {
 			if (checkedOptions[questionNumber-1] == 0) {
 				setSelectedOption(0);
 			}
@@ -110,7 +110,7 @@ const QuizMonarquia1 = () => {
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
 				>
-					{questionNumber == 3 ? 'Finalizar Quiz' : 'Siguiente pregunta'}
+					{questionNumber == 4 ? 'Finalizar Quiz' : 'Siguiente pregunta'}
 				</button>
 			</div>
 		</div>
