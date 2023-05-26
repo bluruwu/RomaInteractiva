@@ -31,10 +31,11 @@ const QuizMonarquia1 = () => {
 	};
 
 	const handleClickButton1 = () => {
+
+		guardarOpcionMarcada(questionNumber, selectedOption);
+		setSelectedOption(0);
 		if (questionNumber != 0) {
-			guardarOpcionMarcada(questionNumber, selectedOption-1);
-			setSelectedOption(0);
-			setQuestionNumber(questionNumber-1);	
+			setQuestionNumber(questionNumber-1);
 		}
 		else {
 			navigate(INFORMATION[questionNumber].urlbef)
@@ -42,10 +43,10 @@ const QuizMonarquia1 = () => {
 	}
 
 	const handleClickButton2 = () => {
+		guardarOpcionMarcada(questionNumber, selectedOption);
+		setSelectedOption(0);
 		if (questionNumber != 3) {
-			guardarOpcionMarcada(questionNumber, selectedOption-1);
-			setSelectedOption(0);
-			setQuestionNumber(questionNumber+1);	
+			setQuestionNumber(questionNumber+1);
 		}
 		else {
 			navigate(INFORMATION[questionNumber].urlnxt)
