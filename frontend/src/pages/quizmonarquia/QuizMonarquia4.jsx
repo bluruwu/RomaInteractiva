@@ -4,11 +4,11 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import QuizAnswers from "../../components/quiz/QuizAnswers";
 import QuizNav from "../../components/quiz/QuizNav";
 
-const question = `QUESTION4`;
-const firstoption = `QUESTION`;
-const secondoption = `QUESTION`;
-const thirdoption = `QUESTION`;
-const fourthoption = `QUESTION`;
+const question = `¿Quién fue el último rey de Roma?`;
+const firstoption = `Numa Pompilio`;
+const secondoption = `Remo`;
+const thirdoption = `Tarquinio`;
+const fourthoption = `Remo`;
 const buttonbef = "Anterior pregunta";
 const buttonnxt = "Siguiente pregunta";
 const urlbef = "/quiz_monarquia_3";
