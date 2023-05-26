@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const Option = ({ optionNumber, selectedOption, handleOptionSelect, option }) => {
+const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, initialOption }) => {
+    
     const isButtonActive = () => {
         return selectedOption === optionNumber;
     };
