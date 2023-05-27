@@ -5,8 +5,8 @@ import HomeButton from "../utilities/HomeButton";
 import Swal from 'sweetalert2'
 
 const Register = () => {
-  const navigate = useNavigate();
-  //data that is going to be sent to the backend
+  const navigate = useNavigate(); // Hook de navegación
+  // Datos que se enviarán al backend
   const [formData, setFormData] = useState({
     email: "",
     nombre_usuario: "",
@@ -14,14 +14,14 @@ const Register = () => {
     contrasena: "",
   });
 
-  const [confirmedPassword, setConfirmedPassword] = useState();
+  const [confirmedPassword, setConfirmedPassword] = useState(); // Estado para almacenar la confirmación de contraseña
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Perform form submission logic here
-    console.log(formData);
+    event.preventDefault(); // Prevenir comportamiento de envío predeterminado
+    console.log(formData); // Imprimir los datos del formulario en la consola
 
     if (formData["contrasena"].length < 8) {
+      // Validar longitud mínima de contraseña
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -31,6 +31,7 @@ const Register = () => {
     }
 
     if (formData["contrasena"] != confirmedPassword) {
+      // Validar que las contraseñas coincidan
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -40,6 +41,7 @@ const Register = () => {
     }
 
     if (formData["nombre_usuario"].length < 8) {
+      // Validar longitud mínima de nombre de usuario
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -49,6 +51,7 @@ const Register = () => {
     }
 
     if (formData["nickname"].length < 5) {
+      // Validar longitud mínima de nickname
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -58,6 +61,7 @@ const Register = () => {
     }
 
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData["email"]) == false) {
+      // Validar formato de correo electrónico
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -67,16 +71,17 @@ const Register = () => {
     }
 
     const myresponse = async () => {
-      const req_succesful = await postData(formData);
+      const req_succesful = await postData(formData); // Realizar solicitud de registro utilizando los datos del formulario
       if (req_succesful === "Data submitted successfully") {
+        // Si el registro es exitoso, mostrar una alerta de éxito y navegar a la página de inicio de sesión ("/login")
         Swal.fire(
           'Congrats!',
           'You have succesfully been register!',
           'success'
         )
-        //alert("Register succesful");
         navigate("/login");
       } else {
+        // Si ocurre un error durante el registro, mostrar una alerta de error con el mensaje de error correspondiente
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -84,9 +89,10 @@ const Register = () => {
         })
       }
     };
-    myresponse();
+    myresponse(); // Ejecutar la función asíncrona myresponse
   };
 
+  // Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para registrarse. Además del botón de submit y el botón que lleva a Login y Home
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex h-screen">
@@ -110,6 +116,7 @@ const Register = () => {
           <br />
           <div className="mb-4">
             <input
+              id="name"
               type="text"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Full name"
@@ -118,6 +125,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="nickname"
               type="text"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Nickname"
@@ -126,6 +134,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="email"
               type="email"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Email"
@@ -134,6 +143,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="contraseña"
               type="password"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Password"
@@ -142,6 +152,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id= "Repetir_contraseña"
               type="password"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Repeat Password"
@@ -149,6 +160,7 @@ const Register = () => {
             />
           </div>
           <button
+            id="submit"
             type="submit"
             className="w-full py-2 text-xl text-white bg-red-500 rounded-full cursor-pointer hover:bg-red-600"
             style={{ backgroundColor: "rgb(142, 0, 0)" }}
@@ -157,6 +169,7 @@ const Register = () => {
           </button>
           <br />
           <p
+            id="redirlogin"
             className="underline ... hover:underline-offset-4 hover:text-green-500 "
             onClick={() => navigate("/login")}
           >

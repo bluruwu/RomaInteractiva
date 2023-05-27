@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Button = ({ image, hoverImage, onClick, buttonText, number }) => {
+const Button = ({ image, hoverImage, onClick, buttonText, number, id }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleMouseEnter = () => {
@@ -13,6 +13,7 @@ const Button = ({ image, hoverImage, onClick, buttonText, number }) => {
 
 	return (
 		<button
+			id= {id}
 			className="bg-cover bg-center bg-no-repeat border-4 border-red-800 w-72 h-44 rounded-3xl relative overflow-hidden hover:scale-110 transition-transform duration-300"
 			style={{
 				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${
