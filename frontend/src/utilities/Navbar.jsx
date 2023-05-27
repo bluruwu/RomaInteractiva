@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../media/logo.png";
 import { useNavigate } from "react-router-dom";
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -15,6 +16,9 @@ const Navbar = () => {
 				</div>
 
 				<ul className="flex space-x-4 items-center">
+					<li className="ml-20 mr-20">
+						<SearchBar/>
+					</li>
 					<li>
 						<a
 							id="iniciarsesion"
