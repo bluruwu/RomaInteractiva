@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../media/logo.png";
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
 	return (
@@ -13,6 +14,9 @@ const Navbar = () => {
 				</div>
 
 				<ul className="flex space-x-4 items-center">
+					<li className="ml-20 mr-20">
+						<SearchBar/>
+					</li>
 					<li>
 						<a
 							href="/login"

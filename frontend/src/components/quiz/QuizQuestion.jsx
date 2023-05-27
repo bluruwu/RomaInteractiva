@@ -1,18 +1,27 @@
 import React from "react";
 import HomeButton from "../../utilities/HomeButton";
 
-/* HomeButton y titulo pregunta. Se hace un grid de 3 columnas*/
+/* 
+Componente de pregunta del cuestionario.
+Recibe la siguiente propiedad:
+- question: Texto de la pregunta a mostrar
+*/
 
 const QuizQuestion = ({ question }) => {
 	return (
+		// Contenedor de la pregunta y el botón de inicio
 		<div className="grid grid-cols-3 items-center">
+			{/* Botón de inicio */}
 			<div className="p-14">
 				<HomeButton />
 			</div>
-			{/* Pregunta titulo */}
+
+			{/* Título de la pregunta */}
 			<div className="flex-grow text-3xl text-center">
 				<p className="font-bold filter drop-shadow-lg">{question}</p>
 			</div>
+
+			{/* Espacio en blanco */}
 			<div style={{ width: "200px", height: "100px" }}></div>
 		</div>
 	);
