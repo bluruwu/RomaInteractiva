@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Navbar from "../../utilities/Navbar";
 import QuizQuestion from "../../components/quiz/QuizQuestion";
-import Option from "../../components/quizOption";
-import Swal from 'sweetalert2'
+import Option from "../../components/quiz/quizOption";
+import Swal from "sweetalert2";
 import { INFORMATION } from "../../utilities/monarquiaInfo";
 import { useNavigate } from "react-router-dom";
 
 const QuizMonarquia1 = () => {
-
 	const navigate = useNavigate();
 
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -29,47 +28,41 @@ const QuizMonarquia1 = () => {
 
 	const handleOptionSelect = (option) => {
 		setSelectedOption(option);
-		if (questionNumber == 4) {
+		if (questionNumber === 4) {
 			guardarOpcionMarcada(4, option);
 		}
 	};
 
 	const handleClickButton1 = () => {
-
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		if (questionNumber != 0) {
-			if (checkedOptions[questionNumber - 1] == 0) {
+		if (questionNumber !== 0) {
+			if (checkedOptions[questionNumber - 1] === 0) {
 				setSelectedOption(0);
 				guardarOpcionMarcada(questionNumber - 1, 0);
-			}
-			else {
+			} else {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
 			}
 			guardarOpcionMarcada(questionNumber - 1, 0);
 			setQuestionNumber(questionNumber - 1);
+		} else {
+			navigate(INFORMATION[questionNumber].urlbef);
 		}
-		else {
-			navigate(INFORMATION[questionNumber].urlbef)
-		}
-	}
+	};
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		if (questionNumber != 4) {
-			if (checkedOptions[questionNumber - 1] == 0) {
+		if (questionNumber !== 4) {
+			if (checkedOptions[questionNumber - 1] === 0) {
 				setSelectedOption(0);
-			}
-			else {
+			} else {
 				setSelectedOption(checkedOptions[questionNumber + 1]);
 			}
 			setQuestionNumber(questionNumber + 1);
-		}
-		else {
-
+		} else {
 			Swal.fire({
-				title: '¿Quieres terminar el intento?',
+				title: "¿Quieres terminar el intento?",
 				showCancelButton: true,
-				confirmButtonText: 'Sí',
+				confirmButtonText: "Sí",
 			}).then((result) => {
 				let respuestasCorrectas = 0;
 				for (let i = 0; i < 5; i++) {
@@ -77,21 +70,20 @@ const QuizMonarquia1 = () => {
 						respuestasCorrectas++;
 					}
 				}
-				/* Read more about isConfirmed, isDenied below */
+				/* Leer más sobre isConfirmed, isDenied a continuación */
 				if (result.isConfirmed) {
 					Swal.fire(`Tu puntaje fue ${respuestasCorrectas}/5`);
 					navigate(INFORMATION[questionNumber].urlnxt);
 				}
-			})
-
+			});
 		}
-	}
+	};
 
 	return (
 		<div className="font-text">
 			<Navbar />
 			<QuizQuestion question={INFORMATION[questionNumber].title} />
-			<div className="flex flex-col  items-center mb-12">
+			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}
 					selectedOption={selectedOption}
@@ -127,17 +119,18 @@ const QuizMonarquia1 = () => {
 					onClick={handleClickButton1}
 					style={{ minWidth: "15rem" }}
 				>
-					{questionNumber == 0 ? 'Volver a lección' : 'Pregunta anterior'}
+					{questionNumber === 0 ? "Volver a lección" : "Pregunta anterior"}
 				</button>
 				<button
 					className="mb-4 md:mb-0 h-8 bg-custom-dorado rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
 				>
-					{questionNumber == 4 ? 'Finalizar Quiz' : 'Siguiente pregunta'}
+					{questionNumber === 4 ? "Finalizar Quiz" : "Siguiente pregunta"}
 				</button>
 			</div>
 		</div>
 	);
 };
+
 export default QuizMonarquia1;
