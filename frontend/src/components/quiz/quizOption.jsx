@@ -9,8 +9,10 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 	return (
 		// Botón de opción
 		<button
-			className={`mb-4 h-10 border border-gray-500 bg-custom-rojo text-white rounded-3xl shadow-xl transform transition w-96 duration-300 hover:scale-110 ${
-				isButtonActive() ? "scale-110" : ""
+			className={`mb-4 h-10 border  border-gray-500 bg-custom-rojo text-white rounded-3xl shadow-xl transform transition w-96 duration-300 hover:scale-110 ${
+				isButtonActive()
+					? "scale-110   border-custom-doradonormal border-4 focus:outline-none "
+					: ""
 			}`}
 			onClick={() => handleOptionSelect(optionNumber)}
 		>
