@@ -5,10 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 
 import QuizMonarquia1 from "./pages/quizmonarquia/QuizMonarquia1";
-import QuizMonarquia2 from "./pages/quizmonarquia/QuizMonarquia2";
-import QuizMonarquia3 from "./pages/quizmonarquia/QuizMonarquia3";
-import QuizMonarquia4 from "./pages/quizmonarquia/QuizMonarquia4";
-import QuizMonarquia5 from "./pages/quizmonarquia/QuizMonarquia5";
 
 import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
 import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
@@ -38,35 +34,30 @@ const App = () => {
 			<Route path="/home" element={<HomePage />} />
 
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia1 />} />
-			<Route path="Quiz_monarquia_2" element={<QuizMonarquia2 />} />
-			<Route path="Quiz_monarquia_3" element={<QuizMonarquia3 />} />
-			<Route path="Quiz_monarquia_4" element={<QuizMonarquia4 />} />
-			<Route path="Quiz_monarquia_5" element={<QuizMonarquia5 />} />
 
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
-			<Route path="/Reyes_de_Roma" element={<LessonReyesDeRoma/>}/>
-			<Route path="/Final_Monarquia" element={<LessonFinalMonarquia/>} />
+			<Route path="/Reyes_de_Roma" element={<LessonReyesDeRoma />} />
+			<Route path="/Final_Monarquia" element={<LessonFinalMonarquia />} />
 
-			<Route path="/Fundacion_Republica" element={<LessonFundacionRepublica/>} />
-			<Route path="/Expansion_Republica" element={<LessonExpRepublica/>}/>
-			<Route path="/Colapso_Republica" element={<LessonColapsoRepublica/>} />
+			<Route path="/Fundacion_Republica" element={<LessonFundacionRepublica />} />
+			<Route path="/Expansion_Republica" element={<LessonExpRepublica />} />
+			<Route path="/Colapso_Republica" element={<LessonColapsoRepublica />} />
 
-			<Route path="/Cristianismo_Imperio" element={<LessonCristianismoImp/>} />
-			<Route path="/Armas_Imperio" element={<LessonArmasImperio/>} />
-			<Route path="/Final_Imperio" element={<LessonFinalImperio/>} />
+			<Route path="/Cristianismo_Imperio" element={<LessonCristianismoImp />} />
+			<Route path="/Armas_Imperio" element={<LessonArmasImperio />} />
+			<Route path="/Final_Imperio" element={<LessonFinalImperio />} />
 
 			<Route path="/Romulo_Remo" element={<LessonRomuloRemo />} />
 			<Route path="/Julio_Cesar" element={<LessonJulioCesar />} />
 			<Route path="/Augusto" element={<LessonAugusto />} />
 
-			<Route path="/Coliseo_Romano" element={<LessonColiseo/>} />
-			<Route path="/Panteon_Agripa" element={<LessonPanteon/>} />
-			<Route path="/Acueducto_Romano" element={<LessonAcueducto/>} />
+			<Route path="/Coliseo_Romano" element={<LessonColiseo />} />
+			<Route path="/Panteon_Agripa" element={<LessonPanteon />} />
+			<Route path="/Acueducto_Romano" element={<LessonAcueducto />} />
 
-			<Route path="/Educacion" element={<LessonEducacion/>} />
-			<Route path="/Recreacion" element={<LessonRecreacion/>} />
-			<Route path="/Viviendas" element={<LessonViviendas/>} />
-
+			<Route path="/Educacion" element={<LessonEducacion />} />
+			<Route path="/Recreacion" element={<LessonRecreacion />} />
+			<Route path="/Viviendas" element={<LessonViviendas />} />
 		</Routes>
 	);
 };

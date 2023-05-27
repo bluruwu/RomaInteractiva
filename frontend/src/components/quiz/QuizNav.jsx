@@ -1,12 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-//Div con los 4 botones de las opciones de respuesta
-
+// Componente de barra de navegación para el cuestionario
+// Recibe las siguientes propiedades:
+// - buttonbef: Texto del botón anterior
+// - buttonnxt: Texto del botón siguiente
+// - urlbef: URL de la página anterior
+// - urlnxt: URL de la siguiente página
 const QuizNav = ({ buttonbef, buttonnxt, urlbef, urlnxt }) => {
 	const navigate = useNavigate();
+
 	return (
+		// Contenedor de los botones
 		<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
+			{/* Botón "Anterior" */}
 			<button
 				className="mb-4 md:mb-0 h-8 bg-custom-dorado rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 				onClick={() => navigate(urlbef)}
@@ -14,6 +21,8 @@ const QuizNav = ({ buttonbef, buttonnxt, urlbef, urlnxt }) => {
 			>
 				{buttonbef}
 			</button>
+
+			{/* Botón "Siguiente" */}
 			<button
 				className="mb-4 md:mb-0 h-8 bg-custom-dorado rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 				style={{ minWidth: "15rem" }}
