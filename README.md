@@ -11,10 +11,6 @@ Explora la Antigua Roma de manera innovadora.
 
 Ya sea que estés interesado en la arquitectura romana, las leyendas y mitología, las estrategias militares o la política de la época, Roma Interactiva te ofrece una experiencia completa y enriquecedora. A través de nuestra plataforma, podrás acceder a contenido de alta calidad, actividades interactivas, recreaciones 3D, mapas interactivos y mucho más.
 
-## Acceso a la aplicación
-
-Puedes ver la aplicación en la siguiente URL: [Web Roma Interactiva](https://roma-front-gxm7zdrgd-grupo-desarrollo-de-sofware.vercel.app/)
-
 ## Instalación y Ejecución
 
 ### Backend
