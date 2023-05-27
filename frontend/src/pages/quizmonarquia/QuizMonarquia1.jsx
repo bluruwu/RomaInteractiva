@@ -46,7 +46,6 @@ const QuizMonarquia1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
 		if (questionNumber != 4) {
 			if (checkedOptions[questionNumber + 1] == 0) {
-
 				setSelectedOption(0);
 			} else {
 				setSelectedOption(checkedOptions[questionNumber + 1]);
@@ -109,14 +108,14 @@ const QuizMonarquia1 = () => {
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-dorado rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					onClick={handleClickButton1}
 					style={{ minWidth: "15rem" }}
 				>
 					{questionNumber === 0 ? "Volver a lección" : "Pregunta anterior"}
 				</button>
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-dorado rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
 				>

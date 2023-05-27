@@ -5,10 +5,10 @@ module.exports = {
 		extend: {
 			colors: {
 				custom: {
-					dorado: "#FFAD1B",
+					doradonormal: "#FFAD1B",
 					rojo: "#8E0000",
 					doradodark: "#e69200",
-					doradolight: "ffcc33",
+					doradolight: "#ffcc33",
 				},
 			},
 			fontFamily: {
@@ -19,8 +19,8 @@ module.exports = {
 				bold: 700,
 			},
 			width: {
-				'128': '32rem'
-			}
+				128: "32rem",
+			},
 		},
 	},
 	plugins: [],
