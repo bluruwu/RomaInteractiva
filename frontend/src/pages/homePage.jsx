@@ -40,6 +40,7 @@ const HomePage = () => {
 					<h1 className="font-bold text-3xl text-black"> Etapas</h1>
 					<div className="flex justify-center gap-x-24 mt-8">
 						<Button
+							id="monarquia"
 							image={"images/monarquia.jpeg"}
 							hoverImage={monarquiaImage}
 							onClick={() => navigate("/fundacion_de_roma")}
@@ -47,6 +48,7 @@ const HomePage = () => {
 							number={4}
 						/>
 						<Button
+							id="republica"
 							image={"images/republica.jpg"}
 							hoverImage={republicaImage}
 							onClick={() => navigate("/Fundacion_Republica")}
@@ -54,6 +56,7 @@ const HomePage = () => {
 							number={2}
 						/>
 						<Button
+							id="imperio"
 							image={"images/imperio.jpg"}
 							hoverImage={imperioImage}
 							onClick={() => navigate("/Cristianismo_Imperio")}
@@ -68,6 +71,7 @@ const HomePage = () => {
 					<h1 className="font-bold text-3xl text-black"> Los Romanos</h1>
 					<div className="flex justify-center gap-x-24 mt-8">
 						<Button
+							id="personajes"
 							image={"images/julio.png"}
 							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
@@ -75,6 +79,7 @@ const HomePage = () => {
 							number={3}
 						/>
 						<Button
+							id="arquitectura"
 							image={"images/coliseo.jpg"}
 							onClick={() => navigate("/Coliseo_Romano")}
 							hoverImage={coliseoImage}
@@ -82,6 +87,7 @@ const HomePage = () => {
 							number={4}
 						/>
 						<Button
+							id="cultura"
 							image={"images/cultura.jpg"}
 							hoverImage={domusImage}
 							onClick={() => navigate("/Viviendas")}

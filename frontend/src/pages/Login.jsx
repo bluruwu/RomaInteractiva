@@ -57,6 +57,7 @@ const Login = () => {
             />
             <div className="mb-6">
               <input
+                id="username"
                 type="text"
                 className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
                 placeholder="Username"
@@ -65,6 +66,7 @@ const Login = () => {
             </div>
             <div className="mb-6">
               <input
+                id="password"
                 type="password"
                 className="w-fit px-32 py-4 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
                 placeholder="Password"
@@ -72,6 +74,7 @@ const Login = () => {
               />
             </div>
             <button
+              id="submit"
               type="submit"
               className="px-6 py-4 text-xl text-white bg-red-500 rounded-full cursor-pointer hover:bg-red-600"
               onSubmit={(e) => e.preventDefault()}
@@ -80,6 +83,7 @@ const Login = () => {
             </button>
             <br />
             <p
+              id="recover"
               className="underline ... hover:underline-offset-4 hover:text-green-500"
               onClick={() => navigate("/recoverpassword")}
             >
@@ -87,6 +91,7 @@ const Login = () => {
             </p>
             <br />
             <p
+              id="navregistro"
               className="underline ... hover:underline-offset-4 hover:text-green-500"
               onClick={() => navigate("/register")}
             >

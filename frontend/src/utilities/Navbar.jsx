@@ -1,7 +1,9 @@
 import React from "react";
 import logo from "../media/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+	const navigate = useNavigate();
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-20">
@@ -15,7 +17,8 @@ const Navbar = () => {
 				<ul className="flex space-x-4 items-center">
 					<li>
 						<a
-							href="/login"
+							id="iniciarsesion"
+							onClick={() => navigate("/login")}
 							className="font-text font-regular text-custom-dorado hover:text-gray-300"
 						>
 							Iniciar sesión

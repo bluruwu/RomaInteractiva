@@ -110,6 +110,7 @@ const Register = () => {
           <br />
           <div className="mb-4">
             <input
+              id="name"
               type="text"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Full name"
@@ -118,6 +119,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="nickname"
               type="text"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Nickname"
@@ -126,6 +128,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="email"
               type="email"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Email"
@@ -134,6 +137,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id="contraseña"
               type="password"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Password"
@@ -142,6 +146,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <input
+              id= "Repetir_contraseña"
               type="password"
               className="w-fit px-32 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
               placeholder="Repeat Password"
@@ -149,6 +154,7 @@ const Register = () => {
             />
           </div>
           <button
+            id="submit"
             type="submit"
             className="w-full py-2 text-xl text-white bg-red-500 rounded-full cursor-pointer hover:bg-red-600"
             style={{ backgroundColor: "rgb(142, 0, 0)" }}
@@ -157,6 +163,7 @@ const Register = () => {
           </button>
           <br />
           <p
+            id="redirlogin"
             className="underline ... hover:underline-offset-4 hover:text-green-500 "
             onClick={() => navigate("/login")}
           >
