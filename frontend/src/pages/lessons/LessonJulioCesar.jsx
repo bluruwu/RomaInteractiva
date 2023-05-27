@@ -23,16 +23,20 @@ const LessonJulioCesar = () => {
 
 	return (
 		<div className="font-text"> {/* Div principal */}
+		{/* Barra de navegación */}
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
+				{/* Componente de texto de la lección */}
 				<LessonText 
 					title="Julio César" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
 				/> 
+				{/* Componente del modelo 3D */}
 				<LessonModel description="Estatua de Julio Cesar" titleModel="Julio Cesar" source="https://sketchfab.com/models/dcd1c9c12ab44b8daca06481f6cdc78f/embed?ui_infos=0"/>
 			</div>
+			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Romulo_Remo" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
 			           urlnxt="/Augusto" medianxt="augustus.jpg"  titlenxt="AUGUSTO"/>
 		</div>

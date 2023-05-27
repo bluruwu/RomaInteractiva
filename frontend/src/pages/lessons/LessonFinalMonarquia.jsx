@@ -21,16 +21,20 @@ const LessonFinalMonarquia = () => {
 
 	return (
 		<div className="font-text"> {/* Div principal */}
+		{/* Barra de navegación */}
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
+				{/* Componente de texto de la lección */}
 				<LessonText 
 					title="Finalización de la monarquía" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
 				/> 
+				{/* Componente del modelo 3D */}
 				<LessonModel description="Recreación de la ultima construcción hecha en la monarquia por Tarquinius el soberbio" titleModel="Jupiter Óptimo Máximo Capitolino" source="https://sketchfab.com/models/52851fd49e994a3e9f4e1df9ab681756/embed?dnt=1"/>
 			</div>
+			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Reyes_de_Roma" mediabef="monarquia2.png" titlebef="REYES DE ROMA" 
 			           urlnxt="/Quiz_monarquia_1" medianxt="quiz.jpg"  titlenxt="QUIZ (MONARQUIA)"/>
 		</div>

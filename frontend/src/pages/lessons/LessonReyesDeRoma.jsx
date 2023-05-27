@@ -30,16 +30,20 @@ const LessonReyesDeRoma = () => {
 
 	return (
 		<div className="font-text"> {/* Div principal */}
+        {/* Barra de navegación */}
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
-				<LessonText 
+				{/* Componente de texto de la lección */}
+                <LessonText 
 					title="Reyes de Roma" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}
 				/> 
+                {/* Componente del modelo 3D */}
 				<LessonModel description="Templo de Vesta, fundado por Numa Pompilio" titleModel="Temple of Vesta" source="https://sketchfab.com/models/8bdf295b9ff04e3a9fe0f62a0017c120/embed"/>
 			</div>
+            {/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Fundacion_de_Roma" mediabef="fundacionroma.jpg" titlebef="FUNDACIÓN DE ROMA" 
 			           urlnxt="/Final_Monarquia" medianxt="finalmonarquia.jpg"  titlenxt="FINALIZACIÓN DE LA MONARQUÍA"/>
 		</div>

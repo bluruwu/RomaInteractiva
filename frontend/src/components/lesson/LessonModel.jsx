@@ -6,6 +6,7 @@ const LessonModel = ({description, titleModel, source}) => {
 	return (
         <div className="w-full md:w-1/2 flex relative sketchfab-embed-wrapper"> 
             {" "}
+            {/* El iframe para mostrar el modelo 3D */}
             <iframe
                 // title={"Romulus & Remus"}
                 title = {titleModel}
