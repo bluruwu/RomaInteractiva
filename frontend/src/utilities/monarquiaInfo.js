@@ -22,7 +22,7 @@ export const INFORMATION = [
         option2: "Violencia y opresión",
         option3: "Ambición y conquista militar",
         option4: "Comercio y prosperidad económica",
-        respuesta: 2
+        respuesta: 1
     },
     { //3
         title: "¿Quién fue el último rey de Roma?",
@@ -38,7 +38,7 @@ export const INFORMATION = [
         option2: "509 a.C.",
         option3: "312 a.C.",
         option4: "753 a.C.​",
-        respuesta: 1,
+        respuesta: 2,
         urlnxt: "/home"
     }, 
 ]
