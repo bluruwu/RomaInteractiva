@@ -5,21 +5,21 @@ import { Alert } from "../components/alerts/alerts";
 import Swal from 'sweetalert2'
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate(); // Hook de navegación 
+  const [showAlert, setShowAlert] = useState(false); // Estado para mostrar/ocultar la alerta
 
   const [formData, setFormData] = useState({
     nickname: "",
     contrasena: "",
-  });
+  }); // Estado para almacenar los datos del formulario de inicio de sesión
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
-
+    event.preventDefault(); // Prevenir comportamiento de envío predeterminado
+    console.log(formData); // Imprimir los datos del formulario en la consola
     const myresponse = async () => {
-      const req_succesful = await getLogin(formData);
+      const req_succesful = await getLogin(formData); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
       if (req_succesful === "Correct credentials") {
+        // Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
         Swal.fire(
           'Welcome!',
           'You have succesfully been logged!',
@@ -27,6 +27,7 @@ const Login = () => {
         )
         navigate("/home");
       } else {
+        // Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -34,9 +35,10 @@ const Login = () => {
         })
       }
     };
-    myresponse();
+    myresponse(); // Ejecutar la función asíncrona myresponse
   };
 
+  // Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
   return (
     <div >
       {showAlert && <Alert />}

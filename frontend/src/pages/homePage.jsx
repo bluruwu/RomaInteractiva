@@ -12,6 +12,7 @@ import domusImage from "../media/prev6.png";
 
 const HomePage = () => {
 	const navigate = useNavigate();
+	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
 	const Title = () => {
 		return (
 			<div className="relative h-80 font-text">
@@ -30,6 +31,7 @@ const HomePage = () => {
 	};
 
 	return (
+		// Render de la pagina, con el navbar, titulo y las categorias de las lecciones. Además del Footer al final
 		<div className="font-text">
 			<Navbar />
 			{Title()}

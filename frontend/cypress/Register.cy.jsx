@@ -2,6 +2,7 @@ import React from 'react'
 import Register from '../src/pages/Register'
 import { BrowserRouter } from "react-router-dom";
 
+// Prueba unitaria que verifica que el campo "Contraseña" falle si la longitud no es la correcta.
 describe('Pruebas unitarias campo Contraseña en Registro', () => {
   it('Longitud 1 contraseña', () => {
     cy.mount(<BrowserRouter> <Register /> </BrowserRouter>)
@@ -26,6 +27,7 @@ describe('Pruebas unitarias campo Contraseña en Registro', () => {
   })
 })
 
+// Prueba unitaria que verifica que el boton que hay en registro SÍ lleve a Login
 describe('Pruebas unitarias Boton a login', () => {
   it('Redireccionamiento a login', () => {
     cy.mount(<BrowserRouter> <Register /> </BrowserRouter>)

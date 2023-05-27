@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter } from "react-router-dom";
 import HomePage from '../src/pages/homePage';
 
+// Prueba unitaria que verifica cada botón por categoria. Revisa que lo llevé a la primera lección de cada categoria.
 describe('Prueba unitaria sobre redireccionamiento lecciones', () => {
   it('Monarquia', () => {
     cy.mount(<BrowserRouter> <HomePage /> </BrowserRouter>)
@@ -35,6 +36,7 @@ describe('Prueba unitaria sobre redireccionamiento lecciones', () => {
   })
 })
 
+// Prueba unitaria que verifica que el botón que hay en la navbar SÍ lleve a login
 describe('Prueba unitaria sobre redireccionamiento a Login', () => {
     it('Boton Login', () => {
       cy.mount(<BrowserRouter> <HomePage /> </BrowserRouter>)
