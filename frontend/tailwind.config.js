@@ -5,8 +5,8 @@ module.exports = {
 		extend: {
 			colors: {
 				custom: {
-					doradonormal: "#FFAD1B",
 					rojo: "#8E0000",
+					doradonormal: "#ffad1b",
 					doradodark: "#e69200",
 					doradolight: "#ffcc33",
 				},

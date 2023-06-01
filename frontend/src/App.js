@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
+import Perfil from "./pages/Perfil";
 
 import QuizMonarquia1 from "./pages/quizmonarquia/QuizMonarquia1";
 
@@ -32,6 +33,7 @@ const App = () => {
 			<Route path="/register" element={<Register />} />
 			<Route path="/" element={<HomePage />} />
 			<Route path="/home" element={<HomePage />} />
+			<Route path="perfil" element={<Perfil />} />
 
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia1 />} />
 
