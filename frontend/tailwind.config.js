@@ -5,10 +5,10 @@ module.exports = {
 		extend: {
 			colors: {
 				custom: {
-					doradonormal: "#FFAD1B",
 					rojo: "#8E0000",
 					doradodark: "#e69200",
 					doradolight: "#ffcc33",
+					doradonormal: "#ffad1a",
 				},
 			},
 			fontFamily: {

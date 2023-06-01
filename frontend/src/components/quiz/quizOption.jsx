@@ -10,9 +10,7 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 		// Botón de opción
 		<button
 			className={`mb-4 h-10 border  border-gray-500 bg-custom-rojo text-white rounded-3xl shadow-xl transform transition w-96 duration-300 hover:scale-110 ${
-				isButtonActive()
-					? "scale-110   border-custom-doradonormal border-4 focus:outline-none "
-					: ""
+				isButtonActive() ? "   bg-custom-doradodark border-0 focus:outline-none scale-110" : ""
 			}`}
 			onClick={() => handleOptionSelect(optionNumber)}
 		>

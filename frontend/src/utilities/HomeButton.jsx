@@ -9,7 +9,7 @@ const HomeButton = () => {
 	};
 
 	return (
-		<div className="mb-4">
+		<div>
 			<img
 				src={require("../media/homeicon.png")}
 				alt="Imagen de fondo"
