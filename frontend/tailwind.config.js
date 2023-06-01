@@ -6,9 +6,9 @@ module.exports = {
 			colors: {
 				custom: {
 					rojo: "#8E0000",
+					doradonormal: "#ffad1b",
 					doradodark: "#e69200",
 					doradolight: "#ffcc33",
-					doradonormal: "#ffad1a",
 				},
 			},
 			fontFamily: {
