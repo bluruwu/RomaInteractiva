@@ -1,8 +1,55 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const LessonNav = ({urlbef, urlnxt, mediabef, medianxt, titlebef, titlenxt}) => {
+const LessonNav = ({urlbef, urlnxt, mediabef, medianxt, titlebef, titlenxt ,last=false, quiz}) => {
     const navigate = useNavigate();
+
+	const quizDone = () => {
+		if (quiz == 'monarquia') {
+			return JSON.parse(localStorage.getItem('monarquiaResuelto'))
+		}
+		//hacer lo mismo para las otras lecciones
+	}
+
+	const quizMessage = () => {
+		if (last) {
+			if (quizDone()) {
+				Swal.fire({
+					title: 'Ya has realizado este quiz ',
+					text: '¿deseas hacer revisión de las respuestas?',
+					icon: 'warning',
+					showDenyButton: true,
+					showCancelButton: true,
+					confirmButtonText: 'Sip',
+					denyButtonText: `Volver a home`,
+					denyButtonColor: '#3085d6'
+				  }).then((result) => {
+					/* Read more about isConfirmed, isDenied below */
+					if (result.isConfirmed) {
+					  navigate(urlnxt)
+					} else if (result.isDenied) {
+					  navigate('/home')
+					}
+				  })
+			}
+			else {
+				Swal.fire({
+					title: 'Solo tienes un intento para hacer el quiz',
+					showCancelButton: true,
+					confirmButtonText: 'Hacer quiz',
+				  }).then((result) => {
+					/* Read more about isConfirmed, isDenied below */
+					if (result.isConfirmed) {
+						navigate(urlnxt)
+					}
+				  })
+			}
+		}
+		else {
+			navigate(urlnxt)
+		}
+	}
     
 	return (
         <div className="flex flex-col md:flex-row bg-red-100">
@@ -29,7 +76,7 @@ const LessonNav = ({urlbef, urlnxt, mediabef, medianxt, titlebef, titlenxt}) => 
                 {/* Leccion siguiente */}
 				<div
 					className="w-full md:w-1/2 h-32 relative cursor-pointer"
-					onClick={() => navigate(urlnxt)}
+					onClick={quizMessage}
 				>
 					<img
 						src={require(`../../media/${medianxt}`)} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen

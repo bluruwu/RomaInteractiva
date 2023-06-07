@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import Footbar from "../utilities/Footbar";
@@ -12,6 +12,15 @@ import domusImage from "../media/prev6.png";
 
 const HomePage = () => {
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		// Verificar si la variable ya existe en el almacenamiento local
+		if (!localStorage.getItem('monarquiaResuelto')) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem('monarquiaResuelto', JSON.stringify(false));
+		}
+	}, []);
+
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
 	const Title = () => {
 		return (
