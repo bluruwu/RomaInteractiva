@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
@@ -10,6 +10,15 @@ const Perfil = () => {
 	const handleButtonClick = () => {
 		navigate("/perfil");
 	};
+
+	const [nombreCompleto, setNombreCompleto] = useState(
+		localStorage.getItem("nombre_usuario") || ""
+	);
+	const [nickname, setNickname] = useState(localStorage.getItem("nickname") || "");
+	const [contrasena, setContrasena] = useState(localStorage.getItem("contrasena") || "");
+	const [email, setEmail] = useState(localStorage.getItem("email") || "");
+	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
+	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
 
 	return (
 		<div className="font-text bg-gray-100 h-screen">
@@ -23,25 +32,25 @@ const Perfil = () => {
 				{/* Logros izquierda */}
 				<div class=" flex-col items-center">
 					<img
-						src={require("../media/logro.png")}
-						className="inline  object-cover w-20 h-20 rounded-full"
+						src={require("../media/logro-columna.png")}
+						className="inline  object-cover w-20 h-20 mr-6 rounded-full"
 					/>
 					<img
-						src={require("../media/logro.png")}
-						className="inline  object-cover w-20 h-20 rounded-full"
+						src={require("../media/logro-helmet.png")}
+						className="inline  object-cover w-20 h-20 mr-6 rounded-full"
 					/>
 					<img
 						src={require("../media/usericon.png")}
-						className="inline  object-cover w-28 h-28 ml-4 mr-4 mb-2 rounded-full"
+						className="inline  object-cover w-32 h-32 mb-2 rounded-full"
 					/>
 
 					<img
-						src={require("../media/logro.png")}
-						className="inline  object-cover w-20 h-20 rounded-full"
+						src={require("../media/logro-medalla.png")}
+						className="inline  object-cover w-20 h-20 ml-6 rounded-full"
 					/>
 					<img
-						src={require("../media/logro.png")}
-						className="inline  object-cover w-20 h-20 rounded-full"
+						src={require("../media/logro-toga.png")}
+						className="inline  object-cover w-20 h-20 ml-6 rounded-full"
 					/>
 				</div>
 			</div>
@@ -63,6 +72,8 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							onChange={(e) => setNombreCompleto(e.target.value)}
+							value={nombreCompleto}
 						/>
 					</div>
 				</div>
@@ -71,6 +82,8 @@ const Perfil = () => {
 					<input
 						type="text"
 						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						onChange={(e) => setNickname(e.target.value)}
+						value={nickname}
 					/>
 				</div>
 				<div className="flex flex-col">
@@ -87,6 +100,8 @@ const Perfil = () => {
 					<input
 						type="text"
 						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
 					/>
 				</div>
 				<div className="flex flex-col">
