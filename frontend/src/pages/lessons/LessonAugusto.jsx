@@ -6,11 +6,12 @@ import LessonNav from "../../components/lesson/LessonNav";
 
 const first = `Augusto, cuyo nombre completo era Cayo Octavio Augusto, fue el primer emperador 
 				del Imperio Romano. Nació el 23 de septiembre del año 63 a.C. y falleció el 19 de 
-				agosto del año 14 d.C. Fue el sobrino e hijo adoptivo de Julio César, a quien luego de 
-				varias luchas internas, sucedió en el gobierno de la entonces república de Roma. 
-				Su reinado marcó el final de la República Romana y el comienzo 
-				de una nueva era en la historia de Roma. Augusto gobernó con habilidad y astucia, 
-				consolidando su poder y estableciendo una paz duradera conocida como el "Pax Romana".`
+				agosto del año 14 d.C. Fue el sobrino e hijo adoptivo de Julio César, a quien sucedió 
+				en el gobierno de Roma luego de su vil asesinato. Su ascenso al poder ocasionó varias luchas 
+				internas que tuvo que enfrentar antes de asumir el completo control del gobierno
+				Su reinado marcó el final de la República Romana y el comienzo de una nueva era en la 
+				historia de Roma: El imperio. Augusto gobernó con habilidad y astucia, 
+				consolidando su poder y estableciendo una paz duradera conocida como la "Pax Romana".`
 
 const second = `Bajo el gobierno de Augusto, Roma experimentó un período de prosperidad y estabilidad. 
 				Implementó una serie de reformas políticas, administrativas y militares que sentaron 
