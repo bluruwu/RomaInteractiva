@@ -45,7 +45,7 @@ const LessonReyesDeRoma = () => {
 			</div>
             {/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Fundacion_de_Roma" mediabef="fundacionroma.jpg" titlebef="FUNDACIÓN DE ROMA" 
-			           urlnxt="/Final_Monarquia" medianxt="finalmonarquia.jpg"  titlenxt="FINALIZACIÓN DE LA MONARQUÍA"/>
+			           urlnxt="/Final_Monarquia" medianxt="finalmonarquia.jpg"  titlenxt="FINALIZACIÓN DE LA MONARQUÍA" quiz={'monarquia'}/>
 		</div>
 	);
 };
