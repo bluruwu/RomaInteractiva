@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Fuse from 'fuse.js'
 import { Link } from 'react-router-dom';
 import lupa from '../media/lupa.png';
 
@@ -12,10 +13,15 @@ const SearchBar = () => {
       { title: 'Julio César', path: '/Julio_Cesar' },
     ];
   
-    const filteredLessons = lessons.filter(lesson =>
-      lesson.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const fuse = new Fuse(lessons, {
+      keys: ['title'],
+      includeScore: true,
+    });
   
+    const searchResults = fuse.search(searchTerm.toLowerCase());
+  
+    const filteredLessons = searchResults.map(result => result.item);
+    
     return (
       <>
         <form>
