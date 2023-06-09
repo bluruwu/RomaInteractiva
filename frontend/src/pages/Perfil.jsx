@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
+import ModalAvatar from "../components/chooseAvatar";
 
 const Perfil = () => {
 	const navigate = useNavigate();
@@ -10,6 +11,13 @@ const Perfil = () => {
 	const handleButtonClick = () => {
 		navigate("/perfil");
 	};
+
+	const initialAvatar = () => {
+		if (localStorage.getItem('avatar')) {
+			return JSON.parse(localStorage.getItem('avatar'))
+		}
+		else return null
+	}
 
 	const [nombreCompleto, setNombreCompleto] = useState(
 		localStorage.getItem("nombre_usuario") || ""
@@ -19,6 +27,24 @@ const Perfil = () => {
 	const [email, setEmail] = useState(localStorage.getItem("email") || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
+	const [idAvatar, setIdAvatar] = useState(initialAvatar())
+
+	
+
+	const getAvatar = () => {
+		if (idAvatar != null) {
+			return <img
+				src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
+				className="inline border-4 border-gray-500 object-cover w-36 h-36 mb-2 rounded-full"
+			/>
+		}
+		else {
+			return <img
+			src={require("../media/usericon.png")}
+			className="inline  object-cover w-32 h-32 mb-2 rounded-full"
+		/>
+		}
+	}
 
 	return (
 		<div className="font-text bg-gray-100 h-screen">
@@ -33,36 +59,27 @@ const Perfil = () => {
 				<div class=" flex-col items-center">
 					<img
 						src={require("../media/logro-columna.png")}
-						className="inline  object-cover w-20 h-20 mr-6 rounded-full"
+						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
 					/>
 					<img
 						src={require("../media/logro-helmet.png")}
-						className="inline  object-cover w-20 h-20 mr-6 rounded-full"
+						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
 					/>
-					<img
-						src={require("../media/usericon.png")}
-						className="inline  object-cover w-32 h-32 mb-2 rounded-full"
-					/>
-
+					{getAvatar()}
 					<img
 						src={require("../media/logro-medalla.png")}
-						className="inline  object-cover w-20 h-20 ml-6 rounded-full"
+						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
 					/>
 					<img
 						src={require("../media/logro-toga.png")}
-						className="inline  object-cover w-20 h-20 ml-6 rounded-full"
+						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
 					/>
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center justify-center mb-5">
-				<button
-					className="mb-4 md:mb-0 h-8  rounded-xl transform transition duration-300 hover:scale-110 underline"
-					onClick={() => navigate("/perfil")}
-				>
-					Cambiar avatar
-				</button>
-				<Modal/>
+				<ModalAvatar saveAvatar={setIdAvatar}/>
+				<Modal />
 			</div>
 
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center mb-8">
