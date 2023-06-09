@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
+import Modal from "../components/scores";
 
 const Perfil = () => {
 	const navigate = useNavigate();
@@ -52,12 +53,7 @@ const Perfil = () => {
 				>
 					Cambiar avatar
 				</button>
-				<button
-					className="mb-4 md:mb-0 h-8  rounded-xl transform transition duration-300 hover:scale-110 underline"
-					onClick={() => navigate("/perfil")}
-				>
-					Ver mis calificaciones
-				</button>
+				<Modal/>
 			</div>
 
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center mb-8">
