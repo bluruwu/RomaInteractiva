@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getLogin } from "../conections/requests";
+import { postLogin } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
@@ -10,7 +10,7 @@ const Login = () => {
 	const [showAlert, setShowAlert] = useState(false); // Estado para mostrar/ocultar la alerta
 
 	const [formData, setFormData] = useState({
-		nickname: "",
+		email: "",
 		contrasena: "",
 	}); // Estado para almacenar los datos del formulario de inicio de sesión
 
@@ -18,8 +18,9 @@ const Login = () => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
 		console.log(formData); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
-			const req_succesful = await getLogin(formData); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
-			if (req_succesful === "Correct credentials") {
+			const req_succesful = await postLogin(formData); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
+			console.log(req_succesful);
+			if (req_succesful === "Inicio de sesión exitoso") {
 				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
 				Swal.fire("Welcome!", "You have succesfully been logged!", "success");
 				navigate("/home");
@@ -64,7 +65,7 @@ const Login = () => {
 								type="text"
 								className="w-fit px-32 py-3 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
 								placeholder="Username"
-								onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
+								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
 						</div>
 						<div className="mb-4">

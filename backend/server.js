@@ -1,8 +1,16 @@
+const { createClient } = require("@supabase/supabase-js");
+
 const express = require("express");
 const app = express();
-const sql = require("mssql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
+const supabaseKey =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljaXd5dGp1dmJzbHJnaGZuaWF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMjUxODMsImV4cCI6MjAwMTkwMTE4M30.LsP_mUbNlT0nr7mZtgOxm9cevizYtTk9cLixo_K4ewM";
+const supabase = createClient(supabaseUrl, supabaseKey);
+// const supabase = createClient(supabaseUrl, supabaseKey, {
+// 	localStorage: window.localStorage, // Utilizar localStorage del navegador para persistir las sesiones
+// });
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
@@ -10,96 +18,90 @@ app.use(bodyParser.json());
 // allow all the incoming ip
 app.use(cors());
 
-// Configuración de la conexión a la base de datos
-const dbConfig = {
-  user: "edinsonuwu",
-  password: "Ema12345",
-  server: "edinsonuwu.database.windows.net",
-  database: "roma",
-  options: {
-    encrypt: true, // Habilita la encriptación
-  },
-};
+// async function agregarFila() {
+// 	try {
+// 		const { data, error } = await supabase.from("prueba").insert([{ id: 90, nombre: "Hola" }]);
 
-// Ruta para crear todas las tablas
-app.get("/create/tables", async (req, res) => {
-  try {
-    // Conexión a la base de datos
-    await sql.connect(dbConfig);
+// 		if (error) {
+// 			console.error("Error al agregar la fila:", error);
+// 		} else {
+// 			console.log("Fila agregada exitosamente:", data);
+// 		}
+// 	} catch (error) {
+// 		console.error("Error en la conexión con Supabase:", error);
+// 	}
+// }
 
-    // Operación CREATE TABLE de ejemplo
-    //NO MOVER ESTO NUNCA
-    const createTableQuery = `--DROP SEQUENCE IF EXISTS UserSequenceq;
-    --CREATE SEQUENCE UserSequenceq
-    --AS INT
-    --START WITH 1
-    --INCREMENT BY 1;
-    DROP TABLE IF EXISTS Usuarios;
-    CREATE TABLE Usuarios (
-      id_user INT DEFAULT (NEXT VALUE FOR UserSequenceq) PRIMARY KEY,
-      email VARCHAR(100) UNIQUE NOT NULL,
-      nombre_usuario VARCHAR(100) UNIQUE NOT NULL,
-      nickname VARCHAR(100) UNIQUE NOT NULL,
-      contrasena VARCHAR(255) NOT NULL
-  );
-    `; //NOTA IMPORTANTE: SI USTED VA A COLCOAR PK, SEPA, QUE MUY PROBABLEMENTE NO VA A PODER (HAGA DOS POST)
+// agregarFila();
 
-    await sql.query(createTableQuery);
-
-    res.send("Tabla creada exitosamente");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error en el servidor");
-  }
-});
-
-// Ruta para registrar un usuario
 app.post("/register/user", async (req, res) => {
-  try {
-    // Conexión a la base de datos
-    await sql.connect(dbConfig);
-    console.log(req.body);
-    // Datos del nuevo usuario obtenidos del cuerpo de la solicitud
-    const { email, nombre_usuario, nickname, contrasena } = req.body;
+	try {
+		const { email, nombre_usuario, nickname, avatar_id, contrasena } = req.body;
 
-    // Consulta para insertar el nuevo usuario en la tabla
-    const insertQuery = `INSERT INTO Usuarios (email, nombre_usuario, nickname, contrasena)
-    VALUES ('${email}', '${nombre_usuario}', '${nickname}', '${contrasena}');`;
+		const { user, session, error } = await supabase.auth.signUp({
+			email,
+			password: contrasena,
+		});
 
-    // Ejecutar la consulta con los parámetros
-    await sql.query(insertQuery);
+		if (error) {
+			throw new Error(error.message);
+		}
 
-    res.send("Usuario registrado exitosamente");
-  } catch (error) {
-    //console.error(error);
-    res.status(500).send(error.message);
-  }
+		// Guardar los datos adicionales del usuario en la tabla "users"
+		const { data, error: insertError } = await supabase
+			.from("usuarios")
+			.insert([{ email, nickname, nombre_usuario, avatar_id, contrasena }]);
+
+		if (insertError) {
+			throw new Error(insertError.message);
+		}
+
+		console.log("Usuario creado:", user);
+
+		res.json({ user, session });
+	} catch (error) {
+		console.error("Error al crear el usuario:", error);
+		res.status(500).json({ error: error.message });
+	}
 });
 
-// Ruta para consultar usuarios
-app.get("/users", async (req, res) => {
-  try {
-    // Conexión a la base de datos
-    await sql.connect(dbConfig);
+app.post("/login", async (req, res) => {
+	try {
+		const { email, contrasena } = req.body;
 
-    // Consulta para obtener todos los usuarios
-    const query = "SELECT * FROM Usuarios;";
+		const { user, session, error } = await supabase.auth.signInWithPassword({
+			email,
+			password: contrasena,
+		});
 
-    // Ejecutar la consulta
-    const result = await sql.query(query);
+		console.log("Email:", email);
+		console.log("Contraseña:", contrasena);
 
-    // Obtener los resultados de la consulta
-    const users = result.recordset;
+		if (error) {
+			throw new Error(error.message);
+		}
 
-    // Enviar los usuarios como respuesta
-    res.json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error.message);
-  }
+		// Realizar la consulta para obtener los datos de una fila en la tabla "usuarios"
+		const { data, error: queryError } = await supabase
+			.from("usuarios")
+			.select("*")
+			.eq("email", email)
+			.single();
+
+		if (queryError) {
+			throw new Error(queryError.message);
+		}
+
+		console.log(data);
+
+		res.json({ user, session, data, message: "Inicio de sesión exitoso" });
+	} catch (error) {
+		console.error("Error al iniciar sesión:", error);
+		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
+	}
 });
 
 // Iniciar el servidor
 app.listen(9000, () => {
-  console.log("Servidor Express.js en ejecución");
+	console.log("Servidor Express.js en ejecución");
 });

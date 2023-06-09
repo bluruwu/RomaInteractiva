@@ -1,6 +1,6 @@
 export const postData = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-api2.azurewebsites.net/register/user", {
+		const response = await fetch("http://127.0.0.1:9000/register/user", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -25,39 +25,34 @@ export const postData = async (mydata) => {
 	}
 };
 
-export const getLogin = async (mydata) => {
+export const postLogin = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-api2.azurewebsites.net/users");
-		const jsonData = await response.json();
+		const response = await fetch("http://127.0.0.1:9000/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(mydata),
+		});
 
 		if (response.ok) {
-			console.log("adsdvsdav");
-			console.log(jsonData);
-			var validCredentialsCounter = 0;
-			for (let i in jsonData) {
-				console.log(jsonData[i]);
-				if (jsonData[i]["nickname"] === mydata["nickname"]) {
-					validCredentialsCounter++;
-				}
-				if (jsonData[i]["contrasena"] === mydata["contrasena"]) {
-					validCredentialsCounter++;
-				}
-				if (validCredentialsCounter == 2) {
-					localStorage.setItem("id_user", jsonData[i]["id_user"]);
-					localStorage.setItem("email", jsonData[i]["email"]);
-					localStorage.setItem("nombre_usuario", jsonData[i]["nombre_usuario"]);
-					localStorage.setItem("nickname", jsonData[i]["nickname"]);
-					return "Correct credentials";
-				} else {
-					validCredentialsCounter = 0;
-				}
-			}
-			return "Username or Password are invalid";
+			const jsonData = await response.json();
+			const { user, session, data, message } = jsonData;
+
+			// Accede a los datos de la fila en "data"
+			console.log(data);
+			console.log(message);
+
+			// Realiza las acciones adicionales después de una autenticación exitosa
+			return "Inicio de sesión exitoso";
 		} else {
-			return "Credentials are not right";
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "Credenciales incorrectas";
 		}
 	} catch (error) {
 		console.error("Error:", error);
-		return "Conection failed";
+		return "Error de conexión";
 	}
 };
