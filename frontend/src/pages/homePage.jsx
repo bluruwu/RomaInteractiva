@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import Footbar from "../utilities/Footbar";
@@ -12,6 +12,15 @@ import domusImage from "../media/prev6.png";
 
 const HomePage = () => {
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		// Verificar si la variable ya existe en el almacenamiento local
+		if (!localStorage.getItem('monarquiaResuelto')) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem('monarquiaResuelto', JSON.stringify(false));
+		}
+	}, []);
+
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
 	const Title = () => {
 		return (
@@ -30,6 +39,29 @@ const HomePage = () => {
 		);
 	};
 
+	const getScore = (leccion) => {
+		if (leccion == 0) {
+			const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
+			if (quizResuelto) {
+				return JSON.parse(localStorage.getItem('aciertosMonarquia'))
+			}
+			else return 0
+		}
+		else if (leccion == 1) {
+
+		}
+		else if (leccion == 2) {
+			
+		}
+		else if (leccion == 3) {
+			
+		}
+		else if (leccion == 4) {
+			
+		}
+		else return 0
+	}
+
 	return (
 		// Render de la pagina, con el navbar, titulo y las categorias de las lecciones. Además del Footer al final
 		<div className="font-text">
@@ -47,7 +79,7 @@ const HomePage = () => {
 							hoverImage={monarquiaImage}
 							onClick={() => navigate("/fundacion_de_roma")}
 							buttonText={"La Monarquía"}
-							number={4}
+							number={getScore(0)}
 						/>
 						<Button
 							id="republica"
@@ -55,7 +87,7 @@ const HomePage = () => {
 							hoverImage={republicaImage}
 							onClick={() => navigate("/Fundacion_Republica")}
 							buttonText={"La República"}
-							number={2}
+							number={0}
 						/>
 						<Button
 							id="imperio"
@@ -63,7 +95,7 @@ const HomePage = () => {
 							hoverImage={imperioImage}
 							onClick={() => navigate("/Cristianismo_Imperio")}
 							buttonText={"El Imperio"}
-							number={5}
+							number={0}
 						/>
 					</div>
 				</section>
@@ -78,7 +110,7 @@ const HomePage = () => {
 							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
 							buttonText={"Personajes"}
-							number={3}
+							number={0}
 						/>
 						<Button
 							id="arquitectura"
@@ -86,7 +118,7 @@ const HomePage = () => {
 							onClick={() => navigate("/Coliseo_Romano")}
 							hoverImage={coliseoImage}
 							buttonText={"Arquitectura"}
-							number={4}
+							number={0}
 						/>
 						<Button
 							id="cultura"
@@ -94,7 +126,7 @@ const HomePage = () => {
 							hoverImage={domusImage}
 							onClick={() => navigate("/Viviendas")}
 							buttonText={"Cultura"}
-							number={1}
+							number={0}
 						/>
 					</div>
 				</section>
