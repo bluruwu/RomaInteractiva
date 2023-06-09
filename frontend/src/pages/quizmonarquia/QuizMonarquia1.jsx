@@ -13,29 +13,48 @@ const QuizMonarquia1 = () => {
 
 	const [questionNumber, setQuestionNumber] = useState(0);
 
-	const [checkedOptions, setCheckedOptions] = useState([0, 0, 0, 0, 0]);
+	const setInitialOptions = () => {
+		if (JSON.parse(localStorage.getItem('monarquiaResuelto')) === true) {
+			let valoresIniciales = []
+			for (let i = 0; i < 5; i++) {
+				valoresIniciales[i] = JSON.parse(localStorage.getItem(`monarquiaOpcion${i}`))
+			}
+			return valoresIniciales;
+		}
+		else return [0, 0, 0, 0, 0]
+	}
+
+	const [checkedOptions, setCheckedOptions] = useState(setInitialOptions());
 
 	const guardarOpcionMarcada = (index, valor) => {
-		// Clonar el arreglo existente
-		const arregloModificado = [...checkedOptions];
+		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
+		if (!quizResuelto) {
+			// Clonar el arreglo existente
+			const arregloModificado = [...checkedOptions];
 
-		// Modificar el estado específico
-		arregloModificado[index] = valor;
+			// Modificar el estado específico
+			arregloModificado[index] = valor;
 
-		// Actualizar el estado con la nueva copia del arreglo modificado
-		setCheckedOptions(arregloModificado);
+			// Actualizar el estado con la nueva copia del arreglo modificado
+			setCheckedOptions(arregloModificado);
+		}
 	};
 
 	const handleOptionSelect = (option) => {
-		setSelectedOption(option);
-		guardarOpcionMarcada(questionNumber, option);
+		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
+		if (!quizResuelto) {
+			setSelectedOption(option);
+			guardarOpcionMarcada(questionNumber, option);
+		}
 	};
 
 	const handleClickButton1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
+		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
 		if (questionNumber != 0) {
-			setSelectedOption(checkedOptions[questionNumber - 1]);
-
+			if (!quizResuelto) {
+				setSelectedOption(checkedOptions[questionNumber - 1]);
+			}
 			setQuestionNumber(questionNumber - 1);
 		} else {
 			navigate(INFORMATION[questionNumber].urlbef);
@@ -44,33 +63,77 @@ const QuizMonarquia1 = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
+		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
 		if (questionNumber != 4) {
-			if (checkedOptions[questionNumber + 1] == 0) {
-				setSelectedOption(0);
-			} else {
-				setSelectedOption(checkedOptions[questionNumber + 1]);
+			if (!quizResuelto) {
+				if (checkedOptions[questionNumber + 1] == 0) {
+					setSelectedOption(0);
+				} else {
+					setSelectedOption(checkedOptions[questionNumber + 1]);
+				}
 			}
 			setQuestionNumber(questionNumber + 1);
 		} else {
-			Swal.fire({
-				title: "¿Quieres terminar el intento?",
-				showCancelButton: true,
-				confirmButtonText: "Sí",
-			}).then((result) => {
-				let respuestasCorrectas = 0;
-				for (let i = 0; i < 5; i++) {
-					if (checkedOptions[i] === INFORMATION[i].respuesta) {
-						respuestasCorrectas++;
+			if (JSON.parse(localStorage.getItem('monarquiaResuelto'))) {
+				Swal.fire({
+					title: "¿Terminar revisión?",
+					showCancelButton: true,
+					confirmButtonText: "Sí",
+				}).then((result) => {
+					/* Leer más sobre isConfirmed, isDenied a continuación */
+					if (result.isConfirmed) {
+						navigate(INFORMATION[questionNumber].urlnxt);
 					}
-				}
-				/* Leer más sobre isConfirmed, isDenied a continuación */
-				if (result.isConfirmed) {
-					Swal.fire(`Tu puntaje fue ${respuestasCorrectas}/5`);
-					navigate(INFORMATION[questionNumber].urlnxt);
-				}
-			});
+				});
+			}
+			else {
+				Swal.fire({
+					title: "¿Quieres terminar el intento?",
+					showCancelButton: true,
+					confirmButtonText: "Sí",
+				}).then((result) => {
+					let respuestasCorrectas = 0;
+					for (let i = 0; i < 5; i++) {
+						localStorage.setItem(`monarquiaOpcion${i}`, JSON.stringify(checkedOptions[i]))
+						if (checkedOptions[i] === INFORMATION[i].respuesta) {
+							respuestasCorrectas++;
+						}
+					}
+					localStorage.setItem('aciertosMonarquia', JSON.stringify(respuestasCorrectas));
+					localStorage.setItem('monarquiaResuelto', JSON.stringify(true));
+					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
+					if (result.isConfirmed) {
+						Swal.fire({
+							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
+							showDenyButton: true,
+							confirmButtonText: 'Revisar respuestas',
+							denyButtonText: `Volver a home`,
+							denyButtonColor: '#3085d6'
+						}).then((result) => {
+							/* Read more about isConfirmed, isDenied below */
+							if (result.isConfirmed) {
+								setQuestionNumber(0);
+								setSelectedOption(null);
+								navigate("/Quiz_monarquia_1")
+							} else if (result.isDenied) {
+								navigate(INFORMATION[questionNumber].urlnxt);
+							}
+						})
+					}
+				});
+			}
 		}
 	};
+
+	const button2Text = () => {
+		if (questionNumber === 4) {
+			if (JSON.parse(localStorage.getItem('monarquiaResuelto'))) {
+				return "Finalizar revisión"
+			}
+			else return "Finalizar Quiz"
+		}
+		else return "Siguiente pregunta"
+	}
 
 	return (
 		<div className="font-text">
@@ -83,6 +146,8 @@ const QuizMonarquia1 = () => {
 					handleOptionSelect={handleOptionSelect}
 					optionNumber={1}
 					initialOption={checkedOptions[questionNumber]}
+					questionNumber={questionNumber}
+					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option2}
@@ -90,6 +155,8 @@ const QuizMonarquia1 = () => {
 					handleOptionSelect={handleOptionSelect}
 					optionNumber={2}
 					initialOption={checkedOptions[questionNumber]}
+					questionNumber={questionNumber}
+					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option3}
@@ -97,6 +164,8 @@ const QuizMonarquia1 = () => {
 					handleOptionSelect={handleOptionSelect}
 					optionNumber={3}
 					initialOption={checkedOptions[questionNumber]}
+					questionNumber={questionNumber}
+					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option4}
@@ -104,6 +173,8 @@ const QuizMonarquia1 = () => {
 					handleOptionSelect={handleOptionSelect}
 					optionNumber={4}
 					initialOption={checkedOptions[questionNumber]}
+					questionNumber={questionNumber}
+					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
 				/>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
@@ -119,7 +190,7 @@ const QuizMonarquia1 = () => {
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
 				>
-					{questionNumber === 4 ? "Finalizar Quiz" : "Siguiente pregunta"}
+					{button2Text()}
 				</button>
 			</div>
 		</div>
