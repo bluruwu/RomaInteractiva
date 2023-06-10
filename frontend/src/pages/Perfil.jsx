@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 
 const Perfil = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const handleButtonClick = () => {
-		navigate("/perfil");
+		return <Navigate to="/perfil" />;
 	};
 
 	const initialAvatar = () => {
-		if (localStorage.getItem('avatar')) {
-			return JSON.parse(localStorage.getItem('avatar'))
-		}
-		else return null
-	}
+		if (localStorage.getItem("avatar")) {
+			return JSON.parse(localStorage.getItem("avatar"));
+		} else return null;
+	};
 
 	const [nombreCompleto, setNombreCompleto] = useState(
 		localStorage.getItem("nombre_usuario") || ""
@@ -27,24 +26,25 @@ const Perfil = () => {
 	const [email, setEmail] = useState(localStorage.getItem("email") || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
-	const [idAvatar, setIdAvatar] = useState(initialAvatar())
-
-	
+	const [idAvatar, setIdAvatar] = useState(initialAvatar());
 
 	const getAvatar = () => {
 		if (idAvatar != null) {
-			return <img
-				src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
-				className="inline border-4 border-gray-500 object-cover w-36 h-36 mb-2 rounded-full"
-			/>
+			return (
+				<img
+					src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
+					className="inline border-4 border-gray-500 object-cover w-36 h-36 mb-2 rounded-full"
+				/>
+			);
+		} else {
+			return (
+				<img
+					src={require("../media/usericon.png")}
+					className="inline  object-cover w-32 h-32 mb-2 rounded-full"
+				/>
+			);
 		}
-		else {
-			return <img
-			src={require("../media/usericon.png")}
-			className="inline  object-cover w-32 h-32 mb-2 rounded-full"
-		/>
-		}
-	}
+	};
 
 	return (
 		<div className="font-text bg-gray-100 h-screen">
@@ -78,7 +78,7 @@ const Perfil = () => {
 			</div>
 
 			<div className="flex flex-col items-center justify-center mb-5">
-				<ModalAvatar saveAvatar={setIdAvatar}/>
+				<ModalAvatar saveAvatar={setIdAvatar} />
 				<Modal />
 			</div>
 
