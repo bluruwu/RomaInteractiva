@@ -21,10 +21,18 @@ export default function Modal() {
             else return <span className="flex items-center justify-between px-4"><strong>Monarquía:</strong><span className="text-right">Sin resolver</span></span>
         }
         else if (quiz == 1) {
-
+            const quizResuelto = JSON.parse(localStorage.getItem('republicaResuelto'));
+            if (quizResuelto) {
+                return <span className="flex items-center justify-between px-4"><strong>República:</strong><span className="text-right">{JSON.parse(localStorage.getItem('aciertosRepublica'))}/5 aciertos</span></span>
+            }
+            else return <span className="flex items-center justify-between px-4"><strong>República:</strong><span className="text-right">Sin resolver</span></span>
         }
         else if (quiz == 2) {
-
+            const quizResuelto = JSON.parse(localStorage.getItem('personajesResuelto'));
+            if (quizResuelto) {
+                return <span className="flex items-center justify-between px-4"><strong>Personajes:</strong><span className="text-right">{JSON.parse(localStorage.getItem('aciertosPersonajes'))}/5 aciertos</span></span>
+            }
+            else return <span className="flex items-center justify-between px-4"><strong>Personajes:</strong><span className="text-right">Sin resolver</span></span>
         }
         else if (quiz == 3) {
 
@@ -89,10 +97,12 @@ export default function Modal() {
             getMessage(quizResuelto, "/Quiz_monarquia_1", "fundacion_de_roma")
         }
         else if (quiz == 1) {
-
+            const quizResuelto = JSON.parse(localStorage.getItem('republicaResuelto'));
+            getMessage(quizResuelto, "/Quiz_Republica", "Fundacion_Republica")
         }
         else if (quiz == 2) {
-
+            const quizResuelto = JSON.parse(localStorage.getItem('personajesResuelto'));
+            getMessage(quizResuelto, "/Quiz_Personajes", "Romulo_Remo")
         }
         else if (quiz == 3) {
 
@@ -144,11 +154,11 @@ export default function Modal() {
                                                 </h1>
                                                 <Button texto={getText(0)} onClick={() => getScore(0)} />
 
-                                                <Button texto={<span className="flex items-center justify-between px-4"><strong>La República:</strong><span className="text-right">Sin resolver</span></span>} onClick={() => console.log('jeje')} />
+                                                <Button texto={getText(1)} onClick={() => getScore(1)} />
 
                                                 <Button texto={<span className="flex items-center justify-between px-4"><strong>El Imperio:</strong><span className="text-right">Sin resolver</span></span>} onClick={() => console.log('jeje')} />
 
-                                                <Button texto={<span className="flex items-center justify-between px-4"><strong>Personajes:</strong><span className="text-right">Sin resolver</span></span>} onClick={() => console.log('jeje')} />
+                                                <Button texto={getText(2)} onClick={() => getScore(2)} />
 
                                                 <Button texto={<span className="flex items-center justify-between px-4"><strong>Arquitectura:</strong><span className="text-right">Sin resolver</span></span>} onClick={() => console.log('jeje')} />
 

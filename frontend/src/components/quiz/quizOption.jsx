@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 
-const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, initialOption, questionNumber, correctAnswerNumber }) => {
+const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, initialOption, questionNumber, correctAnswerNumber, resolved, savedSelection }) => {
 	// Función para determinar si el botón está activo o no
 	const isButtonActive = () => {
 		return selectedOption === optionNumber || initialOption === optionNumber;
 	};
 
 	const hoverScale = () => {
-		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
-		if (!quizResuelto) {
+		if (!resolved) {
 			return 'hover:scale-110'
 		}
 	}
 
 	const enlargeButton = () => {
-		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
 		if (isButtonActive() || optionNumber === correctAnswerNumber) {
 			if (isButtonActive()) {
 				return "border-4 border-gray-500 focus:outline-none scale-110"
 			}
 			else {
-				if (quizResuelto) {
+				if (resolved) {
 					return " focus:outline-none scale-110"
 				}
 				else return ""
@@ -32,8 +30,7 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 	}
 
 	const activeColor = () => {
-		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
-		if (quizResuelto && optionNumber === correctAnswerNumber) {
+		if (resolved && optionNumber === correctAnswerNumber) {
 			return " bg-green-400"
 		}
 		else if (isButtonActive()) {
@@ -43,9 +40,7 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 	}
 
 	const iconReview = () => {
-		const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
-		const opcionEscogida = JSON.parse(localStorage.getItem(`monarquiaOpcion${questionNumber}`))
-		if (quizResuelto) {
+		if (resolved) {
 			if (optionNumber === correctAnswerNumber) {
 				return <img
 					src={process.env.PUBLIC_URL + "icons/check.svg"}
@@ -53,7 +48,7 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 					className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
 				/>
 			}
-			else if (opcionEscogida === optionNumber)
+			else if (savedSelection === optionNumber)
 				return <img src={process.env.PUBLIC_URL + '/icons/x.svg'} alt="X" className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2" />
 		}
 		else return ""

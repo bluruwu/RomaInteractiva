@@ -39,6 +39,7 @@ const SearchBar = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              id="busqueda"
             />
             <button type="submit" className="px-4 py-3 bg-white text-black rounded-r-full">
               <img src={lupa} alt="Lupa" className="w-5 h-auto"></img>
@@ -49,10 +50,11 @@ const SearchBar = () => {
           <div className="relative mt-2">
             <div className="absolute z-20 w-full bg-white rounded-md shadow-lg py-1">
             {filteredLessons.length > 0 ? (
-              filteredLessons.map(lesson => (
+              filteredLessons.map((lesson, index) => (
                 <Link
                   key={lesson.path}
                   to={lesson.path}
+                  id={`search-result-${index}`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   {lesson.title}

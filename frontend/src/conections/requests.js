@@ -42,8 +42,12 @@ export const postLogin = async (mydata) => {
 			// Accede a los datos de la fila en "data"
 			console.log(data);
 			console.log(message);
+			localStorage.setItem("email", JSON.stringify(data.email));
+			localStorage.setItem("avatar_id", JSON.stringify(data.avatar_id));
 			localStorage.setItem("nickname", JSON.stringify(data.nickname));
 			localStorage.setItem("email", JSON.stringify(data.email));
+			localStorage.setItem("id_usuario", JSON.stringify(data.id_usuario));
+			localStorage.setItem("nombre_usuario", JSON.stringify(data.nombre_usuario));
 
 			// Realiza las acciones adicionales después de una autenticación exitosa
 			return "Inicio de sesión exitoso";
@@ -66,7 +70,7 @@ export const postQuiz = async (mydata) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(mydata),
+			body: mydata,
 		});
 
 		if (response.ok) {
@@ -77,7 +81,11 @@ export const postQuiz = async (mydata) => {
 			console.log("sdfnindinefi");
 			console.log(data);
 			console.log(message);
+			localStorage.setItem("avatar_id", JSON.stringify(data.avatar_id));
 			localStorage.setItem("nickname", JSON.stringify(data.nickname));
+			localStorage.setItem("email", JSON.stringify(data.email));
+			localStorage.setItem("id_usuario", JSON.stringify(data.id_usuario));
+			localStorage.setItem("nombre-usuario", JSON.stringify(data.nombre_usuario));
 
 			// Realiza las acciones adicionales después de una autenticación exitosa
 			return "Evaluacion guardada";
