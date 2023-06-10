@@ -82,26 +82,6 @@ const QuizMonarquia1 = () => {
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación */
 					if (result.isConfirmed) {
-						// Llamada a postQuiz para enviar los datos del quiz al servidor
-						const formData = {
-							monarquiaOpcion0: localStorage.getItem("monarquiaOpcion0"),
-							monarquiaOpcion1: localStorage.getItem("monarquiaOpcion1"),
-							monarquiaOpcion2: localStorage.getItem("monarquiaOpcion2"),
-							monarquiaOpcion3: localStorage.getItem("monarquiaOpcion3"),
-							monarquiaOpcion4: localStorage.getItem("monarquiaOpcion4"),
-							aciertosMonarquia: localStorage.getItem("aciertosMonarquia"),
-						};
-
-						postQuiz(formData)
-							.then((response) => {
-								// Manejar la respuesta del servidor si es necesario
-								console.log(response);
-							})
-							.catch((error) => {
-								// Manejar el error si ocurre
-								console.error(error);
-							});
-
 						navigate(INFORMATION[questionNumber].urlnxt);
 					}
 				});
@@ -119,6 +99,26 @@ const QuizMonarquia1 = () => {
 						}
 					}
 					localStorage.setItem("aciertosMonarquia", JSON.stringify(respuestasCorrectas));
+
+					const formData = {
+						id_usuario: JSON.parse(localStorage.getItem("idUsuario")),
+						monarquiaOpcion0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
+						monarquiaOpcion1: JSON.parse(localStorage.getItem("monarquiaOpcion1")),
+						monarquiaOpcion2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
+						monarquiaOpcion3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
+						monarquiaOpcion4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
+						aciertosMonarquia: JSON.parse(localStorage.getItem("aciertosMonarquia")),
+					};
+
+					postQuiz(formData)
+						.then((response) => {
+							// Manejar la respuesta del servidor si es necesario
+							console.log(response);
+						})
+						.catch((error) => {
+							// Manejar el error si ocurre
+							console.error(error);
+						});
 					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
