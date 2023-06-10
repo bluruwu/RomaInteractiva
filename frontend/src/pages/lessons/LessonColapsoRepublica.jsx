@@ -25,7 +25,7 @@ const LessonColapsoRepublica = () => {
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Expansion_Republica" mediabef="expansion.jpg" titlebef="EXPANSIÓN DE LA REPÚBLICA ROMANA" 
-			           urlnxt="/Quiz_Republica" medianxt="quiz.jpg"  titlenxt="QUIZ (REPÚBLICA)"/>
+			           urlnxt="/Quiz_Republica" medianxt="quiz.jpg"  titlenxt="QUIZ (REPÚBLICA)" last={true} quiz={'republica'}/>
 		</div>
 	);
 };

@@ -29,8 +29,6 @@ const Perfil = () => {
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
 	const [idAvatar, setIdAvatar] = useState(initialAvatar())
 
-	
-
 	const getAvatar = () => {
 		if (idAvatar != null) {
 			return <img

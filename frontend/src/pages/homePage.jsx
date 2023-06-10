@@ -19,6 +19,14 @@ const HomePage = () => {
 			// Si no existe, agregarla al almacenamiento local
 			localStorage.setItem('monarquiaResuelto', JSON.stringify(false));
 		}
+		if (!localStorage.getItem('republicaResuelto')) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem('republicaResuelto', JSON.stringify(false));
+		}
+		if (!localStorage.getItem('personajesResuelto')) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem('personajesResuelto', JSON.stringify(false));
+		}
 	}, []);
 
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
@@ -48,13 +56,21 @@ const HomePage = () => {
 			else return 0
 		}
 		else if (leccion == 1) {
-
+			const quizResuelto = JSON.parse(localStorage.getItem('republicaResuelto'));
+			if (quizResuelto) {
+				return JSON.parse(localStorage.getItem('aciertosRepublica'))
+			}
+			else return 0
 		}
 		else if (leccion == 2) {
 			
 		}
 		else if (leccion == 3) {
-			
+			const quizResuelto = JSON.parse(localStorage.getItem('personajesResuelto'));
+			if (quizResuelto) {
+				return JSON.parse(localStorage.getItem('aciertosPersonajes'))
+			}
+			else return 0
 		}
 		else if (leccion == 4) {
 			
@@ -87,7 +103,7 @@ const HomePage = () => {
 							hoverImage={republicaImage}
 							onClick={() => navigate("/Fundacion_Republica")}
 							buttonText={"La República"}
-							number={0}
+							number={getScore(1)}
 						/>
 						<Button
 							id="imperio"
@@ -110,7 +126,7 @@ const HomePage = () => {
 							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
 							buttonText={"Personajes"}
-							number={0}
+							number={getScore(3)}
 						/>
 						<Button
 							id="arquitectura"
