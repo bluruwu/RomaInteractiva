@@ -13,6 +13,7 @@ const Perfil = () => {
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
+		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
 
 		// Recargar la página
 		window.location.reload();
@@ -21,8 +22,8 @@ const Perfil = () => {
 	};
 
 	const initialAvatar = () => {
-		if (localStorage.getItem("avatar")) {
-			return JSON.parse(localStorage.getItem("avatar"));
+		if (localStorage.getItem("avatar_id")) {
+			return JSON.parse(localStorage.getItem("avatar_id"));
 		} else return null;
 	};
 
