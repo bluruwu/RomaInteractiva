@@ -61,10 +61,10 @@ const Login = () => {
 						/>
 						<div className="mb-4">
 							<input
-								id="username"
+								id="email"
 								type="text"
 								className="w-fit px-32 py-3 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
-								placeholder="Username"
+								placeholder="Email"
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
 						</div>
