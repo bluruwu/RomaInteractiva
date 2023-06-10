@@ -101,6 +101,47 @@ app.post("/login", async (req, res) => {
 	}
 });
 
+app.post("/enviarevaluacion", async (req, res) => {
+	try {
+		const { monarquiaOpcion0, monarquiaOpcion1 } = req.body;
+
+		// const { user, session, error } = await supabase.auth.signInWithPassword({
+		// 	email,
+		// 	password: contrasena,
+		// });
+
+		const { data, error } = await supabase
+			.from("calificaciones")
+			.insert([
+				{
+					id_quiz: 1,
+					id_usuario: "Hola",
+					calificacion: 4,
+					respuesta0: 1,
+					respuesta1: 1,
+					respuesta2: 2,
+					respuesta3: 2,
+					respuesta4: 2,
+				},
+			]);
+
+		if (error) {
+			throw new Error(error.message);
+		}
+
+		if (error) {
+			console.error("Error al agregar la fila:", error);
+		} else {
+			console.log("Fila agregada exitosamente:", data);
+		}
+
+		res.json({ data, message: "Quiz guardado" });
+	} catch (error) {
+		console.error("Error al iniciar sesión:", error);
+		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
+	}
+});
+
 // Iniciar el servidor
 app.listen(9000, () => {
 	console.log("Servidor Express.js en ejecución");
