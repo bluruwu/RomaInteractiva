@@ -4,15 +4,23 @@ import { Link } from 'react-router-dom';
 import lupa from '../media/lupa.png';
 
 const SearchBar = () => {
+  // Las funciones de abajo son para la busqueda. Lessons son las lecciones que se añadiran en la busqueda, y keys es aquello que se va a buscar
+  // Si se quiere colocar más keys, primero agrega a lessons aquello por lo que se va a buscar y luego lo incluyes en keys.
+
     const [searchTerm, setSearchTerm] = useState('');
   
     const lessons = [
       { title: 'Fundación de Roma', path: '/Fundacion_de_Roma' },
       { title: 'Reyes de Roma', path: '/Reyes_de_Roma' },
       { title: 'Finalización de la monarquía', path: '/Final_Monarquia' },
-      { title: 'Julio César', path: '/Julio_Cesar' },
+      { title: 'Augusto', path: '/Augusto' },
+      { title: 'Rómulo y Remo', path: '/Romulo_Remo' },
+      { title: 'Fundación de la Republica Romana', path: '/Fundacion_Republica' },
+      { title: 'Expansión de la Republica Romana', path: '/Expansion_Republica' },
+      { title: 'Colapso de la República Romana', path: '/Colapso_Republica' },
     ];
   
+    
     const fuse = new Fuse(lessons, {
       keys: ['title'],
       includeScore: true,
@@ -39,7 +47,7 @@ const SearchBar = () => {
         </form>
         {searchTerm && (
           <div className="relative mt-2">
-            <div className="absolute z-10 w-full bg-white rounded-md shadow-lg py-1">
+            <div className="absolute z-20 w-full bg-white rounded-md shadow-lg py-1">
             {filteredLessons.length > 0 ? (
               filteredLessons.map(lesson => (
                 <Link
