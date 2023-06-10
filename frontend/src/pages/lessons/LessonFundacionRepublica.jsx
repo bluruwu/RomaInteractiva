@@ -4,11 +4,27 @@ import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 
-const first = ``
+const first = `La fundación de la República Romana marcó un importante hito en la historia de 
+				la antigua Roma. Se estima que este suceso ocurrió en el año 509 a.C., cuando 
+				el último rey de Roma, Lucio Tarquinio el Soberbio, fue expulsado del poder y 
+				se instauró un sistema republicano de gobierno. Esta transformación política tuvo 
+				lugar después de años de tensión entre la aristocracia romana y el monarca, quien 
+				había abusado de su autoridad y mostrado desprecio por las instituciones republicanas.`
 
-const second = ``
+const second = `La fundación de la República Romana implicó la creación de un nuevo sistema de gobierno 
+				basado principalmente en la igualdad y la participación ciudadana. Se estableció un Senado compuesto por 
+				miembros de la aristocracia, quienes tomaban decisiones políticas y administrativas. Además, 
+				se eligieron dos cónsules para liderar el gobierno, los cuales eran elegidos anualmente, para 
+				representar los intereses de la república. Estos cambios proporcionaron un equilibrio de poder
+				y una distribución más justa de la autoridad política en Roma.`
 
-const third = ``
+const third = `En términos sociales, la República Romana estaba estructurada en diferentes clases. 
+				Los patricios, pertenecientes a la aristocracia, eran la élite gobernante y tenían privilegios 
+				y derechos especiales. Por otro lado, los plebeyos, que constituían la mayoría de la población,
+				luchaban por obtener más derechos y representación política. A lo largo del tiempo, los plebeyos
+				lograron avances significativos en su lucha por la igualdad y la justicia social, 
+				como la obtención del derecho a la participación política y la elección de sus propios 
+				representantes en la Asamblea Popular.`
 
 const LessonFundacionRepublica = () => {
 
@@ -25,7 +41,7 @@ const LessonFundacionRepublica = () => {
 					thirdparag={third}
 				/> 
 				{/* Componente del modelo 3D */}
-				<LessonModel description="" titleModel="" source=""/>
+				<LessonModel description="Templo de Neptuno, construido durante la República Romana" titleModel="Templo de Neptuno" source="https://sketchfab.com/models/7a82e48e244445e69fd0a9c7b7c4b256/embed"/>
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Final_Monarquia" mediabef="finalmonarquia.jpg" titlebef="FINALIZACIÓN DE LA MONARQUÍA" 
