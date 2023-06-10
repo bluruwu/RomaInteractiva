@@ -9,6 +9,14 @@ const Perfil = () => {
 	// const navigate = useNavigate();
 
 	const handleButtonClick = () => {
+		// Guardar los valores en el localStorage
+		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
+		localStorage.setItem("nickname", JSON.stringify(nickname));
+		localStorage.setItem("email", JSON.stringify(email));
+
+		// Recargar la página
+		window.location.reload();
+
 		return <Navigate to="/perfil" />;
 	};
 
@@ -19,11 +27,11 @@ const Perfil = () => {
 	};
 
 	const [nombreCompleto, setNombreCompleto] = useState(
-		localStorage.getItem("nombre_usuario") || ""
+		JSON.parse(localStorage.getItem("nombre_usuario")) || ""
 	);
-	const [nickname, setNickname] = useState(localStorage.getItem("nickname") || "");
+	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
 	const [contrasena, setContrasena] = useState(localStorage.getItem("contrasena") || "");
-	const [email, setEmail] = useState(localStorage.getItem("email") || "");
+	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
 	const [idAvatar, setIdAvatar] = useState(initialAvatar());
