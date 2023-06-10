@@ -5,6 +5,22 @@ import SearchBar from "./SearchBar";
 
 const Navbar = () => {
 	const navigate = useNavigate();
+
+	// Obtener el valor del nickname del localStorage
+	const nickname = JSON.parse(localStorage.getItem("nickname"));
+
+	// Obtener el valor del id_avatar del localStorage
+	const idAvatar = JSON.parse(localStorage.getItem("avatar_id"));
+
+	// Redirigir al usuario según la existencia del nickname
+	const handleNavigation = () => {
+		if (nickname) {
+			navigate("/perfil");
+		} else {
+			navigate("/login");
+		}
+	};
+
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-20">
@@ -26,14 +42,21 @@ const Navbar = () => {
 					<li>
 						<a
 							id="iniciarsesion"
-							onClick={() => navigate("/login")}
+							onClick={handleNavigation}
 							className="font-text font-regular text-custom-doradonormal hover:text-white"
 						>
-							Iniciar sesión
+							{nickname ? nickname : "Iniciar sesión"}
 						</a>
 					</li>
 					<li>
-						<div className="w-14 h-14 rounded-full bg-gray-300"></div>
+						<div className="w-14 h-14 rounded-full bg-gray-300">
+							{idAvatar && (
+								<img
+									src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
+									className="inline border-4 border-custom-doradodark object-cover rounded-full"
+								/>
+							)}
+						</div>
 					</li>
 				</ul>
 			</div>
