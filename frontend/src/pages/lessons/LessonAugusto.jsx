@@ -29,7 +29,7 @@ const LessonAugusto = () => {
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Julio_Cesar" mediabef="juliocesar.jpg" titlebef="JULIO CÉSAR" 
-			           urlnxt="/Quiz_Personajes" medianxt="quiz.jpg"  titlenxt="QUIZ (PERSONAJES)"/>
+			           urlnxt="/Quiz_Personajes" medianxt="quiz.jpg"  titlenxt="QUIZ (PERSONAJES)" last={true} quiz={'personajes'}/>
 		</div>
 	);
 };

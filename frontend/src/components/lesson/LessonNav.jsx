@@ -9,7 +9,12 @@ const LessonNav = ({urlbef, urlnxt, mediabef, medianxt, titlebef, titlenxt ,last
 		if (quiz == 'monarquia') {
 			return JSON.parse(localStorage.getItem('monarquiaResuelto'))
 		}
-		//hacer lo mismo para las otras lecciones
+		else if(quiz == 'republica'){
+			return JSON.parse(localStorage.getItem('republicaResuelto'))
+		}
+		else if(quiz == 'personajes'){
+			return JSON.parse(localStorage.getItem('personajesResuelto'))
+		}
 	}
 
 	const quizMessage = () => {
