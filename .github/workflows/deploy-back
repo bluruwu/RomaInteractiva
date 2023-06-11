@@ -1,4 +1,4 @@
-name: GitHub Actions Vercel Deployment
+name: GitHub Actions Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: Q8esKtg3ENB1XkeFyRo5lqJs
   VERCEL_PROJECT_ID: prj_fXXSpKePaCTWEo3QOUchGNx1tJuN
@@ -26,4 +26,4 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=DIj85LauZRme4719HVZRZZTn
-        working-directory: backend # Set the working directory for this stepa
+        working-directory: backend # Set the working directory for this step
