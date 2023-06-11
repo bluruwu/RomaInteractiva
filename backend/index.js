@@ -34,6 +34,19 @@ app.use(cors());
 
 // agregarFila();
 
+app.get("/users", async (req, res) => {
+	const { data, error: queryError } = await supabase
+		.from("usuarios")
+		.select("*");
+
+	if (queryError) {
+		throw new Error(queryError.message);
+	}
+
+	console.log(data);
+    res.json(data)
+})
+
 app.post("/register/user", async (req, res) => {
 	try {
 		const { email, nombre_usuario, nickname, avatar_id, contrasena } = req.body;
