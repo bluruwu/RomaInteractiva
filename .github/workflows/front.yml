@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 'deploy/**'
+      - 'deploy([A-Za-z][-][A-Za-z])\w+'
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
