@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 'deploy([A-Za-z][-][A-Za-z])\w+'
+      - ^deploy(?!.*[\s])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
