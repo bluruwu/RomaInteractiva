@@ -2,7 +2,11 @@ name: GitHub Actions Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: Q8esKtg3ENB1XkeFyRo5lqJs
   VERCEL_PROJECT_ID: prj_fXXSpKePaCTWEo3QOUchGNx1tJuN
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - 'deploy/**'
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
