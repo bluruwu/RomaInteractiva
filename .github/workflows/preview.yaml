@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Entrar en frontend folder
-        run: vercel frontend
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
       - name: Pull Vercel Environment Information
@@ -21,3 +19,5 @@ jobs:
         run: vercel build --token=DIj85LauZRme4719HVZRZZTn
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=DIj85LauZRme4719HVZRZZTn
+      - name: Entrar en frontend folder
+        run: vercel frontend
