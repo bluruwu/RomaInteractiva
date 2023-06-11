@@ -19,5 +19,4 @@ jobs:
         run: vercel build --token=DIj85LauZRme4719HVZRZZTn
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=DIj85LauZRme4719HVZRZZTn
-      with:
-        working-directory: ./frontend
+    
