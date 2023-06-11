@@ -1,15 +1,12 @@
 name: GitHub Actions Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: Q8esKtg3ENB1XkeFyRo5lqJs
-  VERCEL_PROJECT_ID: prj_OEehib0BFOXLkBgB2DV3anYzFnyO
-on:
-  push:
-    branches-ignore:
-      - main
+  VERCEL_PROJECT_ID: prj_UgiF1WlelTPYWs4A3RSzlntH8c8z
+on: [push]
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
-    steps:
+    steps: #wtf bro x4
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
