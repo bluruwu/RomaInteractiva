@@ -1,7 +1,7 @@
 name: GitHub Actions Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: Q8esKtg3ENB1XkeFyRo5lqJs
-  VERCEL_PROJECT_ID: prj_UgiF1WlelTPYWs4A3RSzlntH8c8z
+  VERCEL_PROJECT_ID: prj_fXXSpKePaCTWEo3QOUchGNx1tJuN
 on: [push]
 jobs:
   Deploy-Preview:
@@ -10,20 +10,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          path: frontend # Specify the path to the root directory
+          path: backend # Specify the path to the root directory
 
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
-        working-directory: frontend # Set the working directory for this step
+        working-directory: backend # Set the working directory for this step
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=DIj85LauZRme4719HVZRZZTn
-        working-directory: frontend # Set the working directory for this step
+        working-directory: backend # Set the working directory for this step
 
       - name: Build Project Artifacts
         run: vercel build --token=DIj85LauZRme4719HVZRZZTn
-        working-directory: frontend # Set the working directory for this step
+        working-directory: backend # Set the working directory for this step
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=DIj85LauZRme4719HVZRZZTn
-        working-directory: frontend # Set the working directory for this step
+        working-directory: backend # Set the working directory for this step
