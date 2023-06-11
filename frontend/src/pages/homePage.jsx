@@ -122,7 +122,7 @@ const HomePage = () => {
 					<div className="flex justify-center gap-x-24 mt-8">
 						<Button
 							id="personajes"
-							image={"images/julio.png"}
+							image={"images/Julio.png"}
 							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
 							buttonText={"Personajes"}
