@@ -26,4 +26,4 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=DIj85LauZRme4719HVZRZZTn
-        working-directory: backend # Set the working directory for this step
+        working-directory: backend # Set the working directory for this stepa
