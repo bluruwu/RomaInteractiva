@@ -1,6 +1,6 @@
 name: GitHub Actions Vercel Preview Deployment
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_ORG_ID: a
   VERCEL_PROJECT_ID: prj_OEehib0BFOXLkBgB2DV3anYzFnyO
 on:
   push:
