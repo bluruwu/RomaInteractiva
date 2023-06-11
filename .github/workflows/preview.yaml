@@ -9,7 +9,7 @@ on:
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
-    steps:
+    steps: #wtf bro
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
