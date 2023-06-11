@@ -20,4 +20,4 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=DIj85LauZRme4719HVZRZZTn
       - name: Entrar en frontend folder
-        run: vercel frontend
+        run: vercel ./frontend
