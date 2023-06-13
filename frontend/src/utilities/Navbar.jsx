@@ -29,27 +29,27 @@ const Navbar = () => {
 						<img src={logo} alt="Logo" className="w-32 h-auto"></img>
 					</a>
 					<a onClick={() => navigate("/home")}>
-						<span className="text-xl ml-2 font-text font-regular text-custom-doradonormal">
+						<span className="text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap">
 							Roma Interactiva
 						</span>
 					</a>
 				</div>
 
 				<ul className="flex space-x-4 items-center">
-					<li className="ml-20 mr-20">
+					<li className="ml-20 mr-20 hidden md:block">
 						<SearchBar />
 					</li>
 					<li>
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white"
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
 					</li>
 					<li>
-						<div className="w-14 h-14 rounded-full bg-gray-300">
+						<div className="w-14 h-14 rounded-full bg-gray-300 hidden md:block">
 							{idAvatar && (
 								<img
 									src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}

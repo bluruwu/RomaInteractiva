@@ -4,11 +4,11 @@ import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import Perfil from "./pages/Perfil";
-
+//Quizes
 import QuizMonarquia1 from "./pages/quizmonarquia/QuizMonarquia1";
 import QuizRepublica from "./pages/quizmonarquia/QuizRepublica";
 import QuizPersonajes from "./pages/quizmonarquia/QuizPersonajes";
-
+//Lecciones
 import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
 import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
 import LessonFinalMonarquia from "./pages/lessons/LessonFinalMonarquia";
@@ -28,6 +28,7 @@ import LessonViviendas from "./pages/lessons/LessonViviendas";
 import LessonExpRepublica from "./pages/lessons/LessonExpRepublica";
 import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
 
+//Rutas de la aplicacion. Con el path y el elemento que debe ser renderizado importado previamente
 const App = () => {
 	return (
 		<Routes>
@@ -38,8 +39,8 @@ const App = () => {
 			<Route path="perfil" element={<Perfil />} />
 
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia1 />} />
-			<Route path="Quiz_Republica" element={<QuizRepublica/>} />
-			<Route path="Quiz_Personajes" element={<QuizPersonajes/>} />
+			<Route path="Quiz_Republica" element={<QuizRepublica />} />
+			<Route path="Quiz_Personajes" element={<QuizPersonajes />} />
 
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
 			<Route path="/Reyes_de_Roma" element={<LessonReyesDeRoma />} />
