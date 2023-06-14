@@ -1,4 +1,4 @@
-name: Run Tests
+name: Test of API with Jest
 
 on:
   push:
