@@ -26,6 +26,6 @@ jobs:
           node-version: '14'
           path: tests
 
-      - name: todo
+      - name: todo #peor es nada
         run: cd tests;npm install;npm test
 
