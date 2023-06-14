@@ -26,12 +26,6 @@ jobs:
           node-version: '14'
           path: tests
 
-      - name: Cd on folder
-        run: cd tests
+      - name: todo
+        run: cd tests;npm install;npm test
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm xf
-        working-directory: tests
