@@ -26,10 +26,11 @@ jobs:
           node-version: '14'
           path: tests
 
+      - name: Cd on folder
+        run: cd tests
+
       - name: Install dependencies
         run: npm ci
-        working-directory: tests # Specify the path to the root directory
 
       - name: Run tests
         run: npm test
-        working-directory: tests # Specify the path to the root directory
