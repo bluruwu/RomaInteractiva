@@ -15,6 +15,6 @@ describe('POST /endpoint', () => {
         });
         const responseBody = await response.json();
         expect(response.status).toBe(200);
-        expect(responseBody.message).toEqual('Inicio de sesión exitoso');
+        expect(responseBody.message).toEqual('Inicio de sesión exit1oso');
     });
 });
