@@ -1,6 +1,6 @@
 export const postData = async (mydata) => {
 	try {
-		const response = await fetch("https:https://roma-interactiva-back-edinsonuwu.vercel.app/register/user", {
+		const response = await fetch("https://roma-interactiva-back.vercel.app/register/user", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const postData = async (mydata) => {
 
 export const postLogin = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-interactiva-back-edinsonuwu.vercel.app/login", {
+		const response = await fetch("https://roma-interactiva-back.vercel.app/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -65,7 +65,7 @@ export const postLogin = async (mydata) => {
 
 export const postQuiz = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-interactiva-back-edinsonuwu.vercel.app/enviarevaluacion", {
+		const response = await fetch("https://roma-interactiva-back.vercel.app/enviarevaluacion", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
