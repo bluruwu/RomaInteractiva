@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "ci": "ci"
+    "ci": "install",
+    "xf": "jest"
   },
   "keywords": [],
   "author": "",
