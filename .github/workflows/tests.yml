@@ -13,14 +13,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          path: tests # Specify the path to the root directory
+
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+          path: tests # Specify the path to the root directory
 
       - name: Install dependencies
         run: npm ci
+        with:
+          path: tests # Specify the path to the root directory
 
       - name: Run tests
-        run: npm test --prefix ./tests
+        run: npm test
+        with:
+          path: tests # Specify the path to the root directory
