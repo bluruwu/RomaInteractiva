@@ -1,6 +1,15 @@
+//ARCHIVO PARA HACER LAS SOLICITUDES HTTP
+//Usar Authorization: `Bearer ${token}` en el header de los fetch
+
+//Usar API_URL de vercel antes de hacer pull request a main para hacer el despliegue
+//const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
+//Usar la API_URL del puerto 9000 si se va a trabajar local
+const API_URL = "http://127.0.0.1:9000";
+
+//Solicitud POST para el registro de usuarios
 export const postData = async (mydata) => {
 	try {
-		const response = await fetch("https:https://roma-interactiva-back-edinsonuwu.vercel.app/register/user", {
+		const response = await fetch(`${API_URL}/register/user`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -8,15 +17,15 @@ export const postData = async (mydata) => {
 			body: JSON.stringify(mydata),
 		});
 
+		//Si se recibe una respuesta exitosa del backend
 		if (response.ok) {
 			console.log("Data submitted successfully");
 			return "Data submitted successfully";
-			// Perform additional actions after successful submission
 		} else {
+			// Handle error response
 			const error = await response.json();
 			console.error(error);
 			return "Email or Username already taken";
-			// Handle error response
 		}
 	} catch (error) {
 		console.error("Error:", error);
@@ -25,29 +34,71 @@ export const postData = async (mydata) => {
 	}
 };
 
+//GET de prueba para el funcionamiento de los tokens
+//Retorna los datos del usuario en consola
+//Se le pasa un token
+export const getPrueba = async (token) => {
+	try {
+		const response = await fetch(`${API_URL}/ruta`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		//Si se recibe una respuesta exitosa del backend
+		if (response.ok) {
+			const jsonData = await response.json();
+			const { userId, email, username } = jsonData;
+
+			// Mostrar en consola los datos del usuario obtenidos por medio del token
+			console.log(userId, email, username);
+
+			return "OK";
+		} else {
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "No se puedo obtener la informacion del usuario";
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		return "Error en solicitud";
+	}
+};
+
+//POST para realizar el login de los usuarios
 export const postLogin = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-interactiva-back-edinsonuwu.vercel.app/login", {
+		const response = await fetch(`${API_URL}/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				// Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify(mydata),
 		});
 
+		//Si se obtiene respuesta exitosa del backend
 		if (response.ok) {
 			const jsonData = await response.json();
-			const { user, session, data, message } = jsonData;
+			const { usuarioData, message } = jsonData;
+
+			// Después de recibir el token en la respuesta del servidor
+			const token = jsonData.token;
+			localStorage.setItem("token", token);
+			console.log("token recibido del login", token);
 
 			// Accede a los datos de la fila en "data"
-			console.log(data);
+			console.log(usuarioData);
 			console.log(message);
-			localStorage.setItem("email", JSON.stringify(data.email));
-			localStorage.setItem("avatar_id", JSON.stringify(data.avatar_id));
-			localStorage.setItem("nickname", JSON.stringify(data.nickname));
-			localStorage.setItem("email", JSON.stringify(data.email));
-			localStorage.setItem("id_usuario", JSON.stringify(data.id_usuario));
-			localStorage.setItem("nombre_usuario", JSON.stringify(data.nombre_usuario));
+			localStorage.setItem("email", JSON.stringify(usuarioData.email));
+			localStorage.setItem("avatar_id", JSON.stringify(usuarioData.avatar_id));
+			localStorage.setItem("nickname", JSON.stringify(usuarioData.nickname));
+			localStorage.setItem("email", JSON.stringify(usuarioData.email));
+			localStorage.setItem("id_usuario", JSON.stringify(usuarioData.id_usuario));
+			localStorage.setItem("nombre_usuario", JSON.stringify(usuarioData.nombre_usuario));
 
 			// Realiza las acciones adicionales después de una autenticación exitosa
 			return "Inicio de sesión exitoso";
@@ -65,10 +116,11 @@ export const postLogin = async (mydata) => {
 
 export const postQuiz = async (mydata) => {
 	try {
-		const response = await fetch("https://roma-interactiva-back-edinsonuwu.vercel.app/enviarevaluacion", {
+		const response = await fetch(`${API_URL}/enviarevaluacion`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				// Authorization: `Bearer ${token}`,
 			},
 			body: mydata,
 		});
