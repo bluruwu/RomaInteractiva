@@ -1,10 +1,7 @@
 name: Test of API with Jest
 
 on:
-  push:
-    branches:
-      - main
-      - deployment-back
+  push
 
 jobs:
   test:
