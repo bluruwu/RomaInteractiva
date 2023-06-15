@@ -117,16 +117,23 @@ const QuizRepublica = () => {
 
 					console.log(formData);
 
-					//Agregar token
-					postQuiz(formData, token)
-						.then((response) => {
-							// Manejar la respuesta del servidor si es necesario
-							console.log(response);
-						})
-						.catch((error) => {
-							// Manejar el error si ocurre
-							console.error(error);
-						});
+					console.log("el token es:", token);
+
+					if (token) {
+						//Agregar token
+						postQuiz(formData, token)
+							.then((response) => {
+								// Manejar la respuesta del servidor si es necesario
+								console.log(response);
+							})
+							.catch((error) => {
+								// Manejar el error si ocurre
+								console.error(error);
+							});
+					} else {
+						// Manejar el caso en el que no haya token disponible, usuario sin logear
+						console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+					}
 
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
