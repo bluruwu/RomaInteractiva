@@ -79,7 +79,7 @@ const Login = () => {
 						</div>
 
 						<img
-							src={require("../media/luperca.jpg")}
+							src={require("../media/iconos/luperca.jpg")}
 							alt="Imagen en el top right"
 							className="max-w-200 max-h-200 object-cover  max-w-prose"
 						/>

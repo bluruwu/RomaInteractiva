@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../media/logo.png";
+import logo from "../media/logos/logo.png";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 

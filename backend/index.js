@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
 		};
 
 		// Generar token JWT con el id_usuario email y nickname del usuario
-		const token = jwt.sign(user, "secreto", { expiresIn: "1h" });
+		const token = jwt.sign(user, "secreto");
 
 		// Enviar el token al frontend con los datos del usuario y un mensaje de confirmacion
 		res.json({ usuarioData, token, message: "Inicio de sesión exitoso" });
@@ -63,7 +63,7 @@ app.post("/login", async (req, res) => {
 	}
 });
 
-app.get("/ruta", verifyToken, (req, res) => {
+app.get("/currentuser", verifyToken, (req, res) => {
 	const userId = req.user.id_usuario;
 	const email = req.user.email;
 	const username = req.user.nickname;

@@ -5,9 +5,11 @@ import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 
+//Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 	// const navigate = useNavigate();
 
+	//Manejar cuando el usuario hace clic en "GUARDAR CAMBIOS"
 	const handleButtonClick = () => {
 		// Guardar los valores en el localStorage
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
@@ -18,18 +20,23 @@ const Perfil = () => {
 		// Recargar la página
 		window.location.reload();
 
+		//Recargar página
 		return <Navigate to="/perfil" />;
 	};
 
+	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
 		if (localStorage.getItem("avatar_id")) {
 			return JSON.parse(localStorage.getItem("avatar_id"));
 		} else return null;
 	};
 
+	//Obtener el nombre del usuario
 	const [nombreCompleto, setNombreCompleto] = useState(
 		JSON.parse(localStorage.getItem("nombre_usuario")) || ""
 	);
+
+	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
 	const [contrasena, setContrasena] = useState(localStorage.getItem("contrasena") || "");
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
@@ -37,7 +44,9 @@ const Perfil = () => {
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
 	const [idAvatar, setIdAvatar] = useState(initialAvatar());
 
+	//Obtener la imagen del avatar
 	const getAvatar = () => {
+		//Si el usuario tiene un avatar_id se busca la imagen que le corresponde
 		if (idAvatar != null) {
 			return (
 				<img
@@ -46,9 +55,10 @@ const Perfil = () => {
 				/>
 			);
 		} else {
+			//Si el usuario no tiene ningun avatar_id se pone el avatar generico
 			return (
 				<img
-					src={require("../media/usericon.png")}
+					src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 					className="inline  object-cover w-32 h-32 mb-2 rounded-full"
 				/>
 			);
@@ -67,30 +77,32 @@ const Perfil = () => {
 				{/* Logros izquierda */}
 				<div class=" flex-col items-center">
 					<img
-						src={require("../media/logro-columna.png")}
+						src={require("../media/logros/logro-columna.png")}
 						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
 					/>
 					<img
-						src={require("../media/logro-helmet.png")}
+						src={require("../media/logros/logro-helmet.png")}
 						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
 					/>
 					{getAvatar()}
 					<img
-						src={require("../media/logro-medalla.png")}
+						src={require("../media/logros/logro-medalla.png")}
 						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
 					/>
 					<img
-						src={require("../media/logro-toga.png")}
+						src={require("../media/logros/logro-toga.png")}
 						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
 					/>
 				</div>
 			</div>
 
+			{/* Modal para mostrar los avatares disponibles */}
 			<div className="flex flex-col items-center justify-center mb-5">
 				<ModalAvatar saveAvatar={setIdAvatar} />
 				<Modal />
 			</div>
 
+			{/* Campos con la informacion del usuario */}
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center mb-8">
 				<div className="flex flex-col">
 					<div className="w-30 self-end">
