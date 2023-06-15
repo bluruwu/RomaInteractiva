@@ -135,7 +135,7 @@ app.post("/register/user", async (req, res) => {
 });
 
 // POST para el registro de calificacion de un quiz de un usuario en la base de datos
-//Se requiere el verifyToken para validad la sesion del usuario
+//Se requiere el verifyToken para validar la sesion del usuario
 app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 	try {
 		//Obtener datos del usuario del frontend
@@ -144,6 +144,8 @@ app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 
 		// Obtener el ID de usuario del token decodificado
 		const id_usuario = req.user.id_usuario;
+		console.log("id_usuario", id_usuario);
+		console.log(respuesta0, calificacion, id_quiz);
 
 		//Guardar calificaciones del usuario
 		const { data, error } = await supabase.from("calificaciones").insert([

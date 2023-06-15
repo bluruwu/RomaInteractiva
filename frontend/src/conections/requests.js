@@ -122,30 +122,19 @@ export const postQuiz = async (mydata, token) => {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: mydata,
+			body: JSON.stringify(mydata),
 		});
 
+		console.log(mydata);
+		//Respuesta exitosa del backend
 		if (response.ok) {
-			const jsonData = await response.json();
-			const { user, session, data, message } = jsonData;
-
-			// Accede a los datos de la fila en "data"
-			console.log("sdfnindinefi");
-			console.log(data);
-			console.log(message);
-			localStorage.setItem("avatar_id", JSON.stringify(data.avatar_id));
-			localStorage.setItem("nickname", JSON.stringify(data.nickname));
-			localStorage.setItem("email", JSON.stringify(data.email));
-			localStorage.setItem("id_usuario", JSON.stringify(data.id_usuario));
-			localStorage.setItem("nombre-usuario", JSON.stringify(data.nombre_usuario));
-
-			// Realiza las acciones adicionales después de una autenticación exitosa
-			return "Evaluacion guardada";
+			console.log("Insercion de calificacion realizada");
+			return "Insercion de calificacion realizada";
 		} else {
 			const error = await response.json();
 			console.error(error);
 			// Maneja la respuesta de error
-			return "ERROR";
+			return "Error al insertar calificacion";
 		}
 	} catch (error) {
 		console.error("Error:", error);

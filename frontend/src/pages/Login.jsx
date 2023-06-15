@@ -38,40 +38,31 @@ const Login = () => {
 		myresponse(); // Ejecutar la función asíncrona myresponse
 	};
 
-	const handleSubmitPrueba = (event) => {
-		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
-		const myresponse = async () => {
-			const req_succesful = await getPrueba(token); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
-			console.log(req_succesful);
-			if (req_succesful === "OK") {
-				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
-				Swal.fire("Prueba exitosa!", "success");
-				navigate("/home");
-			} else {
-				// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
-				Swal.fire({
-					icon: "error",
-					title: "Oops...",
-					text: req_succesful,
-				});
-			}
-		};
-		myresponse(); // Ejecutar la función asíncrona myresponse
-	};
+	// const handleSubmitPrueba = (event) => {
+	// 	event.preventDefault(); // Prevenir comportamiento de envío predeterminado
+	// 	const myresponse = async () => {
+	// 		const req_succesful = await getPrueba(token); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
+	// 		console.log(req_succesful);
+	// 		if (req_succesful === "OK") {
+	// 			// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
+	// 			Swal.fire("Prueba exitosa!", "success");
+	// 			navigate("/home");
+	// 		} else {
+	// 			// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
+	// 			Swal.fire({
+	// 				icon: "error",
+	// 				title: "Oops...",
+	// 				text: req_succesful,
+	// 			});
+	// 		}
+	// 	};
+	// 	myresponse(); // Ejecutar la función asíncrona myresponse
+	// };
+
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
 	return (
 		<div className="flex h-screen font-text">
 			{showAlert && <Alert />}
-			<form onSubmit={handleSubmitPrueba}>
-				<button
-					id="submit"
-					type="submit"
-					className="w-full px-6 py-3 text-xl text-white bg-custom-rojo rounded-full cursor-pointer hover:bg-red-800"
-					onSubmit={(e) => e.preventDefault()}
-				>
-					Prueba
-				</button>
-			</form>
 
 			<form onSubmit={handleSubmit}>
 				<div className="flex h-screen">

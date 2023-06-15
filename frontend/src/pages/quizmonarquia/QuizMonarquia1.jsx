@@ -14,6 +14,9 @@ const QuizMonarquia1 = () => {
 
 	const [questionNumber, setQuestionNumber] = useState(0);
 
+	//Obtener token de la sesion
+	const token = localStorage.getItem("token");
+
 	const setInitialOptions = () => {
 		if (JSON.parse(localStorage.getItem("monarquiaResuelto")) === true) {
 			let valoresIniciales = [];
@@ -92,25 +95,32 @@ const QuizMonarquia1 = () => {
 					confirmButtonText: "Sí",
 				}).then((result) => {
 					let respuestasCorrectas = 0;
+
+					//Guardar respuestas del quiz en localStorage
 					for (let i = 0; i < 5; i++) {
 						localStorage.setItem(`monarquiaOpcion${i}`, JSON.stringify(checkedOptions[i]));
 						if (checkedOptions[i] === INFORMATION[i].respuesta) {
 							respuestasCorrectas++;
 						}
 					}
+					//Guardar calificacion del quiz en localStorage
 					localStorage.setItem("aciertosMonarquia", JSON.stringify(respuestasCorrectas));
 
+					//Objeto para hacer solicitud
 					const formData = {
-						id_usuario: JSON.parse(localStorage.getItem("idUsuario")),
-						monarquiaOpcion0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
-						monarquiaOpcion1: JSON.parse(localStorage.getItem("monarquiaOpcion1")),
-						monarquiaOpcion2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
-						monarquiaOpcion3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
-						monarquiaOpcion4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
-						aciertosMonarquia: JSON.parse(localStorage.getItem("aciertosMonarquia")),
+						id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
+						respuesta0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
+						respuesta1: JSON.parse(localStorage.getItem("monarquiaOpcion1")),
+						respuesta2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
+						respuesta3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
+						respuesta4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
+						calificacion: JSON.parse(localStorage.getItem("aciertosMonarquia")),
 					};
 
-					postQuiz(formData)
+					console.log(formData);
+
+					//Agregar token
+					postQuiz(formData, token)
 						.then((response) => {
 							// Manejar la respuesta del servidor si es necesario
 							console.log(response);
@@ -119,6 +129,8 @@ const QuizMonarquia1 = () => {
 							// Manejar el error si ocurre
 							console.error(error);
 						});
+
+					//Marcar como resuelta en localStorage
 					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
@@ -152,63 +164,6 @@ const QuizMonarquia1 = () => {
 		} else return "Siguiente pregunta";
 	};
 
-	// const [formData, setFormData] = useState({
-	// 	monarquiaOpcion0: "",
-	// 	monarquiaOpcion1: "",
-	// 	monarquiaOpcion2: "",
-	// 	monarquiaOpcion3: "",
-	// 	monarquiaOpcion4: "",
-	// 	aciertosMonarquia: "",
-	// });
-
-	// const monarquiaOpcion0 = localStorage.getItem("monarquiaOpcion0");
-	// const monarquiaOpcion1 = localStorage.getItem("monarquiaOpcion1");
-	// const monarquiaOpcion2 = localStorage.getItem("monarquiaOpcion2");
-	// const monarquiaOpcion3 = localStorage.getItem("monarquiaOpcion3");
-	// const monarquiaOpcion4 = localStorage.getItem("monarquiaOpcion4");
-	// const aciertosMonarquia = localStorage.getItem("aciertosMonarquia");
-
-	// setFormData({
-	// 	monarquiaOpcion0: monarquiaOpcion0,
-	// 	monarquiaOpcion1: monarquiaOpcion1,
-	// 	monarquiaOpcion2: monarquiaOpcion2,
-	// 	monarquiaOpcion3: monarquiaOpcion3,
-	// 	monarquiaOpcion4: monarquiaOpcion4,
-	// 	aciertosMonarquia: aciertosMonarquia,
-	// });
-
-	const handleSubmit = (event) => {
-		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
-
-		const formData = {
-			monarquiaOpcion0: localStorage.getItem("monarquiaOpcion0"),
-			monarquiaOpcion1: localStorage.getItem("monarquiaOpcion1"),
-			monarquiaOpcion2: localStorage.getItem("monarquiaOpcion2"),
-			monarquiaOpcion3: localStorage.getItem("monarquiaOpcion3"),
-			monarquiaOpcion4: localStorage.getItem("monarquiaOpcion4"),
-			aciertosMonarquia: localStorage.getItem("aciertosMonarquia"),
-		};
-		console.log(formData); // Imprimir los datos del formulario en la consola
-
-		const myresponse = async () => {
-			const req_succesful = await postQuiz(formData); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
-			console.log(req_succesful);
-			if (req_succesful === "Inicio de sesión exitoso") {
-				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
-				Swal.fire("Welcome!", "You have succesfully been logged!", "success");
-				navigate("/home");
-			} else {
-				// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
-				Swal.fire({
-					icon: "error",
-					title: "Oops...",
-					text: req_succesful,
-				});
-			}
-		};
-		myresponse(); // Ejecutar la función asíncrona myresponse
-	};
-
 	return (
 		<div className="font-text">
 			<Navbar />
@@ -222,7 +177,7 @@ const QuizMonarquia1 = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem('monarquiaResuelto'))}
+					resolved={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
 					savedSelection={JSON.parse(localStorage.getItem(`monarquiaOpcion${questionNumber}`))}
 				/>
 				<Option
@@ -233,7 +188,7 @@ const QuizMonarquia1 = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem('monarquiaResuelto'))}
+					resolved={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
 					savedSelection={JSON.parse(localStorage.getItem(`monarquiaOpcion${questionNumber}`))}
 				/>
 				<Option
@@ -244,7 +199,7 @@ const QuizMonarquia1 = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem('monarquiaResuelto'))}
+					resolved={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
 					savedSelection={JSON.parse(localStorage.getItem(`monarquiaOpcion${questionNumber}`))}
 				/>
 				<Option
@@ -255,7 +210,7 @@ const QuizMonarquia1 = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem('monarquiaResuelto'))}
+					resolved={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
 					savedSelection={JSON.parse(localStorage.getItem(`monarquiaOpcion${questionNumber}`))}
 				/>
 			</div>
