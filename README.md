@@ -1,11 +1,11 @@
 # Roma Interactiva
 
 <div align="center">
-  <img src="frontend/src/media/roma-interactiva-logo.png" alt="Logo" />
+  <img src="frontend/src/media/logos/roma-interactiva-logo.png" alt="Logo" />
 </div>
 
-[Link a pagina principal](https://roma-interactiva.vercel.app/)
-#
+Accede a Roma Interactiva: [Link a pagina principal](https://roma-interactiva.vercel.app/)
+
 Explora la Antigua Roma de manera innovadora.
 
 ¡Bienvenido a Roma Interactiva! Nuestro objetivo es hacer que el fascinante mundo de la Antigua Roma sea accesible para todas las personas de una manera interactiva e innovadora.
@@ -20,7 +20,7 @@ Ya sea que estés interesado en la arquitectura romana, las leyendas y mitologí
 2. Ejecuta el siguiente comando para instalar las dependencias del backend:
    `npm install`
 3. Ejecuta el siguiente comando para iniciar el servidor:
-   `node server.js`
+   `npm start`
 
 ### Frontend
 
