@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { createClient } = require("@supabase/supabase-js");
 const express = require("express");
 const app = express();
@@ -6,10 +7,11 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
 //Credenciales supabase
+
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
-const supabaseKey =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljaXd5dGp1dmJzbHJnaGZuaWF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMjUxODMsImV4cCI6MjAwMTkwMTE4M30.LsP_mUbNlT0nr7mZtgOxm9cevizYtTk9cLixo_K4ewM";
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseKey = process.env.SUPABASE_KEY;
+
+const secretKey = process.env.SECRET_KEY_JWT;
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +19,9 @@ app.use(bodyParser.json());
 
 // allow all the incoming ip
 app.use(cors());
+
+console.log(process.env.SUPABASE_KEY);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 //POST para el inicio de sesion de los usuarios
 app.post("/login", async (req, res) => {
@@ -53,7 +58,7 @@ app.post("/login", async (req, res) => {
 		};
 
 		// Generar token JWT con el id_usuario email y nickname del usuario
-		const token = jwt.sign(user, "secreto");
+		const token = jwt.sign(user, secretKey);
 
 		// Enviar el token al frontend con los datos del usuario y un mensaje de confirmacion
 		res.json({ usuarioData, token, message: "Inicio de sesión exitoso" });
@@ -87,7 +92,7 @@ function verifyToken(req, res, next) {
 
 	//Verifica la validad del token con la biblitoeca jsonwebtoken
 	//Toma tres argumentos: el token a verificar, la clave secreta y una funcion de devolucion de llamada que maneja el resultado de la verificacion
-	jwt.verify(token.split(" ")[1], "secreto", (err, decoded) => {
+	jwt.verify(token.split(" ")[1], secretKey, (err, decoded) => {
 		if (err) {
 			return res.status(403).json({ error: "Token inválido" });
 		}
