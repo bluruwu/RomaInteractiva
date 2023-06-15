@@ -12,7 +12,7 @@ const HomeButton = () => {
 	return (
 		<div>
 			<img
-				src={require("../media/homeicon.png")}
+				src={require("../media/iconos/homeicon.png")}
 				alt="Imagen de fondo"
 				className="block object-cover w-12 h-12 cursor-pointer"
 				onClick={handleButtonClick}

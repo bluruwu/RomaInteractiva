@@ -7,7 +7,7 @@ import { postQuiz } from "../../conections/requests";
 import { INFORMATION } from "../../utilities/monarquiaInfo";
 import { useNavigate } from "react-router-dom";
 
-const QuizMonarquia1 = () => {
+const QuizMonarquia = () => {
 	const navigate = useNavigate();
 
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -105,8 +105,10 @@ const QuizMonarquia1 = () => {
 					}
 					//Guardar calificacion del quiz en localStorage
 					localStorage.setItem("aciertosMonarquia", JSON.stringify(respuestasCorrectas));
+					//Marcar como resuelta en localStorage
+					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
 
-					//Objeto para hacer solicitud
+					//Objeto para enviar respuestas al backend
 					const formData = {
 						id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
 						respuesta0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
@@ -130,8 +132,6 @@ const QuizMonarquia1 = () => {
 							console.error(error);
 						});
 
-					//Marcar como resuelta en localStorage
-					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
 						Swal.fire({
@@ -234,4 +234,4 @@ const QuizMonarquia1 = () => {
 	);
 };
 
-export default QuizMonarquia1;
+export default QuizMonarquia;

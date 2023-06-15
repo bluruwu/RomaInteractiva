@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 
-const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, initialOption, questionNumber, correctAnswerNumber, resolved, savedSelection }) => {
+const Option = ({
+	optionNumber,
+	selectedOption,
+	handleOptionSelect,
+	option,
+	initialOption,
+	questionNumber,
+	correctAnswerNumber,
+	resolved,
+	savedSelection,
+}) => {
 	// Función para determinar si el botón está activo o no
 	const isButtonActive = () => {
 		return selectedOption === optionNumber || initialOption === optionNumber;
@@ -8,51 +18,52 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 
 	const hoverScale = () => {
 		if (!resolved) {
-			return 'hover:scale-110'
+			return "hover:scale-110";
 		}
-	}
+	};
 
 	const enlargeButton = () => {
 		if (isButtonActive() || optionNumber === correctAnswerNumber) {
 			if (isButtonActive()) {
-				return "border-4 border-gray-500 focus:outline-none scale-110"
-			}
-			else {
+				return "border-4 border-gray-700 focus:outline-none scale-110";
+			} else {
 				if (resolved) {
-					return " focus:outline-none scale-110"
-				}
-				else return ""
+					return " focus:outline-none scale-110";
+				} else return "";
 			}
+		} else {
+			return "";
 		}
-		else {
-			return ""
-		}
-	}
+	};
 
 	const activeColor = () => {
 		if (resolved && optionNumber === correctAnswerNumber) {
-			return " bg-green-400"
-		}
-		else if (isButtonActive()) {
-			return "bg-[#e69200]"
-		}
-		else return "bg-custom-rojo"
-	}
+			return " bg-green-400";
+		} else if (isButtonActive()) {
+			return "bg-[#e69200]";
+		} else return "bg-custom-rojo";
+	};
 
 	const iconReview = () => {
 		if (resolved) {
 			if (optionNumber === correctAnswerNumber) {
-				return <img
-					src={process.env.PUBLIC_URL + "icons/check.svg"}
-					alt="Check"
-					className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
-				/>
-			}
-			else if (savedSelection === optionNumber)
-				return <img src={process.env.PUBLIC_URL + '/icons/x.svg'} alt="X" className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2" />
-		}
-		else return ""
-	}
+				return (
+					<img
+						src={process.env.PUBLIC_URL + "icons/check.svg"}
+						alt="Check"
+						className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
+					/>
+				);
+			} else if (savedSelection === optionNumber)
+				return (
+					<img
+						src={process.env.PUBLIC_URL + "/icons/x.svg"}
+						alt="X"
+						className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
+					/>
+				);
+		} else return "";
+	};
 
 	return (
 		// Botón de opción
@@ -64,7 +75,6 @@ const Option = ({ optionNumber, selectedOption, handleOptionSelect, option, init
 			{iconReview()}
 			{option}
 		</button>
-
 	);
 };
 

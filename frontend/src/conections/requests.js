@@ -39,7 +39,7 @@ export const postData = async (mydata) => {
 //Se le pasa un token
 export const getPrueba = async (token) => {
 	try {
-		const response = await fetch(`${API_URL}/ruta`, {
+		const response = await fetch(`${API_URL}/currentuser`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -142,6 +142,7 @@ export const postQuiz = async (mydata, token) => {
 	}
 };
 
+//POST para enviar las calificaciones a la base de datos y guardalas en ella
 export const getCalificaciones = async (token) => {
 	try {
 		const response = await fetch(`${API_URL}/calificaciones`, {

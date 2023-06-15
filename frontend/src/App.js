@@ -5,9 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import Perfil from "./pages/Perfil";
 //Quizes
-import QuizMonarquia1 from "./pages/quizmonarquia/QuizMonarquia1";
-import QuizRepublica from "./pages/quizmonarquia/QuizRepublica";
-import QuizPersonajes from "./pages/quizmonarquia/QuizPersonajes";
+import QuizMonarquia from "./pages/quizes/QuizMonarquia";
+import QuizRepublica from "./pages/quizes/QuizRepublica";
+import QuizPersonajes from "./pages/quizes/QuizPersonajes";
 //Lecciones
 import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
 import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
@@ -38,7 +38,7 @@ const App = () => {
 			<Route path="/home" element={<HomePage />} />
 			<Route path="perfil" element={<Perfil />} />
 
-			<Route path="Quiz_monarquia_1" element={<QuizMonarquia1 />} />
+			<Route path="Quiz_monarquia_1" element={<QuizMonarquia />} />
 			<Route path="Quiz_Republica" element={<QuizRepublica />} />
 			<Route path="Quiz_Personajes" element={<QuizPersonajes />} />
 

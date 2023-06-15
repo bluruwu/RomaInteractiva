@@ -109,7 +109,11 @@ const Register = () => {
 					</div>
 
 					{/* Logo */}
-					<img src={require("../media/logo.png")} alt="Imagen en el top right" className="h-42" />
+					<img
+						src={require("../media/logos/logo.png")}
+						alt="Imagen en el top right"
+						className="h-42"
+					/>
 
 					{/* Formulario */}
 					<div className="flex flex-col items-center mb-12">

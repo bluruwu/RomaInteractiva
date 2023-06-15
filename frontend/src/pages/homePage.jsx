@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import Footbar from "../utilities/Footbar";
 import Button from "../components/lessonButton";
-import monarquiaImage from "../media/prev1.jpg";
-import republicaImage from "../media/prev2.png";
-import imperioImage from "../media/prev3.png";
-import augustoImage from "../media/prev4.png";
-import coliseoImage from "../media/prev5.png";
-import domusImage from "../media/prev6.png";
+import monarquiaImage from "../media/previsualizaciones/prev1.jpg";
+import republicaImage from "../media/previsualizaciones/prev2.png";
+import imperioImage from "../media/previsualizaciones/prev3.png";
+import augustoImage from "../media/previsualizaciones/prev4.png";
+import coliseoImage from "../media/previsualizaciones/prev5.png";
+import domusImage from "../media/previsualizaciones/prev6.png";
 import { getCalificaciones, getPrueba } from "../conections/requests";
 
 const HomePage = () => {
