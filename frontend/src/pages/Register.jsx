@@ -20,7 +20,7 @@ const Register = () => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
 		console.log(formData); // Imprimir los datos del formulario en la consola
 
-		if (formData["contrasena"].length < 8) {
+		if (formData["contrasena"].length < 6) {
 			// Validar longitud mínima de contraseña
 			Swal.fire({
 				icon: "error",

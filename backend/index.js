@@ -1,40 +1,103 @@
 const { createClient } = require("@supabase/supabase-js");
-
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 //Credenciales supabase
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljaXd5dGp1dmJzbHJnaGZuaWF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMjUxODMsImV4cCI6MjAwMTkwMTE4M30.LsP_mUbNlT0nr7mZtgOxm9cevizYtTk9cLixo_K4ewM";
 const supabase = createClient(supabaseUrl, supabaseKey);
-// const supabase = createClient(supabaseUrl, supabaseKey, {
-// 	localStorage: window.localStorage, // Utilizar localStorage del navegador para persistir las sesiones
-// });
 
 // Middleware for parsing JSON bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // allow all the incoming ip
 app.use(cors());
 
-// Obtener informacion de todos los usuarios de la base de datos
-app.get("/users", async (req, res) => {
-	// Seleccionar todos los usuarios de la base de datos con todos sus atributos
-	const { data, error: queryError } = await supabase.from("usuarios").select("*");
+//POST para el inicio de sesion de los usuarios
+app.post("/login", async (req, res) => {
+	try {
+		// Datos obtenidos por el frontend
+		const { email, contrasena } = req.body;
 
-	//Si hay un error durante la consulta
-	if (queryError) {
-		throw new Error(queryError.message);
+		// Login en supabase auth con los datos del usuario
+		const { data: loginResult, error } = await supabase.auth.signInWithPassword({
+			email: email,
+			password: contrasena,
+		});
+
+		// Si hay un error durante el login
+		if (error) {
+			throw new Error(error.message);
+		}
+		// Realizar la consulta para obtener todos los datos del usuario en la base de datos
+		const { data: usuarioData, error: queryError } = await supabase
+			.from("usuarios")
+			.select("*")
+			.eq("email", email)
+			.single();
+
+		// Si hay un error durante la consulta
+		if (queryError) {
+			throw new Error(queryError.message);
+		}
+
+		const user = {
+			id_usuario: usuarioData.id_usuario,
+			email: usuarioData.email,
+			nickname: usuarioData.nickname,
+		};
+
+		// Generar token JWT con el id_usuario email y nickname del usuario
+		const token = jwt.sign(user, "secreto", { expiresIn: "1h" });
+
+		// Enviar el token al frontend con los datos del usuario y un mensaje de confirmacion
+		res.json({ usuarioData, token, message: "Inicio de sesión exitoso" });
+	} catch (error) {
+		console.error("Error al iniciar sesión:", error);
+		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
+	}
+});
+
+app.get("/ruta", verifyToken, (req, res) => {
+	const userId = req.user.id_usuario;
+	const email = req.user.email;
+	const username = req.user.nickname;
+
+	console.log("INFO TOKEN:", userId, email, username);
+
+	res.json({ userId, email, username });
+});
+
+// Middleware para verificar la validez de un token de autenticacion JWT
+function verifyToken(req, res, next) {
+	//Extrae el token del encabezado de autorizacion de la solicitud
+	//El token se envía al servidor en el encabezado de autorización utilizando el esquema "Bearer"
+	const token = req.headers.authorization;
+	console.log("MITOKEN", token);
+
+	//Si no se proporciono ningun token. Se envia respuesta de error 401 (No autorizado)
+	if (!token) {
+		return res.status(401).json({ error: "Token no proporcionado" });
 	}
 
-	console.log(data);
+	//Verifica la validad del token con la biblitoeca jsonwebtoken
+	//Toma tres argumentos: el token a verificar, la clave secreta y una funcion de devolucion de llamada que maneja el resultado de la verificacion
+	jwt.verify(token.split(" ")[1], "secreto", (err, decoded) => {
+		if (err) {
+			return res.status(403).json({ error: "Token inválido" });
+		}
 
-	//Respuesta
-	res.json(data);
-});
+		// Si el token es valido y se verifica correctamente, el usuario decodificado se asigna a req.user
+		req.user = decoded;
+		//Invoca siguiente funcion de middleware
+		next();
+	});
+}
 
 //POST para el registro de usuarios
 app.post("/register/user", async (req, res) => {
@@ -63,8 +126,6 @@ app.post("/register/user", async (req, res) => {
 			throw new Error(insertError.message);
 		}
 
-		console.log("Usuario creado:", user);
-
 		//Respuesta
 		res.json({ user, session });
 	} catch (error) {
@@ -73,70 +134,30 @@ app.post("/register/user", async (req, res) => {
 	}
 });
 
-//POST para el login de los usuarios
-app.post("/login", async (req, res) => {
-	try {
-		//Datos obtenidos por el frontend
-		const { email, contrasena } = req.body;
-
-		//Login en supabase auth con los datos del usuario
-		const { user, session, error } = await supabase.auth.signInWithPassword({
-			email,
-			password: contrasena,
-		});
-
-		console.log("Email:", email);
-		console.log("Contraseña:", contrasena);
-
-		//Si hay un error durante el login
-		if (error) {
-			throw new Error(error.message);
-		}
-
-		// Realizar la consulta para obtener todos los datos del usuario en la base de datos
-		const { data, error: queryError } = await supabase
-			.from("usuarios")
-			.select("*")
-			.eq("email", email)
-			.single();
-
-		//Si hay un error durante la consulta
-		if (queryError) {
-			throw new Error(queryError.message);
-		}
-
-		console.log(data);
-
-		//Respuesta de login exitoso
-		res.json({ user, session, data, message: "Inicio de sesión exitoso" });
-	} catch (error) {
-		console.error("Error al iniciar sesión:", error);
-		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
-	}
-});
-
 // POST para el registro de calificacion de un quiz de un usuario en la base de datos
-app.post("/enviarevaluacion", async (req, res) => {
+//Se requiere el verifyToken para validar la sesion del usuario
+app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 	try {
 		//Obtener datos del usuario del frontend
-		const { monarquiaOpcion0, monarquiaOpcion1 } = req.body;
+		const { respuesta0, respuesta1, respuesta2, respuesta3, respuesta4, calificacion, id_quiz } =
+			req.body;
 
-		// const { user, session, error } = await supabase.auth.signInWithPassword({
-		// 	email,
-		// 	password: contrasena,
-		// });
+		// Obtener el ID de usuario del token decodificado
+		const id_usuario = req.user.id_usuario;
+		console.log("id_usuario", id_usuario);
+		console.log(respuesta0, calificacion, id_quiz);
 
 		//Guardar calificaciones del usuario
 		const { data, error } = await supabase.from("calificaciones").insert([
 			{
-				id_quiz: 1,
-				id_usuario: "Hola",
-				calificacion: 4,
-				respuesta0: 1,
-				respuesta1: 1,
-				respuesta2: 2,
-				respuesta3: 2,
-				respuesta4: 2,
+				id_quiz: parseInt(id_quiz),
+				id_usuario: parseInt(id_usuario),
+				calificacion: parseInt(calificacion),
+				respuesta0: parseInt(respuesta0),
+				respuesta1: parseInt(respuesta1),
+				respuesta2: parseInt(respuesta2),
+				respuesta3: parseInt(respuesta3),
+				respuesta4: parseInt(respuesta4),
 			},
 		]);
 
@@ -145,35 +166,48 @@ app.post("/enviarevaluacion", async (req, res) => {
 			throw new Error(error.message);
 		}
 
-		if (error) {
-			console.error("Error al agregar la fila:", error);
-		} else {
-			console.log("Fila agregada exitosamente:", data);
-		}
-
 		//Respuesta
-		res.json({ data, message: "Quiz guardado" });
+		res.json({ message: "Quiz guardado" });
 	} catch (error) {
-		console.error("Error al iniciar sesión:", error);
-		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
+		res.status(500).json({ error: "Error al guardar calificacion" });
 	}
 });
 
-// async function agregarFila() {
-// 	try {
-// 		const { data, error } = await supabase.from("prueba").insert([{ id: 90, nombre: "Hola" }]);
+app.get("/calificaciones", verifyToken, async (req, res) => {
+	// Seleccionar todos los usuarios de la base de datos con todos sus atributos
+	const id_usuario = req.user.id_usuario;
 
-// 		if (error) {
-// 			console.error("Error al agregar la fila:", error);
-// 		} else {
-// 			console.log("Fila agregada exitosamente:", data);
-// 		}
-// 	} catch (error) {
-// 		console.error("Error en la conexión con Supabase:", error);
-// 	}
-// }
+	const { data, error } = await supabase
+		.from("calificaciones")
+		.select("*")
+		.eq("id_usuario", id_usuario);
 
-// agregarFila();
+	//Si hay un error durante la consulta
+	if (error) {
+		throw new Error(queryError.message);
+	}
+
+	console.log(data);
+
+	//Respuesta
+	res.json(data);
+});
+
+// Obtener informacion de todos los usuarios de la base de datos
+app.get("/users", async (req, res) => {
+	// Seleccionar todos los usuarios de la base de datos con todos sus atributos
+	const { data, error: queryError } = await supabase.from("usuarios").select("*");
+
+	//Si hay un error durante la consulta
+	if (queryError) {
+		throw new Error(queryError.message);
+	}
+
+	console.log(data);
+
+	//Respuesta
+	res.json(data);
+});
 
 // Iniciar el servidor
 app.listen(9000, () => {

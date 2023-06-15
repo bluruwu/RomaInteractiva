@@ -9,23 +9,26 @@ import imperioImage from "../media/prev3.png";
 import augustoImage from "../media/prev4.png";
 import coliseoImage from "../media/prev5.png";
 import domusImage from "../media/prev6.png";
+import { getCalificaciones, getPrueba } from "../conections/requests";
 
 const HomePage = () => {
 	const navigate = useNavigate();
+	const token = localStorage.getItem("token");
 
 	useEffect(() => {
+		getCalificaciones(token);
 		// Verificar si la variable ya existe en el almacenamiento local
-		if (!localStorage.getItem('monarquiaResuelto')) {
+		if (!localStorage.getItem("monarquiaResuelto")) {
 			// Si no existe, agregarla al almacenamiento local
-			localStorage.setItem('monarquiaResuelto', JSON.stringify(false));
+			localStorage.setItem("monarquiaResuelto", JSON.stringify(false));
 		}
-		if (!localStorage.getItem('republicaResuelto')) {
+		if (!localStorage.getItem("republicaResuelto")) {
 			// Si no existe, agregarla al almacenamiento local
-			localStorage.setItem('republicaResuelto', JSON.stringify(false));
+			localStorage.setItem("republicaResuelto", JSON.stringify(false));
 		}
-		if (!localStorage.getItem('personajesResuelto')) {
+		if (!localStorage.getItem("personajesResuelto")) {
 			// Si no existe, agregarla al almacenamiento local
-			localStorage.setItem('personajesResuelto', JSON.stringify(false));
+			localStorage.setItem("personajesResuelto", JSON.stringify(false));
 		}
 	}, []);
 
@@ -49,34 +52,24 @@ const HomePage = () => {
 
 	const getScore = (leccion) => {
 		if (leccion == 0) {
-			const quizResuelto = JSON.parse(localStorage.getItem('monarquiaResuelto'));
+			const quizResuelto = JSON.parse(localStorage.getItem("monarquiaResuelto"));
 			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem('aciertosMonarquia'))
-			}
-			else return 0
-		}
-		else if (leccion == 1) {
-			const quizResuelto = JSON.parse(localStorage.getItem('republicaResuelto'));
+				return JSON.parse(localStorage.getItem("aciertosMonarquia"));
+			} else return 0;
+		} else if (leccion == 1) {
+			const quizResuelto = JSON.parse(localStorage.getItem("republicaResuelto"));
 			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem('aciertosRepublica'))
-			}
-			else return 0
-		}
-		else if (leccion == 2) {
-			
-		}
-		else if (leccion == 3) {
-			const quizResuelto = JSON.parse(localStorage.getItem('personajesResuelto'));
+				return JSON.parse(localStorage.getItem("aciertosRepublica"));
+			} else return 0;
+		} else if (leccion == 2) {
+		} else if (leccion == 3) {
+			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
 			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem('aciertosPersonajes'))
-			}
-			else return 0
-		}
-		else if (leccion == 4) {
-			
-		}
-		else return 0
-	}
+				return JSON.parse(localStorage.getItem("aciertosPersonajes"));
+			} else return 0;
+		} else if (leccion == 4) {
+		} else return 0;
+	};
 
 	return (
 		// Render de la pagina, con el navbar, titulo y las categorias de las lecciones. Además del Footer al final
