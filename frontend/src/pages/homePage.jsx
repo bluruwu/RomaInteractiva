@@ -16,7 +16,12 @@ const HomePage = () => {
 	const token = localStorage.getItem("token");
 
 	useEffect(() => {
-		getCalificaciones(token);
+		if (token) {
+			getCalificaciones(token);
+		} else {
+			console.log("Usuario no autenticado");
+		}
+
 		// Verificar si la variable ya existe en el almacenamiento local
 		if (!localStorage.getItem("monarquiaResuelto")) {
 			// Si no existe, agregarla al almacenamiento local

@@ -8,8 +8,6 @@ import HomeButton from "../utilities/HomeButton";
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
 	const [showAlert, setShowAlert] = useState(false); // Estado para mostrar/ocultar la alerta
-	// Obtén el token de una manera (por ejemplo, desde el almacenamiento local)
-	const token = localStorage.getItem("token");
 
 	const [formData, setFormData] = useState({
 		email: "",
@@ -20,7 +18,7 @@ const Login = () => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
 		console.log(formData); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
-			const req_succesful = await postLogin(formData, token); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
+			const req_succesful = await postLogin(formData); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
 			console.log(req_succesful);
 			if (req_succesful === "Inicio de sesión exitoso") {
 				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
