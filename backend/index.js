@@ -173,6 +173,26 @@ app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 	}
 });
 
+app.get("/calificaciones", verifyToken, async (req, res) => {
+	// Seleccionar todos los usuarios de la base de datos con todos sus atributos
+	const id_usuario = req.user.id_usuario;
+
+	const { data, error } = await supabase
+		.from("calificaciones")
+		.select("*")
+		.eq("id_usuario", id_usuario);
+
+	//Si hay un error durante la consulta
+	if (error) {
+		throw new Error(queryError.message);
+	}
+
+	console.log(data);
+
+	//Respuesta
+	res.json(data);
+});
+
 // Obtener informacion de todos los usuarios de la base de datos
 app.get("/users", async (req, res) => {
 	// Seleccionar todos los usuarios de la base de datos con todos sus atributos

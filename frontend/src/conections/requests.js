@@ -141,3 +141,34 @@ export const postQuiz = async (mydata, token) => {
 		return "Error de conexión";
 	}
 };
+
+export const getCalificaciones = async (token) => {
+	try {
+		const response = await fetch(`${API_URL}/calificaciones`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		//Si se recibe una respuesta exitosa del backend
+		if (response.ok) {
+			const jsonData = await response.json();
+			const { data } = jsonData;
+
+			// Mostrar en consola los datos del usuario obtenidos por medio del token
+			console.log("data calificaciones:", data);
+
+			return "OK";
+		} else {
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "No se puedo obtener la informacion del usuario";
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		return "Error en solicitud";
+	}
+};
