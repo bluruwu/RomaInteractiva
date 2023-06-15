@@ -135,42 +135,32 @@ app.post("/register/user", async (req, res) => {
 });
 
 // POST para el registro de calificacion de un quiz de un usuario en la base de datos
-app.post("/enviarevaluacion", async (req, res) => {
+//Se requiere el verifyToken para validad la sesion del usuario
+app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 	try {
 		//Obtener datos del usuario del frontend
-		const {
-			respuesta0,
-			respuesta1,
-			respuesta2,
-			respuesta3,
-			respuesta4,
-			calificacion,
-			id_usuario,
-			id_quiz,
-		} = req.body;
+		const { respuesta0, respuesta1, respuesta2, respuesta3, respuesta4, calificacion, id_quiz } =
+			req.body;
 
-		// const {
-		// 	data: { user },
-		// } = await supabase.auth.getUser();
-
-		console.log("asasfsaf");
+		// Obtener el ID de usuario del token decodificado
+		const id_usuario = req.user.id_usuario;
 
 		//Guardar calificaciones del usuario
-		const { data, error: insertError } = await supabase.from("calificaciones").insert([
+		const { data, error } = await supabase.from("calificaciones").insert([
 			{
-				id_quiz: Number(id_quiz),
-				id_usuario: Number(id_usuario),
-				calificacion: Number(calificacion),
-				respuesta0: Number(respuesta0),
-				respuesta1: Number(respuesta1),
-				respuesta2: Number(respuesta2),
-				respuesta3: Number(respuesta3),
-				respuesta4: Number(respuesta4),
+				id_quiz: parseInt(id_quiz),
+				id_usuario: parseInt(id_usuario),
+				calificacion: parseInt(calificacion),
+				respuesta0: parseInt(respuesta0),
+				respuesta1: parseInt(respuesta1),
+				respuesta2: parseInt(respuesta2),
+				respuesta3: parseInt(respuesta3),
+				respuesta4: parseInt(respuesta4),
 			},
 		]);
 
 		//Si hay un error durante la insercion
-		if (insertError) {
+		if (error) {
 			throw new Error(error.message);
 		}
 

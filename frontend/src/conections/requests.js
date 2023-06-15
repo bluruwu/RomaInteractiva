@@ -113,13 +113,14 @@ export const postLogin = async (mydata) => {
 	}
 };
 
-export const postQuiz = async (mydata) => {
+//POST para guardar las respuestas de los quizes tomados
+export const postQuiz = async (mydata, token) => {
 	try {
 		const response = await fetch(`${API_URL}/enviarevaluacion`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				// Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${token}`,
 			},
 			body: mydata,
 		});
