@@ -51,7 +51,7 @@ const Perfil = () => {
 			return (
 				<img
 					src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
-					className="inline border-4 border-gray-500 object-cover w-36 h-36 mb-2 rounded-full"
+					className="inline border-4 border-custom-doradodark object-cover w-36 h-36 mb-2 rounded-full"
 				/>
 			);
 		} else {

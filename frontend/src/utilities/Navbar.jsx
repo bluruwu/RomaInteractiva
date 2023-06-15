@@ -49,11 +49,16 @@ const Navbar = () => {
 						</a>
 					</li>
 					<li>
-						<div className="w-14 h-14 rounded-full bg-gray-300 hidden md:block">
-							{idAvatar && (
+						<div className="w-14 h-14 rounded-full bg-gray-200 hidden md:block">
+							{idAvatar ? (
 								<img
 									src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
 									className="inline border-4 border-custom-doradodark object-cover rounded-full"
+								/>
+							) : (
+								<img
+									src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
+									className="inline object-cover rounded-full"
 								/>
 							)}
 						</div>

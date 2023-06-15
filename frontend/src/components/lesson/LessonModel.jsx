@@ -1,5 +1,6 @@
 import React from "react";
 
+//Componente para mostrar el modelo en la parte derecha de las lecciones
 const LessonModel = ({ description, titleModel, source }) => {
 	return (
 		<div className="w-full md:w-1/2 flex relative sketchfab-embed-wrapper">
