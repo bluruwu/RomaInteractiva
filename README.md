@@ -4,6 +4,7 @@
   <img src="frontend/src/media/roma-interactiva-logo.png" alt="Logo" />
 </div>
 
+[Link a pagina principal](https://roma-interactiva.vercel.app/)
 #
 Explora la Antigua Roma de manera innovadora.
 

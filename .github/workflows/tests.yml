@@ -1,0 +1,31 @@
+name: Test of API with Jest
+
+on:
+  push:
+    branches:
+      - main
+      - deployment-back
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tests
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: tests # Specify the path to the root directory
+
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          path: tests
+
+      - name: todo #peor es nada
+        run: cd tests;npm install;npm test
+
