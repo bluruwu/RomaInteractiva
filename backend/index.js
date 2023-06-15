@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 // allow all the incoming ip
 app.use(cors());
 
-console.log(process.env.SUPABASE_KEY);
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 //POST para el inicio de sesion de los usuarios
