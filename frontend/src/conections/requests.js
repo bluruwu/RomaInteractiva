@@ -83,16 +83,16 @@ export const postLogin = async (mydata) => {
 		//Si se obtiene respuesta exitosa del backend
 		if (response.ok) {
 			const jsonData = await response.json();
+			//Obtener datos del usuario
 			const { usuarioData, message } = jsonData;
 
-			// Después de recibir el token en la respuesta del servidor
+			// Obtener token de la respuesta del servidor
 			const token = jsonData.token;
+			//Guardar el token en localStorage
 			localStorage.setItem("token", token);
 			console.log("token recibido del login", token);
 
-			// Accede a los datos de la fila en "data"
-			console.log(usuarioData);
-			console.log(message);
+			//Guardar datos del usuario en localStorage
 			localStorage.setItem("email", JSON.stringify(usuarioData.email));
 			localStorage.setItem("avatar_id", JSON.stringify(usuarioData.avatar_id));
 			localStorage.setItem("nickname", JSON.stringify(usuarioData.nickname));
@@ -100,7 +100,6 @@ export const postLogin = async (mydata) => {
 			localStorage.setItem("id_usuario", JSON.stringify(usuarioData.id_usuario));
 			localStorage.setItem("nombre_usuario", JSON.stringify(usuarioData.nombre_usuario));
 
-			// Realiza las acciones adicionales después de una autenticación exitosa
 			return "Inicio de sesión exitoso";
 		} else {
 			const error = await response.json();
