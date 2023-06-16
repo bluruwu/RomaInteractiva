@@ -2,9 +2,9 @@
 //Usar Authorization: `Bearer ${token}` en el header de los fetch
 
 //Usar API_URL de vercel antes de hacer pull request a main para hacer el despliegue
-const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
+//const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 //Usar la API_URL del puerto 9000 si se va a trabajar local
-// const API_URL = "http://127.0.0.1:9000";
+const API_URL = "http://127.0.0.1:9000";
 
 //Solicitud POST para el registro de usuarios
 export const postData = async (mydata) => {
@@ -167,6 +167,33 @@ export const getCalificaciones = async (token) => {
 			console.error(error);
 			// Maneja la respuesta de error
 			return "No se puedo obtener la informacion del usuario";
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		return "Error en solicitud";
+	}
+};
+
+//POST para enviar las calificaciones a la base de datos y guardalas en ella
+export const putActualizarPerfil = async (mydata, token) => {
+	try {
+		const response = await fetch(`${API_URL}/actualizarperfil`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(mydata),
+		});
+
+		//Si se recibe una respuesta exitosa del backend
+		if (response.ok) {
+			return "Perfil actualizado correctamente";
+		} else {
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "No se pudo actualizar el perfil";
 		}
 	} catch (error) {
 		console.error("Error:", error);

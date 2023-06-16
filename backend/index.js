@@ -238,7 +238,7 @@ app.put('/actualizarperfil', verifyToken, async (req, res) => {
 		throw new Error(queryError.message);
 	}
 
-	res.json("Datos actualizados correctamente")
+	res.json("Perfil actualizado correctamente")
 
 });
 

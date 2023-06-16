@@ -4,6 +4,7 @@ import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
+import { putActualizarPerfil } from "../conections/requests";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -16,6 +17,36 @@ const Perfil = () => {
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
 		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
+		localStorage.setItem("contrasena", JSON.stringify(contrasena))
+
+		const myData =
+		{
+			"nombre_usuario": nombreCompleto,
+			"nickname": nickname,
+			"email": email,
+			"contrasena": contrasena
+		}
+
+		//realizar la peticion al backend
+		console.log()
+
+
+		const myPutPetition = async () => {
+			const req_succesful = await putActualizarPerfil(myData, localStorage.getItem("token")); // Realizar solicitud de registro utilizando los datos del formulario
+			if (req_succesful === "Data submitted successfully") {
+				// Si el registro es exitoso, mostrar una alerta de éxito y navegar a la página de inicio de sesión ("/login")
+				//Swal.fire("Congrats!", "You have succesfully updated!", "success");
+			}
+			// } else {
+			// 	// Si ocurre un error durante el registro, mostrar una alerta de error con el mensaje de error correspondiente
+			// 	Swal.fire({
+			// 		icon: "error",
+			// 		title: "Oops...",
+			// 		text: "Email or username already taken",
+			// 	});
+			// }
+		};
+		myPutPetition(); // Ejecutar la función asíncrona myresponse
 
 		// Recargar la página
 		window.location.reload();
@@ -38,7 +69,7 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(localStorage.getItem("contrasena") || "");
+	const [contrasena, setContrasena] = useState(JSON.parse(localStorage.getItem("contrasena") || ""));
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
@@ -130,6 +161,8 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							onChange={(e) => setContrasena(e.target.value)}
+							value={contrasena}
 						/>
 					</div>
 				</div>
