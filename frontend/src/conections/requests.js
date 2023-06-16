@@ -142,7 +142,7 @@ export const postQuiz = async (mydata, token) => {
 	}
 };
 
-//POST para enviar las calificaciones a la base de datos y guardalas en ella
+//POST para obtener las calificaciones del usuario de la base de datos
 export const getCalificaciones = async (token) => {
 	try {
 		const response = await fetch(`${API_URL}/calificaciones`, {
@@ -158,7 +158,7 @@ export const getCalificaciones = async (token) => {
 			const jsonData = await response.json();
 			const { data } = jsonData;
 
-			// Mostrar en consola los datos del usuario obtenidos por medio del token
+			// Mostrar en consola todas las calificaciones del usuario obtenidas
 			console.log("data calificaciones:", data);
 
 			return "OK";
