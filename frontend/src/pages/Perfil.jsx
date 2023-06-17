@@ -5,6 +5,8 @@ import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
+import Swal from "sweetalert2";
+import './index.css'
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -31,28 +33,28 @@ const Perfil = () => {
 		console.log()
 
 
-		const myPutPetition = async () => {
-			const req_succesful = await putActualizarPerfil(myData, localStorage.getItem("token")); // Realizar solicitud de registro utilizando los datos del formulario
-			if (req_succesful === "Data submitted successfully") {
-				// Si el registro es exitoso, mostrar una alerta de éxito y navegar a la página de inicio de sesión ("/login")
-				//Swal.fire("Congrats!", "You have succesfully updated!", "success");
+		const myPutPetition = async (myData,myToken) => {
+			// Realizar solicitud de registro utilizando los datos del formulario
+			const req_succesful = await putActualizarPerfil(myData,myToken);
+			console.log(req_succesful)
+			
+			if (req_succesful === "Perfil actualizado correctamente") {
+				// Si el registro es exitoso, mostrar una alerta de éxito "
+				Swal.fire("Congrats!", "You have succesfully been register!", "success").
+				then(()=>{window.location.reload();});
+				
+			} else {
+				// Si ocurre un error durante el registro, mostrar una alerta con un mensaje de error
+			 	Swal.fire({
+			 		icon: "error",
+			 		title: "Oops...",
+			 		text: "Something went wrong, try later.",
+			 	}).then(()=>{window.location.reload();});
+				return
 			}
-			// } else {
-			// 	// Si ocurre un error durante el registro, mostrar una alerta de error con el mensaje de error correspondiente
-			// 	Swal.fire({
-			// 		icon: "error",
-			// 		title: "Oops...",
-			// 		text: "Email or username already taken",
-			// 	});
-			// }
 		};
-		myPutPetition(); // Ejecutar la función asíncrona myresponse
+		myPutPetition(myData,localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 
-		// Recargar la página
-		window.location.reload();
-
-		//Recargar página
-		return <Navigate to="/perfil" />;
 	};
 
 	//Obtener el avatar del usuario si tiene uno
@@ -140,7 +142,7 @@ const Perfil = () => {
 						<p>Nombre completo</p>
 						<input
 							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							className="inputClassName"
 							onChange={(e) => setNombreCompleto(e.target.value)}
 							value={nombreCompleto}
 						/>
@@ -150,7 +152,7 @@ const Perfil = () => {
 					<p>Apodo</p>
 					<input
 						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						className="inputClassName"
 						onChange={(e) => setNickname(e.target.value)}
 						value={nickname}
 					/>
@@ -160,7 +162,7 @@ const Perfil = () => {
 						<p>Contraseña</p>
 						<input
 							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							className="inputClassName"
 							onChange={(e) => setContrasena(e.target.value)}
 							value={contrasena}
 						/>
@@ -170,7 +172,7 @@ const Perfil = () => {
 					<p>Correo electrónico</p>
 					<input
 						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						className="inputClassName"
 						onChange={(e) => setEmail(e.target.value)}
 						value={email}
 					/>
@@ -180,7 +182,7 @@ const Perfil = () => {
 						<p>Nivel</p>
 						<input
 							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							className="inputClassName"
 						/>
 					</div>
 				</div>
@@ -188,7 +190,7 @@ const Perfil = () => {
 					<p>Experiencia</p>
 					<input
 						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						className="inputClassName"
 					/>
 				</div>
 			</div>
