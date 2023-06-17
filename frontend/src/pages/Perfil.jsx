@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import './index.css'
+import './perfil.index.css'
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -136,9 +136,9 @@ const Perfil = () => {
 			</div>
 
 			{/* Campos con la informacion del usuario */}
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center mb-8">
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+			<div class="grid">
+				<div>
+					<div className="first-column ">
 						<p>Nombre completo</p>
 						<input
 							type="text"
@@ -148,7 +148,7 @@ const Perfil = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col w-30">
+				<div>
 					<p>Apodo</p>
 					<input
 						type="text"
@@ -157,8 +157,8 @@ const Perfil = () => {
 						value={nickname}
 					/>
 				</div>
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+				<div>
+					<div className="first-column">
 						<p>Contraseña</p>
 						<input
 							type="text"
@@ -168,7 +168,7 @@ const Perfil = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col">
+				<div>
 					<p>Correo electrónico</p>
 					<input
 						type="text"
@@ -177,8 +177,8 @@ const Perfil = () => {
 						value={email}
 					/>
 				</div>
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+				<div>
+					<div className="first-column">
 						<p>Nivel</p>
 						<input
 							type="text"
@@ -186,7 +186,7 @@ const Perfil = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col">
+				<div>
 					<p>Experiencia</p>
 					<input
 						type="text"
