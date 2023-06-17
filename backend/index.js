@@ -219,16 +219,15 @@ app.put('/actualizarperfil', verifyToken, async (req, res) => {
 	// Obtener el ID de usuario del token decodificado
 	const id_usuario = req.user.id_usuario;
 
-	const { email, nombre_usuario, nickname, contrasena } = req.body
+	const { nombre_usuario, nickname, contrasena } = req.body
 
 
 	newData = {}
-	if (email) newData["email"] = email
 	if (nombre_usuario) newData["nombre_usuario"] = nombre_usuario
 	if (nickname) newData["nickname"] = nickname
 	if (contrasena) newData["contrasena"] = contrasena
 
-	const { currentData, error: queryError } = await supabase.
+	const { error: queryError } = await supabase.
 		from('usuarios').
 		update(newData).
 		eq('id_usuario', id_usuario);

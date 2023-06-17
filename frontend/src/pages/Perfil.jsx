@@ -25,7 +25,6 @@ const Perfil = () => {
 		{
 			"nombre_usuario": nombreCompleto,
 			"nickname": nickname,
-			"email": email,
 			"contrasena": contrasena
 		}
 
@@ -175,6 +174,7 @@ const Perfil = () => {
 						className="inputClassName"
 						onChange={(e) => setEmail(e.target.value)}
 						value={email}
+						disabled
 					/>
 				</div>
 				<div>
@@ -183,6 +183,7 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="inputClassName"
+							disabled
 						/>
 					</div>
 				</div>
@@ -191,6 +192,7 @@ const Perfil = () => {
 					<input
 						type="text"
 						className="inputClassName"
+						disabled
 					/>
 				</div>
 			</div>
