@@ -31,9 +31,9 @@ const Perfil = () => {
 		//realizar la peticion al backend
 		console.log()
 
-
+		//Logica de la actualizacion de campos del perfil del usuario
 		const myPutPetition = async (myData,myToken) => {
-			// Realizar solicitud de registro utilizando los datos del formulario
+			// LLamar al backend con los nuevos datos y el token del usuario
 			const req_succesful = await putActualizarPerfil(myData,myToken);
 			console.log(req_succesful)
 			
