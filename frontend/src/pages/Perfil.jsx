@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./perfil.index.css";
+import "./perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -27,8 +27,6 @@ const Perfil = () => {
 			contrasena: contrasena,
 		};
 
-		//realizar la peticion al backend
-		console.log();
 
 		//Logica de la actualizacion de campos del perfil del usuario
 		const myPutPetition = async (myData, myToken) => {

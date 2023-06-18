@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 //Credenciales supabase
 
@@ -19,7 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // allow all the incoming ip
-app.use(cors());
+const corsOptions = {
+	origin: "*",
+	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
+  };
+  
+  app.use(cors(corsOptions));
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
