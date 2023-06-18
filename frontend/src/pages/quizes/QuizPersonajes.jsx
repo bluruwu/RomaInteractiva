@@ -101,7 +101,7 @@ const QuizPersonajes = () => {
 							respuestasCorrectas++;
 						}
 					}
-					localStorage.setItem("aciertosPersonajes", JSON.stringify(respuestasCorrectas));
+					localStorage.setItem("personajesAciertos", JSON.stringify(respuestasCorrectas));
 					localStorage.setItem("personajesResuelto", JSON.stringify(true));
 
 					//Objeto para enviar respuestas al backend
@@ -112,7 +112,7 @@ const QuizPersonajes = () => {
 						respuesta2: JSON.parse(localStorage.getItem("personajesOpcion2")),
 						respuesta3: JSON.parse(localStorage.getItem("personajesOpcion3")),
 						respuesta4: JSON.parse(localStorage.getItem("personajesOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("aciertosPersonajes")),
+						calificacion: JSON.parse(localStorage.getItem("personajesAciertos")),
 					};
 
 					console.log(formData);

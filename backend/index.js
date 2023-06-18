@@ -185,8 +185,6 @@ app.get("/calificaciones", verifyToken, async (req, res) => {
 		throw new Error(queryError.message);
 	}
 
-	console.log(data);
-
 	//Respuesta
 	res.json(data);
 });
