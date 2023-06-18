@@ -18,12 +18,7 @@ const secretKey = process.env.SECRET_KEY_JWT;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use((_req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', '*');
-  
-	next();
-  });
+app.options('*', cors()) // include before other routes
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
