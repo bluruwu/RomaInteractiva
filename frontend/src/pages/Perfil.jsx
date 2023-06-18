@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import './perfil.index.css'
+import "./perfil.index.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -19,41 +19,41 @@ const Perfil = () => {
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
 		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
-		localStorage.setItem("contrasena", JSON.stringify(contrasena))
+		localStorage.setItem("contrasena", JSON.stringify(contrasena));
 
-		const myData =
-		{
-			"nombre_usuario": nombreCompleto,
-			"nickname": nickname,
-			"contrasena": contrasena
-		}
+		const myData = {
+			nombre_usuario: nombreCompleto,
+			nickname: nickname,
+			contrasena: contrasena,
+		};
 
 		//realizar la peticion al backend
-		console.log()
+		console.log();
 
 		//Logica de la actualizacion de campos del perfil del usuario
-		const myPutPetition = async (myData,myToken) => {
+		const myPutPetition = async (myData, myToken) => {
 			// LLamar al backend con los nuevos datos y el token del usuario
-			const req_succesful = await putActualizarPerfil(myData,myToken);
-			console.log(req_succesful)
-			
+			const req_succesful = await putActualizarPerfil(myData, myToken);
+			console.log(req_succesful);
+
 			if (req_succesful === "Perfil actualizado correctamente") {
 				// Si el registro es exitoso, mostrar una alerta de éxito "
-				Swal.fire("Congrats!", "You have succesfully been register!", "success").
-				then(()=>{window.location.reload();});
-				
+				Swal.fire("Congrats!", "You have succesfully been register!", "success").then(() => {
+					window.location.reload();
+				});
 			} else {
 				// Si ocurre un error durante el registro, mostrar una alerta con un mensaje de error
-			 	Swal.fire({
-			 		icon: "error",
-			 		title: "Oops...",
-			 		text: "Something went wrong, try later.",
-			 	}).then(()=>{window.location.reload();});
-				return
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "Something went wrong, try later.",
+				}).then(() => {
+					window.location.reload();
+				});
+				return;
 			}
 		};
-		myPutPetition(myData,localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
-
+		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
 
 	//Obtener el avatar del usuario si tiene uno
@@ -70,7 +70,9 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(JSON.parse(localStorage.getItem("contrasena") || ""));
+	const [contrasena, setContrasena] = useState(
+		JSON.parse(localStorage.getItem("contrasena") || "")
+	);
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
@@ -180,20 +182,12 @@ const Perfil = () => {
 				<div>
 					<div className="first-column">
 						<p>Nivel</p>
-						<input
-							type="text"
-							className="inputClassName"
-							disabled
-						/>
+						<input type="text" className="inputClassName" disabled />
 					</div>
 				</div>
 				<div>
 					<p>Experiencia</p>
-					<input
-						type="text"
-						className="inputClassName"
-						disabled
-					/>
+					<input type="text" className="inputClassName" disabled />
 				</div>
 			</div>
 

@@ -155,11 +155,30 @@ export const getCalificaciones = async (token) => {
 
 		//Si se recibe una respuesta exitosa del backend
 		if (response.ok) {
-			const jsonData = await response.json();
-			const { data } = jsonData;
+			const data = await response.json();
 
-			// Mostrar en consola los datos del usuario obtenidos por medio del token
-			console.log("data calificaciones:", data);
+			const quizMappings = {
+				1: "monarquia",
+				2: "republica",
+				3: "imperio",
+				4: "personajes",
+				5: "arquitectura",
+				6: "cultura",
+			};
+
+			data.forEach((calificacion) => {
+				const quizName = quizMappings[calificacion.id_quiz];
+				if (quizName) {
+					// Establecer los valores en localStorage usando interpolación de cadenas
+					localStorage.setItem(`${quizName}Opcion0`, calificacion.respuesta0);
+					localStorage.setItem(`${quizName}Opcion1`, calificacion.respuesta1);
+					localStorage.setItem(`${quizName}Opcion2`, calificacion.respuesta2);
+					localStorage.setItem(`${quizName}Opcion3`, calificacion.respuesta3);
+					localStorage.setItem(`${quizName}Opcion4`, calificacion.respuesta4);
+					localStorage.setItem(`${quizName}Aciertos`, calificacion.calificacion);
+					localStorage.setItem(`${quizName}Resuelto`, true);
+				}
+			});
 
 			return "OK";
 		} else {

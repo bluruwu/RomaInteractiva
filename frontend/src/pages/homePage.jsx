@@ -14,10 +14,38 @@ import { getCalificaciones, getPrueba } from "../conections/requests";
 const HomePage = () => {
 	const navigate = useNavigate();
 	const token = localStorage.getItem("token");
+	const [scoreData, setScoreData] = useState([]);
 
 	useEffect(() => {
 		if (token) {
-			getCalificaciones(token);
+			async function fetchCalificaciones() {
+				const result = await getCalificaciones(token);
+				if (result === "OK") {
+					// Actualizar los valores de número utilizando el estado local
+					setScoreData([
+						{
+							leccion: 0,
+							nombre: "monarquia",
+							nota: localStorage.getItem("monarquiaAciertos"),
+						},
+						{
+							leccion: 1,
+							nombre: "republica",
+							nota: localStorage.getItem("republicaAciertos"),
+						},
+						{
+							leccion: 4,
+							nombre: "personajes",
+							nota: localStorage.getItem("personajesAciertos"),
+						},
+						// Agregar más elementos según sea necesario para las demás lecciones
+					]);
+				} else {
+					console.log("No se pudo obtener las calificaciones");
+				}
+			}
+
+			fetchCalificaciones();
 		} else {
 			console.log("Usuario no autenticado");
 		}
@@ -56,24 +84,12 @@ const HomePage = () => {
 	};
 
 	const getScore = (leccion) => {
-		if (leccion == 0) {
-			const quizResuelto = JSON.parse(localStorage.getItem("monarquiaResuelto"));
-			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem("aciertosMonarquia"));
-			} else return 0;
-		} else if (leccion == 1) {
-			const quizResuelto = JSON.parse(localStorage.getItem("republicaResuelto"));
-			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem("aciertosRepublica"));
-			} else return 0;
-		} else if (leccion == 2) {
-		} else if (leccion == 3) {
-			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
-			if (quizResuelto) {
-				return JSON.parse(localStorage.getItem("aciertosPersonajes"));
-			} else return 0;
-		} else if (leccion == 4) {
-		} else return 0;
+		const scoreDataItem = scoreData.find((item) => item.leccion === leccion);
+		if (scoreDataItem) {
+			return scoreDataItem.nota || 0;
+		} else {
+			return 0;
+		}
 	};
 
 	return (
@@ -124,7 +140,7 @@ const HomePage = () => {
 							onClick={() => navigate("/Romulo_Remo")}
 							hoverImage={augustoImage}
 							buttonText={"Personajes"}
-							number={getScore(3)}
+							number={getScore(4)}
 						/>
 						<Button
 							id="arquitectura"
