@@ -6,6 +6,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
+const corsOptions = {
+    origin: ['http://localhost'],
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
+    credentials: true,
+    enablePreflight: true
+}
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions))
+
+
 //Credenciales supabase
 
 const supabaseUrl = 'https://yciwytjuvbslrghfniat.supabase.co';
@@ -17,8 +28,7 @@ const secretKey = process.env.SECRET_KEY_JWT;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// allow all the incoming ip
-app.use(cors());
+
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
