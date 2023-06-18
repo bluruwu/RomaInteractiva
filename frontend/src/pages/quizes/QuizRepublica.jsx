@@ -101,7 +101,7 @@ const QuizRepublica = () => {
 							respuestasCorrectas++;
 						}
 					}
-					localStorage.setItem("aciertosRepublica", JSON.stringify(respuestasCorrectas));
+					localStorage.setItem("republicaAciertos", JSON.stringify(respuestasCorrectas));
 					localStorage.setItem("republicaResuelto", JSON.stringify(true));
 
 					//Objeto para enviar respuestas al backend
@@ -112,7 +112,7 @@ const QuizRepublica = () => {
 						respuesta2: JSON.parse(localStorage.getItem("republicaOpcion2")),
 						respuesta3: JSON.parse(localStorage.getItem("republicaOpcion3")),
 						respuesta4: JSON.parse(localStorage.getItem("republicaOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("aciertosRepublica")),
+						calificacion: JSON.parse(localStorage.getItem("republicaAciertos")),
 					};
 
 					console.log(formData);

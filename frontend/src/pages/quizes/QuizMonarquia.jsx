@@ -104,7 +104,7 @@ const QuizMonarquia = () => {
 						}
 					}
 					//Guardar calificacion del quiz en localStorage
-					localStorage.setItem("aciertosMonarquia", JSON.stringify(respuestasCorrectas));
+					localStorage.setItem("monarquiaAciertos", JSON.stringify(respuestasCorrectas));
 					//Marcar como resuelta en localStorage
 					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
 
@@ -116,7 +116,7 @@ const QuizMonarquia = () => {
 						respuesta2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
 						respuesta3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
 						respuesta4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("aciertosMonarquia")),
+						calificacion: JSON.parse(localStorage.getItem("monarquiaAciertos")),
 					};
 
 					console.log(formData);

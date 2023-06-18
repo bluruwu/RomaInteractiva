@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 //Credenciales supabase
 
@@ -28,16 +29,6 @@ app.post("/login", async (req, res) => {
 		// Datos obtenidos por el frontend
 		const { email, contrasena } = req.body;
 
-		// Login en supabase auth con los datos del usuario
-		const { data: loginResult, error } = await supabase.auth.signInWithPassword({
-			email: email,
-			password: contrasena,
-		});
-
-		// Si hay un error durante el login
-		if (error) {
-			throw new Error(error.message);
-		}
 		// Realizar la consulta para obtener todos los datos del usuario en la base de datos
 		const { data: usuarioData, error: queryError } = await supabase
 			.from("usuarios")
@@ -48,6 +39,17 @@ app.post("/login", async (req, res) => {
 		// Si hay un error durante la consulta
 		if (queryError) {
 			throw new Error(queryError.message);
+		}
+
+		// Verificar el hash de la contraseña
+		const contrasenaHash = usuarioData.contrasena;
+
+		// Comparar el hash almacenado con el hash de la contraseña proporcionada por el usuario
+		const match = await bcrypt.compare(contrasena, contrasenaHash);
+
+		// Si las contraseñas no coinciden, se envía una respuesta de error
+		if (!match) {
+			throw new Error("Credenciales de inicio de sesión inválidas");
 		}
 
 		const user = {
@@ -80,7 +82,7 @@ app.get("/currentuser", verifyToken, (req, res) => {
 // Middleware para verificar la validez de un token de autenticacion JWT
 function verifyToken(req, res, next) {
 	//Extrae el token del encabezado de autorizacion de la solicitud
-	//El token se envía al servidor en el encabezado de autorización utilizando el esquema "Bearer"
+	//El token se envía al servidor en el encabezado de autorización utilizando el esquema 'Bearer'
 	const token = req.headers.authorization;
 	console.log("MITOKEN", token);
 
@@ -109,21 +111,13 @@ app.post("/register/user", async (req, res) => {
 		//Datos de registro del usuario recibidos
 		const { email, nombre_usuario, nickname, avatar_id, contrasena } = req.body;
 
-		// Registro del usuario en supabase auth
-		const { user, session, error } = await supabase.auth.signUp({
-			email,
-			password: contrasena,
-		});
+		// Generar el hash de la contraseña
+		const hashedPassword = await bcrypt.hash(contrasena, 10); // 10 es el número de rondas de hashing
 
-		// Si hay un error durante el registro en supabase
-		if (error) {
-			throw new Error(error.message);
-		}
-
-		// Guardar los datos adicionales del usuario en la tabla "usuarios"
+		// Guardar los datos adicionales del usuario en la tabla 'usuarios'
 		const { data, error: insertError } = await supabase
 			.from("usuarios")
-			.insert([{ email, nickname, nombre_usuario, avatar_id, contrasena }]);
+			.insert([{ email, nickname, nombre_usuario, avatar_id, contrasena: hashedPassword }]);
 
 		//Si hay un error durante la insercion de los datos del usuario
 		if (insertError) {
@@ -131,7 +125,7 @@ app.post("/register/user", async (req, res) => {
 		}
 
 		//Respuesta
-		res.json({ user, session });
+		res.json("OK");
 	} catch (error) {
 		console.error("Error al crear el usuario:", error);
 		res.status(500).json({ error: error.message });
@@ -191,8 +185,6 @@ app.get("/calificaciones", verifyToken, async (req, res) => {
 		throw new Error(queryError.message);
 	}
 
-	console.log(data);
-
 	//Respuesta
 	res.json(data);
 });
@@ -211,6 +203,31 @@ app.get("/users", async (req, res) => {
 
 	//Respuesta
 	res.json(data);
+});
+
+// Actualizar Datos editables en el perfil de un usuario
+app.put("/actualizarperfil", verifyToken, async (req, res) => {
+	// Obtener el ID de usuario del token decodificado
+	const id_usuario = req.user.id_usuario;
+
+	const { nombre_usuario, nickname, contrasena } = req.body;
+
+	newData = {};
+	if (nombre_usuario) newData["nombre_usuario"] = nombre_usuario;
+	if (nickname) newData["nickname"] = nickname;
+	if (contrasena) newData["contrasena"] = contrasena;
+
+	const { error: queryError } = await supabase
+		.from("usuarios")
+		.update(newData)
+		.eq("id_usuario", id_usuario);
+
+	//Si hay un error durante la actualizacion
+	if (queryError) {
+		throw new Error(queryError.message);
+	}
+
+	res.json("Perfil actualizado correctamente");
 });
 
 // Iniciar el servidor
