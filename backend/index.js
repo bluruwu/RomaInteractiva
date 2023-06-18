@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // allow all the incoming ip
 const corsOptions = {
-	origin: "https://roma-interactiva.vercel.app/",
+	origin: "*",
 	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
   };
   
