@@ -8,8 +8,6 @@ import HomeButton from "../utilities/HomeButton";
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
 	const [showAlert, setShowAlert] = useState(false); // Estado para mostrar/ocultar la alerta
-	//Obtener token de la sesion
-	const token = localStorage.getItem("token");
 
 	const [formData, setFormData] = useState({
 		email: "",
@@ -18,9 +16,22 @@ const Login = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
+		const lowercaseEmail = formData.email.toLowerCase(); // Convertir el campo de email a minúsculas
+
+		// Actualizar el estado formData con el email en minúsculas
+		setFormData({
+			...formData,
+			email: lowercaseEmail,
+		});
+
 		console.log(formData); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
-			const req_succesful = await postLogin(formData, token); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
+			// Realizar solicitud de inicio de sesión utilizando los datos del formulario
+			const req_succesful = await postLogin({
+				...formData,
+				email: lowercaseEmail,
+			});
+
 			console.log(req_succesful);
 			if (req_succesful === "Inicio de sesión exitoso") {
 				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
@@ -37,27 +48,6 @@ const Login = () => {
 		};
 		myresponse(); // Ejecutar la función asíncrona myresponse
 	};
-
-	// const handleSubmitPrueba = (event) => {
-	// 	event.preventDefault(); // Prevenir comportamiento de envío predeterminado
-	// 	const myresponse = async () => {
-	// 		const req_succesful = await getPrueba(token); // Realizar solicitud de inicio de sesión utilizando los datos del formulario
-	// 		console.log(req_succesful);
-	// 		if (req_succesful === "OK") {
-	// 			// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
-	// 			Swal.fire("Prueba exitosa!", "success");
-	// 			navigate("/home");
-	// 		} else {
-	// 			// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
-	// 			Swal.fire({
-	// 				icon: "error",
-	// 				title: "Oops...",
-	// 				text: req_succesful,
-	// 			});
-	// 		}
-	// 	};
-	// 	myresponse(); // Ejecutar la función asíncrona myresponse
-	// };
 
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
 	return (
