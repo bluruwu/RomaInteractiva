@@ -19,12 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // allow all the incoming ip
-const corsOptions = {
-	origin: "https://roma-interactiva.vercel.app/",
-	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
-  };
-  
-  app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
