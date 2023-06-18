@@ -18,12 +18,6 @@ const Login = () => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
 		const lowercaseEmail = formData.email.toLowerCase(); // Convertir el campo de email a minúsculas
 
-		// Actualizar el estado formData con el email en minúsculas
-		setFormData({
-			...formData,
-			email: lowercaseEmail,
-		});
-
 		console.log(formData); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
 			// Realizar solicitud de inicio de sesión utilizando los datos del formulario
