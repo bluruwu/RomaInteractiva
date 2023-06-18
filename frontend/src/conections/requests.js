@@ -155,11 +155,30 @@ export const getCalificaciones = async (token) => {
 
 		//Si se recibe una respuesta exitosa del backend
 		if (response.ok) {
-			const jsonData = await response.json();
-			const { data } = jsonData;
+			const data = await response.json();
 
-			// Mostrar en consola todas las calificaciones del usuario obtenidas
-			console.log("data calificaciones:", data);
+			const quizMappings = {
+				1: "monarquia",
+				2: "republica",
+				3: "imperio",
+				4: "personajes",
+				5: "arquitectura",
+				6: "cultura",
+			};
+
+			data.forEach((calificacion) => {
+				const quizName = quizMappings[calificacion.id_quiz];
+				if (quizName) {
+					// Establecer los valores en localStorage usando interpolación de cadenas
+					localStorage.setItem(`${quizName}Opcion0`, calificacion.respuesta0);
+					localStorage.setItem(`${quizName}Opcion1`, calificacion.respuesta1);
+					localStorage.setItem(`${quizName}Opcion2`, calificacion.respuesta2);
+					localStorage.setItem(`${quizName}Opcion3`, calificacion.respuesta3);
+					localStorage.setItem(`${quizName}Opcion4`, calificacion.respuesta4);
+					localStorage.setItem(`${quizName}Aciertos`, calificacion.calificacion);
+					localStorage.setItem(`${quizName}Resuelto`, true);
+				}
+			});
 
 			return "OK";
 		} else {
@@ -167,6 +186,33 @@ export const getCalificaciones = async (token) => {
 			console.error(error);
 			// Maneja la respuesta de error
 			return "No se puedo obtener la informacion del usuario";
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		return "Error en solicitud";
+	}
+};
+
+//POST para enviar las calificaciones a la base de datos y guardalas en ella
+export const putActualizarPerfil = async (mydata, token) => {
+	try {
+		const response = await fetch(`${API_URL}/actualizarperfil`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(mydata),
+		});
+
+		//Si se recibe una respuesta exitosa del backend
+		if (response.ok) {
+			return "Perfil actualizado correctamente";
+		} else {
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "No se pudo actualizar el perfil";
 		}
 	} catch (error) {
 		console.error("Error:", error);

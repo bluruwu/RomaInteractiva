@@ -18,6 +18,9 @@ const Register = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
+		const lowercaseEmail = formData.email.toLowerCase(); // Convertir el campo de email a minúsculas
+		console.log(lowercaseEmail);
+
 		console.log(formData); // Imprimir los datos del formulario en la consola
 
 		if (formData["contrasena"].length < 6) {
@@ -71,7 +74,11 @@ const Register = () => {
 		}
 
 		const myresponse = async () => {
-			const req_succesful = await postData(formData); // Realizar solicitud de registro utilizando los datos del formulario
+			const req_succesful = await postData({
+				...formData,
+				email: lowercaseEmail,
+			});
+			// Realizar solicitud de registro utilizando los datos del formulario
 			if (req_succesful === "Data submitted successfully") {
 				// Si el registro es exitoso, mostrar una alerta de éxito y navegar a la página de inicio de sesión ("/login")
 				Swal.fire("Congrats!", "You have succesfully been register!", "success");
