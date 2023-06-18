@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-//import "./perfil.css";
+import "./perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
