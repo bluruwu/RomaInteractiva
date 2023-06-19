@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./perfil.css";
+import "./css/perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -15,7 +15,6 @@ const Perfil = () => {
 	//Manejar cuando el usuario hace clic en "GUARDAR CAMBIOS"
 	const handleButtonClick = () => {
 		// Guardar los valores en el localStorage
-
 
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
 		localStorage.setItem("nickname", JSON.stringify(nickname));
@@ -55,30 +54,36 @@ const Perfil = () => {
 		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
 
-	function cambiarContraseñaDialogue(e){
+	function cambiarContraseñaDialogue(e) {
 		Swal.fire({
-			title: 'Recover Password Dialogue',
+			title: "Recover Password Dialogue",
 			html: `<input type="text" id="currentPassword" class="swal2-input" placeholder="CurrentPassword">
 			<input type="password" id="newPassword" class="swal2-input" placeholder="newPassword">
 			<input type="password" id="newPasswordAgain" class="swal2-input" placeholder="newPasswordAgain">`,
-			confirmButtonText: 'Recover Password',
+			confirmButtonText: "Recover Password",
 			focusConfirm: false,
 			preConfirm: () => {
-			  const currentPassword = Swal.getPopup().querySelector('#currentPassword').value
-			  const newPassword = Swal.getPopup().querySelector('#newPassword').value
-			  const newPasswordAgain = Swal.getPopup().querySelector('#newPasswordAgain').value
-			  if (!currentPassword || !newPassword ||!newPasswordAgain) {
-				Swal.showValidationMessage(`Please enter login and password`)
-			  }
-			  return { currentPassword: currentPassword, newPassword: newPassword, newPasswordAgain: newPasswordAgain }
-			}
-		  }).then((result) => {
-			Swal.fire(`
+				const currentPassword = Swal.getPopup().querySelector("#currentPassword").value;
+				const newPassword = Swal.getPopup().querySelector("#newPassword").value;
+				const newPasswordAgain = Swal.getPopup().querySelector("#newPasswordAgain").value;
+				if (!currentPassword || !newPassword || !newPasswordAgain) {
+					Swal.showValidationMessage(`Please enter login and password`);
+				}
+				return {
+					currentPassword: currentPassword,
+					newPassword: newPassword,
+					newPasswordAgain: newPasswordAgain,
+				};
+			},
+		}).then((result) => {
+			Swal.fire(
+				`
 			  Contraseña Actual: ${result.value.currentPassword}
 			  Contraseña Nueva: ${result.value.newPassword}
 			  Repetir Contraseña Nueva: ${result.value.newPasswordAgain}
-			`.trim())
-		  })
+			`.trim()
+			);
+		});
 	}
 
 	//Obtener el avatar del usuario si tiene uno
@@ -125,7 +130,7 @@ const Perfil = () => {
 	};
 
 	return (
-		<div className="font-text  h-screen">
+		<div id="perfil" className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mt-10 ml-10">
@@ -218,9 +223,9 @@ const Perfil = () => {
 			</div>
 
 			{/* Boton guardar cambios */}
-			<div className="flex flex-col items-center">
+			<div className="flex flex-col items-center pb-20">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110 "
 					style={{ minWidth: "15rem" }}
 					onClick={handleButtonClick}
 				>
