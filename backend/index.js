@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 const corsOptions = {
 	origin: "*",
 	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
-  };
-  
-  app.use(cors(corsOptions));
+};
+
+app.use(cors(corsOptions));
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -211,17 +211,51 @@ app.get("/users", async (req, res) => {
 });
 
 // Actualizar Datos editables en el perfil de un usuario
+/**
+ * Envia un json stado acorde y con un string.
+ * {status: 280, Perfil actualizado correctamente}
+ * {status: 480, "Las contraseña actual no es valida"}
+ */
 app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	// Obtener el ID de usuario del token decodificado
 	const id_usuario = req.user.id_usuario;
 
-	const { nombre_usuario, nickname, contrasena } = req.body;
+	const { nombre_usuario, nickname, contrasena, nueva_contrasena, avatar_id } = req.body;
 
 	newData = {};
-	if (nombre_usuario) newData["nombre_usuario"] = nombre_usuario;
+	if (nombre_usuario && (nombre_usuario != "")) newData["nombre_usuario"] = nombre_usuario;
 	if (nickname) newData["nickname"] = nickname;
 	if (contrasena) newData["contrasena"] = contrasena;
+	if (avatar_id) newData["avatar_id"] = avatar_id;
 
+	//Consulata a la base de datos para obtener el usuario con el id del token
+	const { data, error } = await supabase
+		.from("usuarios")
+		.select("contrasena")
+		.eq("id_usuario", id_usuario);
+
+	//se obtiene la contraseña del usuario en la bd
+	const contrasena_db = data[0]["contrasena"]
+
+	/**
+	 * Si se resive una contrasena, se debe chequear contra la bd.
+	 * Si equivalen a lo mismo, se cambia en el diccionario con el 
+	 * nuevo body, la nueva contrasena
+	 */
+	console.log(contrasena_db)
+	if (contrasena) {
+		const verificacionHash = await bcrypt.compare(contrasena,contrasena_db)
+		console.log(verificacionHash)
+		if (verificacionHash) {
+			if (nueva_contrasena){
+				newData["contrasena"] = await bcrypt.hash(nueva_contrasena, 10); // 10 es el número de rondas de hashing
+			}
+		}else{
+			res.status(480).json("Las contraseña actual no es valida");
+			return
+		}
+	}   
+ 
 	const { error: queryError } = await supabase
 		.from("usuarios")
 		.update(newData)
@@ -232,8 +266,11 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 		throw new Error(queryError.message);
 	}
 
-	res.json("Perfil actualizado correctamente");
+	res.status(280).json("Perfil actualizado correctamente");
+	return
 });
+
+
 
 // Iniciar el servidor
 app.listen(9000, () => {
