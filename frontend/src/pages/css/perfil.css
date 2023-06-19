@@ -1,0 +1,34 @@
+#perfil .inputClassName {
+	width: 60%;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-align: center;
+	border-radius: 15px;
+	border-width: 2px;
+	border-color: #f56565;
+	margin-bottom: 0.5rem;
+	box-shadow: 0 0 5px #8e0000;
+}
+
+#perfil .inputClassName:focus {
+	outline: none !important;
+	border: 2px solid #ffcc33;
+	box-shadow: 0 0 10px #e69200;
+}
+
+#perfil .first-column {
+	/* background-color: darkmagenta; */
+	align-items: right;
+	margin-left: 25%;
+	margin-right: 0;
+}
+
+#perfil .grid {
+	grid-template-columns: 57.5% 40%;
+	color: black;
+	/* background-color: darkmagenta; */
+	grid-gap: 40px;
+	justify-content: center;
+	margin-bottom: 5px;
+	padding-bottom: 40px;
+}

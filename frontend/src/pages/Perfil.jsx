@@ -6,53 +6,90 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./perfil.css";
+import "./css/perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 	// const navigate = useNavigate();
+	//Logica de la actualizacion de campos del perfil del usuario
+	const myPutPetition = async (myData, myToken) => {
+		// LLamar al backend con los nuevos datos y el token del usuario
+		const req_succesful = await putActualizarPerfil(myData, myToken);
+		console.log(req_succesful);
+
+		if (req_succesful === "Perfil actualizado correctamente") {
+			// Si el registro es exitoso, mostrar una alerta de éxito "
+			Swal.fire("Datos Actualizados correctamente!", "").then(() => {
+				window.location.reload();
+			});
+		}else if(req_succesful === "Las contraseña actual no es valida") {
+			Swal.fire("Contraseña incorrecta!", "").then(() => {
+				window.location.reload();
+			});
+		}else {
+			// Si ocurre un error durante el registro, mostrar una alerta con un mensaje de error
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Sorry, Some of our services are not working",
+			}).then(() => {
+				window.location.reload();
+			});
+			return;
+		}
+	};
 
 	//Manejar cuando el usuario hace clic en "GUARDAR CAMBIOS"
 	const handleButtonClick = () => {
 		// Guardar los valores en el localStorage
+
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
 		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
-		localStorage.setItem("contrasena", JSON.stringify(contrasena));
 
 		const myData = {
 			nombre_usuario: nombreCompleto,
 			nickname: nickname,
-			contrasena: contrasena,
+			avatar_id: idAvatar
 		};
 
-
-		//Logica de la actualizacion de campos del perfil del usuario
-		const myPutPetition = async (myData, myToken) => {
-			// LLamar al backend con los nuevos datos y el token del usuario
-			const req_succesful = await putActualizarPerfil(myData, myToken);
-			console.log(req_succesful);
-
-			if (req_succesful === "Perfil actualizado correctamente") {
-				// Si el registro es exitoso, mostrar una alerta de éxito "
-				Swal.fire("Congrats!", "You have succesfully been register!", "success").then(() => {
-					window.location.reload();
-				});
-			} else {
-				// Si ocurre un error durante el registro, mostrar una alerta con un mensaje de error
-				Swal.fire({
-					icon: "error",
-					title: "Oops...",
-					text: "Something went wrong, try later.",
-				}).then(() => {
-					window.location.reload();
-				});
-				return;
-			}
-		};
+		
 		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
+
+	const cambiarContraseñaDialogue = async(e) => {
+		Swal.fire({
+			title: 'Recuperar Contraseña',
+			html: `<input type="text" id="currentPassword" class="swal2-input" placeholder="Contraseña Actual">
+			<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
+			<input type="password" id="newPasswordAgain" class="swal2-input" placeholder="Repite Nueva Contraseña">`,
+			confirmButtonText: 'Recuperar',
+			focusConfirm: false,
+			preConfirm: () => {
+				const currentPassword = Swal.getPopup().querySelector('#currentPassword').value
+				const newPassword = Swal.getPopup().querySelector('#newPassword').value
+				const newPasswordAgain = Swal.getPopup().querySelector('#newPasswordAgain').value
+
+				if (!currentPassword || !newPassword || !newPasswordAgain) {
+					Swal.showValidationMessage(`Por favor, llena todos los campos.`)
+				}
+				if (newPassword != newPasswordAgain) {
+					Swal.showValidationMessage(`No repetiste bien las contraseñas`)
+				}
+				if (newPassword.length < 8) {
+					Swal.showValidationMessage(`La nueva contraseña debe ser de por lo menos 8 caracteres`)
+				}
+				return { currentPassword: currentPassword, newPassword: newPassword, newPasswordAgain: newPasswordAgain }
+			}
+		}).then((result) => {
+			if (result.value != undefined) {
+				myPutPetition({
+					contrasena: result.value.currentPassword,
+					nueva_contrasena: result.value.newPassword
+				}, localStorage.getItem("token"));}
+			})
+	}
 
 	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
@@ -68,7 +105,7 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(JSON.parse(localStorage.getItem("contrasena")) || "");
+	const [contrasena, setContrasena] = useState('--------');
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
@@ -96,7 +133,7 @@ const Perfil = () => {
 	};
 
 	return (
-		<div className="font-text bg-gray-100 h-screen">
+		<div id="perfil" className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mt-10 ml-10">
@@ -160,7 +197,8 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="inputClassName"
-							onChange={(e) => setContrasena(e.target.value)}
+							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
+							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
 							value={contrasena}
 						/>
 					</div>
@@ -188,9 +226,9 @@ const Perfil = () => {
 			</div>
 
 			{/* Boton guardar cambios */}
-			<div className="flex flex-col items-center">
+			<div className="flex flex-col items-center pb-20">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110 "
 					style={{ minWidth: "15rem" }}
 					onClick={handleButtonClick}
 				>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -64,42 +64,108 @@ const LessonNav = ({
 		}
 	};
 
+	const [isHoveredPrev, setIsHoveredPrev] = useState(false);
+	const [isHoveredNext, setIsHoveredNext] = useState(false);
+
+	const handleHoverPrev = () => {
+		setIsHoveredPrev(true);
+	};
+
+	const handleMouseLeavePrev = () => {
+		setIsHoveredPrev(false);
+	};
+
+	const handleHoverNext = () => {
+		setIsHoveredNext(true);
+	};
+
+	const handleMouseLeaveNext = () => {
+		setIsHoveredNext(false);
+	};
+
 	return (
-		<div className="flex flex-col md:flex-row bg-red-100">
+		<div className="flex flex-col md:flex-row bg-red-100 ">
 			{/* Leccion anterior */}
 			<div
-				className="w-full md:w-1/2 h-32 relative cursor-pointer"
+				className="w-full md:w-1/2 h-40 relative cursor-pointer overflow-hidden"
 				onClick={() => navigate(urlbef)}
+				onMouseEnter={handleHoverPrev}
+				onMouseLeave={handleMouseLeavePrev}
 			>
 				<img
-					src={require(`../../media/${mediabef}`)} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+					src={require(`../../media/${mediabef}`)}
 					alt="Anterior leccion"
-					className="block w-full h-full object-cover"
+					className={`block w-full h-full object-cover ${
+						isHoveredPrev ? "scale-110 transition-all duration-500" : ""
+					}${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+					style={{
+						transformOrigin: "center center",
+						transformStyle: "preserve-3d",
+					}}
 				/>
 				{/* Opacidad de la imagen */}
-				<div className="absolute inset-0 bg-black opacity-50"></div>
+				<div
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
+						isHoveredPrev ? "opacity-70" : "opacity-40"
+					}`}
+				></div>
 
 				{/* Texto que aparece sobre la imagen */}
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-					<p className="text-lg font-bold text-white">Anterior</p>
-					<p className="text-lg font-bold text-white">{titlebef}</p>
+					<p
+						className={`text-lg font-bold text-white ${
+							isHoveredPrev ? "scale-125 transition-all duration-500" : ""
+						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+					>
+						Anterior
+					</p>
+					<p
+						className={`text-lg font-bold text-white ${
+							isHoveredPrev ? "scale-125 transition-all duration-500" : ""
+						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+					>
+						{titlebef}
+					</p>
 				</div>
 			</div>
 
 			{/* Leccion siguiente */}
-			<div className="w-full md:w-1/2 h-32 relative cursor-pointer" onClick={quizMessage}>
+			<div
+				className="w-full md:w-1/2 h-40 relative cursor-pointer overflow-hidden"
+				onClick={quizMessage}
+				onMouseEnter={handleHoverNext}
+				onMouseLeave={handleMouseLeaveNext}
+			>
 				<img
-					src={require(`../../media/${medianxt}`)} // Reemplaza "ruta-de-la-imagen.jpg" con la ruta de tu imagen
+					src={require(`../../media/${medianxt}`)}
 					alt="Siguiente leccion"
-					className="block w-full h-full object-cover"
+					className={`block w-full h-full object-cover ${
+						isHoveredNext ? "scale-110 transition-all duration-500" : ""
+					}${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 				/>
 				{/* Opacidad de la imagen */}
-				<div className="absolute inset-0 bg-black opacity-50"></div>
+				<div
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
+						isHoveredNext ? "opacity-70" : "opacity-40"
+					}`}
+				></div>
 
 				{/* Texto que aparece sobre la imagen */}
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-					<p className="text-lg font-bold text-white">Siguiente</p>
-					<p className="text-lg font-bold text-white">{titlenxt}</p>
+					<p
+						className={`text-lg font-bold text-white ${
+							isHoveredNext ? "scale-125 transition-all duration-500" : ""
+						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
+					>
+						Siguiente
+					</p>
+					<p
+						className={`text-lg font-bold text-white ${
+							isHoveredNext ? "scale-125 transition-all duration-500" : ""
+						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
+					>
+						{titlenxt}
+					</p>
 				</div>
 			</div>
 		</div>

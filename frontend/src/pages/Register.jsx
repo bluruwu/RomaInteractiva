@@ -89,7 +89,7 @@ const Register = () => {
 				Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "Email or username already taken",
+					text: "Really sorry, some services aren't avaliable right now.",
 				});
 			}
 		};

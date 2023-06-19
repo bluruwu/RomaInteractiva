@@ -10,7 +10,7 @@ Recibe la siguiente propiedad:
 const QuizQuestion = ({ question }) => {
 	return (
 		// Contenedor de la pregunta y el botón de inicio
-		<div className="grid grid-cols-3 items-center">
+		<div className="grid grid-cols-3 justify-center items-center">
 			{/* Botón de inicio */}
 			<div className="p-14">
 				<HomeButton />
