@@ -105,7 +105,9 @@ const LessonNav = ({
 				/>
 				{/* Opacidad de la imagen */}
 				<div
-					className={`absolute inset-0 bg-black ${isHoveredPrev ? "opacity-60" : "opacity-30"}`}
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
+						isHoveredPrev ? "opacity-70" : "opacity-40"
+					}`}
 				></div>
 
 				{/* Texto que aparece sobre la imagen */}
@@ -143,7 +145,9 @@ const LessonNav = ({
 				/>
 				{/* Opacidad de la imagen */}
 				<div
-					className={`absolute inset-0 bg-black ${isHoveredNext ? "opacity-60" : "opacity-40"}`}
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
+						isHoveredNext ? "opacity-70" : "opacity-40"
+					}`}
 				></div>
 
 				{/* Texto que aparece sobre la imagen */}

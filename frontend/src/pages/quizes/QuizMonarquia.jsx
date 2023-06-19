@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
 import { INFORMATION } from "../../utilities/monarquiaInfo";
 import { useNavigate } from "react-router-dom";
-import "./quiz.css";;
 
 const QuizMonarquia = () => {
 	const navigate = useNavigate();
