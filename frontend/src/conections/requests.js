@@ -4,7 +4,7 @@
 //Usar API_URL de vercel antes de hacer pull request a main para hacer el despliegue
 const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 //Usar la API_URL del puerto 9000 si se va a trabajar local
-// const API_URL = "http://127.0.0.1:9000";
+//const API_URL = "http://127.0.0.1:9000";
 
 //Solicitud POST para el registro de usuarios
 export const postData = async (mydata) => {
@@ -205,14 +205,14 @@ export const putActualizarPerfil = async (mydata, token) => {
 			body: JSON.stringify(mydata),
 		});
 
-		//Si se recibe una respuesta exitosa del backend
-		if (response.ok) {
+		//Tratar el tipo de respuesta del backend
+		if (response.status == 280) {
 			return "Perfil actualizado correctamente";
-		} else {
+		} else if (response.status == 480){
+			return "Las contraseña actual no es valida";
+		}else {
 			const error = await response.json();
-			console.error(error);
-			// Maneja la respuesta de error
-			return "No se pudo actualizar el perfil";
+			return error;
 		}
 	} catch (error) {
 		console.error("Error:", error);
