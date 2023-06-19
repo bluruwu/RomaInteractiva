@@ -19,6 +19,7 @@ const Perfil = () => {
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
 		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
+		localStorage.setItem("contrasena", JSON.stringify(contrasena));
 
 		const myData = {
 			nombre_usuario: nombreCompleto,
@@ -96,7 +97,7 @@ const Perfil = () => {
 	};
 
 	return (
-		<div className="font-text bg-gray-100 h-screen">
+		<div className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mt-10 ml-10">
@@ -133,60 +134,57 @@ const Perfil = () => {
 			</div>
 
 			{/* Campos con la informacion del usuario */}
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center mb-8">
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+			<div class="grid">
+				<div>
+					<div className="first-column ">
 						<p>Nombre completo</p>
 						<input
 							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							className="inputClassName"
 							onChange={(e) => setNombreCompleto(e.target.value)}
 							value={nombreCompleto}
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col w-30">
+				<div>
 					<p>Apodo</p>
 					<input
 						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						className="inputClassName"
 						onChange={(e) => setNickname(e.target.value)}
 						value={nickname}
 					/>
 				</div>
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+				<div>
+					<div className="first-column">
 						<p>Contraseña</p>
 						<input
 							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+							className="inputClassName"
+							onChange={(e) => setContrasena(e.target.value)}
+							value={contrasena}
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col">
+				<div>
 					<p>Correo electrónico</p>
 					<input
 						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
+						className="inputClassName"
 						onChange={(e) => setEmail(e.target.value)}
 						value={email}
+						disabled
 					/>
 				</div>
-				<div className="flex flex-col">
-					<div className="w-30 self-end">
+				<div>
+					<div className="first-column">
 						<p>Nivel</p>
-						<input
-							type="text"
-							className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-						/>
+						<input type="text" className="inputClassName" disabled />
 					</div>
 				</div>
-				<div className="flex flex-col">
+				<div>
 					<p>Experiencia</p>
-					<input
-						type="text"
-						className="w-fit px-28 py-1 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-					/>
+					<input type="text" className="inputClassName" disabled />
 				</div>
 			</div>
 
