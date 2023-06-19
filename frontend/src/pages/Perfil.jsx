@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./perfil.css";
+import "./css/perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -42,7 +42,6 @@ const Perfil = () => {
 	//Manejar cuando el usuario hace clic en "GUARDAR CAMBIOS"
 	const handleButtonClick = () => {
 		// Guardar los valores en el localStorage
-
 
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
 		localStorage.setItem("nickname", JSON.stringify(nickname));
@@ -134,7 +133,7 @@ const Perfil = () => {
 	};
 
 	return (
-		<div className="font-text  h-screen">
+		<div id="perfil" className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mt-10 ml-10">
@@ -227,9 +226,9 @@ const Perfil = () => {
 			</div>
 
 			{/* Boton guardar cambios */}
-			<div className="flex flex-col items-center">
+			<div className="flex flex-col items-center pb-20">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110 "
 					style={{ minWidth: "15rem" }}
 					onClick={handleButtonClick}
 				>
