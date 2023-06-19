@@ -69,15 +69,15 @@ const Navbar = () => {
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-4 md:mx-20">
-				<div className="flex items-center -space-x-3">
-					<button onClick={() => navigate("/home")}>
+				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
+					<button>
 						<img
 							src={logo}
 							alt="Logo"
 							className="w-20 md:w-32 md:h-auto h-auto min-h-[40px] min-w-[70px]"
 						></img>
 					</button>
-					<button onClick={() => navigate("/home")}>
+					<button>
 						<span className="text-base md:text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap">
 							Roma Interactiva
 						</span>
