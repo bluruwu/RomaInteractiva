@@ -98,7 +98,7 @@ const HomePage = () => {
 			<Navbar />
 			{Title()}
 
-			<main className="flex flex-col gap-y-20 m-12">
+			<main className="flex flex-col gap-y-20 m-12 mb-[160px]">
 				{/* Seccion ETAPAS */}
 				<section>
 					<h1 className="font-bold text-3xl text-black"> Etapas</h1>

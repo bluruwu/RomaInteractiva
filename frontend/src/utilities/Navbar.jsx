@@ -147,7 +147,7 @@ const Navbar = () => {
 												// className="z-10 absolute bg-white border border-gray-300 p-2 rounded"
 												className={`${
 													open ? "block" : "hidden"
-												} z-10 absolute bg-white border rounded border-2 shadow-lg w-48`}
+												} z-10 absolute bg-white rounded border-2 shadow-lg w-48`}
 												style={{ right: "0", marginTop: "1rem" }} // Estilos personalizados para cambiar la posición
 											>
 												{/* Botones que se encuentran en el popover */}
