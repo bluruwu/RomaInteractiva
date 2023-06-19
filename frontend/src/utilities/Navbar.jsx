@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../media/logos/logo.png";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import BusquedaAleatoria from "./randomSearch";
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -23,19 +24,20 @@ const Navbar = () => {
 
 	return (
 		<nav className="bg-custom-rojo">
-			<div className="flex justify-between mx-20">
+			<div className="flex justify-between mx-4 md:mx-20">
 				<div className="flex items-center -space-x-3">
-					<a onClick={() => navigate("/home")}>
-						<img src={logo} alt="Logo" className="w-32 h-auto"></img>
-					</a>
-					<a onClick={() => navigate("/home")}>
-						<span className="text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap">
+					<button onClick={() => navigate("/home")}>
+						<img src={logo} alt="Logo" className="w-20 md:w-32 md:h-auto h-auto min-h-[40px] min-w-[70px]"></img>
+					</button>
+					<button onClick={() => navigate("/home")}>
+						<span className="text-base md:text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap">
 							Roma Interactiva
 						</span>
-					</a>
+					</button>
 				</div>
 
 				<ul className="flex space-x-4 items-center">
+					<BusquedaAleatoria/>
 					<li className="ml-20 mr-20 hidden md:block">
 						<SearchBar />
 					</li>
@@ -43,20 +45,22 @@ const Navbar = () => {
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block"
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block sm:hidden"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
 					</li>
 					<li>
-						<div className="w-14 h-14 rounded-full bg-gray-200 hidden md:block">
+						<div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-gray-200 hidden md:block sm:hidden">
 							{idAvatar ? (
 								<img
+									alt="Avatar del usuario"
 									src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
 									className="inline border-4 border-custom-doradodark object-cover rounded-full"
 								/>
 							) : (
 								<img
+									alt="Avatar del usuario"
 									src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 									className="inline object-cover rounded-full"
 								/>
