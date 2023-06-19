@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../media/logos/logo.png";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import BusquedaAleatoria from "./randomSearch";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
@@ -67,22 +68,26 @@ const Navbar = () => {
 
 	return (
 		<nav className="bg-custom-rojo">
-			<div className="flex justify-between mx-20">
-				{/* Logo y texto */}
-				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
-					<a>
-						<img src={logo} alt="Logo" className="w-32 h-auto"></img>
-					</a>
-					<a>
-						<span className="text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap text-sm">
+			<div className="flex justify-between mx-4 md:mx-20">
+				<div className="flex items-center -space-x-3">
+					<button onClick={() => navigate("/home")}>
+						<img
+							src={logo}
+							alt="Logo"
+							className="w-20 md:w-32 md:h-auto h-auto min-h-[40px] min-w-[70px]"
+						></img>
+					</button>
+					<button onClick={() => navigate("/home")}>
+						<span className="text-base md:text-xl ml-2 font-text font-regular text-custom-doradonormal whitespace-nowrap">
 							Roma Interactiva
 						</span>
-					</a>
+					</button>
 				</div>
 
 				{/* Barra de busqueda, texto y avatar */}
 				<ul className="flex space-x-4 items-center">
 					{/* Barra de busqueda */}
+					<BusquedaAleatoria />
 					<li className="ml-20 mr-20 hidden md:block">
 						<SearchBar />
 					</li>
@@ -91,7 +96,7 @@ const Navbar = () => {
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block cursor-pointer "
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block cursor-pointer  sm:hidden"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
