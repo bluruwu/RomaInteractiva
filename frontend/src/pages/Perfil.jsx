@@ -4,6 +4,9 @@ import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
+import { putActualizarPerfil } from "../conections/requests";
+import Swal from "sweetalert2";
+import "./perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -17,11 +20,36 @@ const Perfil = () => {
 		localStorage.setItem("email", JSON.stringify(email));
 		localStorage.setItem("avatar_id", JSON.stringify(idAvatar));
 
-		// Recargar la página
-		window.location.reload();
+		const myData = {
+			nombre_usuario: nombreCompleto,
+			nickname: nickname,
+			contrasena: contrasena,
+		};
 
-		//Recargar página
-		return <Navigate to="/perfil" />;
+		//Logica de la actualizacion de campos del perfil del usuario
+		const myPutPetition = async (myData, myToken) => {
+			// LLamar al backend con los nuevos datos y el token del usuario
+			const req_succesful = await putActualizarPerfil(myData, myToken);
+			console.log(req_succesful);
+
+			if (req_succesful === "Perfil actualizado correctamente") {
+				// Si el registro es exitoso, mostrar una alerta de éxito "
+				Swal.fire("Congrats!", "You have succesfully been register!", "success").then(() => {
+					window.location.reload();
+				});
+			} else {
+				// Si ocurre un error durante el registro, mostrar una alerta con un mensaje de error
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "Something went wrong, try later.",
+				}).then(() => {
+					window.location.reload();
+				});
+				return;
+			}
+		};
+		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
 
 	//Obtener el avatar del usuario si tiene uno
@@ -38,7 +66,9 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(localStorage.getItem("contrasena") || "");
+	const [contrasena, setContrasena] = useState(
+		JSON.parse(localStorage.getItem("contrasena")) || ""
+	);
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");

@@ -1,0 +1,35 @@
+.inputClassName {
+  width: 60%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: center;
+  border-radius: 15px;
+  border-width: 2px;
+  border-color: #f56565;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 5px #f56565;
+}
+
+
+.inputClassName:focus {
+  outline: none !important;
+  border:1px solid rgb(0, 255, 140);
+  box-shadow: 0 0 10px #719ECE;
+}
+
+.first-column {
+    /* background-color: darkmagenta; */
+    align-items: right;
+    margin-left: 25%; 
+    margin-right: 0;
+}
+
+.grid {
+    grid-template-columns: 57.5% 40%;
+    color:#4a5568;
+    /* background-color: darkmagenta; */
+    grid-gap: 40px;
+    justify-content: center;
+    margin-bottom: 5px;
+    padding-bottom: 40px;
+}
