@@ -96,7 +96,7 @@ const Navbar = () => {
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block cursor-pointer  sm:hidden"
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block cursor-pointer sm:hidden"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
@@ -114,11 +114,13 @@ const Navbar = () => {
 										<div className="w-14 h-14 rounded-full bg-gray-200">
 											{idAvatar ? (
 												<img
+													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
 													className="inline border-4 border-custom-doradodark object-cover rounded-full"
 												/>
 											) : (
 												<img
+													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 													className="inline object-cover rounded-full"
 													onClick={handleNavigation}
