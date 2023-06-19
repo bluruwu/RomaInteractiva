@@ -27,7 +27,6 @@ const Perfil = () => {
 			contrasena: contrasena,
 		};
 
-
 		//Logica de la actualizacion de campos del perfil del usuario
 		const myPutPetition = async (myData, myToken) => {
 			// LLamar al backend con los nuevos datos y el token del usuario
@@ -68,7 +67,9 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(JSON.parse(localStorage.getItem("contrasena")) || "");
+	const [contrasena, setContrasena] = useState(
+		JSON.parse(localStorage.getItem("contrasena")) || ""
+	);
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
@@ -96,7 +97,7 @@ const Perfil = () => {
 	};
 
 	return (
-		<div className="font-text bg-gray-100 h-screen">
+		<div className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
 			<div className="mt-10 ml-10">
