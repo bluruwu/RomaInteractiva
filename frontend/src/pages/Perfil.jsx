@@ -15,6 +15,8 @@ const Perfil = () => {
 	//Manejar cuando el usuario hace clic en "GUARDAR CAMBIOS"
 	const handleButtonClick = () => {
 		// Guardar los valores en el localStorage
+
+
 		localStorage.setItem("nombre_usuario", JSON.stringify(nombreCompleto));
 		localStorage.setItem("nickname", JSON.stringify(nickname));
 		localStorage.setItem("email", JSON.stringify(email));
@@ -52,6 +54,32 @@ const Perfil = () => {
 		};
 		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
+
+	function cambiarContraseñaDialogue(e){
+		Swal.fire({
+			title: 'Recover Password Dialogue',
+			html: `<input type="text" id="currentPassword" class="swal2-input" placeholder="CurrentPassword">
+			<input type="password" id="newPassword" class="swal2-input" placeholder="newPassword">
+			<input type="password" id="newPasswordAgain" class="swal2-input" placeholder="newPasswordAgain">`,
+			confirmButtonText: 'Recover Password',
+			focusConfirm: false,
+			preConfirm: () => {
+			  const currentPassword = Swal.getPopup().querySelector('#currentPassword').value
+			  const newPassword = Swal.getPopup().querySelector('#newPassword').value
+			  const newPasswordAgain = Swal.getPopup().querySelector('#newPasswordAgain').value
+			  if (!currentPassword || !newPassword ||!newPasswordAgain) {
+				Swal.showValidationMessage(`Please enter login and password`)
+			  }
+			  return { currentPassword: currentPassword, newPassword: newPassword, newPasswordAgain: newPasswordAgain }
+			}
+		  }).then((result) => {
+			Swal.fire(`
+			  Contraseña Actual: ${result.value.currentPassword}
+			  Contraseña Nueva: ${result.value.newPassword}
+			  Repetir Contraseña Nueva: ${result.value.newPasswordAgain}
+			`.trim())
+		  })
+	}
 
 	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
@@ -161,7 +189,8 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="inputClassName"
-							onChange={(e) => setContrasena(e.target.value)}
+							//onChange={(e) => setContrasena(e.target.value)}
+							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							value={contrasena}
 						/>
 					</div>
