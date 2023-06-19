@@ -6,7 +6,7 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./perfil.index.css";
+import "./perfil.css";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -27,8 +27,6 @@ const Perfil = () => {
 			contrasena: contrasena,
 		};
 
-		//realizar la peticion al backend
-		console.log();
 
 		//Logica de la actualizacion de campos del perfil del usuario
 		const myPutPetition = async (myData, myToken) => {
@@ -70,9 +68,7 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState(
-		JSON.parse(localStorage.getItem("contrasena") || "")
-	);
+	const [contrasena, setContrasena] = useState(JSON.parse(localStorage.getItem("contrasena")) || "");
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
