@@ -24,9 +24,6 @@ const LessonModel = ({ description, titleModel, source }) => {
 			<div className="flex font-bold items-end justify-end absolute bottom-14 right-8 p-3 bg-custom-doradonormal rounded-md shadow-xl ">
 				<p>{description}</p>
 			</div>
-			<div className="flex font-bold items-end justify-end absolute bottom-1 right-8 my- p-3 bg-custom-rojo text-white rounded-md shadow-xl ">
-				<p>{"Otros modelos"}</p>
-			</div>
 		</div>
 	);
 };

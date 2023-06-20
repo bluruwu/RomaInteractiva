@@ -3,6 +3,7 @@ import Navbar from "../../utilities/Navbar";
 import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
+import { Dropdown } from 'flowbite-react'
 
 const first = `Rómulo y Remo son figuras legendarias en la mitología romana y desempeñaron un papel crucial en la fundación de la antigua ciudad de Roma. Según la historia, eran hijos de Rea Silvia, una princesa descendiente de Eneas, y fueron abandonados en las orillas del río Tíber. Allí, fueron amamantados y cuidados por una loba, hasta que fueron encontrados por un pastor llamado Faustulo, quien se hizo cargo de su crianza.`
 
@@ -26,6 +27,19 @@ const LessonRomuloRemo = () => {
 				/> 
 				{/* Componente del modelo 3D */}
 				<LessonModel description="Rómulo y Remo de Pequeños" titleModel="Rómulo y Remo" source="https://sketchfab.com/models/23ad914573fe46c49b510a736715a377/embed"/>
+			</div>
+			<div className="flex justify-end"> 
+				<div id="modelos" data-dropdown-toggle="dropdown" title="Boton para cambiar modelos" className=" font-bold p-3 mb-3 bg-custom-rojo text-white rounded-md shadow-xl items-center focus:ring-4 focus:outline-none focus:ring-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button" >
+					<Dropdown 
+						inline
+						label="Otros modelos"
+						placement="top"
+					> 
+						<Dropdown.Item className="" > Romulo y remo v2 </Dropdown.Item>
+						<Dropdown.Item> Romulo y remo con pepito </Dropdown.Item>
+
+					</Dropdown>
+				</div>
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Final_Imperio" mediabef="finalimperio.jpg" titlebef="FINAL DEL IMPERIO ROMANO" 

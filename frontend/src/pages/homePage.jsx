@@ -9,7 +9,7 @@ import imperioImage from "../media/previsualizaciones/prev3.png";
 import augustoImage from "../media/previsualizaciones/prev4.png";
 import coliseoImage from "../media/previsualizaciones/prev5.png";
 import domusImage from "../media/previsualizaciones/prev6.png";
-import { getCalificaciones, getPrueba } from "../conections/requests";
+import { getCalificaciones} from "../conections/requests";
 
 const HomePage = () => {
 	const navigate = useNavigate();
