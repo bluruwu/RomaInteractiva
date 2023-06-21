@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../../utilities/Navbar";
 import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
+import DropdownMenu from "../../utilities/modelosMultiples";
 
 const first = `La fundación de la República Romana marcó un importante hito en la historia de 
 				la antigua Roma. Se estima que este suceso ocurrió en el año 509 a.C., cuando 
@@ -28,6 +29,18 @@ const third = `En términos sociales, la República Romana estaba estructurada e
 
 const LessonFundacionRepublica = () => {
 
+	//Información con los modelos que se ofrecerán en la lección del de la funcdación de la república romana
+	const otrosModelos = [
+		{ description: "Templo de Neptuno, construido durante la República Romana", titleModel: "Templo de Neptuno", source: "https://sketchfab.com/models/7a82e48e244445e69fd0a9c7b7c4b256/embed" },
+		{ description: "El Foro de Roma, el centro de la República Romana", titleModel: "Foro romano", source: "https://sketchfab.com/models/8602b8f386b04a9d84e08b76d1fe0a29/embed" },
+	]
+
+	// Funcion estado y funcion handle, son aquello que van cambiando el modelo mostrado. Por default el modelo que se muestra es el que esta de primero
+	const [modeloActual, setmodeloActual] = useState(otrosModelos[0])
+	const handleModelo = (model) => {
+		setmodeloActual(model);
+	}
+
 	return (
 		<div className="font-text"> {/* Div principal */}
 		{/* Barra de navegación */}
@@ -41,7 +54,11 @@ const LessonFundacionRepublica = () => {
 					thirdparag={third}
 				/> 
 				{/* Componente del modelo 3D */}
-				<LessonModel description="Templo de Neptuno, construido durante la República Romana" titleModel="Templo de Neptuno" source="https://sketchfab.com/models/7a82e48e244445e69fd0a9c7b7c4b256/embed"/>
+				<LessonModel description={modeloActual.description} titleModel={modeloActual.titleModel} source={modeloActual.source} />
+			</div>
+			<div className="flex justify-end">
+				{/* Menu de opciones para modelos */}
+				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} /> {/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Final_Monarquia" mediabef="finalmonarquia.jpg" titlebef="FINALIZACIÓN DE LA MONARQUÍA" 

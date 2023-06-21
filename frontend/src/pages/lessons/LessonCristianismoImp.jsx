@@ -25,7 +25,7 @@ const LessonCristianismoImp = () => {
 					thirdparag={third}
 				/> 
 				{/* Componente del modelo 3D */}
-				<LessonModel description="Primer Emperador Cirstiano" titleModel="Flavio Valerio Constantino" source="https://sketchfab.com/models/a1775d29c84941288f5bfe7497889f92/embed"/>
+				<LessonModel description="Constantino, primer Emperador Cristiano" titleModel="Flavio Valerio Constantino" source="https://sketchfab.com/models/a1775d29c84941288f5bfe7497889f92/embed"/>
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Colapso_Republica" mediabef="finalrepublica.jpg" titlebef="COLAPSO DE LA REPÚBLICA ROMANA" 
