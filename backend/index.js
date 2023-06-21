@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const multer = require('multer');
 
 //Credenciales supabase
 
@@ -36,6 +37,38 @@ app.use((req, res, next) => {
 }) 
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Configuración de Multer para gestionar la carga de archivos
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
+	},
+	filename: function (req, file, cb) {
+
+	  cb(null, Date.now() + '-' + file.originalname); // Nombre único para la imagen
+	}
+  });
+const upload = multer({ storage: storage });
+
+// Endpoint para subir una imagen
+app.post('/upload', upload.single('file'), async (req, res) => {
+  //console.log(req)
+  if (!req.file) {
+    res.status(400).json({ error: 'No se ha proporcionado ninguna imagen' });
+    return;
+  }
+
+  res.json({ message: 1 });
+  return
+});
+
+
+
+
+
+
+
+
 
 //POST para el inicio de sesion de los usuarios
 app.post("/login", async (req, res) => {
@@ -278,6 +311,7 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	res.status(280).json("Perfil actualizado correctamente");
 	return
 });
+
 
 
 
