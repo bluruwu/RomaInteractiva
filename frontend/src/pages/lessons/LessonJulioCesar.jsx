@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../../utilities/Navbar";
 import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
+import DropdownMenu from "../../utilities/modelosMultiples";
 
 const first = `Julio César fue un líder militar y político romano que vivió durante el periodo de la República Romana. 
                 Nació en el año 100 a.C. en una familia patricia y demostró desde temprana edad su talento para la oratoria y el liderazgo. 
@@ -21,6 +22,18 @@ const third = ` Su ascenso provocó tensiones en Roma y, finalmente, llevó al f
 
 const LessonJulioCesar = () => {
 
+	//Información con los modelos que se ofrecerán en la lección de Julio Cesar
+	const otrosModelos = [
+		{ description: "Estatua de Julio Cesar", titleModel: "Julio Cesar", source: "https://sketchfab.com/models/dcd1c9c12ab44b8daca06481f6cdc78f/embed?ui_infos=0" },
+		{ description: "Circo Flaminio, remodelado durante la época de Cesar", titleModel: "Circo Flaminio", source: "https://sketchfab.com/models/7a0a5d5e3bc349baabc83ba91a9b6552/embed" },
+	]
+
+	// Funcion estado y funcion handle, son aquello que van cambiando el modelo mostrado. Por default el modelo que se muestra es el que esta de primero
+	const [modeloActual, setmodeloActual] = useState(otrosModelos[0])
+	const handleModelo = (model) => {
+		setmodeloActual(model);
+	}
+
 	return (
 		<div className="font-text"> {/* Div principal */}
 		{/* Barra de navegación */}
@@ -34,7 +47,11 @@ const LessonJulioCesar = () => {
 					thirdparag={third}
 				/> 
 				{/* Componente del modelo 3D */}
-				<LessonModel description="Estatua de Julio Cesar" titleModel="Julio Cesar" source="https://sketchfab.com/models/dcd1c9c12ab44b8daca06481f6cdc78f/embed?ui_infos=0"/>
+				<LessonModel description={modeloActual.description} titleModel={modeloActual.titleModel} source={modeloActual.source} />
+			</div>
+			<div className="flex justify-end">
+				{/* Menu de opciones para modelos */}
+				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} /> {/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/Romulo_Remo" mediabef="Romulusandremus.jpg" titlebef="RÓMULO Y REMO" 
