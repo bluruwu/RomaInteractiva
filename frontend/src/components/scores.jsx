@@ -79,6 +79,9 @@ export default function Modal() {
 				showCancelButton: true,
 				cancelButtonText: "Cancelar",
 				confirmButtonText: "Sí",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then((result) => {
 				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
@@ -91,6 +94,9 @@ export default function Modal() {
 				showCancelButton: true,
 				cancelButtonText: "Cancelar",
 				confirmButtonText: "Sí",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then((result) => {
 				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
@@ -103,6 +109,9 @@ export default function Modal() {
 						denyButtonText: `Ir a la lección`,
 						cancelButtonText: "Cancelar",
 						denyButtonColor: "#3085d6",
+						customClass: {
+							container: "font-text", // Cambiar la fuente del título
+						},
 					}).then((result) => {
 						/* Read more about isConfirmed, isDenied below */
 						if (result.isConfirmed) {

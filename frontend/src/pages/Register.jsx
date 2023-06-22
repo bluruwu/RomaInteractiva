@@ -29,6 +29,9 @@ const Register = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Password is too short",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			});
 			return;
 		}
@@ -39,6 +42,9 @@ const Register = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Passwords are not the same",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			});
 			return;
 		}
@@ -48,7 +54,10 @@ const Register = () => {
 			Swal.fire({
 				icon: "error",
 				title: "Oops...",
-				text: "Username is too short",
+				text: "Full name is too short",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			});
 			return;
 		}
@@ -59,6 +68,9 @@ const Register = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Nickname is too short",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			});
 			return;
 		}
@@ -69,6 +81,9 @@ const Register = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Email is not valid",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			});
 			return;
 		}
@@ -81,7 +96,15 @@ const Register = () => {
 			// Realizar solicitud de registro utilizando los datos del formulario
 			if (req_succesful === "Data submitted successfully") {
 				// Si el registro es exitoso, mostrar una alerta de éxito y navegar a la página de inicio de sesión ("/login")
-				Swal.fire("Congrats!", "You have succesfully been register!", "success");
+				Swal.fire({
+					title: "Congrats!",
+					text: "You have succesfully been registered!",
+					icon: "success",
+					customClass: {
+						container: "font-text",
+					},
+				});
+
 				//alert("Register succesful");
 				navigate("/login");
 			} else {
@@ -90,6 +113,9 @@ const Register = () => {
 					icon: "error",
 					title: "Oops...",
 					text: "Really sorry, some services aren't avaliable right now.",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				});
 			}
 		};
