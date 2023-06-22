@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import "./css/perfil.css";
 import { useNavigate, Navigate } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
-import start from "../utilities/start";
+import uploadImageToServer from "../utilities/start";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
@@ -145,27 +145,11 @@ const Perfil = () => {
 	function updloadAvatar(){
 
 		
-		  
-		start();
-		//return <UploadTheImage/>
-		
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		//ask the user for an image, upload that image, and get an id
+		const idFromServer = uploadImageToServer();
+		//revisar si el servidor respondio con un id
+		if (idFromServer.length > 0)
+			setIdAvatar(idFromServer)
 
 
 

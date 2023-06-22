@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-export default async function start() {
+export default async function uploadImageToServer() {
   const { value: file } = await Swal.fire({
     title: 'Select image',
     input: 'file',
@@ -23,10 +23,11 @@ export default async function start() {
         const responseData = await response.json();
         Swal.fire({
           title: 'Upload successful  &#9989;',
-          text: `The file has been uploaded to the server. Response: ${JSON.stringify(responseData)}`,
+          text: `The file has been uploaded to the server. Response: ${JSON.stringify(responseData.message)}`,
           imageUrl: URL.createObjectURL(file),
           imageAlt: 'Uploaded picture'
         });
+        return JSON.stringify(responseData.message)
       } else {
         Swal.fire({
           title: 'Upload failed',

@@ -7,6 +7,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const multer = require('multer');
+const fs = require('fs');
 
 //Credenciales supabase
 
@@ -29,38 +30,72 @@ const corsOptions = {
 
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-COntrol-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-}) 
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-COntrol-Allow-Request-Method');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+	next();
+})
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Configuración de Multer para gestionar la carga de archivos
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-	  cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
+		cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
 	},
-	filename: function (req, file, cb) {
+	filename: async function (req, file, cb) {
 
-	  cb(null, Date.now() + '-' + file.originalname); // Nombre único para la imagen
+		cb(null,"avatar"+(parseInt(await getLastId("/uploads"))+1).toString() + ".jpg"); // Nombre único para la imagen
 	}
-  });
+});
 const upload = multer({ storage: storage });
 
 // Endpoint para subir una imagen
 app.post('/upload', upload.single('file'), async (req, res) => {
-  //console.log(req)
-  if (!req.file) {
-    res.status(400).json({ error: 'No se ha proporcionado ninguna imagen' });
-    return;
-  }
+	if (!req.file) {
+		res.status(400).json({ error: 'No se ha proporcionado ninguna imagen' });
+		return;
+	}
+	let lastId = await lastId("/uploads")
 
-  res.json({ message: 1 });
-  return
+
+
+
+	try {
+		res.json({ message: lastId});
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Error al leer el directorio' });
+	}
 });
+
+//funcion que me retorna el avatar con el ultimo id
+//esto sirve para añadir imagenes al server de forma ordenada
+async function getLastId(directoryPath) {
+	function readDirectoryAsync(directoryPath) {
+		return new Promise((resolve, reject) => {
+			fs.readdir(directoryPath, (err, files) => {
+				if (err) {
+					reject(err);
+					return;
+				}
+				resolve(files);
+			});
+		});
+	}
+	const allFileNames = await readDirectoryAsync('./uploads');
+	console.log(allFileNames);
+
+	let id = 6
+	for (let i in allFileNames) {
+		if (id <= parseInt(allFileNames[i].substr(6,allFileNames[i].search('.')+2)))
+			id = parseInt(allFileNames[i].substr(6,allFileNames[i].search('.')+2))
+	}
+	return id
+}
+
+
 
 
 
@@ -286,18 +321,18 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	 */
 	console.log(contrasena_db)
 	if (contrasena) {
-		const verificacionHash = await bcrypt.compare(contrasena,contrasena_db)
+		const verificacionHash = await bcrypt.compare(contrasena, contrasena_db)
 		console.log(verificacionHash)
 		if (verificacionHash) {
-			if (nueva_contrasena){
+			if (nueva_contrasena) {
 				newData["contrasena"] = await bcrypt.hash(nueva_contrasena, 10); // 10 es el número de rondas de hashing
 			}
-		}else{
+		} else {
 			res.status(480).json("Las contraseña actual no es valida");
 			return
 		}
-	}   
- 
+	}
+
 	const { error: queryError } = await supabase
 		.from("usuarios")
 		.update(newData)
