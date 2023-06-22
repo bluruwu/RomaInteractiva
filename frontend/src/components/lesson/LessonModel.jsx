@@ -18,10 +18,9 @@ const LessonModel = ({ description, titleModel, source }) => {
 				web-share
 				src={source}
 				className="w-full"
-			>
-			</iframe>
+			></iframe>
 			{/* Descripcion del modelo 3D */}
-			<div className="flex font-bold items-end justify-end absolute bottom-14 right-8 p-3 bg-custom-doradonormal rounded-md shadow-xl ">
+			<div className="flex font-bold items-end justify-end absolute bottom-36 right-8 p-3 bg-custom-doradonormal rounded-md shadow-xl">
 				<p>{description}</p>
 			</div>
 		</div>
