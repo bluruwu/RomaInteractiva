@@ -123,7 +123,7 @@ const Navbar = () => {
 												<img
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
-													className="inline object-cover rounded-full"
+													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 													onClick={handleNavigation}
 												/>
 											)}
