@@ -22,12 +22,12 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'))
 
 // allow all the incoming ip
-//  const corsOptions = {
-// 	origin: "*",
-// 	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
-//  };
+  const corsOptions = {
+ 	origin: "*",
+ 	credentials: true,//  Enable CORS with credentials (e.g., cookies, authorization headers)
+  };
 
-// app.use(cors());
+ app.use(cors());
 
 
 app.use((req, res, next) => {
