@@ -9,7 +9,7 @@ import imperioImage from "../media/previsualizaciones/prev3.png";
 import augustoImage from "../media/previsualizaciones/prev4.png";
 import coliseoImage from "../media/previsualizaciones/prev5.png";
 import domusImage from "../media/previsualizaciones/prev6.png";
-import { getCalificaciones} from "../conections/requests";
+import { getCalificaciones } from "../conections/requests";
 
 const HomePage = () => {
 	const navigate = useNavigate();
@@ -70,10 +70,11 @@ const HomePage = () => {
 		return (
 			<div className="relative h-80 font-text">
 				<img
-					className="absolute inset-0 w-full h-full object-cover brightness-50"
+					className="absolute inset-0 w-full h-full object-cover brightness-50 z-0"
 					src={process.env.PUBLIC_URL + "/images/fondo.jpg"}
 					alt="Imagen de fondo"
 				/>
+
 				<div className="relative z-10 flex items-center justify-center h-full">
 					<h1 className="font-bold text-4xl text-white">
 						¡Bienvenido a nuestra página sobre la gloriosa cultura Romana!
