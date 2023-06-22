@@ -52,6 +52,13 @@ const LessonNav = ({
 					title: "Solo tienes un intento para hacer el quiz",
 					showCancelButton: true,
 					confirmButtonText: "Hacer quiz",
+					confirmButtonColor: "#03ac13",
+
+					customClass: {
+						title: "font-text", // Cambiar la fuente del título
+						confirmButton: "font-text",
+						cancelButton: "font-text",
+					},
 				}).then((result) => {
 					/* Read more about isConfirmed, isDenied below */
 					if (result.isConfirmed) {
