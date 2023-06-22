@@ -17,7 +17,7 @@ const HomeButton = () => {
 				className="block object-cover w-12 h-12 cursor-pointer"
 				onClick={handleButtonClick}
 			/>
-			<p className="font-bold cursor-pointer" onClick={handleButtonClick}>
+			<p className="font-bold cursor-pointer w-fit" onClick={handleButtonClick}>
 				Home
 			</p>
 		</div>
