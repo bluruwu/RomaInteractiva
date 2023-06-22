@@ -173,7 +173,7 @@ const QuizMonarquia = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion question={INFORMATION[questionNumber].title} />
+			<QuizQuestion question={INFORMATION[questionNumber].title} numeroDePregunta={questionNumber+1}/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}
