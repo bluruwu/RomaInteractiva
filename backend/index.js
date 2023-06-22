@@ -21,13 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'))
 
-// allow all the incoming ip
-  const corsOptions = {
- 	origin: "*",
- 	credentials: true,//  Enable CORS with credentials (e.g., cookies, authorization headers)
-  };
+// // allow all the incoming ip
+//   const corsOptions = {
+//  	origin: "*",
+//  	credentials: true,//  Enable CORS with credentials (e.g., cookies, authorization headers)
+//   };
 
- app.use(cors(corsOptions));
+//  app.use(cors(corsOptions));
 
 
 app.use((req, res, next) => {
@@ -59,9 +59,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 		return;
 	}
 	let lastId = await getLastId("/uploads")
-
-
- 
 
 	try {
 		res.json({ message: lastId});
