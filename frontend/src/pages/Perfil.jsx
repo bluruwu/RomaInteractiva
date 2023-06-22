@@ -85,7 +85,7 @@ const Perfil = () => {
 			confirmButtonColor: "#e69200",
 			focusConfirm: false,
 			customClass: {
-				title: "font-text", // Cambiar la fuente del título
+				container: "font-text", // Cambiar la fuente del título
 			},
 
 			preConfirm: () => {
