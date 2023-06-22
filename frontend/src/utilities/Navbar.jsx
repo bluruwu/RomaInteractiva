@@ -123,7 +123,12 @@ const Navbar = () => {
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 													className="inline object-cover rounded-full"
-													onClick={handleNavigation}
+													onClick={() => {
+														if (!nickname) {
+															// Reemplaza "nickname" con la variable o estado que contiene el nickname
+															handleNavigation();
+														}
+													}}
 												/>
 											)}
 										</div>
@@ -165,7 +170,6 @@ const Navbar = () => {
 													</button>
 												</div>
 											</Popover.Panel>
-
 										</Transition>
 									)}
 								</>
