@@ -69,6 +69,7 @@ const Navbar = () => {
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-4 md:mx-20">
+				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>
 						<img
@@ -125,7 +126,7 @@ const Navbar = () => {
 													className="inline object-cover rounded-full"
 													onClick={() => {
 														if (!nickname) {
-															// Reemplaza "nickname" con la variable o estado que contiene el nickname
+															// Si el usuario no tiene avatar y no esta logeado
 															handleNavigation();
 														}
 													}}
