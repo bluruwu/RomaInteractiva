@@ -7,6 +7,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const Navbar = () => {
+	const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 	const navigate = useNavigate();
 
 	// Obtener el valor del nickname del localStorage
@@ -115,8 +116,8 @@ const Navbar = () => {
 											{idAvatar ? (
 												<img
 													alt="Avatar del usuario"
-													src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
-													className="inline border-4 border-custom-doradodark object-cover rounded-full"
+													src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`:`${API_URL}/uploads/avatar${idAvatar}.jpg`}
+													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 												/>
 											) : (
 												<img

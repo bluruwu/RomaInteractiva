@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
-export default async function uploadImageToServer() {
+import { postImage, putActualizarPerfil } from "../conections/requests";
+
+export default async function uploadImageToServer(token) {
   const { value: file } = await Swal.fire({
     title: 'Select image',
     input: 'file',
@@ -14,13 +16,11 @@ export default async function uploadImageToServer() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:9000/upload', {
-        method: 'POST',
-        body: formData
-      });
+      const response = await postImage(formData,token);
 
       if (response.ok) {
         const responseData = await response.json();
+        const responseUpdateProfile = await putActualizarPerfil({avatar_id: responseData.message},token);
         Swal.fire({
           title: 'Upload successful  &#9989;',
           text: `The file has been uploaded to the server. Response: ${JSON.stringify(responseData.message)}`,

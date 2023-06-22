@@ -19,14 +19,15 @@ const secretKey = process.env.SECRET_KEY_JWT;
 // Middleware for parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'))
 
 // allow all the incoming ip
-const corsOptions = {
-	origin: "*",
-	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
-};
+//  const corsOptions = {
+// 	origin: "*",
+// 	credentials: true, // Enable CORS with credentials (e.g., cookies, authorization headers)
+//  };
 
-//app.use(cors(corsOptions));
+// app.use(cors());
 
 
 app.use((req, res, next) => {
@@ -57,10 +58,10 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 		res.status(400).json({ error: 'No se ha proporcionado ninguna imagen' });
 		return;
 	}
-	let lastId = await lastId("/uploads")
+	let lastId = await getLastId("/uploads")
 
 
-
+ 
 
 	try {
 		res.json({ message: lastId});
@@ -68,8 +69,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 		console.error(err);
 		res.status(500).json({ error: 'Error al leer el directorio' });
 	}
+	return
 });
-
+ 
 //funcion que me retorna el avatar con el ultimo id
 //esto sirve para añadir imagenes al server de forma ordenada
 async function getLastId(directoryPath) {

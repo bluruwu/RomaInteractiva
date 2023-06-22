@@ -68,6 +68,7 @@ export const getPrueba = async (token) => {
 	}
 };
 
+
 //POST para realizar el login de los usuarios
 export const postLogin = async (mydata) => {
 	try {
@@ -219,3 +220,13 @@ export const putActualizarPerfil = async (mydata, token) => {
 		return "Error en solicitud";
 	}
 };
+
+
+//POST image to server, and to database
+export const postImage = async (myForm,token) => {
+	const response = await fetch(`${API_URL}/upload`, {
+        method: 'POST',
+        body: myForm
+      });
+	return response
+}

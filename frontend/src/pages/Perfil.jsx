@@ -6,12 +6,13 @@ import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil } from "../conections/requests";
 import Swal from "sweetalert2";
 import "./css/perfil.css";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
+	const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
 	const myPutPetition = async (myData, myToken) => {
@@ -121,11 +122,11 @@ const Perfil = () => {
 			return (
 				<div>
 					<img
-						src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
+						src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`:`${API_URL}/uploads/avatar${idAvatar}.jpg`}
 						className="overlayed-image-1"
 					/>
-					<img 
-						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`} 
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
 						className="overlayed-image-2"
 						onClick={(e) => updloadAvatar()} />
 				</div>
@@ -142,14 +143,20 @@ const Perfil = () => {
 		}
 	};
 
-	function updloadAvatar(){
+	async function updloadAvatar() {
 
-		
-		//ask the user for an image, upload that image, and get an id
-		const idFromServer = uploadImageToServer();
-		//revisar si el servidor respondio con un id
-		if (idFromServer.length > 0)
-			setIdAvatar(idFromServer)
+		async function waitServer() {
+			//ask the user for an image, upload that image, and get an id
+			const idFromServer = await uploadImageToServer(localStorage.getItem("token"));
+			//revisar si el servidor respondio con un id
+			if (idFromServer) {
+				setIdAvatar(idFromServer)
+				localStorage.setItem("avatar_id",JSON.stringify(idFromServer))
+			}
+		}
+		waitServer()
+
+
 
 
 
