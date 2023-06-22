@@ -27,7 +27,7 @@ app.use('/uploads', express.static('uploads'))
  	credentials: true,//  Enable CORS with credentials (e.g., cookies, authorization headers)
   };
 
- app.use(cors());
+ app.use(cors(corsOptions));
 
 
 app.use((req, res, next) => {
