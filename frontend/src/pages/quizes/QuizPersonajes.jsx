@@ -82,6 +82,9 @@ const QuizPersonajes = () => {
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación */
 					if (result.isConfirmed) {
@@ -93,6 +96,9 @@ const QuizPersonajes = () => {
 					title: "¿Quieres terminar el intento?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					let respuestasCorrectas = 0;
 					for (let i = 0; i < 5; i++) {
@@ -142,6 +148,9 @@ const QuizPersonajes = () => {
 							confirmButtonText: "Revisar respuestas",
 							denyButtonText: `Volver a home`,
 							denyButtonColor: "#3085d6",
+							customClass: {
+								container: "font-text", // Cambiar la fuente del título
+							},
 						}).then((result) => {
 							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {

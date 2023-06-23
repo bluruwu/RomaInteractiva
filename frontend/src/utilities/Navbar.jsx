@@ -69,6 +69,7 @@ const Navbar = () => {
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-4 md:mx-20">
+				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>
 						<img
@@ -123,7 +124,12 @@ const Navbar = () => {
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 													className="inline object-cover rounded-full"
-													onClick={handleNavigation}
+													onClick={() => {
+														if (!nickname) {
+															// Si el usuario no tiene avatar y no esta logeado
+															handleNavigation();
+														}
+													}}
 												/>
 											)}
 										</div>
@@ -165,7 +171,6 @@ const Navbar = () => {
 													</button>
 												</div>
 											</Popover.Panel>
-
 										</Transition>
 									)}
 								</>

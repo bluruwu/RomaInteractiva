@@ -23,6 +23,9 @@ const Perfil = () => {
 				title: "¡Datos actualizados correctamente!",
 				confirmButtonText: "OK",
 				confirmButtonColor: "#e69200", // Cambiar el color del botón
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then(() => {
 				window.location.reload();
 			});
@@ -31,6 +34,9 @@ const Perfil = () => {
 				title: "Contraseña incorrecta",
 				confirmButtonText: "Aceptar",
 				confirmButtonColor: "#e69200", // Cambiar el color del botón
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then(() => {
 				window.location.reload();
 			});
@@ -40,6 +46,9 @@ const Perfil = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Sorry, Some of our services are not working",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then(() => {
 				window.location.reload();
 			});
@@ -76,7 +85,7 @@ const Perfil = () => {
 			confirmButtonColor: "#e69200",
 			focusConfirm: false,
 			customClass: {
-				title: "font-text", // Cambiar la fuente del título
+				container: "font-text", // Cambiar la fuente del título
 			},
 
 			preConfirm: () => {

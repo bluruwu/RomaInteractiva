@@ -29,7 +29,15 @@ const Login = () => {
 			console.log(req_succesful);
 			if (req_succesful === "Inicio de sesión exitoso") {
 				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
-				Swal.fire("Welcome!", "You have succesfully been logged!", "success");
+				Swal.fire({
+					title: "Welcome!",
+					text: "You have succesfully been logged!",
+					icon: "success",
+					customClass: {
+						container: "font-text",
+					},
+				});
+
 				navigate("/home");
 			} else {
 				// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
@@ -37,6 +45,9 @@ const Login = () => {
 					icon: "error",
 					title: "Oops...",
 					text: req_succesful,
+					customClass: {
+						container: "font-text",
+					},
 				});
 			}
 		};

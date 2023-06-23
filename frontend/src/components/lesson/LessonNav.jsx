@@ -32,13 +32,16 @@ const LessonNav = ({
 			if (quizDone()) {
 				Swal.fire({
 					title: "Ya has realizado este quiz ",
-					text: "¿deseas hacer revisión de las respuestas?",
+					text: "¿Deseas hacer revisión de las respuestas?",
 					icon: "warning",
 					showDenyButton: true,
 					showCancelButton: true,
-					confirmButtonText: "Sip",
+					confirmButtonText: "Sí",
 					denyButtonText: `Volver a home`,
 					denyButtonColor: "#3085d6",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Read more about isConfirmed, isDenied below */
 					if (result.isConfirmed) {
@@ -52,6 +55,11 @@ const LessonNav = ({
 					title: "Solo tienes un intento para hacer el quiz",
 					showCancelButton: true,
 					confirmButtonText: "Hacer quiz",
+					confirmButtonColor: "#03ac13",
+
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Read more about isConfirmed, isDenied below */
 					if (result.isConfirmed) {
