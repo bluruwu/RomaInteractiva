@@ -8,6 +8,7 @@ import Perfil from "./pages/Perfil";
 import QuizMonarquia from "./pages/quizes/QuizMonarquia";
 import QuizRepublica from "./pages/quizes/QuizRepublica";
 import QuizPersonajes from "./pages/quizes/QuizPersonajes";
+import QuizImperio from "./pages/quizes/QuizImperio";
 //Lecciones
 import LessonFundacionRoma from "./pages/lessons/LessonFundacionRoma";
 import LessonJulioCesar from "./pages/lessons/LessonJulioCesar";
@@ -43,6 +44,7 @@ const App = () => {
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia />} />
 			<Route path="Quiz_Republica" element={<QuizRepublica />} />
 			<Route path="Quiz_Personajes" element={<QuizPersonajes />} />
+			<Route path="Quiz_Imperio" element={<QuizImperio />} />
 
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
 			<Route path="/Reyes_de_Roma" element={<LessonReyesDeRoma />} />

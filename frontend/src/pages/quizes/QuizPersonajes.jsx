@@ -178,7 +178,17 @@ const QuizPersonajes = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion question={INFORMATION[questionNumber].title} />
+			<QuizQuestion 
+				question={INFORMATION[questionNumber].title} 
+				preguntaSeleccionada={questionNumber}
+				quiz={3}
+				quizResuelto={JSON.parse(localStorage.getItem("personajesResuelto"))}
+				respuesta1={checkedOptions[0]}
+				respuesta2={checkedOptions[1]}
+				respuesta3={checkedOptions[2]}
+				respuesta4={checkedOptions[3]}
+				respuesta5={checkedOptions[4]}
+				/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

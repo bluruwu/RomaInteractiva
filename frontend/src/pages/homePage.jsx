@@ -73,6 +73,10 @@ const HomePage = () => {
 			// Si no existe, agregarla al almacenamiento local
 			localStorage.setItem("personajesResuelto", JSON.stringify(false));
 		}
+		if (!localStorage.getItem("imperioResuelto")) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem("imperioResuelto", JSON.stringify(false));
+		}
 	}, []);
 
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
