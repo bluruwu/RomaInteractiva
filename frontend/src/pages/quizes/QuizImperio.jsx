@@ -4,10 +4,10 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import Option from "../../components/quiz/quizOption";
 import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
-import { INFORMATION } from "../../utilities/personajesInfo";
+import { INFORMATION } from "../../utilities/imperioInfo";
 import { useNavigate } from "react-router-dom";
 
-const QuizPersonajes = () => {
+const QuizImperio = () => {
 	const navigate = useNavigate();
 
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -18,10 +18,10 @@ const QuizPersonajes = () => {
 	const token = localStorage.getItem("token");
 
 	const setInitialOptions = () => {
-		if (JSON.parse(localStorage.getItem("personajesResuelto")) === true) {
+		if (JSON.parse(localStorage.getItem("imperioResuelto")) === true) {
 			let valoresIniciales = [];
 			for (let i = 0; i < 5; i++) {
-				valoresIniciales[i] = JSON.parse(localStorage.getItem(`personajesOpcion${i}`));
+				valoresIniciales[i] = JSON.parse(localStorage.getItem(`imperioOpcion${i}`));
 			}
 			return valoresIniciales;
 		} else return [0, 0, 0, 0, 0];
@@ -30,7 +30,7 @@ const QuizPersonajes = () => {
 	const [checkedOptions, setCheckedOptions] = useState(setInitialOptions());
 
 	const guardarOpcionMarcada = (index, valor) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
 		if (!quizResuelto) {
 			// Clonar el arreglo existente
 			const arregloModificado = [...checkedOptions];
@@ -44,7 +44,7 @@ const QuizPersonajes = () => {
 	};
 
 	const handleOptionSelect = (option) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
 		if (!quizResuelto) {
 			setSelectedOption(option);
 			guardarOpcionMarcada(questionNumber, option);
@@ -53,7 +53,7 @@ const QuizPersonajes = () => {
 
 	const handleClickButton1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
 		if (questionNumber != 0) {
 			if (!quizResuelto) {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
@@ -66,7 +66,7 @@ const QuizPersonajes = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
 		if (questionNumber != 4) {
 			if (!quizResuelto) {
 				if (checkedOptions[questionNumber + 1] == 0) {
@@ -77,7 +77,7 @@ const QuizPersonajes = () => {
 			}
 			setQuestionNumber(questionNumber + 1);
 		} else {
-			if (JSON.parse(localStorage.getItem("personajesResuelto"))) {
+			if (JSON.parse(localStorage.getItem("imperioResuelto"))) {
 				Swal.fire({
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
@@ -95,28 +95,31 @@ const QuizPersonajes = () => {
 					confirmButtonText: "Sí",
 				}).then((result) => {
 					let respuestasCorrectas = 0;
+
+					//Guardar respuestas del quiz en localStorage
 					for (let i = 0; i < 5; i++) {
-						localStorage.setItem(`personajesOpcion${i}`, JSON.stringify(checkedOptions[i]));
+						localStorage.setItem(`imperioOpcion${i}`, JSON.stringify(checkedOptions[i]));
 						if (checkedOptions[i] === INFORMATION[i].respuesta) {
 							respuestasCorrectas++;
 						}
 					}
-					localStorage.setItem("personajesAciertos", JSON.stringify(respuestasCorrectas));
-					localStorage.setItem("personajesResuelto", JSON.stringify(true));
+					//Guardar calificacion del quiz en localStorage
+					localStorage.setItem("imperioAciertos", JSON.stringify(respuestasCorrectas));
+					//Marcar como resuelta en localStorage
+					localStorage.setItem("imperioResuelto", JSON.stringify(true));
 
 					//Objeto para enviar respuestas al backend
 					const formData = {
-						id_quiz: JSON.parse("4"), //El id_quiz=3 pertence a personajes
-						respuesta0: JSON.parse(localStorage.getItem("personajesOpcion0")),
-						respuesta1: JSON.parse(localStorage.getItem("personajesOpcion1")),
-						respuesta2: JSON.parse(localStorage.getItem("personajesOpcion2")),
-						respuesta3: JSON.parse(localStorage.getItem("personajesOpcion3")),
-						respuesta4: JSON.parse(localStorage.getItem("personajesOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("personajesAciertos")),
+						id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
+						respuesta0: JSON.parse(localStorage.getItem("imperioOpcion0")),
+						respuesta1: JSON.parse(localStorage.getItem("imperioOpcion1")),
+						respuesta2: JSON.parse(localStorage.getItem("imperioOpcion2")),
+						respuesta3: JSON.parse(localStorage.getItem("imperioOpcion3")),
+						respuesta4: JSON.parse(localStorage.getItem("imperioOpcion4")),
+						calificacion: JSON.parse(localStorage.getItem("imperioAciertos")),
 					};
 
 					console.log(formData);
-
 					console.log("el token es:", token);
 
 					if (token) {
@@ -134,6 +137,7 @@ const QuizPersonajes = () => {
 						// Manejar el caso en el que no haya token disponible, usuario sin logear
 						console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
 					}
+
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
 						Swal.fire({
@@ -147,7 +151,7 @@ const QuizPersonajes = () => {
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
-								navigate("/Quiz_Personajes");
+								navigate("/Quiz_Imperio");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
@@ -160,7 +164,7 @@ const QuizPersonajes = () => {
 
 	const button2Text = () => {
 		if (questionNumber === 4) {
-			if (JSON.parse(localStorage.getItem("personajesResuelto"))) {
+			if (JSON.parse(localStorage.getItem("monarquiaResuelto"))) {
 				return "Finalizar revisión";
 			} else return "Finalizar Quiz";
 		} else return "Siguiente pregunta";
@@ -172,8 +176,8 @@ const QuizPersonajes = () => {
 			<QuizQuestion 
 				question={INFORMATION[questionNumber].title} 
 				preguntaSeleccionada={questionNumber}
-				quiz={3}
-				quizResuelto={JSON.parse(localStorage.getItem("personajesResuelto"))}
+				quiz={4}
+				quizResuelto={JSON.parse(localStorage.getItem("imperioResuelto"))}
 				respuesta1={checkedOptions[0]}
 				respuesta2={checkedOptions[1]}
 				respuesta3={checkedOptions[2]}
@@ -189,8 +193,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option2}
@@ -200,8 +204,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option3}
@@ -211,8 +215,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option4}
@@ -222,8 +226,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
 				/>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
@@ -246,4 +250,4 @@ const QuizPersonajes = () => {
 	);
 };
 
-export default QuizPersonajes;
+export default QuizImperio;

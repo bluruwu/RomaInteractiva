@@ -1,6 +1,9 @@
 import React from "react";
 import HomeButton from "../../utilities/HomeButton";
-import { INFORMATION } from "../../utilities/monarquiaInfo";
+import { INFORMATION as MonarquiaInformation } from "../../utilities/monarquiaInfo";
+import { INFORMATION as RepublicaInformation } from "../../utilities/republicaInfo";
+import { INFORMATION as PersonajesInformation } from "../../utilities/personajesInfo";
+import { INFORMATION as ImperioInformation } from "../../utilities/imperioInfo";
 
 const QuizQuestion = ({
   question,
@@ -32,31 +35,31 @@ const QuizQuestion = ({
   const color = (pregunta) => {
     if (quizResuelto){
       if (quiz == 1){
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta-1}`)) == INFORMATION[pregunta-1].respuesta) {
+        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta-1}`)) == MonarquiaInformation[pregunta-1].respuesta) {
           return " bg-green-400"
         }
         else return " bg-custom-rojo"
       }
       else if (quiz == 2) {
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`)) == JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`))) {
+        if (JSON.parse(localStorage.getItem(`republicaOpcion${pregunta-1}`)) == RepublicaInformation[pregunta-1].respuesta) {
           return " bg-green-400"
         }
         else return " bg-custom-rojo"
       }
       else if (quiz == 3) {
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`)) == JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`))) {
+        if (JSON.parse(localStorage.getItem(`personajesOpcion${pregunta-1}`)) == PersonajesInformation[pregunta-1].respuesta) {
           return " bg-green-400"
         }
         else return " bg-custom-rojo"
       }
       else if (quiz == 4){
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`)) == JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`))) {
+        if (JSON.parse(localStorage.getItem(`imperioOpcion${pregunta-1}`)) == ImperioInformation[pregunta-1].respuesta) {
           return " bg-green-400"
         }
         else return " bg-custom-rojo"
       }
       else if (quiz == 5){
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`)) == JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`))) {
+        if (JSON.parse(localStorage.getItem(`imperioOpcion${pregunta}`)) == JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta}`))) {
           return " bg-green-400"
         }
         else return " bg-custom-rojo"
@@ -64,31 +67,31 @@ const QuizQuestion = ({
     }
     else {
       if (pregunta == 1){
-        if (respuesta1 != 0) {
+        if (respuesta1 != 0 && respuesta1 != null) {
           return " bg-[#e69200]"
         }
         else return " bg-white "
       }
       else if (pregunta == 2 ) {
-        if (respuesta2 != 0 ) {
+        if (respuesta2 != 0 && respuesta1 != null) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
       else if (pregunta == 3 ) {
-        if (respuesta3 != 0) {
+        if (respuesta3 != 0 && respuesta1 != null) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
       else if (pregunta == 4 ) {
-        if (respuesta4 != 0) {
+        if (respuesta4 != 0 && respuesta1 != null) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
       else if (pregunta == 5 ) {
-        if (respuesta5 != 0) {
+        if (respuesta5 != 0 && respuesta1 != null) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
