@@ -117,7 +117,7 @@ const Navbar = () => {
 											{idAvatar ? (
 												<img
 													alt="Avatar del usuario"
-													src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`:`${API_URL}/uploads/avatar${idAvatar}.jpg`}
+													src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg` : `${API_URL}/image/avatar${idAvatar}.jpg`}
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 												/>
 											) : (

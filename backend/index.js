@@ -8,12 +8,18 @@ const multer = require('multer');
 const { google } = require('googleapis');
 const fs = require("fs")
 const { Readable } = require('stream');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+ 
 // Credenciales supabase
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 
+const secretKey = process.env.SECRET_KEY_JWT;
+
 // Credenciales Google Drive
 const googleCredentials = require('./credenciales.json');
+const { file } = require("googleapis/build/src/apis/file");
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,15 +43,25 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage }).single('file');
 
 
+
+
+
+
+
+
+
+const folderId = '1AguL3BshwwbjoW5BLst8Ynanu4n4u91r'
+
 app.post('/upload', upload, async (req, res) => {
   try {
     const file = req.file;
     const fileName = file.originalname;
 	console.log(file)
 	// Crear el objeto de metadatos del archivo
+	const lastId = await getLastId()
     const fileMetadata = {
-		name: file.originalname,
-		parents: ['1AguL3BshwwbjoW5BLst8Ynanu4n4u91r'], // Reemplaza con el ID de la carpeta en Google Drive
+		name: `avatar${lastId+1}.jpg`,
+		parents: [folderId], // Reemplaza con el ID de la carpeta en Google Drive
 	  };
     const media = {
       mimeType: file.mimetype,
@@ -61,30 +77,34 @@ app.post('/upload', upload, async (req, res) => {
 
     console.log('File ID:', response.data.id);
 	
-    res.status(200).send('File uploaded successfully!');
+    res.json(lastId+1);
   } catch (error) {
     //console.error(error);
-    res.status(500).send(error.message);
+    res.json(error.message);
   }
 });
 
 //funcion que me retorna el avatar con el ultimo id
 //esto sirve para añadir imagenes al server de forma ordenada
-async function getLastId(directoryPath) {
-	function readDirectoryAsync(directoryPath) {
-		return new Promise((resolve, reject) => {
-			fs.readdir(directoryPath, (err, files) => {
-				if (err) {
-					reject(err);
-					return;
-				}
-				resolve(files);
-			});
+async function getLastId() {
+	let imageNames;
+	try {
+		// Obtener la lista de archivos en la carpeta de Google Drive
+		const response = await drive.files.list({
+		  q: `'${folderId}' in parents and mimeType contains 'image/'`,
+		  fields: 'files(name)',
 		});
-	}
-	const allFileNames = await readDirectoryAsync('./uploads');
-	console.log(allFileNames);
+	
+		const files = response.data.files;
+	
+		// Obtener los nombres de las imágenes
+		imageNames = files.map(file => file.name);
+	
+	  } catch (error) {
+		console.error(error);
 
+	  }
+	let allFileNames = imageNames
 	let id = 6
 	for (let i in allFileNames) {
 		if (id <= parseInt(allFileNames[i].substr(6, allFileNames[i].search('.') + 2)))
@@ -92,6 +112,91 @@ async function getLastId(directoryPath) {
 	}
 	return id
 }
+
+
+app.get('/image/:name', async (req, res) => {
+	try {
+	  const fileName = req.params.name;
+  
+	  // Buscar el archivo por nombre en la carpeta de Google Drive
+	  const response = await drive.files.list({
+		q: `name='${fileName}' and '${folderId}' in parents`,
+		fields: 'files(id)',
+	  });
+  
+	  const files = response.data.files;
+  
+	  // Verificar si se encontró el archivo
+	  if (files && files.length > 0) {
+		const fileId = files[0].id;
+  
+		// Obtener los datos del archivo
+		const fileResponse = await drive.files.get({
+		  fileId: fileId,
+		  alt: 'media',
+		}, { responseType: 'stream' });
+  
+		// Establecer los encabezados de la respuesta
+		res.set({
+		  'Content-Type': fileResponse.headers['content-type'],
+		  'Content-Length': fileResponse.headers['content-length'],
+		});
+  
+		// Enviar el contenido de la imagen como respuesta
+		fileResponse.data.pipe(res);
+	  } else {
+		res.status(404).json({ error: 'Imagen no encontrada.' });
+	  }
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+	}
+  });
+
+  
+  app.get('/image/:name', async (req, res) => {
+  try {
+    const fileName = req.params.name;
+
+    // Buscar el archivo por nombre en la carpeta de Google Drive
+    const response = await drive.files.list({
+      q: `name='${fileName}' and '${folderId}' in parents`,
+      fields: 'files(id)',
+    });
+
+    const files = response.data.files;
+
+    // Verificar si se encontró el archivo
+    if (files && files.length > 0) {
+      const fileId = files[0].id;
+
+      // Obtener los datos del archivo
+      const fileResponse = await drive.files.get({
+        fileId: fileId,
+        alt: 'media',
+      }, { responseType: 'stream' });
+
+      // Establecer los encabezados de la respuesta
+      res.set({
+        'Content-Type': fileResponse.headers['content-type'],
+        'Content-Length': fileResponse.headers['content-length'],
+      });
+
+      // Enviar el contenido de la imagen como respuesta
+      fileResponse.data.pipe(res);
+    } else {
+      res.status(404).json({ error: 'Imagen no encontrada.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+  }
+});
+
+
+
+
+
 
 
 

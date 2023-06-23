@@ -123,7 +123,7 @@ const Perfil = () => {
 			return (
 				<div>
 					<img
-						src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`:`${API_URL}/uploads/avatar${idAvatar}.jpg`}
+						src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg` : `${API_URL}/image/avatar${idAvatar}.jpg`}
 						className="overlayed-image-1"
 					/>
 					<img
@@ -136,10 +136,17 @@ const Perfil = () => {
 		} else {
 			//Si el usuario no tiene ningun avatar_id se pone el avatar generico
 			return (
-				<img
-					src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
-					className="inline  object-cover w-32 h-32 mb-2 rounded-full"
-				/>
+				<div>
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
+						className="inline  object-cover w-32 h-32 mb-2 rounded-full"
+					/>
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
+						className="overlayed-image-2"
+						onClick={(e) => updloadAvatar()} />
+				</div>
+
 			);
 		}
 	};
@@ -152,7 +159,7 @@ const Perfil = () => {
 			//revisar si el servidor respondio con un id
 			if (idFromServer) {
 				setIdAvatar(idFromServer)
-				localStorage.setItem("avatar_id",JSON.stringify(idFromServer))
+				localStorage.setItem("avatar_id", JSON.stringify(idFromServer))
 			}
 		}
 		waitServer()
