@@ -6,6 +6,12 @@
 //Usar la API_URL del puerto 9000 si se va a trabajar local
 const API_URL = "http://127.0.0.1:9000";
 
+
+export function getAPI_URL(){
+	return API_URL;
+}
+
+
 //Solicitud POST para el registro de usuarios
 export const postData = async (mydata) => {
 	try {

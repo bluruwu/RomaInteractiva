@@ -5,10 +5,11 @@ import SearchBar from "./SearchBar";
 import BusquedaAleatoria from "./randomSearch";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { getAPI_URL } from "../conections/requests";
 
 const Navbar = () => {
-	//const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
-	const API_URL = "http://localhost:9000";
+
+	const API_URL = getAPI_URL();
 	const navigate = useNavigate();
 
 	// Obtener el valor del nickname del localStorage

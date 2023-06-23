@@ -3,17 +3,18 @@ import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
-import { putActualizarPerfil } from "../conections/requests";
+import { putActualizarPerfil,getAPI_URL } from "../conections/requests";
 import Swal from "sweetalert2";
 import "./css/perfil.css";
 import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
 
+
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
-	//const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
-	const API_URL = "http://localhost:9000";
+
+	const API_URL = getAPI_URL();
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
 	const myPutPetition = async (myData, myToken) => {
