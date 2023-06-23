@@ -26,7 +26,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Allow all the incoming IP addresses
-app.use(cors());
+//app.use(cors());
+
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-COntrol-Allow-Request-Method"
+	);
+	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+	res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
+	next();
+});
+
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -356,10 +368,12 @@ app.post("/enviarevaluacion", verifyToken, async (req, res) => {
 	}
 });
 
+//GET para obtener las calificaciones de un usuario
 app.get("/calificaciones", verifyToken, async (req, res) => {
-	// Seleccionar todos los usuarios de la base de datos con todos sus atributos
+	// Obtener el id del usuario actual
 	const id_usuario = req.user.id_usuario;
 
+	//Obtener todas las calificaciones del usuario
 	const { data, error } = await supabase
 		.from("calificaciones")
 		.select("*")
@@ -403,7 +417,7 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	const { nombre_usuario, nickname, contrasena, nueva_contrasena, avatar_id } = req.body;
 
 	newData = {};
-	if (nombre_usuario && (nombre_usuario != "")) newData["nombre_usuario"] = nombre_usuario;
+	if (nombre_usuario && nombre_usuario != "") newData["nombre_usuario"] = nombre_usuario;
 	if (nickname) newData["nickname"] = nickname;
 	if (contrasena) newData["contrasena"] = contrasena;
 	if (avatar_id) newData["avatar_id"] = avatar_id;
@@ -415,24 +429,26 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 		.eq("id_usuario", id_usuario);
 
 	//se obtiene la contraseña del usuario en la bd
-	const contrasena_db = data[0]["contrasena"]
+	const contrasena_db = data[0]["contrasena"];
 
 	/**
 	 * Si se resive una contrasena, se debe chequear contra la bd.
-	 * Si equivalen a lo mismo, se cambia en el diccionario con el 
+	 * Si equivalen a lo mismo, se cambia en el diccionario con el
 	 * nuevo body, la nueva contrasena
 	 */
-	console.log(contrasena_db)
+	console.log(contrasena_db);
 	if (contrasena) {
+
 		const verificacionHash = await bcrypt.compare(contrasena, contrasena_db)
 		console.log(verificacionHash)
+
 		if (verificacionHash) {
 			if (nueva_contrasena) {
 				newData["contrasena"] = await bcrypt.hash(nueva_contrasena, 10); // 10 es el número de rondas de hashing
 			}
 		} else {
 			res.status(480).json("Las contraseña actual no es valida");
-			return
+			return;
 		}
 	}
 
@@ -447,10 +463,8 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	}
 
 	res.status(280).json("Perfil actualizado correctamente");
-	return
+	return;
 });
-
-
 
 
 // Iniciar el servidor

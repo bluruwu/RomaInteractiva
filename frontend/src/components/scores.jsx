@@ -49,6 +49,24 @@ export default function Modal() {
 					</span>
 				);
 		} else if (quiz == 2) {
+			const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+			if (quizResuelto) {
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Imperio:</strong>
+						<span className="text-right">
+							{JSON.parse(localStorage.getItem("imperioAciertos"))}/5 aciertos
+						</span>
+					</span>
+				);
+			} else
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Imperio:</strong>
+						<span className="text-right">Sin resolver</span>
+					</span>
+				);
+		} else if (quiz == 3) {
 			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
 			if (quizResuelto) {
 				return (
@@ -66,7 +84,6 @@ export default function Modal() {
 						<span className="text-right">Sin resolver</span>
 					</span>
 				);
-		} else if (quiz == 3) {
 		} else if (quiz == 4) {
 		} else if (quiz == 5) {
 		} else return null;
@@ -79,6 +96,9 @@ export default function Modal() {
 				showCancelButton: true,
 				cancelButtonText: "Cancelar",
 				confirmButtonText: "Sí",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then((result) => {
 				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
@@ -91,6 +111,9 @@ export default function Modal() {
 				showCancelButton: true,
 				cancelButtonText: "Cancelar",
 				confirmButtonText: "Sí",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then((result) => {
 				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
@@ -103,6 +126,9 @@ export default function Modal() {
 						denyButtonText: `Ir a la lección`,
 						cancelButtonText: "Cancelar",
 						denyButtonColor: "#3085d6",
+						customClass: {
+							container: "font-text", // Cambiar la fuente del título
+						},
 					}).then((result) => {
 						/* Read more about isConfirmed, isDenied below */
 						if (result.isConfirmed) {
@@ -120,14 +146,16 @@ export default function Modal() {
 		if (quiz == 0) {
 			//Monarquia
 			const quizResuelto = JSON.parse(localStorage.getItem("monarquiaResuelto"));
-			getMessage(quizResuelto, "/Quiz_monarquia_1", "fundacion_de_roma");
+			getMessage(quizResuelto, "/Quiz_monarquia_1", "/fundacion_de_roma");
 		} else if (quiz == 1) {
 			const quizResuelto = JSON.parse(localStorage.getItem("republicaResuelto"));
-			getMessage(quizResuelto, "/Quiz_Republica", "Fundacion_Republica");
+			getMessage(quizResuelto, "/Quiz_Republica", "/Fundacion_Republica");
 		} else if (quiz == 2) {
-			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
-			getMessage(quizResuelto, "/Quiz_Personajes", "Romulo_Remo");
+			const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+			getMessage(quizResuelto, "/Quiz_Imperio", "/Cristianismo_Imperio");
 		} else if (quiz == 3) {
+			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+			getMessage(quizResuelto, "/Quiz_Personajes", "/Romulo_Remo");
 		} else if (quiz == 4) {
 		} else if (quiz == 5) {
 		} else return null;
@@ -175,17 +203,9 @@ export default function Modal() {
 
 												<Button texto={getText(1)} onClick={() => getScore(1)} />
 
-												<Button
-													texto={
-														<span className="flex items-center justify-between px-4">
-															<strong>El Imperio:</strong>
-															<span className="text-right">Sin resolver</span>
-														</span>
-													}
-													onClick={() => console.log("jeje")}
-												/>
-
 												<Button texto={getText(2)} onClick={() => getScore(2)} />
+
+												<Button texto={getText(3)} onClick={() => getScore(3)} />
 
 												<Button
 													texto={

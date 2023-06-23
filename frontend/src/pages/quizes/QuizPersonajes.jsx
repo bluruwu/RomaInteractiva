@@ -82,6 +82,9 @@ const QuizPersonajes = () => {
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación */
 					if (result.isConfirmed) {
@@ -93,6 +96,9 @@ const QuizPersonajes = () => {
 					title: "¿Quieres terminar el intento?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					let respuestasCorrectas = 0;
 					for (let i = 0; i < 5; i++) {
@@ -142,6 +148,9 @@ const QuizPersonajes = () => {
 							confirmButtonText: "Revisar respuestas",
 							denyButtonText: `Volver a home`,
 							denyButtonColor: "#3085d6",
+							customClass: {
+								container: "font-text", // Cambiar la fuente del título
+							},
 						}).then((result) => {
 							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
@@ -169,7 +178,17 @@ const QuizPersonajes = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion question={INFORMATION[questionNumber].title} />
+			<QuizQuestion 
+				question={INFORMATION[questionNumber].title} 
+				preguntaSeleccionada={questionNumber}
+				quiz={3}
+				quizResuelto={JSON.parse(localStorage.getItem("personajesResuelto"))}
+				respuesta1={checkedOptions[0]}
+				respuesta2={checkedOptions[1]}
+				respuesta3={checkedOptions[2]}
+				respuesta4={checkedOptions[3]}
+				respuesta5={checkedOptions[4]}
+				/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

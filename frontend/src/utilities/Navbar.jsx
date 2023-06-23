@@ -72,6 +72,7 @@ const Navbar = () => {
 	return (
 		<nav className="bg-custom-rojo">
 			<div className="flex justify-between mx-4 md:mx-20">
+				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>
 						<img
@@ -125,8 +126,10 @@ const Navbar = () => {
 												<img
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
+
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 													onClick={handleNavigation}
+
 												/>
 											)}
 										</div>
@@ -147,23 +150,22 @@ const Navbar = () => {
 											{/* Menu que se muestra al hacer clic */}
 											<Popover.Panel
 												static
-												// className="z-10 absolute bg-white border border-gray-300 p-2 rounded"
-												className={`${
-													open ? "block" : "hidden"
-												} z-10 absolute bg-white border rounded border-2 shadow-lg w-48`}
-												style={{ right: "0", marginTop: "1rem" }} // Estilos personalizados para cambiar la posición
+												className="z-20 absolute bg-white rounded border-2 shadow-lg w-48"
+												style={{ right: "0", marginTop: "1rem" }}
 											>
 												{/* Botones que se encuentran en el popover */}
 												<div className="text-black text-left text-xs font-bold">
 													<button
-														className="hover:bg-custom-doradonormal py-3 px-4 rounded inline-block cursor-pointer text-xs whitespace-nowrap w-full text-left"
+														className="hover:bg-custom-doradonormal py-3 px-4 rounded inline-block cursor-pointer text-xs whitespace-nowrap w-full text-left bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm z-20"
 														onClick={handleNavigation}
+														style={{ backdropFilter: "blur(4px)" }}
 													>
 														Mi perfil
 													</button>
 													<button
-														className="hover:bg-custom-doradonormal   py-3 px-4 rounded inline-block cursor-pointer text-xs whitespace-nowrap w-full text-left"
+														className="hover:bg-custom-doradonormal py-3 px-4 rounded inline-block cursor-pointer text-xs whitespace-nowrap w-full text-left bg-white bg-opacity-75 backdrop-filter backdrop-blur-sm mt-2 z-20"
 														onClick={setCerrarSesion}
+														style={{ backdropFilter: "blur(4px)" }}
 													>
 														Cerrar sesión
 													</button>

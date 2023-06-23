@@ -24,11 +24,27 @@ const Perfil = () => {
 
 		if (req_succesful === "Perfil actualizado correctamente") {
 			// Si el registro es exitoso, mostrar una alerta de éxito "
-			Swal.fire("Datos Actualizados correctamente!", "").then(() => {
+			Swal.fire({
+				title: "¡Datos actualizados correctamente!",
+				confirmButtonText: "OK",
+				confirmButtonColor: "#e69200", // Cambiar el color del botón
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
+			}).then(() => {
 				window.location.reload();
 			});
 		} else if (req_succesful === "Las contraseña actual no es valida") {
-			Swal.fire("Contraseña incorrecta!", "").then(() => {
+
+			Swal.fire({
+				title: "Contraseña incorrecta",
+				confirmButtonText: "Aceptar",
+				confirmButtonColor: "#e69200", // Cambiar el color del botón
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
+			}).then(() => {
+
 				window.location.reload();
 			});
 		} else {
@@ -37,6 +53,9 @@ const Perfil = () => {
 				icon: "error",
 				title: "Oops...",
 				text: "Sorry, Some of our services are not working",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
 			}).then(() => {
 				window.location.reload();
 			});
@@ -56,39 +75,49 @@ const Perfil = () => {
 		const myData = {
 			nombre_usuario: nombreCompleto,
 			nickname: nickname,
-			avatar_id: idAvatar
+			avatar_id: idAvatar,
 		};
-
 
 		myPutPetition(myData, localStorage.getItem("token")); // Ejecutar la función asíncrona myresponse
 	};
 
 	const cambiarContraseñaDialogue = async (e) => {
 		Swal.fire({
-			title: 'Recuperar Contraseña',
-			html: `<input type="text" id="currentPassword" class="swal2-input" placeholder="Contraseña Actual">
-			<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
-			<input type="password" id="newPasswordAgain" class="swal2-input" placeholder="Repite Nueva Contraseña">`,
-			confirmButtonText: 'Recuperar',
+			title: "Cambiar Contraseña",
+
+			html: `<div class="font-text text-sm"><input type="password" id="currentPassword" class="swal2-input font-text" placeholder="Contraseña actual">
+			<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva contraseña">
+			<input type="password" id="newPasswordAgain" class="swal2-input" placeholder="Repetir nueva contraseña"></div>`,
+			confirmButtonText: "Confirmar",
+			confirmButtonColor: "#e69200",
 			focusConfirm: false,
+			customClass: {
+				container: "font-text", // Cambiar la fuente del título
+			},
+
 			preConfirm: () => {
-				const currentPassword = Swal.getPopup().querySelector('#currentPassword').value
-				const newPassword = Swal.getPopup().querySelector('#newPassword').value
-				const newPasswordAgain = Swal.getPopup().querySelector('#newPasswordAgain').value
+				const currentPassword = Swal.getPopup().querySelector("#currentPassword").value;
+				const newPassword = Swal.getPopup().querySelector("#newPassword").value;
+				const newPasswordAgain = Swal.getPopup().querySelector("#newPasswordAgain").value;
 
 				if (!currentPassword || !newPassword || !newPasswordAgain) {
-					Swal.showValidationMessage(`Por favor, llena todos los campos.`)
+					Swal.showValidationMessage(`Por favor, llena todos los campos`);
 				}
 				if (newPassword != newPasswordAgain) {
-					Swal.showValidationMessage(`No repetiste bien las contraseñas`)
+					Swal.showValidationMessage(`No repetiste bien las contraseñas`);
 				}
-				if (newPassword.length < 8) {
-					Swal.showValidationMessage(`La nueva contraseña debe ser de por lo menos 8 caracteres`)
+				if (newPassword.length < 6) {
+					Swal.showValidationMessage(`La nueva contraseña debe ser de por lo menos 6 caracteres`);
 				}
-				return { currentPassword: currentPassword, newPassword: newPassword, newPasswordAgain: newPasswordAgain }
-			}
+				return {
+					currentPassword: currentPassword,
+					newPassword: newPassword,
+					newPasswordAgain: newPasswordAgain,
+				};
+			},
 		}).then((result) => {
 			if (result.value != undefined) {
+
 				myPutPetition({
 					contrasena: result.value.currentPassword,
 					nueva_contrasena: result.value.newPassword
@@ -96,6 +125,7 @@ const Perfil = () => {
 			}
 		})
 	}
+
 
 	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
@@ -111,7 +141,7 @@ const Perfil = () => {
 
 	//Obtener datos del usuario cuando ingresa a la pagina
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
-	const [contrasena, setContrasena] = useState('--------');
+	const [contrasena, setContrasena] = useState("--------");
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
 	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
 	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");

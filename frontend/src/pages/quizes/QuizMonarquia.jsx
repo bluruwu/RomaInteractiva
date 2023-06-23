@@ -82,6 +82,9 @@ const QuizMonarquia = () => {
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación */
 					if (result.isConfirmed) {
@@ -93,6 +96,9 @@ const QuizMonarquia = () => {
 					title: "¿Quieres terminar el intento?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					let respuestasCorrectas = 0;
 
@@ -146,6 +152,9 @@ const QuizMonarquia = () => {
 							confirmButtonText: "Revisar respuestas",
 							denyButtonText: `Volver a home`,
 							denyButtonColor: "#3085d6",
+							customClass: {
+								container: "font-text", // Cambiar la fuente del título
+							},
 						}).then((result) => {
 							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
@@ -173,7 +182,17 @@ const QuizMonarquia = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion question={INFORMATION[questionNumber].title} />
+			<QuizQuestion 
+				question={INFORMATION[questionNumber].title} 
+				preguntaSeleccionada={questionNumber}
+				quiz={1}
+				quizResuelto={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
+				respuesta1={checkedOptions[0]}
+				respuesta2={checkedOptions[1]}
+				respuesta3={checkedOptions[2]}
+				respuesta4={checkedOptions[3]}
+				respuesta5={checkedOptions[4]}
+				/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

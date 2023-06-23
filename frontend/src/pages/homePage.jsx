@@ -9,37 +9,50 @@ import imperioImage from "../media/previsualizaciones/prev3.png";
 import augustoImage from "../media/previsualizaciones/prev4.png";
 import coliseoImage from "../media/previsualizaciones/prev5.png";
 import domusImage from "../media/previsualizaciones/prev6.png";
-import { getCalificaciones, getPrueba } from "../conections/requests";
+import { getCalificaciones } from "../conections/requests";
 
 const HomePage = () => {
 	const navigate = useNavigate();
 	const token = localStorage.getItem("token");
 	const [scoreData, setScoreData] = useState([]);
 
+	//Poner las calificaciones en la parte superior derecha de los botones
 	useEffect(() => {
+		//Obtener la calificacion de las lecciones del localstorage
+		const getScoreDataFromLocalStorage = () => {
+			return [
+				{
+					leccion: 1,
+					nombre: "monarquia",
+					nota: localStorage.getItem("monarquiaAciertos"),
+				},
+				{
+					leccion: 2,
+					nombre: "republica",
+					nota: localStorage.getItem("republicaAciertos"),
+				},
+
+				{
+					leccion: 3,
+					nombre: "imperio",
+					nota: localStorage.getItem("imperioAciertos"),
+				},
+				{
+					leccion: 4,
+					nombre: "personajes",
+					nota: localStorage.getItem("personajesAciertos"),
+				},
+				// Agregar más elementos según sea necesario para las demás lecciones
+			];
+		};
+
+		//Si el usuario esta logeado, hacer la peticion de las calificaciones al backend
 		if (token) {
 			async function fetchCalificaciones() {
 				const result = await getCalificaciones(token);
 				if (result === "OK") {
-					// Actualizar los valores de número utilizando el estado local
-					setScoreData([
-						{
-							leccion: 0,
-							nombre: "monarquia",
-							nota: localStorage.getItem("monarquiaAciertos"),
-						},
-						{
-							leccion: 1,
-							nombre: "republica",
-							nota: localStorage.getItem("republicaAciertos"),
-						},
-						{
-							leccion: 4,
-							nombre: "personajes",
-							nota: localStorage.getItem("personajesAciertos"),
-						},
-						// Agregar más elementos según sea necesario para las demás lecciones
-					]);
+					const calificaciones = getScoreDataFromLocalStorage();
+					setScoreData(calificaciones);
 				} else {
 					console.log("No se pudo obtener las calificaciones");
 				}
@@ -47,7 +60,10 @@ const HomePage = () => {
 
 			fetchCalificaciones();
 		} else {
+			//Si el usuario NO esta logeado, obtener las calificaciones del localstorage
 			console.log("Usuario no autenticado");
+			const calificaciones = getScoreDataFromLocalStorage();
+			setScoreData(calificaciones);
 		}
 
 		// Verificar si la variable ya existe en el almacenamiento local
@@ -63,6 +79,10 @@ const HomePage = () => {
 			// Si no existe, agregarla al almacenamiento local
 			localStorage.setItem("personajesResuelto", JSON.stringify(false));
 		}
+		if (!localStorage.getItem("imperioResuelto")) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem("imperioResuelto", JSON.stringify(false));
+		}
 	}, []);
 
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
@@ -70,10 +90,11 @@ const HomePage = () => {
 		return (
 			<div className="relative h-80 font-text">
 				<img
-					className="absolute inset-0 w-full h-full object-cover brightness-50"
+					className="absolute inset-0 w-full h-full object-cover brightness-50 z-0"
 					src={process.env.PUBLIC_URL + "/images/fondo.jpg"}
 					alt="Imagen de fondo"
 				/>
+
 				<div className="relative z-10 flex items-center justify-center h-full">
 					<h1 className="font-bold text-4xl text-white">
 						¡Bienvenido a nuestra página sobre la gloriosa cultura Romana!
@@ -86,9 +107,9 @@ const HomePage = () => {
 	const getScore = (leccion) => {
 		const scoreDataItem = scoreData.find((item) => item.leccion === leccion);
 		if (scoreDataItem) {
-			return scoreDataItem.nota || 0;
+			return scoreDataItem.nota || "-";
 		} else {
-			return 0;
+			return "-";
 		}
 	};
 
@@ -98,7 +119,7 @@ const HomePage = () => {
 			<Navbar />
 			{Title()}
 
-			<main className="flex flex-col gap-y-20 m-12">
+			<main className="flex flex-col gap-y-20 m-12 mb-[160px]">
 				{/* Seccion ETAPAS */}
 				<section>
 					<h1 className="font-bold text-3xl text-black"> Etapas</h1>
@@ -109,7 +130,7 @@ const HomePage = () => {
 							hoverImage={monarquiaImage}
 							onClick={() => navigate("/fundacion_de_roma")}
 							buttonText={"La Monarquía"}
-							number={getScore(0)}
+							number={getScore(1)}
 						/>
 						<Button
 							id="republica"
@@ -117,7 +138,7 @@ const HomePage = () => {
 							hoverImage={republicaImage}
 							onClick={() => navigate("/Fundacion_Republica")}
 							buttonText={"La República"}
-							number={getScore(1)}
+							number={getScore(2)}
 						/>
 						<Button
 							id="imperio"
@@ -125,7 +146,7 @@ const HomePage = () => {
 							hoverImage={imperioImage}
 							onClick={() => navigate("/Cristianismo_Imperio")}
 							buttonText={"El Imperio"}
-							number={0}
+							number={getScore(3)}
 						/>
 					</div>
 				</section>
@@ -148,7 +169,7 @@ const HomePage = () => {
 							onClick={() => navigate("/Coliseo_Romano")}
 							hoverImage={coliseoImage}
 							buttonText={"Arquitectura"}
-							number={0}
+							number={getScore(5)}
 						/>
 						<Button
 							id="cultura"
@@ -156,7 +177,7 @@ const HomePage = () => {
 							hoverImage={domusImage}
 							onClick={() => navigate("/Viviendas")}
 							buttonText={"Cultura"}
-							number={0}
+							number={getScore(6)}
 						/>
 					</div>
 				</section>

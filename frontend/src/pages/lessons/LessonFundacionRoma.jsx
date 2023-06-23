@@ -41,7 +41,7 @@ const LessonFundacionRoma = () => {
 					thirdparag={third}
 				/>
 				{/* Componente del modelo 3D */}
-				<LessonModel description="Rómulo y Remo criados por una loba" titleModel="Romulus & Remus" source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed" />
+				<LessonModel description="Rómulo y Remo, fundadores de Roma" titleModel="Romulus & Remus" source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed" />
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav urlbef="/home" mediabef="plazaSanPedro.jpg" titlebef="VOLVER A INICIO"
