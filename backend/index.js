@@ -4,71 +4,70 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const multer = require('multer');
-const fs = require('fs');
-
-//Credenciales supabase
-
+const { google } = require('googleapis');
+const fs = require("fs")
+const { Readable } = require('stream');
+// Credenciales supabase
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 
-const secretKey = process.env.SECRET_KEY_JWT;
+// Credenciales Google Drive
+const googleCredentials = require('./credenciales.json');
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads'))
 
-// // allow all the incoming ip
-//   const corsOptions = {
-//  	origin: "*",
-//  	credentials: true,//  Enable CORS with credentials (e.g., cookies, authorization headers)
-//   };
-
-//  app.use(cors(corsOptions));
-
-
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-COntrol-Allow-Request-Method');
-	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-	next();
-})
+// Allow all the incoming IP addresses
+app.use(cors());
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Configuración de Multer para gestionar la carga de archivos
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
-	},
-	filename: async function (req, file, cb) {
 
-		cb(null,"avatar"+(parseInt(await getLastId("/uploads"))+1).toString() + ".jpg"); // Nombre único para la imagen
-	}
+// Configuración de autenticación de Google Drive
+const auth = new google.auth.GoogleAuth({
+	credentials: googleCredentials,
+	scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
-const upload = multer({ storage: storage });
 
-// Endpoint para subir una imagen
-app.post('/upload', upload.single('file'), async (req, res) => {
-	if (!req.file) {
-		res.status(400).json({ error: 'No se ha proporcionado ninguna imagen' });
-		return;
-	}
-	let lastId = await getLastId("/uploads")
+const drive = google.drive({ version: 'v3', auth });
 
-	try {
-		res.json({ message: lastId});
-	} catch (err) {
-		console.error(err);
-		res.status(500).json({ error: 'Error al leer el directorio' });
-	}
-	return
+const storage = multer.memoryStorage();
+const upload = multer({ storage }).single('file');
+
+
+app.post('/upload', upload, async (req, res) => {
+  try {
+    const file = req.file;
+    const fileName = file.originalname;
+	console.log(file)
+	// Crear el objeto de metadatos del archivo
+    const fileMetadata = {
+		name: file.originalname,
+		parents: ['1AguL3BshwwbjoW5BLst8Ynanu4n4u91r'], // Reemplaza con el ID de la carpeta en Google Drive
+	  };
+    const media = {
+      mimeType: file.mimetype,
+      body: Readable.from(file.buffer),
+    };
+
+     // Subir el archivo a Google Drive
+	 const response = await drive.files.create({
+		resource: fileMetadata,
+		media: media,
+		fields: 'id',
+	  });
+
+    console.log('File ID:', response.data.id);
+	
+    res.status(200).send('File uploaded successfully!');
+  } catch (error) {
+    //console.error(error);
+    res.status(500).send(error.message);
+  }
 });
- 
+
 //funcion que me retorna el avatar con el ultimo id
 //esto sirve para añadir imagenes al server de forma ordenada
 async function getLastId(directoryPath) {
@@ -88,8 +87,8 @@ async function getLastId(directoryPath) {
 
 	let id = 6
 	for (let i in allFileNames) {
-		if (id <= parseInt(allFileNames[i].substr(6,allFileNames[i].search('.')+2)))
-			id = parseInt(allFileNames[i].substr(6,allFileNames[i].search('.')+2))
+		if (id <= parseInt(allFileNames[i].substr(6, allFileNames[i].search('.') + 2)))
+			id = parseInt(allFileNames[i].substr(6, allFileNames[i].search('.') + 2))
 	}
 	return id
 }
