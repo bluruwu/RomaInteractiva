@@ -6,6 +6,12 @@ const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 //Usar la API_URL del puerto 9000 si se va a trabajar local
 //const API_URL = "http://127.0.0.1:9000";
 
+
+export function getAPI_URL(){
+	return API_URL;
+}
+
+
 //Solicitud POST para el registro de usuarios
 export const postData = async (mydata) => {
 	try {
@@ -67,6 +73,7 @@ export const getPrueba = async (token) => {
 		return "Error en solicitud";
 	}
 };
+
 
 //POST para realizar el login de los usuarios
 export const postLogin = async (mydata) => {
@@ -219,3 +226,13 @@ export const putActualizarPerfil = async (mydata, token) => {
 		return "Error en solicitud";
 	}
 };
+
+
+//POST image to server, and to database
+export const postImage = async (myForm,token) => {
+	const response = await fetch(`${API_URL}/upload`, {
+        method: 'POST',
+        body: myForm
+      });
+	return response
+}

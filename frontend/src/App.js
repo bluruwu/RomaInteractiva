@@ -28,6 +28,7 @@ import LessonRecreacion from "./pages/lessons/LessonRecreacion";
 import LessonViviendas from "./pages/lessons/LessonViviendas";
 import LessonExpRepublica from "./pages/lessons/LessonExpRepublica";
 import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
+import UploadTheImage from "./utilities/UploadTheImage";
 
 //Rutas de la aplicacion. Con el path y el elemento que debe ser renderizado importado previamente
 const App = () => {
@@ -67,6 +68,8 @@ const App = () => {
 			<Route path="/Educacion" element={<LessonEducacion />} />
 			<Route path="/Recreacion" element={<LessonRecreacion />} />
 			<Route path="/Viviendas" element={<LessonViviendas />} />
+
+			<Route path="/UploadTheImage" element={<UploadTheImage/>}/>
 		</Routes>
 	);
 };
