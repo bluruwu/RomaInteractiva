@@ -29,6 +29,8 @@ import LessonViviendas from "./pages/lessons/LessonViviendas";
 import LessonExpRepublica from "./pages/lessons/LessonExpRepublica";
 import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
 
+import LessonCrossword from "./pages/lessons/LessonCrossword";
+
 //Rutas de la aplicacion. Con el path y el elemento que debe ser renderizado importado previamente
 const App = () => {
 	return (
@@ -67,6 +69,8 @@ const App = () => {
 			<Route path="/Educacion" element={<LessonEducacion />} />
 			<Route path="/Recreacion" element={<LessonRecreacion />} />
 			<Route path="/Viviendas" element={<LessonViviendas />} />
+
+			<Route path="/Crossword" element={<LessonCrossword />} />
 		</Routes>
 	);
 };

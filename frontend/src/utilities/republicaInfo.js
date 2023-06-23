@@ -7,7 +7,7 @@ export const INFORMATION = [
 		option3: "Lideraba las campañas militares",
 		option4: "Organizaba los juegos y festivales públicos",
 		respuesta: 1,
-		urlbef: "/Fundacion_Republica",
+		urlbef: "/colapso_republica",
 	},
 	{
 		//1

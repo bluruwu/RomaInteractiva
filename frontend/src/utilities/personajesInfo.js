@@ -8,7 +8,7 @@ export const INFORMATION = [
 		option3: "Una princesa",
 		option4: "Un grupo de aves",
 		respuesta: 1,
-		urlbef: "/Romulo_Remo",
+		urlbef: "/Augusto",
 	},
 	{
 		//1

@@ -7,7 +7,7 @@ export const INFORMATION = [
 		option3: "Tito Livio",
 		option4: "Un líder local",
 		respuesta: 2,
-		urlbef: "/fundacion_de_roma",
+		urlbef: "/final_monarquia",
 	},
 	{
 		//1

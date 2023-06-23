@@ -82,6 +82,9 @@ const QuizImperio = () => {
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación */
 					if (result.isConfirmed) {
@@ -93,6 +96,9 @@ const QuizImperio = () => {
 					title: "¿Quieres terminar el intento?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
 				}).then((result) => {
 					let respuestasCorrectas = 0;
 
@@ -110,7 +116,7 @@ const QuizImperio = () => {
 
 					//Objeto para enviar respuestas al backend
 					const formData = {
-						id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
+						id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
 						respuesta0: JSON.parse(localStorage.getItem("imperioOpcion0")),
 						respuesta1: JSON.parse(localStorage.getItem("imperioOpcion1")),
 						respuesta2: JSON.parse(localStorage.getItem("imperioOpcion2")),
@@ -146,6 +152,9 @@ const QuizImperio = () => {
 							confirmButtonText: "Revisar respuestas",
 							denyButtonText: `Volver a home`,
 							denyButtonColor: "#3085d6",
+							customClass: {
+								container: "font-text", // Cambiar la fuente del título
+							},
 						}).then((result) => {
 							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
@@ -173,8 +182,8 @@ const QuizImperio = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion 
-				question={INFORMATION[questionNumber].title} 
+			<QuizQuestion
+				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
 				quiz={4}
 				quizResuelto={JSON.parse(localStorage.getItem("imperioResuelto"))}
@@ -183,7 +192,7 @@ const QuizImperio = () => {
 				respuesta3={checkedOptions[2]}
 				respuesta4={checkedOptions[3]}
 				respuesta5={checkedOptions[4]}
-				/>
+			/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

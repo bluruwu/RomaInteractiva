@@ -31,6 +31,12 @@ const HomePage = () => {
 					nombre: "republica",
 					nota: localStorage.getItem("republicaAciertos"),
 				},
+
+				{
+					leccion: 3,
+					nombre: "imperio",
+					nota: localStorage.getItem("imperioAciertos"),
+				},
 				{
 					leccion: 4,
 					nombre: "personajes",
