@@ -7,7 +7,8 @@ import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const Navbar = () => {
-	const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
+	//const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
+	const API_URL = "http://localhost:9000";
 	const navigate = useNavigate();
 
 	// Obtener el valor del nickname del localStorage
