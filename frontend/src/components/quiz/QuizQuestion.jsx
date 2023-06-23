@@ -64,31 +64,30 @@ const QuizQuestion = ({
     }
     else {
       if (pregunta == 1){
-        console.log(respuesta1)
-        if (respuesta1 != 0 && respuesta1 != undefined && respuesta1 != null) {
+        if (respuesta1 != 0) {
           return " bg-[#e69200]"
         }
         else return " bg-white "
       }
-      else if (pregunta == 2 && respuesta2 != null) {
-        if (respuesta1 != 0 && respuesta1 != null) {
+      else if (pregunta == 2 ) {
+        if (respuesta2 != 0 ) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
-      else if (pregunta == 3 && respuesta3 != null) {
+      else if (pregunta == 3 ) {
         if (respuesta3 != 0) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
-      else if (pregunta == 4 && respuesta4 != null) {
+      else if (pregunta == 4 ) {
         if (respuesta4 != 0) {
           return " bg-[#e69200]"
         }
         else return " bg-white"
       }
-      else if (pregunta == 5 && respuesta5 != null) {
+      else if (pregunta == 5 ) {
         if (respuesta5 != 0) {
           return " bg-[#e69200]"
         }
