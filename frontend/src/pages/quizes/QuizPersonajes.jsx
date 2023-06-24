@@ -244,6 +244,7 @@ const QuizPersonajes = () => {
 					{questionNumber === 0 ? "Volver a lección" : "Pregunta anterior"}
 				</button>
 				<button
+					id="nextButton"
 					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
