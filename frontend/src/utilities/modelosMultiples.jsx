@@ -17,7 +17,7 @@ const DropdownMenu = ({ modelos, handleModelo }) => {
 			>
 				{/* Se mapean las opciones que estan en el array mandando y se muestran como opciones en el menu */}
 				{modelos.map((model, index) => (
-					<Dropdown.Item key={index} onClick={() => handleModelo(model)}>
+					<Dropdown.Item id={`option-${index}`} key={index} onClick={() => handleModelo(model)}>
 						{model.titleModel}
 					</Dropdown.Item>
 				))}
