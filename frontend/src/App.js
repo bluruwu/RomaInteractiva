@@ -74,7 +74,7 @@ const App = () => {
 			<Route path="/Viviendas" element={<LessonViviendas />} />
 
 			<Route path="/UploadTheImage" element={<UploadTheImage />} />
-			<Route path="/Crossword" element={<LessonCrossword />} />
+			<Route path="/Puzzle" element={<LessonPuzzle />} />
 		</Routes>
 	);
 };
