@@ -18,6 +18,7 @@ const QuizQuestion = ({
 }) => {
   const totalPreguntas = 5;
 
+  // Determinar el estilo de borde para el círculo de pregunta seleccionado
   const borde = (pregunta) =>{
     if(pregunta == preguntaSeleccionada + 1) {
         return " border-black border-[3px]"
@@ -25,6 +26,7 @@ const QuizQuestion = ({
       else return " "
   }
 
+  // Determinar el color de texto según si el quiz está resuelto o no
   const textColor = () => {
     if (quizResuelto) {
       return "text-white"
@@ -32,6 +34,7 @@ const QuizQuestion = ({
     else return "text-black"
   }
 
+  // Determinar el color de fondo de los círculos de pregunta
   const color = (pregunta) => {
     if (quizResuelto){
       if (quiz == 1){

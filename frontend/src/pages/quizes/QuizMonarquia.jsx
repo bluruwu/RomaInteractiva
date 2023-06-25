@@ -60,7 +60,20 @@ const QuizMonarquia = () => {
 			}
 			setQuestionNumber(questionNumber - 1);
 		} else {
-			navigate(INFORMATION[questionNumber].urlbef);
+			Swal.fire({
+				title: "¿Estás seguro que quieres salir? Perderás tus cambios",
+				showCancelButton: true,
+				confirmButtonText: "Sí",
+				confirmButtonColor: "#03ac13",
+				customClass: {
+					container: "font-text", // Cambiar la fuente del título
+				},
+			}).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					navigate(INFORMATION[questionNumber].urlbef);
+				}
+			});
 		}
 	};
 
@@ -100,52 +113,53 @@ const QuizMonarquia = () => {
 						container: "font-text", // Cambiar la fuente del título
 					},
 				}).then((result) => {
-					let respuestasCorrectas = 0;
-
-					//Guardar respuestas del quiz en localStorage
-					for (let i = 0; i < 5; i++) {
-						localStorage.setItem(`monarquiaOpcion${i}`, JSON.stringify(checkedOptions[i]));
-						if (checkedOptions[i] === INFORMATION[i].respuesta) {
-							respuestasCorrectas++;
-						}
-					}
-					//Guardar calificacion del quiz en localStorage
-					localStorage.setItem("monarquiaAciertos", JSON.stringify(respuestasCorrectas));
-					//Marcar como resuelta en localStorage
-					localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
-
-					//Objeto para enviar respuestas al backend
-					const formData = {
-						id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
-						respuesta0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
-						respuesta1: JSON.parse(localStorage.getItem("monarquiaOpcion1")),
-						respuesta2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
-						respuesta3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
-						respuesta4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("monarquiaAciertos")),
-					};
-
-					console.log(formData);
-					console.log("el token es:", token);
-
-					if (token) {
-						//Agregar token
-						postQuiz(formData, token)
-							.then((response) => {
-								// Manejar la respuesta del servidor si es necesario
-								console.log(response);
-							})
-							.catch((error) => {
-								// Manejar el error si ocurre
-								console.error(error);
-							});
-					} else {
-						// Manejar el caso en el que no haya token disponible, usuario sin logear
-						console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
-					}
-
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
+
+						let respuestasCorrectas = 0;
+
+						//Guardar respuestas del quiz en localStorage
+						for (let i = 0; i < 5; i++) {
+							localStorage.setItem(`monarquiaOpcion${i}`, JSON.stringify(checkedOptions[i]));
+							if (checkedOptions[i] === INFORMATION[i].respuesta) {
+								respuestasCorrectas++;
+							}
+						}
+						//Guardar calificacion del quiz en localStorage
+						localStorage.setItem("monarquiaAciertos", JSON.stringify(respuestasCorrectas));
+						//Marcar como resuelta en localStorage
+						localStorage.setItem("monarquiaResuelto", JSON.stringify(true));
+
+						//Objeto para enviar respuestas al backend
+						const formData = {
+							id_quiz: JSON.parse("1"), //El id_quiz=1 pertence a monarquia
+							respuesta0: JSON.parse(localStorage.getItem("monarquiaOpcion0")),
+							respuesta1: JSON.parse(localStorage.getItem("monarquiaOpcion1")),
+							respuesta2: JSON.parse(localStorage.getItem("monarquiaOpcion2")),
+							respuesta3: JSON.parse(localStorage.getItem("monarquiaOpcion3")),
+							respuesta4: JSON.parse(localStorage.getItem("monarquiaOpcion4")),
+							calificacion: JSON.parse(localStorage.getItem("monarquiaAciertos")),
+						};
+
+						console.log(formData);
+						console.log("el token es:", token);
+
+						if (token) {
+							//Agregar token
+							postQuiz(formData, token)
+								.then((response) => {
+									// Manejar la respuesta del servidor si es necesario
+									console.log(response);
+								})
+								.catch((error) => {
+									// Manejar el error si ocurre
+									console.error(error);
+								});
+						} else {
+							// Manejar el caso en el que no haya token disponible, usuario sin logear
+							console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+						}
+
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -181,9 +195,9 @@ const QuizMonarquia = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar />
-			<QuizQuestion 
-				question={INFORMATION[questionNumber].title} 
+			<Navbar inQuiz={true} />
+			<QuizQuestion
+				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
 				quiz={1}
 				quizResuelto={JSON.parse(localStorage.getItem("monarquiaResuelto"))}
@@ -192,7 +206,7 @@ const QuizMonarquia = () => {
 				respuesta3={checkedOptions[2]}
 				respuesta4={checkedOptions[3]}
 				respuesta5={checkedOptions[4]}
-				/>
+			/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

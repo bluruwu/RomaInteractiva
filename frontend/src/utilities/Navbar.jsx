@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import logo from "../media/logos/logo.png";
-import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import BusquedaAleatoria from "./randomSearch";
+import Swal from "sweetalert2";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { getAPI_URL } from "../conections/requests";
+import { useNavigate, Navigate, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({inQuiz}) => {
 
 	const API_URL = getAPI_URL();
 	const navigate = useNavigate();
@@ -50,8 +51,26 @@ const Navbar = () => {
 		if (isHome) {
 			window.location.reload();
 		} else {
-			//Si no esta en home, redirigir a la pagina
-			return <Navigate to="/home" />;
+			if (inQuiz) {
+				Swal.fire({
+					title: "¿Estás seguro que quieres salir? Perderás tus cambios",
+					showCancelButton: true,
+					confirmButtonText: "Sí",
+					confirmButtonColor: "#03ac13",
+					customClass: {
+						container: "font-text", // Cambiar la fuente del título
+					},
+				}).then((result) => {
+					/* Read more about isConfirmed, isDenied below */
+					if (result.isConfirmed) {
+						navigate("/home");
+					}
+					else {
+						setGoHome(false);
+					}
+				});
+			}
+			else return <Navigate to="/home" />;
 		}
 	}
 

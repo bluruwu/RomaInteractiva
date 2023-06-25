@@ -16,12 +16,14 @@ const Option = ({
 		return selectedOption === optionNumber || initialOption === optionNumber;
 	};
 
+	// Función para aplicar una escala al hacer hover en el botón
 	const hoverScale = () => {
 		if (!resolved) {
 			return "hover:scale-110";
 		}
 	};
 
+	// Función para ampliar el botón en ciertas circunstancias
 	const enlargeButton = () => {
 		if (isButtonActive() || optionNumber === correctAnswerNumber) {
 			if (isButtonActive()) {
@@ -36,6 +38,7 @@ const Option = ({
 		}
 	};
 
+	// Función para determinar el color activo del botón
 	const activeColor = () => {
 		if (resolved && optionNumber === correctAnswerNumber) {
 			return " bg-green-400";
@@ -43,7 +46,8 @@ const Option = ({
 			return "bg-[#e69200]";
 		} else return "bg-custom-rojo";
 	};
-
+	
+	// Función para mostrar un icono de revisión en el botón
 	const iconReview = () => {
 		if (resolved) {
 			if (optionNumber === correctAnswerNumber) {
