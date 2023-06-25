@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
-import { putActualizarPerfil } from "../conections/requests";
+import { putActualizarPerfil,getAPI_URL } from "../conections/requests";
 import Swal from "sweetalert2";
 import "./css/perfil.css";
+import { useNavigate, Navigate, json } from "react-router-dom";
+import UploadTheImage from "../utilities/UploadTheImage";
+import uploadImageToServer from "../utilities/start";
+
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
+
+	const API_URL = getAPI_URL();
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
 	const myPutPetition = async (myData, myToken) => {
@@ -30,6 +35,7 @@ const Perfil = () => {
 				window.location.reload();
 			});
 		} else if (req_succesful === "Las contraseña actual no es valida") {
+
 			Swal.fire({
 				title: "Contraseña incorrecta",
 				confirmButtonText: "Aceptar",
@@ -38,6 +44,7 @@ const Perfil = () => {
 					container: "font-text", // Cambiar la fuente del título
 				},
 			}).then(() => {
+
 				window.location.reload();
 			});
 		} else {
@@ -110,16 +117,15 @@ const Perfil = () => {
 			},
 		}).then((result) => {
 			if (result.value != undefined) {
-				myPutPetition(
-					{
-						contrasena: result.value.currentPassword,
-						nueva_contrasena: result.value.newPassword,
-					},
-					localStorage.getItem("token")
-				);
+
+				myPutPetition({
+					contrasena: result.value.currentPassword,
+					nueva_contrasena: result.value.newPassword
+				}, localStorage.getItem("token"));
 			}
-		});
-	};
+		})
+	}
+
 
 	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
@@ -146,21 +152,75 @@ const Perfil = () => {
 		//Si el usuario tiene un avatar_id se busca la imagen que le corresponde
 		if (idAvatar != null) {
 			return (
-				<img
-					src={process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`}
-					className="inline border-4 border-custom-doradodark object-cover w-36 h-36 mb-2 rounded-full"
-				/>
+				<div>
+					<img
+						src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg` : `${API_URL}/image/avatar${idAvatar}.jpg`}
+						className="overlayed-image-1"
+					/>
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
+						className="overlayed-image-2"
+						onClick={(e) => updloadAvatar()} />
+				</div>
+
 			);
 		} else {
 			//Si el usuario no tiene ningun avatar_id se pone el avatar generico
 			return (
-				<img
-					src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
-					className="inline  object-cover w-32 h-32 mb-2 rounded-full"
-				/>
+				<div>
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
+						className="inline  object-cover w-32 h-32 mb-2 rounded-full"
+					/>
+					<img
+						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
+						className="overlayed-image-2"
+						onClick={(e) => updloadAvatar()} />
+				</div>
+
 			);
 		}
 	};
+
+	async function updloadAvatar() {
+
+		async function waitServer() {
+			//ask the user for an image, upload that image, and get an id
+			const idFromServer = await uploadImageToServer(localStorage.getItem("token"));
+			//revisar si el servidor respondio con un id
+			if (idFromServer) {
+				setIdAvatar(idFromServer)
+				localStorage.setItem("avatar_id", JSON.stringify(idFromServer))
+			}
+		}
+		waitServer()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
 
 	return (
 		<div id="perfil" className="font-text  h-screen">
@@ -170,27 +230,32 @@ const Perfil = () => {
 				<HomeButton />
 			</div>
 
-			<div className="flex items-center justify-center">
-				{/* Logros izquierda */}
-				<div class=" flex-col items-center">
-					<img
-						src={require("../media/logros/logro-columna.png")}
-						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
-					/>
-					<img
-						src={require("../media/logros/logro-helmet.png")}
-						className="inline  object-cover w-16 h-16 mr-6 rounded-full"
-					/>
-					{getAvatar()}
-					<img
-						src={require("../media/logros/logro-medalla.png")}
-						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
-					/>
-					<img
-						src={require("../media/logros/logro-toga.png")}
-						className="inline  object-cover w-16 h-16 ml-6 rounded-full"
-					/>
-				</div>
+			<div className="logrosyperfil">
+
+				<img
+					src={require("../media/logros/logro-columna.png")}
+					className="imagesLeft"
+				/>
+
+				<img
+					src={require("../media/logros/logro-helmet.png")}
+					className="imagesLeft"
+				/>
+
+				{getAvatar()}
+
+
+				<img
+					src={require("../media/logros/logro-medalla.png")}
+					className="imagesRight"
+				/>
+
+
+				<img
+					src={require("../media/logros/logro-toga.png")}
+					className="imagesRight"
+				/>
+
 			</div>
 
 			{/* Modal para mostrar los avatares disponibles */}

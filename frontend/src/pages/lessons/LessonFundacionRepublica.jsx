@@ -48,7 +48,7 @@ const LessonFundacionRepublica = () => {
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
 				<LessonText 
-					title="Fundación de la Republica Romana" 
+					title="Fundación de la República Romana" 
 					firstparag = {first} 
 					secondparag={second} 
 					thirdparag={third}

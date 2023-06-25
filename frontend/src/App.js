@@ -29,6 +29,7 @@ import LessonViviendas from "./pages/lessons/LessonViviendas";
 import LessonExpRepublica from "./pages/lessons/LessonExpRepublica";
 import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
 
+import UploadTheImage from "./utilities/UploadTheImage";
 import LessonPuzzle from "./pages/lessons/LessonPuzzle";
 
 // import Prueba from "./pages/lessons/puzzle/index";
@@ -72,7 +73,8 @@ const App = () => {
 			<Route path="/Recreacion" element={<LessonRecreacion />} />
 			<Route path="/Viviendas" element={<LessonViviendas />} />
 
-			<Route path="/Puzzle" element={<LessonPuzzle />} />
+			<Route path="/UploadTheImage" element={<UploadTheImage />} />
+			<Route path="/Crossword" element={<LessonCrossword />} />
 		</Routes>
 	);
 };

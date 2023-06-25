@@ -13,7 +13,7 @@ const BusquedaAleatoria = () => {
     };
 
     return(
-        <button onClick={(HandleRandomPath)} type="submit" className="px-1 py-3 bg-transparent rounded-r-full hidden md:block">
+        <button id= "randomButton" onClick={(HandleRandomPath)} type="submit" className="px-1 py-3 bg-transparent rounded-r-full hidden md:block">
             <img src={dado} alt="Dado - Busqueda al azar" className="w-8 min-w-[21px]"></img>
         </button>
     )
