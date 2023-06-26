@@ -61,7 +61,7 @@ const QuizMonarquia = () => {
 			setQuestionNumber(questionNumber - 1);
 		} else {
 			Swal.fire({
-				title: "¿Estás seguro que quieres salir? Perderás tus cambios",
+				title: "¿Estás seguro que quieres salir?",
 				showCancelButton: true,
 				confirmButtonText: "Sí",
 				confirmButtonColor: "#03ac13",
@@ -115,7 +115,6 @@ const QuizMonarquia = () => {
 				}).then((result) => {
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
-
 						let respuestasCorrectas = 0;
 
 						//Guardar respuestas del quiz en localStorage
@@ -157,7 +156,9 @@ const QuizMonarquia = () => {
 								});
 						} else {
 							// Manejar el caso en el que no haya token disponible, usuario sin logear
-							console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+							console.log(
+								"El usuario no esta logeado, calificaciones no guardadas en base de datos"
+							);
 						}
 
 						Swal.fire({

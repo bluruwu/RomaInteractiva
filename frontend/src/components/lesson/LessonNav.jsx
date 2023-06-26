@@ -92,10 +92,10 @@ const LessonNav = ({
 	};
 
 	return (
-		<div className="flex flex-col md:flex-row bg-red-100 ">
+		<div className="flex flex-col  md:flex-row bg-red-100 fixed bottom-0 left-0 w-full">
 			{/* Leccion anterior */}
 			<div
-				className="w-full md:w-1/2 h-40 relative cursor-pointer overflow-hidden"
+				className="w-full md:w-1/2 h-[6rem] md:h-[6rem] lg:h-[6rem] relative cursor-pointer overflow-hidden"
 				onClick={() => navigate(urlbef)}
 				onMouseEnter={handleHoverPrev}
 				onMouseLeave={handleMouseLeavePrev}
@@ -122,14 +122,14 @@ const LessonNav = ({
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 					<p
 						className={`text-lg font-bold text-white ${
-							isHoveredPrev ? "scale-125 transition-all duration-500" : ""
+							isHoveredPrev ? "scale-110 transition-all duration-500" : ""
 						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						Anterior
 					</p>
 					<p
 						className={`text-lg font-bold text-white ${
-							isHoveredPrev ? "scale-125 transition-all duration-500" : ""
+							isHoveredPrev ? "scale-110 transition-all duration-500" : ""
 						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						{titlebef}
@@ -139,7 +139,7 @@ const LessonNav = ({
 
 			{/* Leccion siguiente */}
 			<div
-				className="w-full md:w-1/2 h-40 relative cursor-pointer overflow-hidden"
+				className="w-full md:w-1/2 h-[6rem] md:h-[6rem] lg:h-[6rem] relative cursor-pointer overflow-hidden"
 				onClick={quizMessage}
 				onMouseEnter={handleHoverNext}
 				onMouseLeave={handleMouseLeaveNext}
@@ -162,14 +162,14 @@ const LessonNav = ({
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 					<p
 						className={`text-lg font-bold text-white ${
-							isHoveredNext ? "scale-125 transition-all duration-500" : ""
+							isHoveredNext ? "scale-110 transition-all duration-500" : ""
 						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						Siguiente
 					</p>
 					<p
 						className={`text-lg font-bold text-white ${
-							isHoveredNext ? "scale-125 transition-all duration-500" : ""
+							isHoveredNext ? "scale-110 transition-all duration-500" : ""
 						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						{titlenxt}
