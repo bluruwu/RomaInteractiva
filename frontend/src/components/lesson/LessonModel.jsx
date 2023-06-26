@@ -13,7 +13,7 @@ const LessonModel = ({ description, titleModel, source }) => {
 	};
 	return (
 		<div
-			className="w-full md:w-full lg:w-1/2 flex  relative sketchfab-embed-wrapper"
+			className="w-full md:w-full lg:w-1/2 flex relative sketchfab-embed-wrapper"
 			onMouseEnter={handleHover}
 			onMouseLeave={handleMouseLeave}
 		>
@@ -33,15 +33,8 @@ const LessonModel = ({ description, titleModel, source }) => {
 				className="w-full"
 			></iframe>
 			{/* Descripcion del modelo 3D */}
-			{/* <div
-				className={`flex font-bold items-end justify-end absolute bottom-36 right-8 p-3 bg-custom-doradonormal rounded-md hover:hidden shadow-xl ${
-					isHovered ? "opacity-100" : "opacity-0"
-				} transition-opacity duration-500`}
-			>
-				<p>{description}</p>
-			</div> */}
 			<div
-				className={`flex font-bold items-end justify-end absolute bottom-16 right-8 p-3 bg-custom-doradonormal rounded-md shadow-xl hover:hidden ${
+				className={`flex font-bold items-end justify-end absolute bottom-16 right-8 p-3 bg-custom-doradonormal rounded-md shadow-xl lg:text-sm md:text-xs text-xs hover:hidden ${
 					isHovered ? "opacity-0 transition-opacity duration-500" : "opacity-100"
 				}`}
 				style={{ transition: "opacity 0.5s" }}
