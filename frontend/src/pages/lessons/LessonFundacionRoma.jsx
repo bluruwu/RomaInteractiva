@@ -30,24 +30,22 @@ const LessonFundacionRoma = () => {
 	return (
 		<div className="font-text flex flex-col min-h-screen">
 			{/* Barra de navegación */}
-			<div>
-				<Navbar />
-			</div>
+			<Navbar />
 
-			<div className="flex-grow flex flex-col">
-				<div className="flex flex-grow justify-center">
-					<LessonText
-						title="Fundación de Roma"
-						firstparag={first}
-						secondparag={second}
-						thirdparag={third}
-					/>
-					<LessonModel
-						description="Rómulo y Remo, fundadores de Roma"
-						titleModel="Romulus & Remus"
-						source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
-					/>
-				</div>
+			<div className="flex flex-grow flex-col md:flex-row">
+				{/* <div className="flex flex-grow  md:flex-row"> */}
+				<LessonText
+					title="Fundación de Roma"
+					firstparag={first}
+					secondparag={second}
+					thirdparag={third}
+				/>
+				<LessonModel
+					description="Rómulo y Remo, fundadores de Roma"
+					titleModel="Romulus & Remus"
+					source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
+				/>
+				{/* </div> */}
 			</div>
 
 			{/* Navegación entre lecciones */}

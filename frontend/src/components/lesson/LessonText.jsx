@@ -3,7 +3,7 @@ import HomeButton from "../../utilities/HomeButton";
 
 const LessonText = ({ title, firstparag, secondparag, thirdparag }) => {
 	return (
-		<div className=" w-1/2  p-14 bg-gray-100">
+		<div className=" w-full md:w-full lg:w-1/2 p-14">
 			{/* Botón de inicio */}
 			<div className="mb-10 text-3xl ">
 				<p className=" font-bold text-center filter drop-shadow-lg">{title}</p>
