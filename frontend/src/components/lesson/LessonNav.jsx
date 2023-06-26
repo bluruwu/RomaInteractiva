@@ -92,7 +92,7 @@ const LessonNav = ({
 	};
 
 	return (
-		<div className="flex flex-col  md:flex-row bg-red-100 fixed bottom-0 left-0 w-full">
+		<div className="flex flex-col h-[12rem] md:h-[6rem] lg:h-[6rem] md:flex-row bg-red-100 w-full">
 			{/* Leccion anterior */}
 			<div
 				className="w-full md:w-1/2 h-[6rem] md:h-[6rem] lg:h-[6rem] relative cursor-pointer overflow-hidden"
