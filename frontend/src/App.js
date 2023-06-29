@@ -31,6 +31,7 @@ import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
 
 import UploadTheImage from "./utilities/UploadTheImage";
 import LessonPuzzle from "./pages/lessons/LessonPuzzle";
+import LessonCrossword from "./pages/lessons/LessonCrossword";
 
 // import Prueba from "./pages/lessons/puzzle/index";
 
@@ -75,6 +76,7 @@ const App = () => {
 
 			<Route path="/UploadTheImage" element={<UploadTheImage />} />
 			<Route path="/Puzzle" element={<LessonPuzzle />} />
+			<Route path="/Crossword" element={<LessonCrossword />} />
 		</Routes>
 	);
 };
