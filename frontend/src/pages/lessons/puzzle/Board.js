@@ -59,7 +59,7 @@ function Board({ imgUrl }) {
 
 			{hasWon && isStarted && <div>Puzzle solved 🧠 🎉</div>}
 			{!isStarted ? (
-				<div className="flex justify-center items-center mt-8">
+				<div className="flex justify-center items-center mt-8 mb-8">
 					<button
 						onClick={() => handleStartClick()}
 						className="bg-custom-doradodark hover:bg-custom-doradonormal text-white font-bold py-2 px-4 rounded shadow-md transform transition duration-300 hover:scale-110"
