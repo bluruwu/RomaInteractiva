@@ -1,43 +1,90 @@
 import React from "react";
 import Navbar from "../../utilities/Navbar";
-import Image from "../../media/coliseo.jpg"; // Ruta de la imagen
 import Crossword from "@jaredreisinger/react-crossword";
+import Swal from "sweetalert2";
 
 const LessonCrossword = () => {
-	const navbarHeight = 2; // Altura del Navbar en píxeles
-
 	const crosswordData = {
 		across: {
 			1: {
-				clue: "one plus one",
-				answer: "TWO",
-				row: 0,
+				clue: "Tipo de casa romana",
+				answer: "DOMUS",
+				row: 2,
+				col: 5,
+			},
+			2: {
+				clue: "La legendaria espada romana",
+				answer: "GLADIUS",
+				row: 4,
+				col: 1,
+			},
+			3: {
+				clue: "También conocido como Anfiteatro Flavio",
+				answer: "COLISEO",
+				row: 8,
 				col: 0,
 			},
 		},
 		down: {
-			2: {
-				clue: "three minus two",
-				answer: "ONE",
+			4: {
+				clue: "General cartaginés",
+				answer: "ANIBAL",
 				row: 0,
-				col: 2,
+				col: 3,
+			},
+			5: {
+				clue: "Primer rey de Roma",
+				answer: "ROMULO",
+				row: 1,
+				col: 6,
+			},
+			6: {
+				clue: "Primer emperador del Imperio Romano",
+				answer: "AUGUSTO",
+				row: 2,
+				col: 1,
 			},
 		},
+	};
+
+	const handleCorrect = () => {
+		let timerInterval;
+		Swal.fire({
+			title: "¡Ganaste!",
+			html: "Has contestado correctamente todas las preguntas",
+			timer: 4000,
+			timerProgressBar: true,
+			confirmButtonColor: "#03ac13",
+			customClass: {
+				container: "font-text",
+			},
+			willClose: () => {
+				clearInterval(timerInterval);
+			},
+		});
 	};
 
 	return (
 		<div className="font-text">
 			<Navbar />
 
-			<div className={`flex flex-col md:flex-row h-fit h-[calc(100vh - ${navbarHeight}px)]`}>
-				{/* <div className="w-full md:w-1/2 flex flex-col items-center space-y-4"> */}
-				<div className="w-full mt-10 mb-10 justify-center items-center">
-					<p className="font-bold text-3xl text-center drop-shadow-xl">Crucigrama Romano</p>
-					<div className="h-full">
-						<Crossword data={crosswordData} />
+			<div className=" mt-10 mb-10 justify-center items-center">
+				<div className="w-full">
+					<p className="font-bold text-3xl text-center drop-shadow-xl pb-4">Crucigrama Romano</p>
+					<p className=" text-center">
+						A la derecha encontrarás las preguntas divididas en horizontal (ACROSS) y vertical
+						(DOWN).
+					</p>
+					<p className=" text-center drop-shadow-xl pb-8">
+						Selecciona una de ellas para resolverla.
+					</p>
+				</div>
+
+				<div className="w-full h-2/4 flex justify-center">
+					<div className="flex mx-auto w-2/4 ">
+						<Crossword data={crosswordData} onCrosswordCorrect={handleCorrect} />
 					</div>
 				</div>
-				{/* </div> */}
 			</div>
 		</div>
 	);
