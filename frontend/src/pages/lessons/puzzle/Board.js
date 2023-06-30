@@ -57,7 +57,10 @@ function Board({ imgUrl }) {
 				))}
 			</ul>
 
+			{/* Cuando se gana  */}
 			{hasWon && isStarted && <div>Puzzle solved 🧠 🎉</div>}
+
+			{/* Si no ha iniciado el juego INICIAR JUEGO */}
 			{!isStarted ? (
 				<div className="flex justify-center items-center mt-8 mb-8">
 					<button
@@ -68,6 +71,7 @@ function Board({ imgUrl }) {
 					</button>
 				</div>
 			) : (
+				// Si esta jugando REINICIAR JUEGO
 				<div className="flex justify-center items-center mt-8">
 					<button
 						onClick={() => handleShuffleClick()}

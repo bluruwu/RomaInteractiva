@@ -4,6 +4,7 @@ import Crossword from "@jaredreisinger/react-crossword";
 import Swal from "sweetalert2";
 
 const LessonCrossword = () => {
+	// Datos del crucigrama
 	const crosswordData = {
 		across: {
 			1: {
@@ -47,6 +48,7 @@ const LessonCrossword = () => {
 		},
 	};
 
+	//Cuando el usuario gana
 	const handleCorrect = () => {
 		let timerInterval;
 		Swal.fire({
@@ -69,6 +71,7 @@ const LessonCrossword = () => {
 			<Navbar />
 
 			<div className=" mt-10 mb-10 justify-center items-center">
+				{/* Titulo y descripcion */}
 				<div className="w-full">
 					<p className="font-bold text-3xl text-center drop-shadow-xl pb-4">Crucigrama Romano</p>
 					<p className=" text-center">
@@ -80,6 +83,7 @@ const LessonCrossword = () => {
 					</p>
 				</div>
 
+				{/* Mostrar crucigrama */}
 				<div className="w-full h-2/4 flex justify-center">
 					<div className="flex mx-auto w-2/4 ">
 						<Crossword data={crosswordData} onCrosswordCorrect={handleCorrect} />
