@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Tile from "./Tile";
 import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "./constants";
 import { canSwap, shuffle, swap, isSolved } from "./helpers";
+import Swal from 'sweetalert2';
 
 function Board({ imgUrl }) {
 	const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
@@ -41,6 +42,21 @@ function Board({ imgUrl }) {
 	};
 	const hasWon = isSolved(tiles);
 
+	const showPuzzleSolvedNotification = () => {
+		Swal.fire({
+			title: '¡Rompecabezas resuelto! 🧠 🎉',
+			icon: 'success',
+			showConfirmButton: true,
+			customClass: {
+				container: "font-text", // Cambiar la fuente del título
+			}
+		});
+	};
+	
+	if (hasWon && isStarted) {
+		showPuzzleSolvedNotification();
+	}
+
 	return (
 		<>
 			<ul style={style} className="board">
@@ -56,9 +72,6 @@ function Board({ imgUrl }) {
 					/>
 				))}
 			</ul>
-
-			{/* Cuando se gana  */}
-			{hasWon && isStarted && <div>Puzzle solved 🧠 🎉</div>}
 
 			{/* Si no ha iniciado el juego INICIAR JUEGO */}
 			{!isStarted ? (
