@@ -44,8 +44,8 @@ function Board({ imageUrl, imageName }) {
 
 	const showPuzzleSolvedNotification = () => {
 		Swal.fire({
-			title: "¡Rompecabezas resuelto! 🧠 🎉",
-			text: `Has completado el rompecabezas de "${imageName}"`,
+			title: "¡Rompecabezas resuelto! 🎉",
+			text: `Has completado el rompecabezas "${imageName}"`,
 			icon: "success",
 			showConfirmButton: true,
 			customClass: {
