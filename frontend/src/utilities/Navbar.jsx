@@ -8,7 +8,7 @@ import { Fragment } from "react";
 import { getAPI_URL } from "../conections/requests";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 
-const Navbar = ({inQuiz}) => {
+const Navbar = ({ inQuiz }) => {
 
 	const API_URL = getAPI_URL();
 	const navigate = useNavigate();
@@ -89,7 +89,7 @@ const Navbar = ({inQuiz}) => {
 	}
 
 	return (
-		<nav className="bg-custom-rojo">
+		<nav className={`bg-custom-rojo ${isHome ? 'fixed top-0 left-0 w-full z-50' : ''}`}>
 			<div className="flex justify-between mx-4 md:mx-20">
 				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
@@ -109,6 +109,15 @@ const Navbar = ({inQuiz}) => {
 
 				{/* Barra de busqueda, texto y avatar */}
 				<ul className="flex space-x-4 items-center">
+					{/* Boton que redirige al menu con los diferentes juegos */}
+					<li className="mr-12">
+						<button
+							className="text-custom-doradonormal hover:text-white font-text font-regular"
+							onClick={() => navigate('/games')}
+						>
+							Juegos
+						</button>
+					</li>
 					{/* Barra de busqueda */}
 					<BusquedaAleatoria />
 					<li className="ml-20 mr-20 hidden md:block">
