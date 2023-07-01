@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Tile from "./Tile";
 import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "./constants";
 import { canSwap, shuffle, swap, isSolved } from "./helpers";
+import Swal from 'sweetalert2';
 
 function Board({ imgUrl }) {
 	const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
@@ -41,6 +42,21 @@ function Board({ imgUrl }) {
 	};
 	const hasWon = isSolved(tiles);
 
+	const showPuzzleSolvedNotification = () => {
+		Swal.fire({
+			title: '¡Rompecabezas resuelto! 🧠 🎉',
+			icon: 'success',
+			showConfirmButton: true,
+			customClass: {
+				container: "font-text", // Cambiar la fuente del título
+			}
+		});
+	};
+	
+	if (hasWon && isStarted) {
+		showPuzzleSolvedNotification();
+	}
+
 	return (
 		<>
 			<ul style={style} className="board">
@@ -57,9 +73,9 @@ function Board({ imgUrl }) {
 				))}
 			</ul>
 
-			{hasWon && isStarted && <div>Puzzle solved 🧠 🎉</div>}
+			{/* Si no ha iniciado el juego INICIAR JUEGO */}
 			{!isStarted ? (
-				<div className="flex justify-center items-center mt-8">
+				<div className="flex justify-center items-center mt-8 mb-8">
 					<button
 						onClick={() => handleStartClick()}
 						className="bg-custom-doradodark hover:bg-custom-doradonormal text-white font-bold py-2 px-4 rounded shadow-md transform transition duration-300 hover:scale-110"
@@ -68,6 +84,7 @@ function Board({ imgUrl }) {
 					</button>
 				</div>
 			) : (
+				// Si esta jugando REINICIAR JUEGO
 				<div className="flex justify-center items-center mt-8">
 					<button
 						onClick={() => handleShuffleClick()}
