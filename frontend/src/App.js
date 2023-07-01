@@ -32,8 +32,7 @@ import LessonRomuloRemo from "./pages/lessons/LessonRomuloRemo";
 import UploadTheImage from "./utilities/UploadTheImage";
 import LessonPuzzle from "./pages/lessons/LessonPuzzle";
 import LessonCrossword from "./pages/lessons/LessonCrossword";
-
-// import Prueba from "./pages/lessons/puzzle/index";
+import Games from "./pages/Games";
 
 //Rutas de la aplicacion. Con el path y el elemento que debe ser renderizado importado previamente
 const App = () => {
@@ -50,33 +49,43 @@ const App = () => {
 			<Route path="Quiz_Personajes" element={<QuizPersonajes />} />
 			<Route path="Quiz_Imperio" element={<QuizImperio />} />
 
+			{/* Lecciones Monarquia */}
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />
 			<Route path="/Reyes_de_Roma" element={<LessonReyesDeRoma />} />
 			<Route path="/Final_Monarquia" element={<LessonFinalMonarquia />} />
 
+			{/* Lecciones Republica */}
 			<Route path="/Fundacion_Republica" element={<LessonFundacionRepublica />} />
 			<Route path="/Expansion_Republica" element={<LessonExpRepublica />} />
 			<Route path="/Colapso_Republica" element={<LessonColapsoRepublica />} />
 
+			{/* Lecciones Imperio */}
 			<Route path="/Cristianismo_Imperio" element={<LessonCristianismoImp />} />
 			<Route path="/Armas_Imperio" element={<LessonArmasImperio />} />
 			<Route path="/Final_Imperio" element={<LessonFinalImperio />} />
 
+			{/* Lecciones Personajes */}
 			<Route path="/Romulo_Remo" element={<LessonRomuloRemo />} />
 			<Route path="/Julio_Cesar" element={<LessonJulioCesar />} />
 			<Route path="/Augusto" element={<LessonAugusto />} />
 
+			{/* Lecciones Arquitectura */}
 			<Route path="/Coliseo_Romano" element={<LessonColiseo />} />
 			<Route path="/Panteon_Agripa" element={<LessonPanteon />} />
 			<Route path="/Acueducto_Romano" element={<LessonAcueducto />} />
 
+			{/* Lecciones Cultura */}
 			<Route path="/Educacion" element={<LessonEducacion />} />
 			<Route path="/Recreacion" element={<LessonRecreacion />} />
 			<Route path="/Viviendas" element={<LessonViviendas />} />
 
+			{/* Manejo Imagen */}
 			<Route path="/UploadTheImage" element={<UploadTheImage />} />
+
+			{/* Juegos */}
 			<Route path="/Puzzle" element={<LessonPuzzle />} />
 			<Route path="/Crossword" element={<LessonCrossword />} />
+			<Route path="/Games" element={<Games />} />
 		</Routes>
 	);
 };
