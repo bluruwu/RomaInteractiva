@@ -7,19 +7,23 @@ import Image3 from "./imagenes/constantino.png";
 import Image4 from "./imagenes/panteon.jpg";
 
 function Puzzle() {
-	const images = [Image1, Image2, Image3, Image4];
-	const [imgUrl, setImgUrl] = useState("");
+	const images = [
+		{ url: Image1, name: "Coliseo Romano" },
+		{ url: Image2, name: "Estatua del Emperador Augusto" },
+		{ url: Image3, name: "Busto del Emperador Constantino" },
+		{ url: Image4, name: "Panteón de Agripa" },
+	];
+	const [selectedImage, setSelectedImage] = useState(null);
 
-	//Se escoge una imagen al azar entre las 4 imagenes importadas
 	useEffect(() => {
 		const randomIndex = Math.floor(Math.random() * images.length);
-		setImgUrl(images[randomIndex]);
+		setSelectedImage(images[randomIndex]);
 	}, []);
 
 	return (
 		<div>
 			{/* Mostrar tablero */}
-			<Board imgUrl={imgUrl} />
+			{selectedImage && <Board imageUrl={selectedImage.url} imageName={selectedImage.name} />}
 		</div>
 	);
 }
