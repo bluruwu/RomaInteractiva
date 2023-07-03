@@ -38,7 +38,7 @@ const Games = () => {
 				>
 					<img
 						src={Image1}
-						alt="Anterior leccion"
+						alt="Imagen Juego Rompecabezas"
 						className={`block w-full h-full object-cover ${
 							isHoveredPuzzle ? "scale-110 transition-all duration-500" : ""
 						}${!isHoveredPuzzle ? "scale-100 transition-all duration-500" : ""}`}
@@ -82,7 +82,7 @@ const Games = () => {
 				>
 					<img
 						src={Image2}
-						alt="Anterior leccion"
+						alt="Imagen Juego Crucigrama"
 						className={`block w-full h-full object-cover ${
 							isHoveredCrossword ? "scale-110 transition-all duration-500" : ""
 						}${!isHoveredCrossword ? "scale-100 transition-all duration-500" : ""}`}
