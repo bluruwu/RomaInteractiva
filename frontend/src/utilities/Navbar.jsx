@@ -9,7 +9,6 @@ import { getAPI_URL } from "../conections/requests";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 
 const Navbar = ({ inQuiz }) => {
-
 	const API_URL = getAPI_URL();
 	const navigate = useNavigate();
 
@@ -25,7 +24,7 @@ const Navbar = ({ inQuiz }) => {
 	const [cerrarSesion, setCerrarSesion] = useState(false);
 	//Obtener ruta de la pagina actual
 	const location = useLocation();
-	const isHome = location.pathname === "/home";
+	const isHome = location.pathname === "/" || location.pathname === "/home";
 	const onProfile = location.pathname === "/perfil";
 
 	// Redirigir al usuario según la existencia del nickname
@@ -53,7 +52,7 @@ const Navbar = ({ inQuiz }) => {
 		} else {
 			if (inQuiz) {
 				Swal.fire({
-					title: "¿Estás seguro que quieres salir? Perderás tus cambios",
+					title: "¿Estás seguro que quieres salir?",
 					showCancelButton: true,
 					confirmButtonText: "Sí",
 					confirmButtonColor: "#03ac13",
@@ -64,13 +63,11 @@ const Navbar = ({ inQuiz }) => {
 					/* Read more about isConfirmed, isDenied below */
 					if (result.isConfirmed) {
 						navigate("/home");
-					}
-					else {
+					} else {
 						setGoHome(false);
 					}
 				});
-			}
-			else return <Navigate to="/home" />;
+			} else return <Navigate to="/home" />;
 		}
 	}
 
@@ -89,7 +86,7 @@ const Navbar = ({ inQuiz }) => {
 	}
 
 	return (
-		<nav className={`bg-custom-rojo ${isHome ? 'fixed top-0 left-0 w-full z-50' : ''}`}>
+		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
 			<div className="flex justify-between mx-4 md:mx-20">
 				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
@@ -113,7 +110,7 @@ const Navbar = ({ inQuiz }) => {
 					<li className="mr-12">
 						<button
 							className="text-custom-doradonormal hover:text-white font-text font-regular"
-							onClick={() => navigate('/games')}
+							onClick={() => navigate("/games")}
 						>
 							Juegos
 						</button>
@@ -147,17 +144,19 @@ const Navbar = ({ inQuiz }) => {
 											{idAvatar ? (
 												<img
 													alt="Avatar del usuario"
-													src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg` : `${API_URL}/image/avatar${idAvatar}.jpg`}
+													src={
+														idAvatar < 7
+															? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+															: `${API_URL}/image/avatar${idAvatar}.jpg`
+													}
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 												/>
 											) : (
 												<img
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
-
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 													onClick={handleNavigation}
-
 												/>
 											)}
 										</div>

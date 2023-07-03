@@ -4,32 +4,32 @@ import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 
-const first = ``
-
-const second = ``
-
-const third = ``
-
 const LessonRecreacion = () => {
+	const paragraphs = [];
 
 	return (
-		<div className="font-text"> {/* Div principal */}
-		{/* Barra de navegación */}
+		<div className="font-text flex flex-col min-h-screen">
+			{" "}
+			{/* Div principal */}
+			{/* Barra de navegación */}
 			<Navbar />
-			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
+			<div className="flex flex-grow flex-col md:flex-row relative">
+				{" "}
+				{/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText 
-					title="Recreación en la Antigua Roma" 
-					firstparag = {first} 
-					secondparag={second} 
-					thirdparag={third}
-				/> 
+				<LessonText title="Recreación en la Antigua Roma" paragraphs={paragraphs} />
 				{/* Componente del modelo 3D */}
-				<LessonModel description="" titleModel="" source=""/>
+				<LessonModel description="" titleModel="" source="" />
 			</div>
 			{/* Navegación entre lecciones */}
-			<LessonNav urlbef="/Educacion" mediabef="educacion.png" titlebef="LA EDUCACIÓN EN LA ANTIGUA ROMA" 
-			           urlnxt="/Quiz_Cultura" medianxt="quiz.jpg"  titlenxt="QUIZ (CULTURA)"/>
+			<LessonNav
+				urlbef="/Educacion"
+				mediabef="educacion.png"
+				titlebef="LA EDUCACIÓN EN LA ANTIGUA ROMA"
+				urlnxt="/Quiz_Cultura"
+				medianxt="quiz.jpg"
+				titlenxt="QUIZ (CULTURA)"
+			/>
 		</div>
 	);
 };
