@@ -191,14 +191,14 @@ const Register = () => {
 								onChange={(e) => setConfirmedPassword(e.target.value)}
 							/>
 						</div>
-					
+						<div className="divfields">
 					<button
 						type="submit"
 						className="registerbutton"
 
 					>
 						Register
-					</button>
+					</button></div>
 					<br />
 					<p
 						className="link"

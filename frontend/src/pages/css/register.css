@@ -19,9 +19,11 @@
 }
 
 #register .divfields {
-    width: 80%;
+    width: 100%;
+
     padding: 12px 20px;
-  
+    margin-top: 1px;
+    margin-bottom: 10px;
     box-sizing: border-box;
 }
 
@@ -44,7 +46,8 @@
 
 
 #register .registerbutton {
-    width: 77%;
+    width: 100%;
+    margin-top: 1px;
     padding-left: 6px;
     padding-right: 6px;
     padding-top: 6px;
@@ -54,6 +57,7 @@
     background-color: #8e0000;
     border-radius: 15px;
     cursor: pointer;
+    margin-bottom: -16px;
 
 }
 
