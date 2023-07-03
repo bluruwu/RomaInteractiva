@@ -8,7 +8,7 @@ const LessonText = ({ title, paragraphs }) => {
 	};
 
 	return (
-		<div className="w-full md:w-full lg:w-1/2 p-14 relative">
+		<div className="pt-20 md:w-1/2 p-14 relative">
 			{/* Titulo de la leccion */}
 			<div className="mb-10 text-3xl">
 				<p className="font-bold text-center filter drop-shadow-lg">{title}</p>
@@ -28,23 +28,21 @@ const LessonText = ({ title, paragraphs }) => {
 						{paragraph}
 					</p>
 				))}
+			</div>
 
-				{/* Botones circulares */}
-				<div className="absolute top-72 right-4 z-10 flex space-x-2">
-					{paragraphs.map((_, index) => (
-						<button
-							key={index}
-							onClick={() => handleParagraphChange(index)}
-							className={`rounded-full h-8 w-8 flex items-center justify-center text-base border ${
-								currentParagraph === index
-									? "bg-[#e69200] text-white "
-									: "bg-gray-300 text-gray-600"
-							}`}
-						>
-							{index + 1}
-						</button>
-					))}
-				</div>
+			{/* Botones circulares */}
+			<div className="bottom-32 z-10 flex space-x-2 absolute right-1 transform -translate-x-1/2">
+				{paragraphs.map((_, index) => (
+					<button
+						key={index}
+						onClick={() => handleParagraphChange(index)}
+						className={`rounded-full h-8 w-8 flex items-center justify-center text-base border ${
+							currentParagraph === index ? "bg-[#e69200] text-white " : "bg-gray-300 text-gray-600"
+						}`}
+					>
+						{index + 1}
+					</button>
+				))}
 			</div>
 		</div>
 	);
