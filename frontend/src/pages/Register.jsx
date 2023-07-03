@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../conections/requests";
 import HomeButton from "../utilities/HomeButton";
 import Swal from "sweetalert2";
-import "./css/register.css"
+import "./css/register.css";
 
 const Register = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -124,11 +124,11 @@ const Register = () => {
 	};
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para registrarse. Además del botón de submit y el botón que lleva a Login y Home
 	return (
-		<div id="register" className="font-text">
+		<div id="register" className="font-text flex flex-col ">
 			<form onSubmit={handleSubmit}>
-				<div className="form">
+				<div className="flex flex-col grow max-h-screen md:flex-row">
 					{/* Imagen de fondo */}
-					<div className="flex-1.6  justify-center items-center">
+					<div className="w-2/3 md:w-2/3 flex flex-grow">
 						<img
 							src={require("../media/coliseo.jpg")}
 							alt="Imagen de fondo"
@@ -137,9 +137,9 @@ const Register = () => {
 					</div>
 
 					{/* Panel derecho */}
-					<div className="homebutton">
+					<div className="panelderecho ">
 						{/* HomeButton */}
-						<div className="self-end justify-end items-end">
+						<div className="self-end items-end mb-4 pr-0">
 							<HomeButton />
 						</div>
 
@@ -147,7 +147,7 @@ const Register = () => {
 						<img
 							src={require("../media/logos/logo.png")}
 							alt="Imagen en el top right"
-							className="welcomeimage"
+							className="welcomeimage mb-4"
 						/>
 
 						{/* Formulario */}
@@ -192,25 +192,18 @@ const Register = () => {
 							/>
 						</div>
 						<div className="divfields">
-					<button
-						type="submit"
-						className="registerbutton"
-
-					>
-						Register
-					</button></div>
-					<br />
-					<p
-						className="link"
-						onClick={() => navigate("/login")}
-					>
-						Already have an account?
-					</p>
+							<button type="submit" className="registerbutton">
+								Register
+							</button>
+						</div>
+						<br />
+						<p className="link cursor-pointer" onClick={() => navigate("/login")}>
+							Already have an account?
+						</p>
 					</div>
-				</div >
-			</form >
-		</div >
-
+				</div>
+			</form>
+		</div>
 	);
 };
 
