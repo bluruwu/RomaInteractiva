@@ -124,7 +124,7 @@ const Register = () => {
 	};
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para registrarse. Además del botón de submit y el botón que lleva a Login y Home
 	return (
-		<div id="register">
+		<div id="register" className="font-text">
 			<form onSubmit={handleSubmit}>
 				<div className="form">
 					{/* Imagen de fondo */}

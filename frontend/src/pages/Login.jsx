@@ -57,7 +57,7 @@ const Login = () => {
 
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
 	return (
-		<div id="login" >
+		<div id="login" className="font-text" >
 			{showAlert && <Alert />}
 
 			<form onSubmit={handleSubmit}>
