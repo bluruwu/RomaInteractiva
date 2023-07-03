@@ -4,6 +4,7 @@ import { postLogin, getPrueba } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
+import "./css/login.css"
 
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -56,11 +57,11 @@ const Login = () => {
 
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
 	return (
-		<div className="flex h-screen font-text">
+		<div id="login" >
 			{showAlert && <Alert />}
 
 			<form onSubmit={handleSubmit}>
-				<div className="flex h-screen">
+				<div className="form">
 					<div className="flex-1.6  justify-center items-center">
 						<img
 							src={require("../media/plazaSanPedro.jpg")}
@@ -68,30 +69,30 @@ const Login = () => {
 							className="block w-full h-full object-cover"
 						/>
 					</div>
-					<div className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-40">
+					<div className="homebutton">
 						<div className="self-end justify-end items-end">
 							<HomeButton />
 						</div>
 
 						<img
-							src={require("../media/iconos/luperca.jpg")}
+							src={require("../media/iconos/luperca.png")}
 							alt="Imagen en el top right"
-							className="max-w-200 max-h-200 object-cover  max-w-prose"
+							className="welcomeimage"
 						/>
-						<div className="mb-4">
+						<div className="divfields">
 							<input
 								id="email"
 								type="text"
-								className="w-fit px-32 py-3 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+								className="inputfields"
 								placeholder="Email"
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
 						</div>
-						<div className="mb-4">
+						<div className="divfields">
 							<input
 								id="password"
 								type="password"
-								className="w-fit px-32 py-3 text-center text-gray-700 rounded-full border border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400"
+								className="inputfields"
 								placeholder="Password"
 								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
 							/>
@@ -99,7 +100,7 @@ const Login = () => {
 						<button
 							id="submit"
 							type="submit"
-							className="w-full px-6 py-3 text-xl text-white bg-custom-rojo rounded-full cursor-pointer hover:bg-red-800"
+							className="loginbutton"
 							onSubmit={(e) => e.preventDefault()}
 						>
 							Login
@@ -108,7 +109,7 @@ const Login = () => {
 						<br />
 						<p
 							id="recover"
-							className="underline ... hover:underline-offset-4 hover:text-green-500"
+							className="link"
 							onClick={() => navigate("/recoverpassword")}
 						>
 							Recover password
@@ -116,7 +117,7 @@ const Login = () => {
 						<br />
 						<p
 							id="navregistro"
-							className="underline ... hover:underline-offset-4 hover:text-green-500"
+							className="link"
 							onClick={() => navigate("/register")}
 						>
 							Don't have an account?
