@@ -18,7 +18,9 @@ const LessonPuzzle = () => {
 				<div className="w-full md:w-1/2 flex flex-grow flex-col items-center space-y-4">
 					{/* Titulo */}
 					<div className="w-full mt-10 mb-10 justify-center items-center">
-						<p className="font-bold text-3xl text-center drop-shadow-xl">Rompecabezas Romano</p>
+						<p className="font-bold text-3xl text-center filter drop-shadow-lg">
+							Rompecabezas Romano
+						</p>
 					</div>
 
 					{/* Rompecabezas con su boton */}
