@@ -24,7 +24,7 @@ const Navbar = ({ inQuiz }) => {
 	const [cerrarSesion, setCerrarSesion] = useState(false);
 	//Obtener ruta de la pagina actual
 	const location = useLocation();
-	const isHome = location.pathname === "/home";
+	const isHome = location.pathname === "/" || location.pathname === "/home";
 	const onProfile = location.pathname === "/perfil";
 
 	// Redirigir al usuario según la existencia del nickname
@@ -86,7 +86,7 @@ const Navbar = ({ inQuiz }) => {
 	}
 
 	return (
-		<nav className={`bg-custom-rojo ${isHome ? "fixed top-0 left-0 w-full z-50" : ""}`}>
+		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
 			<div className="flex justify-between mx-4 md:mx-20">
 				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
