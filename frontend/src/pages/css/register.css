@@ -19,7 +19,7 @@
 }
 
 #register .divfields {
-    width: 110%;
+    width: 80%;
     padding: 12px 20px;
   
     box-sizing: border-box;
@@ -44,7 +44,7 @@
 
 
 #register .registerbutton {
-    width: 100%;
+    width: 77%;
     padding-left: 6px;
     padding-right: 6px;
     padding-top: 6px;
@@ -76,7 +76,7 @@
 
 #register .welcomeimage {
     max-width: 100vh;
-    max-height:  17vh;
+    max-height:  20vh;
     object-fit: cover;
     
 }
