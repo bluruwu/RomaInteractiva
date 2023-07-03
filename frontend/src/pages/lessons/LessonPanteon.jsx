@@ -25,6 +25,24 @@ const third = `A lo largo de los siglos, el Panteón de Agripa ha servido a dife
 
 const LessonPanteon = () => {
 
+	const paragraphs = [
+		`El Panteón de Agripa es un majestuoso edificio ubicado en la ciudad de Roma, Italia. Construido 
+				durante el reinado del emperador romano Adriano en el año 126 d.C., el Panteón es considerado 
+				como uno de los logros más destacados de la arquitectura romana. Su imponente cúpula y diseño 
+				innovador han dejado una huella duradera en la historia de la arquitectura.`,
+				`El interior del Panteón es igualmente impresionante. Al entrar, los visitantes son 
+				recibidos por una amplia sala circular con una cúpula que se eleva majestuosamente sobre ellos.
+				 La cúpula del Panteón es famosa por su apertura central, conocida como oculus, que permite la 
+				 entrada de luz natural y crea un efecto visual sorprendente. Además, las paredes del interior 
+				 están decoradas con hermosos mármoles y detalles arquitectónicos que reflejan la exquisitez 
+				 del diseño romano.`,
+				 `A lo largo de los siglos, el Panteón de Agripa ha servido a diferentes propósitos y ha sido 
+				 testigo de numerosos eventos históricos. Hoy en día, se considera uno de los principales 
+				 atractivos turísticos de Roma y es un símbolo emblemático de la grandeza y la ingeniería 
+				 romana. Su durabilidad y belleza perduran como un tributo a la habilidad y visión de los 
+				 arquitectos de la antigua Roma.`,
+	];
+
 	//Información con los modelos que se ofrecerán en la lección del Panteon
 	const otrosModelos = [
 		{ description: "El Panteón de Agripa", titleModel: "Exterior del Panteón", source: "https://sketchfab.com/models/074e9fe9154f41169cb2e79f5330e58f/embed" },
@@ -45,9 +63,7 @@ const LessonPanteon = () => {
 				{/* Componente de texto de la lección */}
 				<LessonText
 					title="Panteón de Agripa"
-					firstparag={first}
-					secondparag={second}
-					thirdparag={third}
+					paragraphs={paragraphs}
 				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel description={modeloActual.description} titleModel={modeloActual.titleModel} source={modeloActual.source} />

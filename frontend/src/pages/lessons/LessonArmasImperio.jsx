@@ -1,31 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../../utilities/Navbar";
 import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 import DropdownMenu from "../../utilities/modelosMultiples";
 
-const first = `El Imperio Romano era conocido por su poderío militar y su sofisticado armamento, que 
-				desempeñó un papel crucial en su expansión y dominio. A lo largo de los siglos, los romanos 
-				desarrollaron una amplia variedad de armas y equipos que les permitieron mantener su 
-				supremacía en el campo de batalla.`
-
-const second = `En primer lugar, la legendaria espada romana, conocida como la gladius, era el arma principal 
-				de los soldados romanos. Esta espada de doble filo y hoja corta era ágil y eficiente en el 
-				combate cuerpo a cuerpo. La gladius permitía a los romanos realizar rápidos ataques y maniobras
-				 en formación, lo que los hacía formidables en el campo de batalla. Además de la espada, 
-				 los romanos también utilizaban una variedad de lanzas y jabalinas, como la pilum. El pilum 
-				 era una lanza pesada con una punta afilada y un astil largo. Los soldados romanos arrojaban 
-				 los pila a sus enemigos antes de cargar, causando estragos en las filas enemigas y 
-				 desorganizando sus formaciones.`
-
-const third = `Otro aspecto destacado del armamento romano era su habilidad en la ingeniería de asedio. Los 
-				romanos desarrollaron máquinas de asedio como catapultas, balistas y torres de asalto para 
-				conquistar ciudades y fortificaciones enemigas. Estas máquinas permitían a los romanos lanzar 
-				proyectiles de gran tamaño, como piedras y flechas, a largas distancias, lo que les daba una 
-				ventaja significativa en el asedio de fortalezas enemigas.`
-
 const LessonArmasImperio = () => {
+
+	const paragraphs = [
+		`El Imperio Romano era conocido por su poderío militar y su sofisticado armamento, que desempeñó un papel crucial en su expansión y dominio. A lo largo de los siglos, los romanos desarrollaron una amplia variedad de armas y equipos que les permitieron mantener su supremacía en el campo de batalla.`, `En primer lugar, la legendaria espada romana, conocida como la gladius, era el arma principal de los soldados romanos. Esta espada de doble filo y hoja corta era ágil y eficiente en el combate cuerpo a cuerpo. La gladius permitía a los romanos realizar rápidos ataques y maniobras en formación, lo que los hacía formidables en el campo de batalla. Además de la espada, los romanos también utilizaban una variedad de lanzas y jabalinas, como la pilum. El pilum era una lanza pesada con una punta afilada y un astil largo. Los soldados romanos arrojaban los pila a sus enemigos antes de cargar, causando estragos en las filas enemigas y desorganizando sus formaciones.`, `Otro aspecto destacado del armamento romano era su habilidad en la ingeniería de asedio. Los  romanos desarrollaron máquinas de asedio como catapultas, balistas y torres de asalto para conquistar ciudades y fortificaciones enemigas. Estas máquinas permitían a los romanos lanzar proyectiles de gran tamaño, como piedras y flechas, a largas distancias, lo que les daba una ventaja significativa en el asedio de fortalezas enemigas.`,
+	];
 
 	//Modelos ofrecidos para esta leccion, junto a sus descripciones
 	const otrosModelos = [
@@ -45,12 +29,10 @@ const LessonArmasImperio = () => {
 			<Navbar />
 			<div className="mb-4 flex flex-col md:flex-row "> {/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText 
-					title="Armamento en el Imperio Romano" 
-					firstparag = {first} 
-					secondparag={second} 
-					thirdparag={third}
-				/> 
+				<LessonText
+					title="Armamento en el Imperio Romano"
+					paragraphs={paragraphs}
+				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel description={modeloActual.description} titleModel={modeloActual.titleModel} source={modeloActual.source} />
 			</div>
@@ -59,8 +41,8 @@ const LessonArmasImperio = () => {
 				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} /> {/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
-			<LessonNav urlbef="/Cristianismo_Imperio" mediabef="cristianismo.jpg" titlebef="CRISTIANISMO EN EL IMPERIO ROMANO" 
-			           urlnxt="/Final_Imperio" medianxt="finalimperio.jpg"  titlenxt="FINAL DEL IMPERIO ROMANO"/>
+			<LessonNav urlbef="/Cristianismo_Imperio" mediabef="cristianismo.jpg" titlebef="CRISTIANISMO EN EL IMPERIO ROMANO"
+				urlnxt="/Final_Imperio" medianxt="finalimperio.jpg" titlenxt="FINAL DEL IMPERIO ROMANO" />
 		</div>
 	);
 };

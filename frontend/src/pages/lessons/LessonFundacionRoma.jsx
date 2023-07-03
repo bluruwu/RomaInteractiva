@@ -1,51 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../utilities/Navbar";
 import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 
-const first = `La fundación de Roma como una monarquía se remonta a la antigüedad y está envuelta en
-				leyendas y mitos. Según la tradición, la ciudad de Roma fue fundada en el año 753 a.C.
-				por Rómulo, quien se convirtió en el primer rey. La historia temprana de Roma se basa
-				en gran medida en la obra "Ab urbe condita" escrita por Tito Livio. Aunque muchas de
-				las historias anteriores a la República temprana son consideradas legendarias, se cree
-				que Rómulo estableció las bases de la estructura política y social de la incipiente
-				ciudad. Dividió la población en tribus y curias, y estableció un senado compuesto por
-				líderes locales.`;
-
-const second = `	La leyenda cuenta que Rómulo y su hermano Remo fueron abandonados en el río Tíber y
-				criados por una loba. Al crecer, decidieron fundar una ciudad en el lugar donde fueron
-				encontrados. Sin embargo, surgieron disputas entre los hermanos sobre quién gobernaría
-				la nueva ciudad. La disputa terminó trágicamente cuando Rómulo mató a Remo y se
-				convirtió en el primer rey de Roma. Bajo su reinado, se estableció la monarquía y se
-				sentaron las bases para el futuro desarrollo de la ciudad.`;
-
-const third = `Aunque la fundación de Roma como una monarquía se basa en la tradición y la mitología,
-				ha dejado un impacto duradero en la historia y la cultura romanas. La monarquía romana
-				sentó las bases de la futura República y posteriormente del Imperio, y su legado
-				continúa influyendo en la concepción del poder y la organización política en el mundo
-				antiguo y más allá.`;
-
 const LessonFundacionRoma = () => {
+
+	const paragraphs = [
+		`La fundación de Roma como una monarquía se remonta a la antigüedad y está envuelta en leyendas y mitos. Según la tradición, la ciudad de Roma fue fundada en el año 753 a.C. por Rómulo, quien se convirtió en el primer rey. La historia temprana de Roma se basa en gran medida en la obra 'Ab urbe condita' escrita por Tito Livio. Aunque muchas de las historias anteriores a la República temprana son consideradas legendarias, se cree que Rómulo estableció las bases de la estructura política y social de la incipiente ciudad. Dividió la población en tribus y curias, y estableció un senado compuesto por líderes locales.`,
+		`La leyenda cuenta que Rómulo y su hermano Remo fueron abandonados en el río Tíber y criados por una loba. Al crecer, decidieron fundar una ciudad en el lugar donde fueron encontrados. Sin embargo, surgieron disputas entre los hermanos sobre quién gobernaría la nueva ciudad. La disputa terminó trágicamente cuando Rómulo mató a Remo y se convirtió en el primer rey de Roma. Bajo su reinado, se estableció la monarquía y se sentaron las bases para el futuro desarrollo de la ciudad.`,
+		`Aunque la fundación de Roma como una monarquía se basa en la tradición y la mitología, ha dejado un impacto duradero en la historia y la cultura romanas. La monarquía romana sentó las bases de la futura República y posteriormente del Imperio, y su legado continúa influyendo en la concepción del poder y la organización política en el mundo antiguo y más allá.`,
+	];
+
 	return (
 		<div className="font-text flex flex-col min-h-screen">
 			{/* Barra de navegación */}
 			<Navbar />
 
-			<div className="flex flex-grow flex-col md:flex-row">
-				{/* <div className="flex flex-grow  md:flex-row"> */}
+			<div className="flex flex-grow flex-col md:flex-row relative">
 				<LessonText
 					title="Fundación de Roma"
-					firstparag={first}
-					secondparag={second}
-					thirdparag={third}
+					paragraphs={paragraphs}
 				/>
 				<LessonModel
 					description="Rómulo y Remo, fundadores de Roma"
 					titleModel="Romulus & Remus"
 					source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
 				/>
-				{/* </div> */}
 			</div>
 
 			{/* Navegación entre lecciones */}
@@ -59,6 +40,7 @@ const LessonFundacionRoma = () => {
 				last={false}
 				quiz={"monarquia"}
 			/>
+
 		</div>
 	);
 };

@@ -5,30 +5,30 @@ import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 import DropdownMenu from "../../utilities/modelosMultiples";
 
-const first = `Augusto, cuyo nombre completo era Cayo Octavio Augusto, fue el primer emperador 
+const LessonAugusto = () => {
+
+	const paragraphs = [
+		`Augusto, cuyo nombre completo era Cayo Octavio Augusto, fue el primer emperador 
 				del Imperio Romano. Nació el 23 de septiembre del año 63 a.C. y falleció el 19 de 
 				agosto del año 14 d.C. Fue el sobrino e hijo adoptivo de Julio César, a quien sucedió 
 				en el gobierno de Roma luego de su vil asesinato. Su ascenso al poder ocasionó varias luchas 
 				internas que tuvo que enfrentar antes de asumir el completo control del gobierno
 				Su reinado marcó el final de la República Romana y el comienzo de una nueva era en la 
 				historia de Roma: El imperio. Augusto gobernó con habilidad y astucia, 
-				consolidando su poder y estableciendo una paz duradera conocida como la "Pax Romana".`
-
-const second = `Bajo el gobierno de Augusto, Roma experimentó un período de prosperidad y estabilidad. 
+				consolidando su poder y estableciendo una paz duradera conocida como la "Pax Romana".`,
+				`Bajo el gobierno de Augusto, Roma experimentó un período de prosperidad y estabilidad. 
 				Implementó una serie de reformas políticas, administrativas y militares que sentaron 
 				las bases del sistema imperial romano. Además, Augusto impulsó una ambiciosa política 
 				de construcción y embellecimiento de la ciudad, promoviendo la creación de obras 
 				arquitectónicas y monumentos que aún hoy en día son admirados, como el Ara Pacis y 
-				el Mausoleo de Augusto.`
-
-const third = `Augusto también fue un líder carismático y habilidoso en la diplomacia. Supo forjar 
+				el Mausoleo de Augusto.`,
+				`Augusto también fue un líder carismático y habilidoso en la diplomacia. Supo forjar 
 				alianzas y establecer acuerdos con otras naciones y líderes, lo que le permitió expandir 
 				y consolidar el Imperio Romano. Su gobierno fue un punto de inflexión en la historia de 
 				Roma, sentando las bases para los siglos de dominio romano que le siguieron. Augusto 
 				dejó un legado duradero en la forma de un imperio fuerte y una Roma grandiosa, y su 
-				figura es recordada como una de las más importantes de la antigüedad clásica.`
-
-const LessonAugusto = () => {
+				figura es recordada como una de las más importantes de la antigüedad clásica.`,
+	];
 
 	//Información con los modelos que se ofrecerán en la lección de Augusto
 	const otrosModelos = [
@@ -50,9 +50,7 @@ const LessonAugusto = () => {
 				{/* Componente de texto de la lección */}
 				<LessonText 
 					title="Augusto" 
-					firstparag = {first} 
-					secondparag={second} 
-					thirdparag={third}
+					paragraphs={paragraphs}
 				/> 
 				{/* Componente del modelo 3D */}
 				<LessonModel description={modeloActual.description} titleModel={modeloActual.titleModel} source={modeloActual.source} />

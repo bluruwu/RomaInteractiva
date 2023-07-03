@@ -4,13 +4,10 @@ import LessonText from "../../components/lesson/LessonText";
 import LessonModel from "../../components/lesson/LessonModel";
 import LessonNav from "../../components/lesson/LessonNav";
 
-const first = ``
-
-const second = ``
-
-const third = ``
 
 const LessonAcueducto = () => {
+
+	const paragraphs = []
 
 	return (
 		<div className="font-text"> {/* Div principal */}
@@ -20,9 +17,7 @@ const LessonAcueducto = () => {
 			{/* Componente de texto de la lección */}
 				<LessonText 
 					title="Acueducto de la Antigua Roma" 
-					firstparag = {first} 
-					secondparag={second} 
-					thirdparag={third}
+					paragraphs={paragraphs}
 				/> 
 				{/* Componente del modelo 3D */}
 				<LessonModel description="" titleModel="" source=""/>

@@ -7,13 +7,12 @@ const LessonModel = ({ description, titleModel, source }) => {
 	const handleHover = () => {
 		setIsHovered(true);
 	};
-
 	const handleMouseLeave = () => {
 		setIsHovered(false);
 	};
 	return (
 		<div
-			className="w-full md:w-full lg:w-1/2 flex relative sketchfab-embed-wrapper"
+			className="w-full md:w-full lg:w-1/2 flex sketchfab-embed-wrapper"
 			onMouseEnter={handleHover}
 			onMouseLeave={handleMouseLeave}
 		>
