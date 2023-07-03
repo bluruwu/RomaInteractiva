@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../conections/requests";
 import HomeButton from "../utilities/HomeButton";
 import Swal from "sweetalert2";
+import "./css/register.css"
 
 const Register = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -123,81 +124,93 @@ const Register = () => {
 	};
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para registrarse. Además del botón de submit y el botón que lleva a Login y Home
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className="flex h-screen">
-				{/* Imagen de fondo */}
-				<div className=" flex justify-center items-centers">
-					<img
-						src={require("../media/coliseo.jpg")}
-						alt="Imagen de fondo"
-						className="block w-full h-full object-cover"
-					/>
-				</div>
-
-				{/* Panel derecho */}
-				<div className="font-text flex-1 flex flex-col justify-center items-center bg-gray-100 p-16">
-					{/* HomeButton */}
-					<div className="w-full flex justify-end">
-						<HomeButton />
+		<div id="register">
+			<form onSubmit={handleSubmit}>
+				<div className="form">
+					{/* Imagen de fondo */}
+					<div className="flex-1.6  justify-center items-center">
+						<img
+							src={require("../media/coliseo.jpg")}
+							alt="Imagen de fondo"
+							className="block w-full h-full object-cover"
+						/>
 					</div>
 
-					{/* Logo */}
-					<img
-						src={require("../media/logos/logo.png")}
-						alt="Imagen en el top right"
-						className="h-42"
-					/>
+					{/* Panel derecho */}
+					<div className="homebutton">
+						{/* HomeButton */}
+						<div className="self-end justify-end items-end">
+							<HomeButton />
+						</div>
 
-					{/* Formulario */}
-					<div className="flex flex-col items-center mb-12">
-						<input
-							type="text"
-							className="w-fit px-28 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-							placeholder="Full name"
-							onChange={(e) => setFormData({ ...formData, nombre_usuario: e.target.value })}
+						{/* Logo */}
+						<img
+							src={require("../media/logos/logo.png")}
+							alt="Imagen en el top right"
+							className="welcomeimage"
 						/>
-						<input
-							type="text"
-							className="w-fit px-28 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-							placeholder="Nickname"
-							onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
-						/>
-						<input
-							type="email"
-							className="w-fit px-28 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-							placeholder="Email"
-							onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-						/>
-						<input
-							type="password"
-							className="w-fit px-28 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-							placeholder="Password"
-							onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
-						/>
-						<input
-							type="password"
-							className="w-fit px-28 py-2 text-center text-gray-700 rounded-full border-4 border-gray-300 focus:outline-none focus:border-red-500 placeholder-gray-400 mb-2"
-							placeholder="Repeat Password"
-							onChange={(e) => setConfirmedPassword(e.target.value)}
-						/>
-						<button
-							type="submit"
-							className="w-full py-2 text-xl text-white bg-red-500 rounded-full cursor-pointer hover:bg-red-600"
-							style={{ backgroundColor: "rgb(142, 0, 0)" }}
-						>
-							Register
-						</button>
-						<br />
-						<p
-							className="underline ... hover:underline-offset-4 hover:text-green-500 "
-							onClick={() => navigate("/login")}
-						>
-							Already have an account?
-						</p>
+
+						{/* Formulario */}
+						<div className="divfields">
+							<input
+								type="text"
+								className="inputfields"
+								placeholder="Full name"
+								onChange={(e) => setFormData({ ...formData, nombre_usuario: e.target.value })}
+							/>
+						</div>
+						<div className="divfields">
+							<input
+								type="text"
+								className="inputfields"
+								placeholder="Nickname"
+								onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
+							/>
+						</div>
+						<div className="divfields">
+							<input
+								type="email"
+								className="inputfields"
+								placeholder="Email"
+								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+							/>
+						</div>
+						<div className="divfields">
+							<input
+								type="password"
+								className="inputfields"
+								placeholder="Password"
+								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
+							/>
+						</div>
+						<div className="divfields">
+							<input
+								type="password"
+								className="inputfields"
+								placeholder="Repeat Password"
+								onChange={(e) => setConfirmedPassword(e.target.value)}
+							/>
+						</div>
+						<div className="divfields">
+					<button
+						type="submit"
+						className="registerbutton"
+
+					>
+						Register
+					</button></div>
+					<br />
+					<p
+						className="link"
+						onClick={() => navigate("/login")}
+					>
+						Already have an account?
+					</p>
 					</div>
-				</div>
-			</div>
-		</form>
+				</div >
+			</form >
+		</div >
+
 	);
 };
 
