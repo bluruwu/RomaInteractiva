@@ -4,7 +4,7 @@ import { postLogin, getPrueba } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
-import "./css/login.css"
+import "./css/login.css";
 
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -57,7 +57,7 @@ const Login = () => {
 
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para loguearse. Además del botón de submit y el botón que lleva a registro
 	return (
-		<div id="login" className="font-text" >
+		<div id="login" className="font-text">
 			{showAlert && <Alert />}
 
 			<form onSubmit={handleSubmit}>
@@ -109,7 +109,7 @@ const Login = () => {
 						<br />
 						<p
 							id="recover"
-							className="link"
+							className="link cursor-pointer"
 							onClick={() => navigate("/recoverpassword")}
 						>
 							Recover password
@@ -117,7 +117,7 @@ const Login = () => {
 						<br />
 						<p
 							id="navregistro"
-							className="link"
+							className="link cursor-pointer"
 							onClick={() => navigate("/register")}
 						>
 							Don't have an account?
