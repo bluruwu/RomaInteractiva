@@ -9,7 +9,7 @@
     border-color: #f56565;
     margin-bottom: 0.5rem;
     box-shadow: 0 0 5px #8e0000;
-
+    font-family: 'Merriweather';
 }
 
 #register .inputfields:focus {
@@ -19,7 +19,7 @@
 }
 
 #register .divfields {
-    width: 100%;
+    width: 140%;
 
     padding: 12px 20px;
     margin-top: 1px;
@@ -34,14 +34,14 @@
     justify-content: center;
     align-items: center;
     background-color: #f7fafc;
-    padding: 95px;
+    padding: 175px;
 
 }
 
 #register .form {
     display: flex;
     height: 100vh;
-
+    font-family: 'Merriweather';
 }
 
 
@@ -80,7 +80,7 @@
 
 #register .welcomeimage {
     max-width: 100vh;
-    max-height:  20vh;
+    max-height:  15vh;
     object-fit: cover;
     
 }

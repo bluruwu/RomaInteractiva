@@ -9,7 +9,7 @@
     border-color: #f56565;
     margin-bottom: 0.5rem;
     box-shadow: 0 0 5px #8e0000;
-
+    font-family: 'Merriweather';
 }
 
 #login .inputfields:focus {
