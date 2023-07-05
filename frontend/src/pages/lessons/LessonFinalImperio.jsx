@@ -7,7 +7,7 @@ import LessonNav from "../../components/lesson/LessonNav";
 const LessonFinalImperio = () => {
 	const paragraphs = [
 		`El fin del Imperio Romano marcó un período de profundos cambios y transformaciones en la 
-				historia. Muchosfactores contribuyeron a su colapso gradual a lo largo de varios siglos. Uno de los 
+				historia. Muchos factores contribuyeron a su colapso gradual a lo largo de varios siglos. Uno de los 
 				factores clave fue la presión y los ataques constantes de los pueblos bárbaros. Durante 
 				el siglo V, grupos como los visigodos, ostrogodos, vándalos y otros invadieron y saquearon 
 				las provincias romanas. Estos pueblos germánicos encontraron debilidades en la estructura 

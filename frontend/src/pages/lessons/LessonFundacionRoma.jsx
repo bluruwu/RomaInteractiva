@@ -19,9 +19,9 @@ const LessonFundacionRoma = () => {
 			<div className="flex flex-grow flex-col md:flex-row relative">
 				<LessonText title="Fundación de Roma" paragraphs={paragraphs} />
 				<LessonModel
-					description="Rómulo y Remo, fundadores de Roma"
-					titleModel="Romulus & Remus"
-					source="https://sketchfab.com/models/3d839aadacb34322b1d1dd48dc2a818b/embed"
+					description="La leyenda de Rómulo y Remo, y la fundación de Roma"
+					titleModel="La leyenda de Rómulo y Remo, y la fundación de Roma"
+					source="https://www.youtube.com/embed/EX5pcki0DGw"
 				/>
 			</div>
 
