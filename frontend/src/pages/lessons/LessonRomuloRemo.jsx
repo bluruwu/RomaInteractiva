@@ -27,13 +27,8 @@ const LessonRomuloRemo = () => {
 			source: "https://sketchfab.com/models/23ad914573fe46c49b510a736715a377/embed",
 		},
 		{
-			description: "Estatua de Luperca, la loba que los alimentó",
-			titleModel: "Luperca",
-			source: "https://sketchfab.com/models/b195f0e1b7be4ec9b8d2f6d55006133a/embed",
-		},
-		{
-			description: "Tiber con Rómulo, remo y luperca",
-			titleModel: "Tiber con Rómulo, remo y luperca",
+			description: "Tiber con Rómulo, Remo y Luperca",
+			titleModel: "Tiber con Rómulo, Remo y Luperca",
 			source: "https://sketchfab.com/models/4b90b61d1ad94456b957844dbaccc0a2/embed",
 		},
 	];
