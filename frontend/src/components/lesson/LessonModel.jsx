@@ -12,7 +12,7 @@ const LessonModel = ({ description, titleModel, source }) => {
 	};
 	return (
 		<div
-			className="w-full md:w-full lg:w-1/2 flex sketchfab-embed-wrapper"
+			className="w-full lg:w-1/2 flex sketchfab-embed-wrapper"
 			onMouseEnter={handleHover}
 			onMouseLeave={handleMouseLeave}
 		>

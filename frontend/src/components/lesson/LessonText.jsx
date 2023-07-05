@@ -8,7 +8,7 @@ const LessonText = ({ title, paragraphs }) => {
 	};
 
 	return (
-		<div className="pt-20 md:w-1/2 p-14 relative">
+		<div className="bg-yellow-100 w-full h-[200vw] sm:h-[700vw] md:h-[50vw] lg:h-auto pt-20 lg:w-1/2 p-14 relative">
 			{/* Titulo de la leccion */}
 			<div className="mb-10 text-3xl">
 				<p className="font-bold text-center filter drop-shadow-lg">{title}</p>
