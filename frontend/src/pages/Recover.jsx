@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postLogin, getPrueba } from "../conections/requests";
+import { sendRecoveryEmail } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
@@ -12,7 +12,6 @@ const Recover = () => {
 
 	const [formData, setFormData] = useState({
 		email: "",
-		contrasena: "",
 	}); // Estado para almacenar los datos del formulario de inicio de sesión
 
 	const handleSubmit = (event) => {
@@ -22,30 +21,31 @@ const Recover = () => {
 		console.log(formData); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
 			// Realizar solicitud de inicio de sesión utilizando los datos del formulario
-			const req_succesful = await postLogin({
-				...formData,
-				email: lowercaseEmail,
+			const req_succesful = await sendRecoveryEmail({
+				to: lowercaseEmail,
+				subject: "Recuperacion de contraseña",
+				body: "Tu nueva contraseña es: "
 			});
 
 			console.log(req_succesful);
-			if (req_succesful === "Inicio de sesión exitoso") {
+			if (req_succesful === "Correo electrónico enviado exitosamente") {
 				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
 				Swal.fire({
-					title: "Welcome!",
-					text: "You have succesfully been logged!",
+					title: "Éxito!",
+					text: "Te hemos enviado a tu correo tu nueva contraseña!",
 					icon: "success",
 					customClass: {
 						container: "font-text",
 					},
 				});
 
-				navigate("/home");
+				navigate("/login");
 			} else {
 				// Si las credenciales son incorrectas, mostrar una alerta de error con el mensaje de error devuelto por la solicitud
 				Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: req_succesful,
+					text: 'No pudimos enviarte tu nueva contraseña 😭',
 					customClass: {
 						container: "font-text",
 					},
@@ -85,43 +85,21 @@ const Recover = () => {
 								type="text"
 								className="inputfields"
 								placeholder="Email"
-								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+								onChange={(e) => setFormData({ email: e.target.value })}
 							/>
 						</div>
-						<div className="divfields">
-							<input
-								id="password"
-								type="password"
-								className="inputfields"
-								placeholder="Password"
-								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
-							/>
-						</div>
+
 						<button
 							id="submit"
 							type="submit"
 							className="recoverbutton"
 							onSubmit={(e) => e.preventDefault()}
 						>
-							Login
+							Send email
 						</button>
 
 						<br />
-						<p
-							id="recover"
-							className="link cursor-pointer"
-							onClick={() => navigate("/recoverpassword")}
-						>
-							Recover password
-						</p>
-						<br />
-						<p
-							id="navregistro"
-							className="link cursor-pointer"
-							onClick={() => navigate("/register")}
-						>
-							Don't have an account?
-						</p>
+						
 					</div>
 				</div>
 			</form>
