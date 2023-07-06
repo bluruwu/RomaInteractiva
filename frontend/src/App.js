@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import Perfil from "./pages/Perfil";
+import Recover from "./pages/Recover";
 //Quizes
 import QuizMonarquia from "./pages/quizes/QuizMonarquia";
 import QuizRepublica from "./pages/quizes/QuizRepublica";
@@ -43,6 +44,7 @@ const App = () => {
 			<Route path="/" element={<HomePage />} />
 			<Route path="/home" element={<HomePage />} />
 			<Route path="perfil" element={<Perfil />} />
+			<Route path="/recoverpassword" element={<Recover/>}/>
 
 			<Route path="Quiz_monarquia_1" element={<QuizMonarquia />} />
 			<Route path="Quiz_Republica" element={<QuizRepublica />} />
