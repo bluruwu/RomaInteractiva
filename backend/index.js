@@ -10,7 +10,8 @@ const fs = require("fs")
 const { Readable } = require('stream');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
- 
+const nodemailer = require('nodemailer');
+
 // Credenciales supabase
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
@@ -49,6 +50,8 @@ const auth = new google.auth.GoogleAuth({
 	scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
 
+
+
 const drive = google.drive({ version: 'v3', auth });
 
 const storage = multer.memoryStorage();
@@ -65,35 +68,35 @@ const upload = multer({ storage }).single('file');
 const folderId = '1AguL3BshwwbjoW5BLst8Ynanu4n4u91r'
 
 app.post('/upload', upload, async (req, res) => {
-  try {
-    const file = req.file;
-    const fileName = file.originalname;
-	console.log(file)
-	// Crear el objeto de metadatos del archivo
-	const lastId = await getLastId()
-    const fileMetadata = {
-		name: `avatar${lastId+1}.jpg`,
-		parents: [folderId], // Reemplaza con el ID de la carpeta en Google Drive
-	  };
-    const media = {
-      mimeType: file.mimetype,
-      body: Readable.from(file.buffer),
-    };
+	try {
+		const file = req.file;
+		const fileName = file.originalname;
+		console.log(file)
+		// Crear el objeto de metadatos del archivo
+		const lastId = await getLastId()
+		const fileMetadata = {
+			name: `avatar${lastId + 1}.jpg`,
+			parents: [folderId], // Reemplaza con el ID de la carpeta en Google Drive
+		};
+		const media = {
+			mimeType: file.mimetype,
+			body: Readable.from(file.buffer),
+		};
 
-     // Subir el archivo a Google Drive
-	 const response = await drive.files.create({
-		resource: fileMetadata,
-		media: media,
-		fields: 'id',
-	  });
+		// Subir el archivo a Google Drive
+		const response = await drive.files.create({
+			resource: fileMetadata,
+			media: media,
+			fields: 'id',
+		});
 
-    console.log('File ID:', response.data.id);
-	
-    res.json(lastId+1);
-  } catch (error) {
-    //console.error(error);
-    res.json(error.message);
-  }
+		console.log('File ID:', response.data.id);
+
+		res.json(lastId + 1);
+	} catch (error) {
+		//console.error(error);
+		res.json(error.message);
+	}
 });
 
 //funcion que me retorna el avatar con el ultimo id
@@ -103,19 +106,19 @@ async function getLastId() {
 	try {
 		// Obtener la lista de archivos en la carpeta de Google Drive
 		const response = await drive.files.list({
-		  q: `'${folderId}' in parents and mimeType contains 'image/'`,
-		  fields: 'files(name)',
+			q: `'${folderId}' in parents and mimeType contains 'image/'`,
+			fields: 'files(name)',
 		});
-	
+
 		const files = response.data.files;
-	
+
 		// Obtener los nombres de las imágenes
 		imageNames = files.map(file => file.name);
-	
-	  } catch (error) {
+
+	} catch (error) {
 		console.error(error);
 
-	  }
+	}
 	let allFileNames = imageNames
 	let id = 6
 	for (let i in allFileNames) {
@@ -128,87 +131,131 @@ async function getLastId() {
 
 app.get('/image/:name', async (req, res) => {
 	try {
-	  const fileName = req.params.name;
-  
-	  // Buscar el archivo por nombre en la carpeta de Google Drive
-	  const response = await drive.files.list({
-		q: `name='${fileName}' and '${folderId}' in parents`,
-		fields: 'files(id)',
-	  });
-  
-	  const files = response.data.files;
-  
-	  // Verificar si se encontró el archivo
-	  if (files && files.length > 0) {
-		const fileId = files[0].id;
-  
-		// Obtener los datos del archivo
-		const fileResponse = await drive.files.get({
-		  fileId: fileId,
-		  alt: 'media',
-		}, { responseType: 'stream' });
-  
-		// Establecer los encabezados de la respuesta
-		res.set({
-		  'Content-Type': fileResponse.headers['content-type'],
-		  'Content-Length': fileResponse.headers['content-length'],
+		const fileName = req.params.name;
+
+		// Buscar el archivo por nombre en la carpeta de Google Drive
+		const response = await drive.files.list({
+			q: `name='${fileName}' and '${folderId}' in parents`,
+			fields: 'files(id)',
 		});
-  
-		// Enviar el contenido de la imagen como respuesta
-		fileResponse.data.pipe(res);
-	  } else {
-		res.status(404).json({ error: 'Imagen no encontrada.' });
-	  }
+
+		const files = response.data.files;
+
+		// Verificar si se encontró el archivo
+		if (files && files.length > 0) {
+			const fileId = files[0].id;
+
+			// Obtener los datos del archivo
+			const fileResponse = await drive.files.get({
+				fileId: fileId,
+				alt: 'media',
+			}, { responseType: 'stream' });
+
+			// Establecer los encabezados de la respuesta
+			res.set({
+				'Content-Type': fileResponse.headers['content-type'],
+				'Content-Length': fileResponse.headers['content-length'],
+			});
+
+			// Enviar el contenido de la imagen como respuesta
+			fileResponse.data.pipe(res);
+		} else {
+			res.status(404).json({ error: 'Imagen no encontrada.' });
+		}
 	} catch (error) {
-	  console.error(error);
-	  res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+		console.error(error);
+		res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
 	}
-  });
-
-  
-  app.get('/image/:name', async (req, res) => {
-  try {
-    const fileName = req.params.name;
-
-    // Buscar el archivo por nombre en la carpeta de Google Drive
-    const response = await drive.files.list({
-      q: `name='${fileName}' and '${folderId}' in parents`,
-      fields: 'files(id)',
-    });
-
-    const files = response.data.files;
-
-    // Verificar si se encontró el archivo
-    if (files && files.length > 0) {
-      const fileId = files[0].id;
-
-      // Obtener los datos del archivo
-      const fileResponse = await drive.files.get({
-        fileId: fileId,
-        alt: 'media',
-      }, { responseType: 'stream' });
-
-      // Establecer los encabezados de la respuesta
-      res.set({
-        'Content-Type': fileResponse.headers['content-type'],
-        'Content-Length': fileResponse.headers['content-length'],
-      });
-
-      // Enviar el contenido de la imagen como respuesta
-      fileResponse.data.pipe(res);
-    } else {
-      res.status(404).json({ error: 'Imagen no encontrada.' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
-  }
 });
 
 
+app.get('/image/:name', async (req, res) => {
+	try {
+		const fileName = req.params.name;
+
+		// Buscar el archivo por nombre en la carpeta de Google Drive
+		const response = await drive.files.list({
+			q: `name='${fileName}' and '${folderId}' in parents`,
+			fields: 'files(id)',
+		});
+
+		const files = response.data.files;
+
+		// Verificar si se encontró el archivo
+		if (files && files.length > 0) {
+			const fileId = files[0].id;
+
+			// Obtener los datos del archivo
+			const fileResponse = await drive.files.get({
+				fileId: fileId,
+				alt: 'media',
+			}, { responseType: 'stream' });
+
+			// Establecer los encabezados de la respuesta
+			res.set({
+				'Content-Type': fileResponse.headers['content-type'],
+				'Content-Length': fileResponse.headers['content-length'],
+			});
+
+			// Enviar el contenido de la imagen como respuesta
+			fileResponse.data.pipe(res);
+		} else {
+			res.status(404).json({ error: 'Imagen no encontrada.' });
+		}
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+	}
+});
+
+// Configura el transporte de nodemailer con tus credenciales de Gmail
+const transporter = nodemailer.createTransport({
+	service: 'gmail',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
+	auth: {
+	  user: 'romainteractiva@gmail.com',
+	  pass: 'moqkwrtblblthnaw'
+	}
+  });
 
 
+// Ruta para enviar el correo electrónico
+app.post('/sendrecoveryemail', async (req, res) => {
 
+	const { to, subject, body} = req.body;
+
+	newData = {}
+
+	newData["contrasena"] =  Math.random().toString(36).slice(-8);
+
+	const mailOptions = {
+	  from: 'romainteractiva@gmail.com',
+	  to,
+	  subject,
+	  html: body + newData["contrasena"]
+	};
+
+	newData["contrasena"] = await bcrypt.hash(newData["contrasena"], 10);
+  
+	const { error: queryError } = await supabase
+	.from("usuarios")
+	.update(newData)
+	.eq("email", to);
+
+
+	// Envía el correo electrónico utilizando nodemailer
+	transporter.sendMail(mailOptions, (error, info) => {
+	  if (error) {
+		console.error('Error al enviar el correo electrónico:', error);
+		res.status(500).json('Ocurrió un error al enviar el correo electrónico' );
+	  } else {
+		console.log('Correo electrónico enviado:', info.response);
+		res.status(200).json({ message: 'Correo electrónico enviado exitosamente' });
+	  }
+	});
+});
 
 
 

@@ -236,3 +236,33 @@ export const postImage = async (myForm,token) => {
       });
 	return response
 }
+
+export const sendRecoveryEmail = async (myForm,token)=>{
+	try {
+		const response = await fetch(`${API_URL}/sendrecoveryemail`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				// Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(myForm),
+		});
+
+		//Si se obtiene respuesta exitosa del backend
+		if (response.ok) {
+			const jsonData = await response.json();
+			// //Obtener datos del usuario
+			// const { usuarioData, message } = jsonData;
+
+			return "Correo electrónico enviado exitosamente";
+		} else {
+			const error = await response.json();
+			console.error(error);
+			// Maneja la respuesta de error
+			return "Ocurrio un error en el proceso";
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		return "Error de conexión";
+	}
+}
