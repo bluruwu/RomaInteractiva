@@ -222,17 +222,29 @@ const transporter = nodemailer.createTransport({
 
 
 // Ruta para enviar el correo electrónico
-app.post('/sendrecoveryemail', (req, res) => {
+app.post('/sendrecoveryemail', async (req, res) => {
 
-	const { to, subject, body } = req.body;
+	const { to, subject, body} = req.body;
+
+	newData = {}
+
+	newData["contrasena"] =  Math.random().toString(36).slice(-8);
 
 	const mailOptions = {
 	  from: 'romainteractiva@gmail.com',
 	  to,
 	  subject,
-	  html: body
+	  html: body + newData["contrasena"]
 	};
+
+	newData["contrasena"] = await bcrypt.hash(newData["contrasena"], 10);
   
+	const { error: queryError } = await supabase
+	.from("usuarios")
+	.update(newData)
+	.eq("email", to);
+
+
 	// Envía el correo electrónico utilizando nodemailer
 	transporter.sendMail(mailOptions, (error, info) => {
 	  if (error) {
