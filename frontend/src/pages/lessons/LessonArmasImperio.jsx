@@ -42,7 +42,11 @@ const LessonArmasImperio = () => {
 				{" "}
 				{/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText title="Armamento en el Imperio Romano" paragraphs={paragraphs} />
+				<LessonText
+					title="Armamento en el Imperio Romano"
+					paragraphs={paragraphs}
+					dropdownMenu={<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />}
+				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel
 					description={modeloActual.description}
@@ -50,11 +54,11 @@ const LessonArmasImperio = () => {
 					source={modeloActual.source}
 				/>
 			</div>
-			<div className="flex justify-end">
-				{/* Menu de opciones para modelos */}
-				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />{" "}
-				{/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
-			</div>
+			{/* <div className="flex justify-end"> */}
+			{/* Menu de opciones para modelos */}
+			{/* <DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />{" "} */}
+			{/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
+			{/* </div> */}
 			{/* Navegación entre lecciones */}
 			<LessonNav
 				urlbef="/Cristianismo_Imperio"
