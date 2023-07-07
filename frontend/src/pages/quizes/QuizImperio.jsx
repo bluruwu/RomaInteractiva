@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "../../components/alerts/alerts";
 import { Congrats } from "../congrats";
 import Image1 from "../../media/trees.png"; // Ruta de la imagen
-import Image2 from "../../media/nyan-cat.gif"; // Ruta de la imagen
-import Image4 from "../../media/gif4.gif"; // Ruta de la imagen
+import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
+import gifGladiadorAcorazado from "../../media/logros/gifimperio.gif"; // Ruta de la imagen
 const QuizImperio = () => {
 	const navigate = useNavigate();
 
@@ -167,12 +167,12 @@ const QuizImperio = () => {
 								padding: '3em',
 								color: '#716add',
 								html: `<div class="swal2-content-container">
-										  <img src="${Image4}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-										  <p style="text-align: center; font-size: 12px; color: #000000; margin-top: 10px;">Texto pequeño</p>
+										  <img src="${gifGladiadorAcorazado}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
+										  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
 									   </div>`,
 								backdrop: `
 								  rgba(0,0,123,0.4)
-								  url("${Image2}")
+								  url("${gifNyanCat}")
 								  left top
 								  no-repeat
 								`

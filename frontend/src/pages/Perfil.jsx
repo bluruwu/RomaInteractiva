@@ -3,18 +3,42 @@ import Navbar from "../utilities/Navbar";
 import HomeButton from "../utilities/HomeButton";
 import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
-import { putActualizarPerfil,getAPI_URL } from "../conections/requests";
+import { putActualizarPerfil, getAPI_URL } from "../conections/requests";
 import Swal from "sweetalert2";
 import "./css/perfil.css";
 import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
-
+import imageNoLogro from "../media/logros/nologro.png";
+import gifarquitectura from "../media/logros/gifarquitectura.gif";
+import gifcultura from "../media/logros/gifcultura.gif";
+import gifimperio from "../media/logros/gifimperio.gif";
+import gifmonarquia from "../media/logros/gifmonarquia.gif";
+import gifpersonajes from "../media/logros/gifpersonajes.gif";
+import gifrepublica from "../media/logros/gifrepublica.gif";
 
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 
+
+
+
 	const API_URL = getAPI_URL();
+
+	const [logrosParaMostrar, setLogrosParaMostrar] = useState(
+		{
+			'logroMonarquia': true,
+			'logroRepublica': true,
+			'logroImperio': true,
+			'logroPersonajes': true,
+			'logroArquitectura': true,
+			'logroCultura': true,
+		});
+
+
+
+
+
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
 	const myPutPetition = async (myData, myToken) => {
@@ -233,12 +257,17 @@ const Perfil = () => {
 			<div className="logrosyperfil">
 
 				<img
-					src={require("../media/logros/logro-columna.png")}
+					src={logrosParaMostrar.logroMonarquia ? gifmonarquia : imageNoLogro}
 					className="imagesLeft"
 				/>
 
 				<img
-					src={require("../media/logros/logro-helmet.png")}
+					src={logrosParaMostrar.logroRepublica ? gifrepublica : imageNoLogro}
+					className="imagesLeft"
+				/>
+
+				<img
+					src={logrosParaMostrar.logroImperio ? gifimperio : imageNoLogro}
 					className="imagesLeft"
 				/>
 
@@ -246,13 +275,18 @@ const Perfil = () => {
 
 
 				<img
-					src={require("../media/logros/logro-medalla.png")}
+					src={logrosParaMostrar.logroPersonajes ? gifpersonajes : imageNoLogro}
 					className="imagesRight"
 				/>
 
 
 				<img
-					src={require("../media/logros/logro-toga.png")}
+					src={logrosParaMostrar.logroArquitectura ? gifarquitectura : imageNoLogro}
+					className="imagesRight"
+				/>
+
+				<img
+					src={logrosParaMostrar.logroCultura ? gifcultura : imageNoLogro}
 					className="imagesRight"
 				/>
 
