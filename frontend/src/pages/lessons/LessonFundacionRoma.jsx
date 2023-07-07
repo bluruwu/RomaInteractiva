@@ -16,7 +16,7 @@ const LessonFundacionRoma = () => {
 			{/* Barra de navegación */}
 			<Navbar />
 
-			<div className="flex lg:flex-grow flex-col lg:flex-row relative">
+			<div className="flex flex-grow flex-col md:flex-row relative">
 				<LessonText title="Fundación de Roma" paragraphs={paragraphs} />
 				<LessonModel
 					description="La leyenda de Rómulo y Remo, y la fundación de Roma"

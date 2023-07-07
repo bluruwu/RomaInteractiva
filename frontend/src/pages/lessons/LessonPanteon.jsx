@@ -72,18 +72,17 @@ const LessonPanteon = () => {
 				{" "}
 				{/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText title="Panteón de Agripa" paragraphs={paragraphs} />
+				<LessonText
+					title="Panteón de Agripa"
+					paragraphs={paragraphs} // Menu de opciones para modelos - Se mandan dos parametros: La funcion handle y el array de los modelos
+					dropdownMenu={<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />}
+				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel
 					description={modeloActual.description}
 					titleModel={modeloActual.titleModel}
 					source={modeloActual.source}
 				/>
-			</div>
-			<div className="flex justify-end">
-				{/* Menu de opciones para modelos */}
-				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />{" "}
-				{/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav

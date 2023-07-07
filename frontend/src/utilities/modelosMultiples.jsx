@@ -7,7 +7,7 @@ const DropdownMenu = ({ modelos, handleModelo }) => {
 			id="modelos"
 			data-dropdown-toggle="dropdown"
 			title="Boton para cambiar modelos"
-			className="font-bold bg-custom-rojo text-white text-md px-4 py-1 rounded-xl shadow-xl items-center focus:ring-4 focus:outline-none focus:ring-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+			className="font-bold bg-custom-rojo hover:bg-custom-rojolight text-white text-md px-4 py-1 rounded-3xl shadow-xl items-center focus:ring-4 focus:outline-none focus:ring-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
 			type="button"
 		>
 			<Dropdown

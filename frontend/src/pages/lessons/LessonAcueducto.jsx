@@ -32,7 +32,6 @@ const LessonAcueducto = () => {
 		setmodeloActual(model);
 	};
 
-
 	return (
 		<div className="font-text flex flex-col min-h-screen">
 			{" "}
@@ -43,18 +42,17 @@ const LessonAcueducto = () => {
 				{" "}
 				{/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText title="Acueductos de la Antigua Roma" paragraphs={paragraphs} />
+				<LessonText
+					title="Acueductos de la Antigua Roma"
+					paragraphs={paragraphs} // Menu de opciones para modelos - Se mandan dos parametros: La funcion handle y el array de los modelos
+					dropdownMenu={<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />}
+				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel
 					description={modeloActual.description}
 					titleModel={modeloActual.titleModel}
 					source={modeloActual.source}
 				/>
-			</div>
-			<div className="flex justify-end">
-				{/* Menu de opciones para modelos */}
-				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />{" "}
-				{/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav
