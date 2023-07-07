@@ -151,6 +151,10 @@ const QuizImperio = () => {
 
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
+
+
+
+
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -161,15 +165,24 @@ const QuizImperio = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then(async (result) => {
-							//aumentar el localStorage en requests y no aqui
-							//en localStorage aumentar la exp y el nivel
-							//aumentar experiencia (aumentar nivel de una vez)
-							//se usa el valor de la experiencia en el localstorage
-							const updateRes = await updateUserBecauseOfNewAchivement('logro_imperio', token);
+
+
+
+
+
+
+
+
+
 							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-							if (true && result.isConfirmed) {
+							if (true && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
+								//aumentar el localStorage en requests y no aqui
+								//en localStorage aumentar la exp y el nivel
+								//aumentar experiencia (aumentar nivel de una vez)
+								//se usa el valor de la experiencia en el localstorage
+								const updateRes = await updateUserBecauseOfNewAchivement('logro_imperio', token);
 								Swal.fire({
-									title: 'WoW! Has aumentado tu experiencia en 500xp!!',
+									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
 									width: 600,
 									padding: '3em',
 									color: '#716add',
@@ -184,7 +197,7 @@ const QuizImperio = () => {
 									  no-repeat
 									`,
 									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
-								}).then(async () => {
+								}).then((result) => {
 
 									if (updateRes === "Se produjo un cambio de nivel correctamente") {
 										const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
@@ -199,20 +212,32 @@ const QuizImperio = () => {
 										  left top
 										  no-repeat
 										`
+										}).then((result) => {
+											
 										});
 									}
 								});
 
 							}
-
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
 								navigate("/Quiz_Imperio");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
-							}
+							}	
 						});
+
+
+
+
+
+
+
+						
+
+
+
 					}
 				});
 			}

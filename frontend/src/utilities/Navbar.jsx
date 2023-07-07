@@ -75,6 +75,8 @@ const Navbar = ({ inQuiz }) => {
 	if (cerrarSesion) {
 		//Limpiar toda la informacion del usuario incluido el token
 		localStorage.clear();
+		window.location.reload();
+		window.localStorage.clear(); //try this to clear all local storage
 
 		//Si esta en la pagina de perfil, redirigir al home
 		if (onProfile) {

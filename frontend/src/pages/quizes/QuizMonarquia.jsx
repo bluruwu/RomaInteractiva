@@ -171,6 +171,7 @@ const QuizMonarquia = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then((result) => {
+							
 							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
