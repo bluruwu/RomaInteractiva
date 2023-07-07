@@ -291,9 +291,9 @@ export const updateUserBecauseOfNewAchivement = async (logro, token) => {
 	//colocar en la data a enviar la exp, basado en la exp actual en el localstorage
 	myData.experiencia = JSON.parse(localStorage.getItem('experiencia')) + 500
 	localStorage.setItem("experiencia",myData.experiencia)
-	const nuevoNivel = 1 + myData.experiencia % 500;
+	const nuevoNivel = Math.floor(myData.experiencia / 500) + 1;
 	myData.nivel = nuevoNivel;
-	localStorage.setItem("nivel",myData.nivel)
+	localStorage.setItem("nivel",nuevoNivel)
 
 	try {
 		const response = await fetch(`${API_URL}/actualizarperfil`, {
@@ -307,9 +307,9 @@ export const updateUserBecauseOfNewAchivement = async (logro, token) => {
 
 		//Tratar el tipo de respuesta del backend
 		if (response.status == 280) {
-			if (viejoNivel != nuevoNivel){
-				return "Se produjo un cambio de nivel correctamente"
-			}
+			// if (viejoNivel != nuevoNivel){
+			// 	return "Se produjo un cambio de nivel correctamente"
+			// }
 			return "Logro, exp, y nivel actualizados correctamente";
 		} else {
 			const error = await response.json();
