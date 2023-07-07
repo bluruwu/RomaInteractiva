@@ -184,6 +184,21 @@ const QuizImperio = () => {
 								//aumentar experiencia (aumentar nivel de una vez)
 								//se usa el valor de la experiencia en el localstorage
 								const updateRes = await updateUserBecauseOfNewAchivement('logro_imperio',token);
+								if (updateRes === "Se produjo un cambio de nivel correctamente"){
+									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
+									Swal.fire({
+										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
+										width: 600,
+										padding: '3em',
+										color: '#716add',
+										backdrop: `
+										  rgba(0,0,123,0.4)
+										  url("${gifNyanCat}")
+										  left top
+										  no-repeat
+										`
+									  });
+								}
 							}
 							
 							if (result.isConfirmed) {

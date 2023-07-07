@@ -307,9 +307,9 @@ export const updateUserBecauseOfNewAchivement = async (logro, token) => {
 
 		//Tratar el tipo de respuesta del backend
 		if (response.status == 280) {
-			// if (viejoNivel != nuevoNivel){
-			// 	return "Se produjo un cambio de nivel correctamente"
-			// }
+			if (viejoNivel != nuevoNivel){
+			 	return "Se produjo un cambio de nivel correctamente";
+			}
 			return "Logro, exp, y nivel actualizados correctamente";
 		} else {
 			const error = await response.json();
