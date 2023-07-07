@@ -116,6 +116,7 @@ const Navbar = ({ inQuiz }) => {
 					{/* Boton que redirige al menu con los diferentes juegos */}
 					<li className="mr-12">
 						<button
+							id="gamesButton"
 							className="text-custom-doradonormal hover:text-white font-text font-regular"
 							onClick={() => navigate("/games")}
 						>

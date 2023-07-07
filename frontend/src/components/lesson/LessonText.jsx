@@ -18,6 +18,7 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 			<div className="relative text-justify">
 				{paragraphs.map((paragraph, index) => (
 					<p
+						id={`text-${index}`}
 						key={index}
 						className={`absolute top-0 left-0 w-full h-full transform ${
 							currentParagraph === index
@@ -36,6 +37,7 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 				<div className="bottom-10 z-10 flex space-x-2 right-1 transform -translate-x-1/2">
 					{paragraphs.map((_, index) => (
 						<button
+							id={`button-${index}`}
 							key={index}
 							onClick={() => handleParagraphChange(index)}
 							className={`rounded-full h-8 w-8 flex items-center justify-center text-base border ${

@@ -39,6 +39,11 @@ const Perfil = () => {
 				confirmButtonColor: "#e69200", // Cambiar el color del botón
 				customClass: {
 					container: "font-text", // Cambiar la fuente del título
+					confirmButton: "confirm-button-class"
+				},
+				didOpen: () => {
+				  const confirmButton = Swal.getConfirmButton();
+				  confirmButton.id = "confirm-button-id";
 				},
 			}).then(() => {
 				window.location.reload();
@@ -89,8 +94,12 @@ const Perfil = () => {
 			focusConfirm: false,
 			customClass: {
 				container: "font-text", // Cambiar la fuente del título
+				confirmButton: "confirm-button-class"
 			},
-
+			didOpen: () => {
+				const confirmButton = Swal.getConfirmButton();
+				confirmButton.id = "confirmButton";
+			},
 			preConfirm: () => {
 				const currentPassword = Swal.getPopup().querySelector("#currentPassword").value;
 				const newPassword = Swal.getPopup().querySelector("#newPassword").value;
@@ -250,6 +259,7 @@ const Perfil = () => {
 						<input
 							type="text"
 							className="inputClassName"
+							id="passwordField"
 							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
 							value={contrasena}

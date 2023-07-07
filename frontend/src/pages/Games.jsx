@@ -31,6 +31,7 @@ const Games = () => {
 
 			<div className="flex flex-col grow md:flex-row">
 				<div
+					id="puzzle"
 					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/puzzle")}
 					onMouseEnter={handleHoverPuzzle}
@@ -75,6 +76,7 @@ const Games = () => {
 				{/* //////////////////////////////////////////////////////////////////////// */}
 				{/* Leccion anterior */}
 				<div
+					id="crossword"
 					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/crossword")}
 					onMouseEnter={handleHoverCrossword}
