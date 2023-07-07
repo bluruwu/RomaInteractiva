@@ -6,7 +6,11 @@ import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
 import { INFORMATION } from "../../utilities/imperioInfo";
 import { useNavigate } from "react-router-dom";
-
+import { Alert } from "../../components/alerts/alerts";
+import { Congrats } from "../congrats";
+import Image1 from "../../media/trees.png"; // Ruta de la imagen
+import Image2 from "../../media/nyan-cat.gif"; // Ruta de la imagen
+import Image4 from "../../media/gif4.gif"; // Ruta de la imagen
 const QuizImperio = () => {
 	const navigate = useNavigate();
 
@@ -157,6 +161,22 @@ const QuizImperio = () => {
 							},
 						}).then((result) => {
 							/* Read more about isConfirmed, isDenied below */
+							Swal.fire({
+								title: 'WoW! Has aumentado tu experiencia en 500xp!!',
+								width: 600,
+								padding: '3em',
+								color: '#716add',
+								html: `<div class="swal2-content-container">
+										  <img src="${Image4}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
+										  <p style="text-align: center; font-size: 12px; color: #000000; margin-top: 10px;">Texto pequeño</p>
+									   </div>`,
+								backdrop: `
+								  rgba(0,0,123,0.4)
+								  url("${Image2}")
+								  left top
+								  no-repeat
+								`
+							  });
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
