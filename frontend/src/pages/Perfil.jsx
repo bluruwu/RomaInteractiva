@@ -20,19 +20,16 @@ import gifrepublica from "../media/logros/gifrepublica.gif";
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 
-
-
-
 	const API_URL = getAPI_URL();
 
 	const [logrosParaMostrar, setLogrosParaMostrar] = useState(
 		{
-			'logroMonarquia': true,
-			'logroRepublica': true,
-			'logroImperio': true,
-			'logroPersonajes': true,
-			'logroArquitectura': true,
-			'logroCultura': true,
+			logroMonarquia: JSON.parse(localStorage.getItem("logro_monarquia")),
+			logroRepublica: JSON.parse(localStorage.getItem("logro_republica")),
+			logroImperio: JSON.parse(localStorage.getItem("logro_imperio")),
+			logroPersonajes: JSON.parse(localStorage.getItem("logro_personajes")),
+			logroArquitectura: JSON.parse(localStorage.getItem("logro_arquitectura")),
+			logroCultura: JSON.parse(localStorage.getItem("logro_cultura")),
 		});
 
 
@@ -257,17 +254,17 @@ const Perfil = () => {
 			<div className="logrosyperfil">
 
 				<img
-					src={logrosParaMostrar.logroMonarquia ? gifmonarquia : imageNoLogro}
+					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
 					className="imagesLeft"
 				/>
 
 				<img
-					src={logrosParaMostrar.logroRepublica ? gifrepublica : imageNoLogro}
+					src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
 					className="imagesLeft"
 				/>
 
 				<img
-					src={logrosParaMostrar.logroImperio ? gifimperio : imageNoLogro}
+					src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
 					className="imagesLeft"
 				/>
 
@@ -275,18 +272,18 @@ const Perfil = () => {
 
 
 				<img
-					src={logrosParaMostrar.logroPersonajes ? gifpersonajes : imageNoLogro}
+					src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
 					className="imagesRight"
 				/>
 
 
 				<img
-					src={logrosParaMostrar.logroArquitectura ? gifarquitectura : imageNoLogro}
+					src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
 					className="imagesRight"
 				/>
 
 				<img
-					src={logrosParaMostrar.logroCultura ? gifcultura : imageNoLogro}
+					src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
 					className="imagesRight"
 				/>
 

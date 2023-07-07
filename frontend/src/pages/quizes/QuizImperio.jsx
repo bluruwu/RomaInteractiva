@@ -11,6 +11,7 @@ import { Congrats } from "../congrats";
 import Image1 from "../../media/trees.png"; // Ruta de la imagen
 import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
 import gifimperio from "../../media/logros/gifimperio.gif";
+import { updateUserBecauseOfNewAchivement } from "../../conections/requests";
 const QuizImperio = () => {
 	const navigate = useNavigate();
 
@@ -159,8 +160,8 @@ const QuizImperio = () => {
 							customClass: {
 								container: "font-text", // Cambiar la fuente del título
 							},
-						}).then((result) => {
-							//logro
+						}).then(async (result) => {
+							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
 							if (true){
 								Swal.fire({
 									title: 'WoW! Has aumentado tu experiencia en 500xp!!',
@@ -178,8 +179,11 @@ const QuizImperio = () => {
 									  no-repeat
 									`
 								  });
+								//aumentar el localStorage en requests y no aqui
+								//en localStorage aumentar la exp y el nivel
 								//aumentar experiencia (aumentar nivel de una vez)
-								//colocar el logro con el userid si userid esta en el localstorage
+								//se usa el valor de la experiencia en el localstorage
+								const updateRes = await updateUserBecauseOfNewAchivement('logro_imperio',token);
 							}
 							
 							if (result.isConfirmed) {
