@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+//Recibe el titulo y parrafos de la leccion, y el boton de cambiar entre modelos
 const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 	const [currentParagraph, setCurrentParagraph] = useState(0);
 
@@ -48,13 +49,8 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 						</button>
 					))}
 				</div>
-				<div className="bottom-1 pt-10 pr-8 md:pr-14 flex">
-					{/* <button className="bg-custom-rojo  space-x-2 px-3 text-white rounded-lg">
-						Visualizar otros modelos 3D
-					</button> */}
-
-					{dropdownMenu}
-				</div>
+				{/* Si se le pasa el dropdownMenu para cambiar entre modelos, lo muestra en el div */}
+				<div className="bottom-1 pt-10 pr-8 md:pr-14 flex">{dropdownMenu}</div>
 			</div>
 		</div>
 	);
