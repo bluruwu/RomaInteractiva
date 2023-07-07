@@ -6,9 +6,6 @@ export function Congrats({ type, message }) {
         width: 600,
         padding: '3em',
         color: '#716add',
-        html: `
-        <img src=${Image1} alt="Custom image" width="200" height="200">
-      `,
         backdrop: `
           rgba(0,0,123,0.4)
           url("nyan-cat.gif")

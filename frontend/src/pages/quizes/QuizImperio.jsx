@@ -10,7 +10,7 @@ import { Alert } from "../../components/alerts/alerts";
 import { Congrats } from "../congrats";
 import Image1 from "../../media/trees.png"; // Ruta de la imagen
 import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
-import gifGladiadorAcorazado from "../../media/logros/gifimperio.gif"; // Ruta de la imagen
+import gifimperio from "../../media/logros/gifimperio.gif";
 const QuizImperio = () => {
 	const navigate = useNavigate();
 
@@ -160,23 +160,28 @@ const QuizImperio = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then((result) => {
-							/* Read more about isConfirmed, isDenied below */
-							Swal.fire({
-								title: 'WoW! Has aumentado tu experiencia en 500xp!!',
-								width: 600,
-								padding: '3em',
-								color: '#716add',
-								html: `<div class="swal2-content-container">
-										  <img src="${gifGladiadorAcorazado}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-										  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
-									   </div>`,
-								backdrop: `
-								  rgba(0,0,123,0.4)
-								  url("${gifNyanCat}")
-								  left top
-								  no-repeat
-								`
-							  });
+							//logro
+							if (true){
+								Swal.fire({
+									title: 'WoW! Has aumentado tu experiencia en 500xp!!',
+									width: 600,
+									padding: '3em',
+									color: '#716add',
+									html: `<div class="swal2-content-container">
+											  <img src="${gifimperio}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
+											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
+										   </div>`,
+									backdrop: `
+									  rgba(0,0,123,0.4)
+									  url("${gifNyanCat}")
+									  left top
+									  no-repeat
+									`
+								  });
+								//aumentar experiencia (aumentar nivel de una vez)
+								//colocar el logro con el userid si userid esta en el localstorage
+							}
+							
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);

@@ -167,8 +167,8 @@ const Perfil = () => {
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
 	const [contrasena, setContrasena] = useState("--------");
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
-	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
-	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
+	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || 1);
+	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || 0);
 	const [idAvatar, setIdAvatar] = useState(initialAvatar());
 
 	//Obtener la imagen del avatar
@@ -328,6 +328,7 @@ const Perfil = () => {
 							className="inputClassName"
 							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
+							style={{ WebkitTextSecurity: "disc" }}
 							value={contrasena}
 						/>
 					</div>
@@ -345,12 +346,20 @@ const Perfil = () => {
 				<div>
 					<div className="first-column">
 						<p>Nivel</p>
-						<input type="text" className="inputClassName" disabled />
+						<input
+							type="text"
+							className="inputClassName"
+							value={nivel}
+							disabled />
 					</div>
 				</div>
 				<div>
 					<p>Experiencia</p>
-					<input type="text" className="inputClassName" disabled />
+					<input
+						type="text"
+						className="inputClassName"
+						value={experiencia}
+						disabled />
 				</div>
 			</div>
 
