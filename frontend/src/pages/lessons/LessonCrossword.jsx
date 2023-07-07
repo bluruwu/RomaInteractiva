@@ -50,18 +50,14 @@ const LessonCrossword = () => {
 
 	//Cuando el usuario gana
 	const handleCorrect = () => {
-		let timerInterval;
 		Swal.fire({
-			title: "¡Ganaste!",
-			html: "Has contestado correctamente todas las preguntas",
-			timer: 4000,
-			timerProgressBar: true,
+			title: "🧠 ¡Ganaste! 🎉",
+			text: `Has resuelto correctamente el crucigrama`,
+			icon: "success",
+			showConfirmButton: true,
 			confirmButtonColor: "#03ac13",
 			customClass: {
-				container: "font-text",
-			},
-			willClose: () => {
-				clearInterval(timerInterval);
+				container: "font-text", // Cambiar la fuente del título
 			},
 		});
 	};
@@ -86,6 +82,7 @@ const LessonCrossword = () => {
 				{/* Mostrar crucigrama */}
 				<div className="w-full h-2/4 flex justify-center">
 					<div className="flex mx-auto w-2/4 ">
+						{/* Se le envia los datos del crucigrama y el funcionamiento cuando se resuelve correctamente el crucigrama */}
 						<Crossword data={crosswordData} onCrosswordCorrect={handleCorrect} />
 					</div>
 				</div>

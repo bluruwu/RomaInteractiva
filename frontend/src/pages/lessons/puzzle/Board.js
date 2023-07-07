@@ -42,6 +42,7 @@ function Board({ imageUrl, imageName }) {
 	};
 	const hasWon = isSolved(tiles);
 
+	//Swal que se muestra cuando gane el juego, se le muestra la descripcion de la imagen
 	const showPuzzleSolvedNotification = () => {
 		Swal.fire({
 			title: "¡Rompecabezas resuelto! 🎉",
@@ -54,6 +55,7 @@ function Board({ imageUrl, imageName }) {
 		});
 	};
 
+	//Mostrar el swal si ha ganado y el juego ha empezado
 	if (hasWon && isStarted) {
 		showPuzzleSolvedNotification();
 	}
