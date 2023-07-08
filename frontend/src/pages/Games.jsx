@@ -10,18 +10,20 @@ const Games = () => {
 	const [isHoveredPuzzle, setIsHoveredPuzzle] = useState(false);
 	const [isHoveredCrossword, setIsHoveredCrossword] = useState(false);
 
+	//Manejo del hover de la imagen del rompecabezas
 	const handleHoverPuzzle = () => {
 		setIsHoveredPuzzle(true);
 	};
-
+	//Manejo del hover de la imagen del rompecabezas
 	const handleMouseLeavePuzzle = () => {
 		setIsHoveredPuzzle(false);
 	};
 
+	//Manejo del hover de la imagen del crucigrama
 	const handleHoverCrossword = () => {
 		setIsHoveredCrossword(true);
 	};
-
+	//Manejo del hover de la imagen del crucigrama
 	const handleMouseLeaveCrossword = () => {
 		setIsHoveredCrossword(false);
 	};
@@ -30,6 +32,7 @@ const Games = () => {
 			<Navbar />
 
 			<div className="flex flex-col grow md:flex-row">
+				{/* Juego Rompecabezas */}
 				<div
 					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/puzzle")}
@@ -73,7 +76,7 @@ const Games = () => {
 				</div>
 
 				{/* //////////////////////////////////////////////////////////////////////// */}
-				{/* Leccion anterior */}
+				{/* Juego Crucigrama */}
 				<div
 					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/crossword")}

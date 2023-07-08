@@ -27,13 +27,8 @@ const LessonRomuloRemo = () => {
 			source: "https://sketchfab.com/models/23ad914573fe46c49b510a736715a377/embed",
 		},
 		{
-			description: "Estatua de Luperca, la loba que los alimentó",
-			titleModel: "Luperca",
-			source: "https://sketchfab.com/models/b195f0e1b7be4ec9b8d2f6d55006133a/embed",
-		},
-		{
-			description: "Tiber con Rómulo, remo y luperca",
-			titleModel: "Tiber con Rómulo, remo y luperca",
+			description: "Tiber con Rómulo, Remo y Luperca",
+			titleModel: "Tiber con Rómulo, Remo y Luperca",
 			source: "https://sketchfab.com/models/4b90b61d1ad94456b957844dbaccc0a2/embed",
 		},
 	];
@@ -54,18 +49,18 @@ const LessonRomuloRemo = () => {
 				{" "}
 				{/* Div del contenido + modelo */}
 				{/* Componente de texto de la lección */}
-				<LessonText title="Rómulo y Remo" paragraphs={paragraphs} />
+				<LessonText
+					title="Rómulo y Remo"
+					paragraphs={paragraphs}
+					// Menu de opciones para modelos - Se mandan dos parametros: La funcion handle y el array de los modelos
+					dropdownMenu={<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />}
+				/>
 				{/* Componente del modelo 3D */}
 				<LessonModel
 					description={modeloActual.description}
 					titleModel={modeloActual.titleModel}
 					source={modeloActual.source}
 				/>
-			</div>
-			<div className="flex justify-end">
-				{/* Menu de opciones para modelos */}
-				<DropdownMenu handleModelo={handleModelo} modelos={otrosModelos} />{" "}
-				{/* Se mandan dos parametros: La funcion handle y el array de los modelos */}
 			</div>
 			{/* Navegación entre lecciones */}
 			<LessonNav

@@ -44,6 +44,13 @@ const Navbar = ({ inQuiz }) => {
 		}
 	};
 
+	//Si no hay avatar, verificar si el usuario no esta logeado para redirigirlo a LOGIN
+	const handleNavigationLoggedOut = () => {
+		if (!nickname) {
+			navigate("/login");
+		}
+	};
+
 	//Redirigir a home
 	if (goHome) {
 		//Si esta en home, recargar la pagina
@@ -88,7 +95,7 @@ const Navbar = ({ inQuiz }) => {
 	}
 
 	return (
-		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
+		<nav className={`bg-custom-rojo `}>
 			<div className="flex justify-between mx-4 md:mx-20">
 				{/* Logo y titulo */}
 				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
@@ -158,7 +165,8 @@ const Navbar = ({ inQuiz }) => {
 													alt="Avatar del usuario"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
-													onClick={handleNavigation}
+													//Si no hay avatar
+													onClick={handleNavigationLoggedOut}
 												/>
 											)}
 										</div>

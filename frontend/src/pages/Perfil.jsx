@@ -9,6 +9,7 @@ import "./css/perfil.css";
 import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
+
 import imageNoLogro from "../media/logros/nologro.png";
 import gifarquitectura from "../media/logros/gifarquitectura.gif";
 import gifcultura from "../media/logros/gifcultura.gif";
@@ -17,9 +18,9 @@ import gifmonarquia from "../media/logros/gifmonarquia.gif";
 import gifpersonajes from "../media/logros/gifpersonajes.gif";
 import gifrepublica from "../media/logros/gifrepublica.gif";
 
+
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
-
 	const API_URL = getAPI_URL();
 
 	const [logrosParaMostrar, setLogrosParaMostrar] = useState(
@@ -56,7 +57,6 @@ const Perfil = () => {
 				window.location.reload();
 			});
 		} else if (req_succesful === "Las contraseña actual no es valida") {
-
 			Swal.fire({
 				title: "Contraseña incorrecta",
 				confirmButtonText: "Aceptar",
@@ -65,7 +65,6 @@ const Perfil = () => {
 					container: "font-text", // Cambiar la fuente del título
 				},
 			}).then(() => {
-
 				window.location.reload();
 			});
 		} else {
@@ -138,15 +137,16 @@ const Perfil = () => {
 			},
 		}).then((result) => {
 			if (result.value != undefined) {
-
-				myPutPetition({
-					contrasena: result.value.currentPassword,
-					nueva_contrasena: result.value.newPassword
-				}, localStorage.getItem("token"));
+				myPutPetition(
+					{
+						contrasena: result.value.currentPassword,
+						nueva_contrasena: result.value.newPassword,
+					},
+					localStorage.getItem("token")
+				);
 			}
-		})
-	}
-
+		});
+	};
 
 	//Obtener el avatar del usuario si tiene uno
 	const initialAvatar = () => {
@@ -175,15 +175,19 @@ const Perfil = () => {
 			return (
 				<div>
 					<img
-						src={idAvatar < 7 ? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg` : `${API_URL}/image/avatar${idAvatar}.jpg`}
+						src={
+							idAvatar < 7
+								? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+								: `${API_URL}/image/avatar${idAvatar}.jpg`
+						}
 						className="overlayed-image-1"
 					/>
 					<img
 						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
 						className="overlayed-image-2"
-						onClick={(e) => updloadAvatar()} />
+						onClick={(e) => updloadAvatar()}
+					/>
 				</div>
-
 			);
 		} else {
 			//Si el usuario no tiene ningun avatar_id se pone el avatar generico
@@ -196,51 +200,24 @@ const Perfil = () => {
 					<img
 						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
 						className="overlayed-image-2"
-						onClick={(e) => updloadAvatar()} />
+						onClick={(e) => updloadAvatar()}
+					/>
 				</div>
-
 			);
 		}
 	};
 
 	async function updloadAvatar() {
-
 		async function waitServer() {
 			//ask the user for an image, upload that image, and get an id
 			const idFromServer = await uploadImageToServer(localStorage.getItem("token"));
 			//revisar si el servidor respondio con un id
 			if (idFromServer) {
-				setIdAvatar(idFromServer)
-				localStorage.setItem("avatar_id", JSON.stringify(idFromServer))
+				setIdAvatar(idFromServer);
+				localStorage.setItem("avatar_id", JSON.stringify(idFromServer));
 			}
 		}
-		waitServer()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		waitServer();
 	}
 
 	return (
@@ -252,6 +229,8 @@ const Perfil = () => {
 			</div>
 
 			<div className="logrosyperfil">
+				<img src={require("../media/logros/logro-columna.png")} className="imagesLeft" />
+
 
 				<img
 					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
@@ -268,7 +247,10 @@ const Perfil = () => {
 					className="imagesLeft"
 				/>
 
+
 				{getAvatar()}
+
+				<img src={require("../media/logros/logro-medalla.png")} className="imagesRight" />
 
 
 				<img
@@ -286,6 +268,7 @@ const Perfil = () => {
 					src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
 					className="imagesRight"
 				/>
+
 
 			</div>
 

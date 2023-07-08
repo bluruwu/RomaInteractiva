@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const LessonText = ({ title, paragraphs }) => {
+//Recibe el titulo y parrafos de la leccion, y el boton de cambiar entre modelos
+const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 	const [currentParagraph, setCurrentParagraph] = useState(0);
 
 	const handleParagraphChange = (index) => {
@@ -8,7 +9,7 @@ const LessonText = ({ title, paragraphs }) => {
 	};
 
 	return (
-		<div className="pt-20 md:w-1/2 p-14 relative">
+		<div className="w-full h-[200vw] sm:h-[700vw] md:h-[50vw] lg:h-auto lg:w-1/2 p-8 md:p-12 lg:p-21 relative">
 			{/* Titulo de la leccion */}
 			<div className="mb-10 text-3xl">
 				<p className="font-bold text-center filter drop-shadow-lg">{title}</p>
@@ -30,19 +31,26 @@ const LessonText = ({ title, paragraphs }) => {
 				))}
 			</div>
 
-			{/* Botones circulares */}
-			<div className="bottom-32 z-10 flex space-x-2 absolute right-1 transform -translate-x-1/2">
-				{paragraphs.map((_, index) => (
-					<button
-						key={index}
-						onClick={() => handleParagraphChange(index)}
-						className={`rounded-full h-8 w-8 flex items-center justify-center text-base border ${
-							currentParagraph === index ? "bg-[#e69200] text-white " : "bg-gray-300 text-gray-600"
-						}`}
-					>
-						{index + 1}
-					</button>
-				))}
+			{/* BOTONES DE LOS PARRAFOS Y BOTON DE CAMBIAR ENTRE MODELOS */}
+			<div className="bottom-10 absolute z-10 flex flex-col items-end right-1">
+				{/* Botones circulares */}
+				<div className="bottom-10 z-10 flex space-x-2 right-1 transform -translate-x-1/2">
+					{paragraphs.map((_, index) => (
+						<button
+							key={index}
+							onClick={() => handleParagraphChange(index)}
+							className={`rounded-full h-8 w-8 flex items-center justify-center text-base border ${
+								currentParagraph === index
+									? "bg-[#e69200] text-white "
+									: "bg-gray-300 text-gray-600"
+							}`}
+						>
+							{index + 1}
+						</button>
+					))}
+				</div>
+				{/* Si se le pasa el dropdownMenu para cambiar entre modelos, lo muestra en el div */}
+				<div className="bottom-1 pt-10 pr-8 md:pr-14 flex">{dropdownMenu}</div>
 			</div>
 		</div>
 	);

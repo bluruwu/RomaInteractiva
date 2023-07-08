@@ -6,7 +6,9 @@ import Image2 from "./imagenes/augusto.jpg";
 import Image3 from "./imagenes/constantino.png";
 import Image4 from "./imagenes/panteon.jpg";
 
+//Rompecabezas deslizante
 function Puzzle() {
+	//Imagenes que se van a mostrar en el juego y la descripcion de la imagen que se mestra cuando gana el juego
 	const images = [
 		{ url: Image1, name: "Coliseo Romano" },
 		{ url: Image2, name: "Estatua del Emperador Augusto" },
@@ -15,6 +17,7 @@ function Puzzle() {
 	];
 	const [selectedImage, setSelectedImage] = useState(null);
 
+	//Escoger una de las imagenes al azar
 	useEffect(() => {
 		const randomIndex = Math.floor(Math.random() * images.length);
 		setSelectedImage(images[randomIndex]);
@@ -22,7 +25,7 @@ function Puzzle() {
 
 	return (
 		<div>
-			{/* Mostrar tablero */}
+			{/* Mostrar tablero con la imagen seleccionada*/}
 			{selectedImage && <Board imageUrl={selectedImage.url} imageName={selectedImage.name} />}
 		</div>
 	);
