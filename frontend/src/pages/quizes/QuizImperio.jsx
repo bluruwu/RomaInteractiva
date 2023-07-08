@@ -158,6 +158,8 @@ const QuizImperio = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then(async (result) => {
+
+							
 							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
 							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
 								//aumentar el localStorage en requests y no aqui
