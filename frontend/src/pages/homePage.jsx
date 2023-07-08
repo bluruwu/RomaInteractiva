@@ -48,6 +48,11 @@ const HomePage = () => {
 					nombre: "arquitectura",
 					nota: localStorage.getItem("arquitecturaAciertos"),
 				},
+				{
+					leccion: 6,
+					nombre: "cultura",
+					nota: localStorage.getItem("culturaAciertos"),
+				},
 
 				// Agregar más elementos según sea necesario para las demás lecciones
 			];
