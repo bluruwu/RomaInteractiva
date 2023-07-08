@@ -79,7 +79,7 @@ export const getPrueba = async (token) => {
 export const postLogin = async (mydata) => {
 	//Limpiar toda la informacion del usuario incluido el token
 	localStorage.clear();
-	window.location.reload();
+
 	window.localStorage.clear(); //try this to clear all local storage
 	try {
 		const response = await fetch(`${API_URL}/login`, {
