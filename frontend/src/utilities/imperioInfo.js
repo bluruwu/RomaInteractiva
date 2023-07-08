@@ -48,6 +48,6 @@ export const INFORMATION = [
 		option3: "Ser considerados una amenaza para el orden",
 		option4: "Tener un rol destacado en la política y sociedad",
 		respuesta: 4,
-		urlnxt: "/Romulo_Remo",
+		urlnxt: "/home",
 	},
 ];
