@@ -85,7 +85,41 @@ export default function Modal() {
 					</span>
 				);
 		} else if (quiz == 4) {
+			const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+			if (quizResuelto) {
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Arquitectura:</strong>
+						<span className="text-right">
+							{JSON.parse(localStorage.getItem("arquitecturaAciertos"))}/5 aciertos
+						</span>
+					</span>
+				);
+			} else
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Arquitectura:</strong>
+						<span className="text-right">Sin resolver</span>
+					</span>
+				);
 		} else if (quiz == 5) {
+			const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
+			if (quizResuelto) {
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Cultura:</strong>
+						<span className="text-right">
+							{JSON.parse(localStorage.getItem("culturaAciertos"))}/5 aciertos
+						</span>
+					</span>
+				);
+			} else
+				return (
+					<span className="flex items-center justify-between px-4">
+						<strong>Cultura:</strong>
+						<span className="text-right">Sin resolver</span>
+					</span>
+				);
 		} else return null;
 	};
 
@@ -157,7 +191,11 @@ export default function Modal() {
 			const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
 			getMessage(quizResuelto, "/Quiz_Personajes", "/Romulo_Remo");
 		} else if (quiz == 4) {
+			const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+			getMessage(quizResuelto, "/Quiz_Arquitectura", "/Coliseo_Romano");
 		} else if (quiz == 5) {
+			const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
+			getMessage(quizResuelto, "/Quiz_Cultura", "/Viviendas");
 		} else return null;
 	};
 
@@ -207,25 +245,10 @@ export default function Modal() {
 
 												<Button texto={getText(3)} onClick={() => getScore(3)} />
 
-												<Button
-													texto={
-														<span className="flex items-center justify-between px-4">
-															<strong>Arquitectura:</strong>
-															<span className="text-right">Sin resolver</span>
-														</span>
-													}
-													onClick={() => console.log("jeje")}
-												/>
+												<Button texto={getText(4)} onClick={() => getScore(4)} />
 
-												<Button
-													texto={
-														<span className="flex items-center justify-between px-4">
-															<strong>Cultura:</strong>
-															<span className="text-right">Sin resolver</span>
-														</span>
-													}
-													onClick={() => console.log("jeje")}
-												/>
+												<Button texto={getText(5)} onClick={() => getScore(5)} />
+
 											</div>
 										</div>
 									</div>

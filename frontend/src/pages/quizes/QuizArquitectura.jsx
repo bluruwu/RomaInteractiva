@@ -4,12 +4,10 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import Option from "../../components/quiz/quizOption";
 import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
-import { INFORMATION } from "../../utilities/imperioInfo";
+import { INFORMATION } from "../../utilities/arquitecturaInfo";
 import { useNavigate } from "react-router-dom";
-import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
-import gifimperio from "../../media/logros/gifimperio.gif";
-import { updateUserBecauseOfNewAchivement } from "../../conections/requests";
-const QuizImperio = () => {
+
+const QuizArquitectura = () => {
 	const navigate = useNavigate();
 
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -20,10 +18,10 @@ const QuizImperio = () => {
 	const token = localStorage.getItem("token");
 
 	const setInitialOptions = () => {
-		if (JSON.parse(localStorage.getItem("imperioResuelto")) === true) {
+		if (JSON.parse(localStorage.getItem("arquitecturaResuelto")) === true) {
 			let valoresIniciales = [];
 			for (let i = 0; i < 5; i++) {
-				valoresIniciales[i] = JSON.parse(localStorage.getItem(`imperioOpcion${i}`));
+				valoresIniciales[i] = JSON.parse(localStorage.getItem(`arquitecturaOpcion${i}`));
 			}
 			return valoresIniciales;
 		} else return [0, 0, 0, 0, 0];
@@ -32,7 +30,7 @@ const QuizImperio = () => {
 	const [checkedOptions, setCheckedOptions] = useState(setInitialOptions());
 
 	const guardarOpcionMarcada = (index, valor) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
 		if (!quizResuelto) {
 			// Clonar el arreglo existente
 			const arregloModificado = [...checkedOptions];
@@ -46,7 +44,7 @@ const QuizImperio = () => {
 	};
 
 	const handleOptionSelect = (option) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
 		if (!quizResuelto) {
 			setSelectedOption(option);
 			guardarOpcionMarcada(questionNumber, option);
@@ -55,7 +53,7 @@ const QuizImperio = () => {
 
 	const handleClickButton1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
 		if (questionNumber != 0) {
 			if (!quizResuelto) {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
@@ -68,7 +66,7 @@ const QuizImperio = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("imperioResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
 		if (questionNumber != 4) {
 			if (!quizResuelto) {
 				if (checkedOptions[questionNumber + 1] == 0) {
@@ -79,7 +77,7 @@ const QuizImperio = () => {
 			}
 			setQuestionNumber(questionNumber + 1);
 		} else {
-			if (JSON.parse(localStorage.getItem("imperioResuelto"))) {
+			if (JSON.parse(localStorage.getItem("arquitecturaResuelto"))) {
 				Swal.fire({
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
@@ -107,25 +105,25 @@ const QuizImperio = () => {
 
 						//Guardar respuestas del quiz en localStorage
 						for (let i = 0; i < 5; i++) {
-							localStorage.setItem(`imperioOpcion${i}`, JSON.stringify(checkedOptions[i]));
+							localStorage.setItem(`arquitecturaOpcion${i}`, JSON.stringify(checkedOptions[i]));
 							if (checkedOptions[i] === INFORMATION[i].respuesta) {
 								respuestasCorrectas++;
 							}
 						}
 						//Guardar calificacion del quiz en localStorage
-						localStorage.setItem("imperioAciertos", JSON.stringify(respuestasCorrectas));
+						localStorage.setItem("arquitecturaAciertos", JSON.stringify(respuestasCorrectas));
 						//Marcar como resuelta en localStorage
-						localStorage.setItem("imperioResuelto", JSON.stringify(true));
+						localStorage.setItem("arquitecturaResuelto", JSON.stringify(true));
 
 						//Objeto para enviar respuestas al backend
 						const formData = {
 							id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
-							respuesta0: JSON.parse(localStorage.getItem("imperioOpcion0")),
-							respuesta1: JSON.parse(localStorage.getItem("imperioOpcion1")),
-							respuesta2: JSON.parse(localStorage.getItem("imperioOpcion2")),
-							respuesta3: JSON.parse(localStorage.getItem("imperioOpcion3")),
-							respuesta4: JSON.parse(localStorage.getItem("imperioOpcion4")),
-							calificacion: JSON.parse(localStorage.getItem("imperioAciertos")),
+							respuesta0: JSON.parse(localStorage.getItem("arquitecturaOpcion0")),
+							respuesta1: JSON.parse(localStorage.getItem("arquitecturaOpcion1")),
+							respuesta2: JSON.parse(localStorage.getItem("arquitecturaOpcion2")),
+							respuesta3: JSON.parse(localStorage.getItem("arquitecturaOpcion3")),
+							respuesta4: JSON.parse(localStorage.getItem("arquitecturaOpcion4")),
+							calificacion: JSON.parse(localStorage.getItem("arquitecturaAciertos")),
 						};
 
 						console.log(formData);
@@ -148,6 +146,7 @@ const QuizImperio = () => {
 						}
 
 						/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
+
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -157,59 +156,15 @@ const QuizImperio = () => {
 							customClass: {
 								container: "font-text", // Cambiar la fuente del título
 							},
-						}).then(async (result) => {
-							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
-								//aumentar el localStorage en requests y no aqui
-								//en localStorage aumentar la exp y el nivel
-								//aumentar experiencia (aumentar nivel de una vez)
-								//se usa el valor de la experiencia en el localstorage
-								const updateRes = await updateUserBecauseOfNewAchivement('logro_imperio', token);
-								Swal.fire({
-									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
-									width: 600,
-									padding: '3em',
-									color: '#716add',
-									html: `<div class="swal2-content-container">
-											  <img src="${gifimperio}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
-										   </div>`,
-									backdrop: `
-									  rgba(0,0,123,0.4)
-									  url("${gifNyanCat}")
-									  left top
-									  no-repeat
-									`,
-									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
-								}).then((result) => {
-
-									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
-										const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
-										Swal.fire({
-											title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
-											width: 600,
-											padding: '3em',
-											color: '#716add',
-											backdrop: `
-										  rgba(0,0,123,0.4)
-										  url("${gifNyanCat}")
-										  left top
-										  no-repeat
-										`
-										}).then((result) => {
-											
-										});
-									//}
-								});
-
-							}
+						}).then((result) => {
+							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
-								navigate("/Quiz_Imperio");
+								navigate("/Quiz_Arquitectura");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
-							}	
+							}
 						});
 					}
 				});
@@ -219,7 +174,7 @@ const QuizImperio = () => {
 
 	const button2Text = () => {
 		if (questionNumber === 4) {
-			if (JSON.parse(localStorage.getItem("monarquiaResuelto"))) {
+			if (JSON.parse(localStorage.getItem("arquitecturaResuelto"))) {
 				return "Finalizar revisión";
 			} else return "Finalizar Quiz";
 		} else return "Siguiente pregunta";
@@ -231,8 +186,8 @@ const QuizImperio = () => {
 			<QuizQuestion
 				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
-				quiz={4}
-				quizResuelto={JSON.parse(localStorage.getItem("imperioResuelto"))}
+				quiz={5}
+				quizResuelto={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
 				respuesta1={checkedOptions[0]}
 				respuesta2={checkedOptions[1]}
 				respuesta3={checkedOptions[2]}
@@ -248,8 +203,8 @@ const QuizImperio = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option2}
@@ -259,8 +214,8 @@ const QuizImperio = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option3}
@@ -270,8 +225,8 @@ const QuizImperio = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option4}
@@ -281,8 +236,8 @@ const QuizImperio = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("imperioResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`imperioOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
 				/>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
@@ -305,4 +260,4 @@ const QuizImperio = () => {
 	);
 };
 
-export default QuizImperio;
+export default QuizArquitectura;

@@ -33,6 +33,8 @@ const LessonRecreacion = () => {
 				urlnxt="/Quiz_Cultura"
 				medianxt="quiz.jpg"
 				titlenxt="QUIZ (CULTURA)"
+				last={true}
+				quiz={"cultura"}
 			/>
 		</div>
 	);
