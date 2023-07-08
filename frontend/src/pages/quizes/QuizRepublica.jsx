@@ -223,7 +223,7 @@ const QuizRepublica = () => {
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
-								navigate("/Quiz_Imperio");
+								navigate("/Quiz_Republica");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
