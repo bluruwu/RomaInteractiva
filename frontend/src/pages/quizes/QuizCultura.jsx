@@ -4,7 +4,7 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import Option from "../../components/quiz/quizOption";
 import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
-import { INFORMATION } from "../../utilities/arquitecturaInfo";
+import { INFORMATION } from "../../utilities/culturaInfo";
 import { useNavigate } from "react-router-dom";
 
 const QuizCultura = () => {
@@ -18,10 +18,10 @@ const QuizCultura = () => {
 	const token = localStorage.getItem("token");
 
 	const setInitialOptions = () => {
-		if (JSON.parse(localStorage.getItem("arquitecturaResuelto")) === true) {
+		if (JSON.parse(localStorage.getItem("culturaResuelto")) === true) {
 			let valoresIniciales = [];
 			for (let i = 0; i < 5; i++) {
-				valoresIniciales[i] = JSON.parse(localStorage.getItem(`arquitecturaOpcion${i}`));
+				valoresIniciales[i] = JSON.parse(localStorage.getItem(`culturaOpcion${i}`));
 			}
 			return valoresIniciales;
 		} else return [0, 0, 0, 0, 0];
@@ -30,7 +30,7 @@ const QuizCultura = () => {
 	const [checkedOptions, setCheckedOptions] = useState(setInitialOptions());
 
 	const guardarOpcionMarcada = (index, valor) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (!quizResuelto) {
 			// Clonar el arreglo existente
 			const arregloModificado = [...checkedOptions];
@@ -44,7 +44,7 @@ const QuizCultura = () => {
 	};
 
 	const handleOptionSelect = (option) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (!quizResuelto) {
 			setSelectedOption(option);
 			guardarOpcionMarcada(questionNumber, option);
@@ -53,7 +53,7 @@ const QuizCultura = () => {
 
 	const handleClickButton1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (questionNumber != 0) {
 			if (!quizResuelto) {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
@@ -66,7 +66,7 @@ const QuizCultura = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (questionNumber != 4) {
 			if (!quizResuelto) {
 				if (checkedOptions[questionNumber + 1] == 0) {
@@ -77,7 +77,7 @@ const QuizCultura = () => {
 			}
 			setQuestionNumber(questionNumber + 1);
 		} else {
-			if (JSON.parse(localStorage.getItem("arquitecturaResuelto"))) {
+			if (JSON.parse(localStorage.getItem("culturaResuelto"))) {
 				Swal.fire({
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
@@ -105,25 +105,25 @@ const QuizCultura = () => {
 
 						//Guardar respuestas del quiz en localStorage
 						for (let i = 0; i < 5; i++) {
-							localStorage.setItem(`arquitecturaOpcion${i}`, JSON.stringify(checkedOptions[i]));
+							localStorage.setItem(`culturaOpcion${i}`, JSON.stringify(checkedOptions[i]));
 							if (checkedOptions[i] === INFORMATION[i].respuesta) {
 								respuestasCorrectas++;
 							}
 						}
 						//Guardar calificacion del quiz en localStorage
-						localStorage.setItem("arquitecturaAciertos", JSON.stringify(respuestasCorrectas));
+						localStorage.setItem("culturaAciertos", JSON.stringify(respuestasCorrectas));
 						//Marcar como resuelta en localStorage
-						localStorage.setItem("arquitecturaResuelto", JSON.stringify(true));
+						localStorage.setItem("culturaResuelto", JSON.stringify(true));
 
 						//Objeto para enviar respuestas al backend
 						const formData = {
 							id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
-							respuesta0: JSON.parse(localStorage.getItem("arquitecturaOpcion0")),
-							respuesta1: JSON.parse(localStorage.getItem("arquitecturaOpcion1")),
-							respuesta2: JSON.parse(localStorage.getItem("arquitecturaOpcion2")),
-							respuesta3: JSON.parse(localStorage.getItem("arquitecturaOpcion3")),
-							respuesta4: JSON.parse(localStorage.getItem("arquitecturaOpcion4")),
-							calificacion: JSON.parse(localStorage.getItem("arquitecturaAciertos")),
+							respuesta0: JSON.parse(localStorage.getItem("culturaOpcion0")),
+							respuesta1: JSON.parse(localStorage.getItem("culturaOpcion1")),
+							respuesta2: JSON.parse(localStorage.getItem("culturaOpcion2")),
+							respuesta3: JSON.parse(localStorage.getItem("culturaOpcion3")),
+							respuesta4: JSON.parse(localStorage.getItem("culturaOpcion4")),
+							calificacion: JSON.parse(localStorage.getItem("culturaAciertos")),
 						};
 
 						console.log(formData);
@@ -161,7 +161,7 @@ const QuizCultura = () => {
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
-								navigate("/Quiz_Arquitectura");
+								navigate("/Quiz_Cultura");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
@@ -174,7 +174,7 @@ const QuizCultura = () => {
 
 	const button2Text = () => {
 		if (questionNumber === 4) {
-			if (JSON.parse(localStorage.getItem("arquitecturaResuelto"))) {
+			if (JSON.parse(localStorage.getItem("culturaResuelto"))) {
 				return "Finalizar revisión";
 			} else return "Finalizar Quiz";
 		} else return "Siguiente pregunta";
@@ -182,12 +182,12 @@ const QuizCultura = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar />
+			<Navbar inQuiz={true}/>
 			<QuizQuestion
 				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
-				quiz={5}
-				quizResuelto={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
+				quiz={6}
+				quizResuelto={JSON.parse(localStorage.getItem("culturaResuelto"))}
 				respuesta1={checkedOptions[0]}
 				respuesta2={checkedOptions[1]}
 				respuesta3={checkedOptions[2]}
@@ -203,8 +203,8 @@ const QuizCultura = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option2}
@@ -214,8 +214,8 @@ const QuizCultura = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option3}
@@ -225,8 +225,8 @@ const QuizCultura = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option4}
@@ -236,8 +236,8 @@ const QuizCultura = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("arquitecturaResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`arquitecturaOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">

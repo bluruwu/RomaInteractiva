@@ -53,6 +53,7 @@ const App = () => {
 			<Route path="Quiz_Personajes" element={<QuizPersonajes />} />
 			<Route path="Quiz_Imperio" element={<QuizImperio />} />
 			<Route path="Quiz_Arquitectura" element={<QuizArquitectura />} />
+			<Route path="Quiz_Cultura" element={<QuizCultura />} />
 
 			{/* Lecciones Monarquia */}
 			<Route path="/Fundacion_de_Roma" element={<LessonFundacionRoma />} />

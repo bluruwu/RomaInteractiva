@@ -24,6 +24,8 @@ const LessonNav = ({
 			return JSON.parse(localStorage.getItem("personajesResuelto"));
 		} else if (quiz == "arquitectura") {
 			return JSON.parse(localStorage.getItem("arquitecturaResuelto"));
+		} else if (quiz == "cultura") {
+			return JSON.parse(localStorage.getItem("culturaResuelto"));
 		}
 		
 	};

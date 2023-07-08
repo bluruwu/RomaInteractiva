@@ -177,7 +177,7 @@ const QuizPersonajes = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar />
+			<Navbar inQuiz={true}/>
 			<QuizQuestion 
 				question={INFORMATION[questionNumber].title} 
 				preguntaSeleccionada={questionNumber}
