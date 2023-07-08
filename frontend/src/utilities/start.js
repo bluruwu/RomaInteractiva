@@ -23,7 +23,7 @@ export default async function uploadImageToServer(token) {
         const responseUpdateProfile = await putActualizarPerfil({avatar_id: responseData.message},token);
         Swal.fire({
           title: 'Upload successful  &#9989;',
-          text: `The file has been uploaded to the server. Response: ${JSON.stringify(responseData)}`,
+          text: `The file has been uploaded to the server.`,
           imageUrl: URL.createObjectURL(file),
           imageAlt: 'Uploaded picture'
         });
