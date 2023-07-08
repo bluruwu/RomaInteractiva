@@ -215,45 +215,45 @@ const transporter = nodemailer.createTransport({
 	port: 465,
 	secure: true,
 	auth: {
-	  user: 'romainteractiva@gmail.com',
-	  pass: 'moqkwrtblblthnaw'
+		user: 'romainteractiva@gmail.com',
+		pass: 'moqkwrtblblthnaw'
 	}
-  });
+});
 
 
 // Ruta para enviar el correo electrónico
 app.post('/sendrecoveryemail', async (req, res) => {
 
-	const { to, subject, body} = req.body;
+	const { to, subject, body } = req.body;
 
 	newData = {}
 
-	newData["contrasena"] =  Math.random().toString(36).slice(-8);
+	newData["contrasena"] = Math.random().toString(36).slice(-8);
 
 	const mailOptions = {
-	  from: 'romainteractiva@gmail.com',
-	  to,
-	  subject,
-	  html: body + newData["contrasena"]
+		from: 'romainteractiva@gmail.com',
+		to,
+		subject,
+		html: body + newData["contrasena"]
 	};
 
 	newData["contrasena"] = await bcrypt.hash(newData["contrasena"], 10);
-  
+
 	const { error: queryError } = await supabase
-	.from("usuarios")
-	.update(newData)
-	.eq("email", to);
+		.from("usuarios")
+		.update(newData)
+		.eq("email", to);
 
 
 	// Envía el correo electrónico utilizando nodemailer
 	transporter.sendMail(mailOptions, (error, info) => {
-	  if (error) {
-		console.error('Error al enviar el correo electrónico:', error);
-		res.status(500).json('Ocurrió un error al enviar el correo electrónico' );
-	  } else {
-		console.log('Correo electrónico enviado:', info.response);
-		res.status(200).json({ message: 'Correo electrónico enviado exitosamente' });
-	  }
+		if (error) {
+			console.error('Error al enviar el correo electrónico:', error);
+			res.status(500).json('Ocurrió un error al enviar el correo electrónico');
+		} else {
+			console.log('Correo electrónico enviado:', info.response);
+			res.status(200).json({ message: 'Correo electrónico enviado exitosamente' });
+		}
 	});
 });
 
@@ -461,13 +461,23 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	// Obtener el ID de usuario del token decodificado
 	const id_usuario = req.user.id_usuario;
 
-	const { nombre_usuario, nickname, contrasena, nueva_contrasena, avatar_id } = req.body;
+	const { nombre_usuario, nickname, contrasena, nueva_contrasena, avatar_id,
+		logro_monarquia, logro_republica, logro_imperio, logro_personajes,
+		logro_arquitectura, logro_cultura, nivel, experiencia } = req.body;
 
 	newData = {};
 	if (nombre_usuario && nombre_usuario != "") newData["nombre_usuario"] = nombre_usuario;
 	if (nickname) newData["nickname"] = nickname;
 	if (contrasena) newData["contrasena"] = contrasena;
 	if (avatar_id) newData["avatar_id"] = avatar_id;
+	if (logro_monarquia) newData["logro_monarquia"] = logro_monarquia;
+	if (logro_republica) newData["logro_republica"] = logro_republica;
+	if (logro_imperio) newData["logro_imperio"] = logro_imperio;
+	if (logro_personajes) newData["logro_personajes"] = logro_personajes;
+	if (logro_arquitectura) newData["logro_arquitectura"] = logro_arquitectura;
+	if (logro_cultura) newData["logro_cultura"] = logro_cultura;
+	if (nivel) newData["nivel"] = nivel;
+	if (experiencia) newData["experiencia"] = experiencia;
 
 	//Consulata a la base de datos para obtener el usuario con el id del token
 	const { data, error } = await supabase
