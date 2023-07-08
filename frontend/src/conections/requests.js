@@ -77,6 +77,10 @@ export const getPrueba = async (token) => {
 
 //POST para realizar el login de los usuarios
 export const postLogin = async (mydata) => {
+	//Limpiar toda la informacion del usuario incluido el token
+	localStorage.clear();
+	window.location.reload();
+	window.localStorage.clear(); //try this to clear all local storage
 	try {
 		const response = await fetch(`${API_URL}/login`, {
 			method: "POST",
@@ -279,21 +283,21 @@ export const sendRecoveryEmail = async (myForm, token) => {
 export const updateUserBecauseOfNewAchivement = async (logro, token) => {
 	const viejoNivel = JSON.parse(localStorage.getItem("nivel"))
 	const myData = {}
-	
+
 	//colocar en la data a enviar el logro, y colocarlo tambein en el localstorage
-	if (logro === 'logro_monarquia') {myData.logro_monarquia = true;localStorage.setItem('logro_monarquia',true)}
-	if (logro === 'logro_republica') {myData.logro_republica = true;localStorage.setItem('logro_republica',true)}
-	if (logro === 'logro_imperio') {myData.logro_imperio = true;localStorage.setItem('logro_imperio',true)}
-	if (logro === 'logro_personajes') {myData.logro_personajes = true;localStorage.setItem('logro_personajes',true)}
-	if (logro === 'logro_arquitectura') {myData.logro_arquitectura = true;localStorage.setItem('logro_arquitectura',true)}
-	if (logro === 'logro_cultura') {myData.logro_cultura = true;localStorage.setItem('logro_cultura',true)}
+	if (logro === 'logro_monarquia') { myData.logro_monarquia = true; localStorage.setItem('logro_monarquia', true) }
+	if (logro === 'logro_republica') { myData.logro_republica = true; localStorage.setItem('logro_republica', true) }
+	if (logro === 'logro_imperio') { myData.logro_imperio = true; localStorage.setItem('logro_imperio', true) }
+	if (logro === 'logro_personajes') { myData.logro_personajes = true; localStorage.setItem('logro_personajes', true) }
+	if (logro === 'logro_arquitectura') { myData.logro_arquitectura = true; localStorage.setItem('logro_arquitectura', true) }
+	if (logro === 'logro_cultura') { myData.logro_cultura = true; localStorage.setItem('logro_cultura', true) }
 
 	//colocar en la data a enviar la exp, basado en la exp actual en el localstorage
 	myData.experiencia = JSON.parse(localStorage.getItem('experiencia')) + 500
-	localStorage.setItem("experiencia",myData.experiencia)
+	localStorage.setItem("experiencia", myData.experiencia)
 	const nuevoNivel = Math.floor(myData.experiencia / 500) + 1;
 	myData.nivel = nuevoNivel;
-	localStorage.setItem("nivel",nuevoNivel)
+	localStorage.setItem("nivel", nuevoNivel)
 
 	try {
 		const response = await fetch(`${API_URL}/actualizarperfil`, {
@@ -307,8 +311,8 @@ export const updateUserBecauseOfNewAchivement = async (logro, token) => {
 
 		//Tratar el tipo de respuesta del backend
 		if (response.status == 280) {
-			if (viejoNivel != nuevoNivel){
-			 	return "Se produjo un cambio de nivel correctamente";
+			if (viejoNivel != nuevoNivel) {
+				return "Se produjo un cambio de nivel correctamente";
 			}
 			return "Logro, exp, y nivel actualizados correctamente";
 		} else {
