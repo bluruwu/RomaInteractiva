@@ -47,7 +47,7 @@ const Navbar = ({ inQuiz }) => {
 	//Si no hay avatar, verificar si el usuario no esta logeado para redirigirlo a LOGIN
 	const handleNavigationLoggedOut = () => {
 		if (!nickname) {
-			navigate("/login");
+			navigate("/perfil");
 		}
 	};
 
