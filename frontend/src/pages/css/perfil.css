@@ -6,7 +6,7 @@
 	border-radius: 15px;
 	border-width: 2px;
 	border-color: #f56565;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0rem;
 	box-shadow: 0 0 5px #8e0000;
 	font-size: 20px;
 }
@@ -30,37 +30,33 @@
 	/* background-color: darkmagenta; */
 	grid-gap: 40px;
 	justify-content: center;
-	margin-bottom: 5px;
-	padding-bottom: 40px;
+	margin-bottom: 3px;
+	padding-bottom: 30px;
 }
 
-  
 #perfil .logrosyperfil {
 	align-items: center;
 	justify-content: center;
 	display: flex;
 	height: 150px;
 	gap: 10px;
-
-  }
-#perfil .imagesLeft{
-
+}
+#perfil .imagesLeft {
 	object-fit: cover;
 	width: 80px;
 	height: 80px;
 	margin-right: 6px;
 	border-radius: 50%;
 }
-#perfil .imagesRight{
+#perfil .imagesRight {
 	object-fit: cover;
 	width: 80px;
 	height: 80px;
 	margin-left: 6px;
 	border-radius: 50%;
-	
 }
 
-#perfil .overlayed-image-1{
+#perfil .overlayed-image-1 {
 	border-width: 3px;
 	border-color: gold;
 	object-fit: cover;
@@ -69,11 +65,9 @@
 	margin-bottom: 2px;
 
 	border-radius: 50%;
-	
 }
 
-#perfil .overlayed-image-2{
-
+#perfil .overlayed-image-2 {
 	border-width: 1px;
 	border-color: rgb(181, 19, 19);
 	object-fit: cover;
@@ -82,6 +76,6 @@
 	margin-bottom: 2px;
 	background-color: rgb(181, 19, 19);
 	border-radius: 50%;
-  
+
 	transform: translate(230%, -100%);
 }

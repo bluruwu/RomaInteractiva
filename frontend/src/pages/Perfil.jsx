@@ -18,24 +18,18 @@ import gifmonarquia from "../media/logros/gifmonarquia.gif";
 import gifpersonajes from "../media/logros/gifpersonajes.gif";
 import gifrepublica from "../media/logros/gifrepublica.gif";
 
-
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 	const API_URL = getAPI_URL();
 
-	const [logrosParaMostrar, setLogrosParaMostrar] = useState(
-		{
-			logroMonarquia: JSON.parse(localStorage.getItem("logro_monarquia")),
-			logroRepublica: JSON.parse(localStorage.getItem("logro_republica")),
-			logroImperio: JSON.parse(localStorage.getItem("logro_imperio")),
-			logroPersonajes: JSON.parse(localStorage.getItem("logro_personajes")),
-			logroArquitectura: JSON.parse(localStorage.getItem("logro_arquitectura")),
-			logroCultura: JSON.parse(localStorage.getItem("logro_cultura")),
-		});
-
-
-
-
+	const [logrosParaMostrar, setLogrosParaMostrar] = useState({
+		logroMonarquia: JSON.parse(localStorage.getItem("logro_monarquia")),
+		logroRepublica: JSON.parse(localStorage.getItem("logro_republica")),
+		logroImperio: JSON.parse(localStorage.getItem("logro_imperio")),
+		logroPersonajes: JSON.parse(localStorage.getItem("logro_personajes")),
+		logroArquitectura: JSON.parse(localStorage.getItem("logro_arquitectura")),
+		logroCultura: JSON.parse(localStorage.getItem("logro_cultura")),
+	});
 
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
@@ -224,12 +218,13 @@ const Perfil = () => {
 		<div id="perfil" className="font-text  h-screen">
 			<Navbar />
 			{/* Contenido de la leccion y modelo */}
-			<div className="mt-10 ml-10">
+			{/* <div className="mt-10 ml-10">
 				<HomeButton />
-			</div>
+			</div> */}
+
+			<div className="p-10"></div>
 
 			<div className="logrosyperfil">
-
 				<img
 					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
 					className="imagesLeft"
@@ -245,15 +240,12 @@ const Perfil = () => {
 					className="imagesLeft"
 				/>
 
-
 				{getAvatar()}
-
 
 				<img
 					src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
 					className="imagesRight"
 				/>
-
 
 				<img
 					src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
@@ -264,8 +256,6 @@ const Perfil = () => {
 					src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
 					className="imagesRight"
 				/>
-
-
 			</div>
 
 			{/* Modal para mostrar los avatares disponibles */}
@@ -305,7 +295,7 @@ const Perfil = () => {
 							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
 							style={{ WebkitTextSecurity: "disc" }}
-							value={localStorage.getItem("token") ?  contrasena: '' }
+							value={localStorage.getItem("token") ? contrasena : ""}
 						/>
 					</div>
 				</div>
@@ -322,20 +312,12 @@ const Perfil = () => {
 				<div>
 					<div className="first-column">
 						<p>Nivel</p>
-						<input
-							type="text"
-							className="inputClassName"
-							value={nivel}
-							disabled />
+						<input type="text" className="inputClassName" value={nivel} disabled />
 					</div>
 				</div>
 				<div>
 					<p>Experiencia</p>
-					<input
-						type="text"
-						className="inputClassName"
-						value={experiencia}
-						disabled />
+					<input type="text" className="inputClassName" value={experiencia} disabled />
 				</div>
 			</div>
 
