@@ -146,6 +146,19 @@ const QuizRepublica = () => {
 
 					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
+
+
+
+
+
+
+
+
+
+
+
+
+
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -155,107 +168,89 @@ const QuizRepublica = () => {
 							customClass: {
 								container: "font-text", // Cambiar la fuente del título
 							},
-						}).then((result) => {
-
-
-
-
-
-
-
-
-
-
-
-
-							Swal.fire({
-								title: `Tu puntaje fue ${respuestasCorrectas}/5`,
-								showDenyButton: true,
-								confirmButtonText: "Revisar respuestas",
-								denyButtonText: `Volver a home`,
-								denyButtonColor: "#3085d6",
-								customClass: {
-									container: "font-text", // Cambiar la fuente del título
-								},
-							}).then(async (result) => {
-								//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-								if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
-									//aumentar el localStorage en requests y no aqui
-									//en localStorage aumentar la exp y el nivel
-									//aumentar experiencia (aumentar nivel de una vez)
-									//se usa el valor de la experiencia en el localstorage
-									const updateRes = await updateUserBecauseOfNewAchivement('logro_republica', token);
-									Swal.fire({
-										title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
-										width: 600,
-										padding: '3em',
-										color: '#716add',
-										html: `<div class="swal2-content-container">
+						}).then(async (result) => {
+							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
+							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
+								//aumentar el localStorage en requests y no aqui
+								//en localStorage aumentar la exp y el nivel
+								//aumentar experiencia (aumentar nivel de una vez)
+								//se usa el valor de la experiencia en el localstorage
+								const updateRes = await updateUserBecauseOfNewAchivement('logro_republica', token);
+								Swal.fire({
+									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
+									width: 600,
+									padding: '3em',
+									color: '#716add',
+									html: `<div class="swal2-content-container">
 												  <img src="${gifrepublica}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-												  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
+												  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Who better to rule us, than you.</p>
 											   </div>`,
-										backdrop: `
+									customClass: {
+										container: "font-text",
+									},
+									backdrop: `
 										  rgba(0,0,123,0.4)
 										  url("${gifNyanCat}")
 										  left top
 										  no-repeat
 										`,
-										timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
-									}).then((result) => {
-	
-										//if (updateRes === "Se produjo un cambio de nivel correctamente") {
-											const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
-											Swal.fire({
-												title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
-												width: 600,
-												padding: '3em',
-												color: '#716add',
-												backdrop: `
+									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
+								}).then((result) => {
+
+									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
+									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
+									Swal.fire({
+										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
+										width: 600,
+										padding: '3em',
+										color: '#716add',
+										customClass: {
+											container: "font-text",
+										},
+										backdrop: `
 											  rgba(0,0,123,0.4)
 											  url("${gifNyanCat}")
 											  left top
 											  no-repeat
 											`
-											}).then((result) => {
-												
-											});
-										//}
+									}).then((result) => {
+
 									});
-	
-								}
-								if (result.isConfirmed) {
-									setQuestionNumber(0);
-									setSelectedOption(null);
-									navigate("/Quiz_Imperio");
-								} else if (result.isDenied) {
-									navigate(INFORMATION[questionNumber].urlnxt);
-								}	
-							});
+									//}
+								});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+							}
+							if (result.isConfirmed) {
+								setQuestionNumber(0);
+								setSelectedOption(null);
+								navigate("/Quiz_Imperio");
+							} else if (result.isDenied) {
+								navigate(INFORMATION[questionNumber].urlnxt);
+							}
 						});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					}
 				});
 			}
@@ -273,8 +268,8 @@ const QuizRepublica = () => {
 	return (
 		<div className="font-text">
 			<Navbar />
-			<QuizQuestion 
-				question={INFORMATION[questionNumber].title} 
+			<QuizQuestion
+				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
 				quiz={2}
 				quizResuelto={JSON.parse(localStorage.getItem("republicaResuelto"))}
@@ -283,7 +278,7 @@ const QuizRepublica = () => {
 				respuesta3={checkedOptions[2]}
 				respuesta4={checkedOptions[3]}
 				respuesta5={checkedOptions[4]}
-				/>
+			/>
 			<div className="flex flex-col items-center mb-12">
 				<Option
 					option={INFORMATION[questionNumber].option1}

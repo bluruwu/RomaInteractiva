@@ -229,8 +229,6 @@ const Perfil = () => {
 			</div>
 
 			<div className="logrosyperfil">
-				<img src={require("../media/logros/logro-columna.png")} className="imagesLeft" />
-
 
 				<img
 					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
@@ -249,8 +247,6 @@ const Perfil = () => {
 
 
 				{getAvatar()}
-
-				<img src={require("../media/logros/logro-medalla.png")} className="imagesRight" />
 
 
 				<img

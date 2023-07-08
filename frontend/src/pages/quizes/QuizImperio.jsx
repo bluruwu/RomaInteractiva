@@ -189,6 +189,9 @@ const QuizImperio = () => {
 											  <img src="${gifimperio}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
 											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
 										   </div>`,
+									customClass: {
+										container: "font-text",
+									},
 									backdrop: `
 									  rgba(0,0,123,0.4)
 									  url("${gifNyanCat}")
@@ -199,21 +202,24 @@ const QuizImperio = () => {
 								}).then((result) => {
 
 									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
-										const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
-										Swal.fire({
-											title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
-											width: 600,
-											padding: '3em',
-											color: '#716add',
-											backdrop: `
+									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
+									Swal.fire({
+										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
+										width: 600,
+										padding: '3em',
+										color: '#716add',
+										customClass: {
+											container: "font-text",
+										},
+										backdrop: `
 										  rgba(0,0,123,0.4)
 										  url("${gifNyanCat}")
 										  left top
 										  no-repeat
 										`
-										}).then((result) => {
-											
-										});
+									}).then((result) => {
+
+									});
 									//}
 								});
 
@@ -224,7 +230,7 @@ const QuizImperio = () => {
 								navigate("/Quiz_Imperio");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
-							}	
+							}
 						});
 
 
@@ -233,7 +239,7 @@ const QuizImperio = () => {
 
 
 
-						
+
 
 
 
