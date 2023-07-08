@@ -4,12 +4,10 @@ import QuizQuestion from "../../components/quiz/QuizQuestion";
 import Option from "../../components/quiz/quizOption";
 import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
-import { INFORMATION } from "../../utilities/personajesInfo";
+import { INFORMATION } from "../../utilities/culturaInfo";
 import { useNavigate } from "react-router-dom";
-import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
-import gifpersonajes from "../../media/logros/gifpersonajes.gif";
-import { updateUserBecauseOfNewAchivement } from "../../conections/requests";
-const QuizPersonajes = () => {
+
+const QuizCultura = () => {
 	const navigate = useNavigate();
 
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -20,10 +18,10 @@ const QuizPersonajes = () => {
 	const token = localStorage.getItem("token");
 
 	const setInitialOptions = () => {
-		if (JSON.parse(localStorage.getItem("personajesResuelto")) === true) {
+		if (JSON.parse(localStorage.getItem("culturaResuelto")) === true) {
 			let valoresIniciales = [];
 			for (let i = 0; i < 5; i++) {
-				valoresIniciales[i] = JSON.parse(localStorage.getItem(`personajesOpcion${i}`));
+				valoresIniciales[i] = JSON.parse(localStorage.getItem(`culturaOpcion${i}`));
 			}
 			return valoresIniciales;
 		} else return [0, 0, 0, 0, 0];
@@ -32,7 +30,7 @@ const QuizPersonajes = () => {
 	const [checkedOptions, setCheckedOptions] = useState(setInitialOptions());
 
 	const guardarOpcionMarcada = (index, valor) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (!quizResuelto) {
 			// Clonar el arreglo existente
 			const arregloModificado = [...checkedOptions];
@@ -46,7 +44,7 @@ const QuizPersonajes = () => {
 	};
 
 	const handleOptionSelect = (option) => {
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (!quizResuelto) {
 			setSelectedOption(option);
 			guardarOpcionMarcada(questionNumber, option);
@@ -55,7 +53,7 @@ const QuizPersonajes = () => {
 
 	const handleClickButton1 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (questionNumber != 0) {
 			if (!quizResuelto) {
 				setSelectedOption(checkedOptions[questionNumber - 1]);
@@ -68,7 +66,7 @@ const QuizPersonajes = () => {
 
 	const handleClickButton2 = () => {
 		guardarOpcionMarcada(questionNumber, selectedOption);
-		const quizResuelto = JSON.parse(localStorage.getItem("personajesResuelto"));
+		const quizResuelto = JSON.parse(localStorage.getItem("culturaResuelto"));
 		if (questionNumber != 4) {
 			if (!quizResuelto) {
 				if (checkedOptions[questionNumber + 1] == 0) {
@@ -79,7 +77,7 @@ const QuizPersonajes = () => {
 			}
 			setQuestionNumber(questionNumber + 1);
 		} else {
-			if (JSON.parse(localStorage.getItem("personajesResuelto"))) {
+			if (JSON.parse(localStorage.getItem("culturaResuelto"))) {
 				Swal.fire({
 					title: "¿Terminar revisión?",
 					showCancelButton: true,
@@ -102,60 +100,52 @@ const QuizPersonajes = () => {
 						container: "font-text", // Cambiar la fuente del título
 					},
 				}).then((result) => {
-					let respuestasCorrectas = 0;
-					for (let i = 0; i < 5; i++) {
-						localStorage.setItem(`personajesOpcion${i}`, JSON.stringify(checkedOptions[i]));
-						if (checkedOptions[i] === INFORMATION[i].respuesta) {
-							respuestasCorrectas++;
-						}
-					}
-					localStorage.setItem("personajesAciertos", JSON.stringify(respuestasCorrectas));
-					localStorage.setItem("personajesResuelto", JSON.stringify(true));
-
-					//Objeto para enviar respuestas al backend
-					const formData = {
-						id_quiz: JSON.parse("4"), //El id_quiz=3 pertence a personajes
-						respuesta0: JSON.parse(localStorage.getItem("personajesOpcion0")),
-						respuesta1: JSON.parse(localStorage.getItem("personajesOpcion1")),
-						respuesta2: JSON.parse(localStorage.getItem("personajesOpcion2")),
-						respuesta3: JSON.parse(localStorage.getItem("personajesOpcion3")),
-						respuesta4: JSON.parse(localStorage.getItem("personajesOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("personajesAciertos")),
-					};
-
-					console.log(formData);
-
-					console.log("el token es:", token);
-
-					if (token) {
-						//Agregar token
-						postQuiz(formData, token)
-							.then((response) => {
-								// Manejar la respuesta del servidor si es necesario
-								console.log(response);
-							})
-							.catch((error) => {
-								// Manejar el error si ocurre
-								console.error(error);
-							});
-					} else {
-						// Manejar el caso en el que no haya token disponible, usuario sin logear
-						console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
-					}
-					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
+						let respuestasCorrectas = 0;
 
+						//Guardar respuestas del quiz en localStorage
+						for (let i = 0; i < 5; i++) {
+							localStorage.setItem(`culturaOpcion${i}`, JSON.stringify(checkedOptions[i]));
+							if (checkedOptions[i] === INFORMATION[i].respuesta) {
+								respuestasCorrectas++;
+							}
+						}
+						//Guardar calificacion del quiz en localStorage
+						localStorage.setItem("culturaAciertos", JSON.stringify(respuestasCorrectas));
+						//Marcar como resuelta en localStorage
+						localStorage.setItem("culturaResuelto", JSON.stringify(true));
 
+						//Objeto para enviar respuestas al backend
+						const formData = {
+							id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
+							respuesta0: JSON.parse(localStorage.getItem("culturaOpcion0")),
+							respuesta1: JSON.parse(localStorage.getItem("culturaOpcion1")),
+							respuesta2: JSON.parse(localStorage.getItem("culturaOpcion2")),
+							respuesta3: JSON.parse(localStorage.getItem("culturaOpcion3")),
+							respuesta4: JSON.parse(localStorage.getItem("culturaOpcion4")),
+							calificacion: JSON.parse(localStorage.getItem("culturaAciertos")),
+						};
 
+						console.log(formData);
+						console.log("el token es:", token);
 
+						if (token) {
+							//Agregar token
+							postQuiz(formData, token)
+								.then((response) => {
+									// Manejar la respuesta del servidor si es necesario
+									console.log(response);
+								})
+								.catch((error) => {
+									// Manejar el error si ocurre
+									console.error(error);
+								});
+						} else {
+							// Manejar el caso en el que no haya token disponible, usuario sin logear
+							console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+						}
 
-
-
-
-
-
-
-
+						/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
@@ -166,81 +156,16 @@ const QuizPersonajes = () => {
 							customClass: {
 								container: "font-text", // Cambiar la fuente del título
 							},
-						}).then(async (result) => {
-							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
-								//aumentar el localStorage en requests y no aqui
-								//en localStorage aumentar la exp y el nivel
-								//aumentar experiencia (aumentar nivel de una vez)
-								//se usa el valor de la experiencia en el localstorage
-								const updateRes = await updateUserBecauseOfNewAchivement('logro_personajes', token);
-								Swal.fire({
-									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
-									width: 600,
-									padding: '3em',
-									color: '#716add',
-									html: `<div class="swal2-content-container">
-												  <img src="${gifpersonajes}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-												  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gaius Julius Caesar</p>
-											   </div>`,
-									customClass: {
-										container: "font-text",
-									},
-									backdrop: `
-										  rgba(0,0,123,0.4)
-										  url("${gifNyanCat}")
-										  left top
-										  no-repeat
-										`,
-									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
-								}).then((result) => {
-
-									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
-									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
-									Swal.fire({
-										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
-										width: 600,
-										padding: '3em',
-										color: '#716add',
-										customClass: {
-											container: "font-text",
-										},
-										backdrop: `
-											  rgba(0,0,123,0.4)
-											  url("${gifNyanCat}")
-											  left top
-											  no-repeat
-											`
-									}).then((result) => {
-
-									});
-									//}
-								});
-
-							}
+						}).then((result) => {
+							/* Read more about isConfirmed, isDenied below */
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
-								navigate("/Quiz_Personajes");
+								navigate("/Quiz_Cultura");
 							} else if (result.isDenied) {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
 						});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					}
 				});
 			}
@@ -249,7 +174,7 @@ const QuizPersonajes = () => {
 
 	const button2Text = () => {
 		if (questionNumber === 4) {
-			if (JSON.parse(localStorage.getItem("personajesResuelto"))) {
+			if (JSON.parse(localStorage.getItem("culturaResuelto"))) {
 				return "Finalizar revisión";
 			} else return "Finalizar Quiz";
 		} else return "Siguiente pregunta";
@@ -257,14 +182,12 @@ const QuizPersonajes = () => {
 
 	return (
 		<div className="font-text">
-
 			<Navbar inQuiz={true}/>
-			<QuizQuestion 
-				question={INFORMATION[questionNumber].title} 
-
+			<QuizQuestion
+				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
-				quiz={3}
-				quizResuelto={JSON.parse(localStorage.getItem("personajesResuelto"))}
+				quiz={6}
+				quizResuelto={JSON.parse(localStorage.getItem("culturaResuelto"))}
 				respuesta1={checkedOptions[0]}
 				respuesta2={checkedOptions[1]}
 				respuesta3={checkedOptions[2]}
@@ -280,8 +203,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option2}
@@ -291,8 +214,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option3}
@@ -302,8 +225,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 				<Option
 					option={INFORMATION[questionNumber].option4}
@@ -313,8 +236,8 @@ const QuizPersonajes = () => {
 					initialOption={checkedOptions[questionNumber]}
 					questionNumber={questionNumber}
 					correctAnswerNumber={INFORMATION[questionNumber].respuesta}
-					resolved={JSON.parse(localStorage.getItem("personajesResuelto"))}
-					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
+					resolved={JSON.parse(localStorage.getItem("culturaResuelto"))}
+					savedSelection={JSON.parse(localStorage.getItem(`culturaOpcion${questionNumber}`))}
 				/>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
@@ -326,7 +249,6 @@ const QuizPersonajes = () => {
 					{questionNumber === 0 ? "Volver a lección" : "Pregunta anterior"}
 				</button>
 				<button
-					id="nextButton"
 					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
@@ -338,4 +260,4 @@ const QuizPersonajes = () => {
 	);
 };
 
-export default QuizPersonajes;
+export default QuizCultura;

@@ -267,9 +267,11 @@ const QuizRepublica = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar />
-			<QuizQuestion
-				question={INFORMATION[questionNumber].title}
+
+			<Navbar inQuiz={true}/>
+			<QuizQuestion 
+				question={INFORMATION[questionNumber].title} 
+
 				preguntaSeleccionada={questionNumber}
 				quiz={2}
 				quizResuelto={JSON.parse(localStorage.getItem("republicaResuelto"))}

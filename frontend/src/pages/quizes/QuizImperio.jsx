@@ -102,67 +102,52 @@ const QuizImperio = () => {
 						container: "font-text", // Cambiar la fuente del título
 					},
 				}).then((result) => {
-					let respuestasCorrectas = 0;
-
-					//Guardar respuestas del quiz en localStorage
-					for (let i = 0; i < 5; i++) {
-						localStorage.setItem(`imperioOpcion${i}`, JSON.stringify(checkedOptions[i]));
-						if (checkedOptions[i] === INFORMATION[i].respuesta) {
-							respuestasCorrectas++;
-						}
-					}
-					//Guardar calificacion del quiz en localStorage
-					localStorage.setItem("imperioAciertos", JSON.stringify(respuestasCorrectas));
-					//Marcar como resuelta en localStorage
-					localStorage.setItem("imperioResuelto", JSON.stringify(true));
-
-					//Objeto para enviar respuestas al backend
-					const formData = {
-						id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
-						respuesta0: JSON.parse(localStorage.getItem("imperioOpcion0")),
-						respuesta1: JSON.parse(localStorage.getItem("imperioOpcion1")),
-						respuesta2: JSON.parse(localStorage.getItem("imperioOpcion2")),
-						respuesta3: JSON.parse(localStorage.getItem("imperioOpcion3")),
-						respuesta4: JSON.parse(localStorage.getItem("imperioOpcion4")),
-						calificacion: JSON.parse(localStorage.getItem("imperioAciertos")),
-					};
-
-					console.log(formData);
-					console.log("el token es:", token);
-
-					if (token) {
-						//Agregar token
-						postQuiz(formData, token)
-							.then((response) => {
-								// Manejar la respuesta del servidor si es necesario
-								console.log(response);
-							})
-							.catch((error) => {
-								// Manejar el error si ocurre
-								console.error(error);
-							});
-					} else {
-						// Manejar el caso en el que no haya token disponible, usuario sin logear
-						console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
-					}
-
-					/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 					if (result.isConfirmed) {
+						let respuestasCorrectas = 0;
 
+						//Guardar respuestas del quiz en localStorage
+						for (let i = 0; i < 5; i++) {
+							localStorage.setItem(`imperioOpcion${i}`, JSON.stringify(checkedOptions[i]));
+							if (checkedOptions[i] === INFORMATION[i].respuesta) {
+								respuestasCorrectas++;
+							}
+						}
+						//Guardar calificacion del quiz en localStorage
+						localStorage.setItem("imperioAciertos", JSON.stringify(respuestasCorrectas));
+						//Marcar como resuelta en localStorage
+						localStorage.setItem("imperioResuelto", JSON.stringify(true));
 
+						//Objeto para enviar respuestas al backend
+						const formData = {
+							id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
+							respuesta0: JSON.parse(localStorage.getItem("imperioOpcion0")),
+							respuesta1: JSON.parse(localStorage.getItem("imperioOpcion1")),
+							respuesta2: JSON.parse(localStorage.getItem("imperioOpcion2")),
+							respuesta3: JSON.parse(localStorage.getItem("imperioOpcion3")),
+							respuesta4: JSON.parse(localStorage.getItem("imperioOpcion4")),
+							calificacion: JSON.parse(localStorage.getItem("imperioAciertos")),
+						};
 
+						console.log(formData);
+						console.log("el token es:", token);
 
+						if (token) {
+							//Agregar token
+							postQuiz(formData, token)
+								.then((response) => {
+									// Manejar la respuesta del servidor si es necesario
+									console.log(response);
+								})
+								.catch((error) => {
+									// Manejar el error si ocurre
+									console.error(error);
+								});
+						} else {
+							// Manejar el caso en el que no haya token disponible, usuario sin logear
+							console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+						}
 
-
-
-
-
-
-
-
-
-
-
+						/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -243,6 +228,7 @@ const QuizImperio = () => {
 
 
 
+
 					}
 				});
 			}
@@ -259,7 +245,7 @@ const QuizImperio = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar />
+			<Navbar inQuiz={true}/>
 			<QuizQuestion
 				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}

@@ -62,6 +62,8 @@ const LessonAcueducto = () => {
 				urlnxt="/Quiz_Arquitectura"
 				medianxt="quiz.jpg"
 				titlenxt="QUIZ (ARQUITECTURA)"
+				last={true}
+				quiz={"arquitectura"}
 			/>
 		</div>
 	);
