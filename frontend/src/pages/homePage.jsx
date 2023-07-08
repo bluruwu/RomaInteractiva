@@ -182,9 +182,9 @@ const HomePage = () => {
 						/>
 					</div>
 				</section>
-				{/* Sección de línea de tiempo */}
+				{/* Sección de LÍNEA DEL TIEMPO */}
 				<section>
-					<h1 className="font-bold text-3xl text-black"> Linea del tiempo</h1>
+					<h1 className="font-bold text-3xl text-black"> Línea del tiempo</h1>
 					<div className="mt-5">
 						<Timeline />
 					</div>
