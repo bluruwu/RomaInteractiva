@@ -8,6 +8,7 @@
 	border-color: #f56565;
 	margin-bottom: 0.5rem;
 	box-shadow: 0 0 5px #8e0000;
+	font-size: 20px;
 }
 
 #perfil .inputClassName:focus {
@@ -45,15 +46,15 @@
 #perfil .imagesLeft{
 
 	object-fit: cover;
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 	margin-right: 6px;
 	border-radius: 50%;
 }
 #perfil .imagesRight{
 	object-fit: cover;
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 	margin-left: 6px;
 	border-radius: 50%;
 	

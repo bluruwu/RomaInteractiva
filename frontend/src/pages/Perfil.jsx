@@ -10,9 +10,33 @@ import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
 
+import imageNoLogro from "../media/logros/nologro.png";
+import gifarquitectura from "../media/logros/gifarquitectura.gif";
+import gifcultura from "../media/logros/gifcultura.gif";
+import gifimperio from "../media/logros/gifimperio.gif";
+import gifmonarquia from "../media/logros/gifmonarquia.gif";
+import gifpersonajes from "../media/logros/gifpersonajes.gif";
+import gifrepublica from "../media/logros/gifrepublica.gif";
+
+
 //Pagina del PERFIL DEL USUARIO
 const Perfil = () => {
 	const API_URL = getAPI_URL();
+
+	const [logrosParaMostrar, setLogrosParaMostrar] = useState(
+		{
+			logroMonarquia: JSON.parse(localStorage.getItem("logro_monarquia")),
+			logroRepublica: JSON.parse(localStorage.getItem("logro_republica")),
+			logroImperio: JSON.parse(localStorage.getItem("logro_imperio")),
+			logroPersonajes: JSON.parse(localStorage.getItem("logro_personajes")),
+			logroArquitectura: JSON.parse(localStorage.getItem("logro_arquitectura")),
+			logroCultura: JSON.parse(localStorage.getItem("logro_cultura")),
+		});
+
+
+
+
+
 	// const navigate = useNavigate();
 	//Logica de la actualizacion de campos del perfil del usuario
 	const myPutPetition = async (myData, myToken) => {
@@ -140,8 +164,8 @@ const Perfil = () => {
 	const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("nickname")) || "");
 	const [contrasena, setContrasena] = useState("--------");
 	const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || "");
-	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || "");
-	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || "");
+	const [nivel, setNivel] = useState(localStorage.getItem("nivel") || 1);
+	const [experiencia, setExperiencia] = useState(localStorage.getItem("experiencia") || 0);
 	const [idAvatar, setIdAvatar] = useState(initialAvatar());
 
 	//Obtener la imagen del avatar
@@ -207,13 +231,45 @@ const Perfil = () => {
 			<div className="logrosyperfil">
 				<img src={require("../media/logros/logro-columna.png")} className="imagesLeft" />
 
-				<img src={require("../media/logros/logro-helmet.png")} className="imagesLeft" />
+
+				<img
+					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
+					className="imagesLeft"
+				/>
+
+				<img
+					src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
+					className="imagesLeft"
+				/>
+
+				<img
+					src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
+					className="imagesLeft"
+				/>
+
 
 				{getAvatar()}
 
 				<img src={require("../media/logros/logro-medalla.png")} className="imagesRight" />
 
-				<img src={require("../media/logros/logro-toga.png")} className="imagesRight" />
+
+				<img
+					src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
+					className="imagesRight"
+				/>
+
+
+				<img
+					src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
+					className="imagesRight"
+				/>
+
+				<img
+					src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
+					className="imagesRight"
+				/>
+
+
 			</div>
 
 			{/* Modal para mostrar los avatares disponibles */}
@@ -252,7 +308,8 @@ const Perfil = () => {
 							className="inputClassName"
 							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
-							value={contrasena}
+							style={{ WebkitTextSecurity: "disc" }}
+							value={localStorage.getItem("token") ?  contrasena: '' }
 						/>
 					</div>
 				</div>
@@ -269,12 +326,20 @@ const Perfil = () => {
 				<div>
 					<div className="first-column">
 						<p>Nivel</p>
-						<input type="text" className="inputClassName" disabled />
+						<input
+							type="text"
+							className="inputClassName"
+							value={nivel}
+							disabled />
 					</div>
 				</div>
 				<div>
 					<p>Experiencia</p>
-					<input type="text" className="inputClassName" disabled />
+					<input
+						type="text"
+						className="inputClassName"
+						value={experiencia}
+						disabled />
 				</div>
 			</div>
 
