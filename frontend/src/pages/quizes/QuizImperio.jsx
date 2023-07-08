@@ -6,9 +6,6 @@ import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
 import { INFORMATION } from "../../utilities/imperioInfo";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "../../components/alerts/alerts";
-import { Congrats } from "../congrats";
-import Image1 from "../../media/trees.png"; // Ruta de la imagen
 import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
 import gifimperio from "../../media/logros/gifimperio.gif";
 import { updateUserBecauseOfNewAchivement } from "../../conections/requests";
@@ -155,6 +152,17 @@ const QuizImperio = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 						Swal.fire({
 							title: `Tu puntaje fue ${respuestasCorrectas}/5`,
 							showDenyButton: true,
@@ -165,17 +173,8 @@ const QuizImperio = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then(async (result) => {
-
-
-
-
-
-
-
-
-
 							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-							if (true && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
+							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
 								//aumentar el localStorage en requests y no aqui
 								//en localStorage aumentar la exp y el nivel
 								//aumentar experiencia (aumentar nivel de una vez)
@@ -199,7 +198,7 @@ const QuizImperio = () => {
 									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
 								}).then((result) => {
 
-									if (updateRes === "Se produjo un cambio de nivel correctamente") {
+									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
 										const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
 										Swal.fire({
 											title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
@@ -215,7 +214,7 @@ const QuizImperio = () => {
 										}).then((result) => {
 											
 										});
-									}
+									//}
 								});
 
 							}

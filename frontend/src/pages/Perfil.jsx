@@ -326,7 +326,7 @@ const Perfil = () => {
 							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
 							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
 							style={{ WebkitTextSecurity: "disc" }}
-							value={contrasena}
+							value={localStorage.getItem("token") ?  contrasena: '' }
 						/>
 					</div>
 				</div>
