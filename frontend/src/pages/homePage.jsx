@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../utilities/Navbar";
 import Footbar from "../utilities/Footbar";
+import Timeline from "../utilities/Timeline";
 import Button from "../components/lessonButton";
 import monarquiaImage from "../media/previsualizaciones/prev1.jpg";
 import republicaImage from "../media/previsualizaciones/prev2.png";
@@ -187,6 +188,13 @@ const HomePage = () => {
 							buttonText={"Cultura"}
 							number={getScore(6)}
 						/>
+					</div>
+				</section>
+				{/* Sección de LÍNEA DEL TIEMPO */}
+				<section>
+					<h1 className="font-bold text-3xl text-black"> Línea del tiempo</h1>
+					<div className="mt-5">
+						<Timeline />
 					</div>
 				</section>
 			</main>
