@@ -144,7 +144,9 @@ const QuizArquitectura = () => {
 								});
 						} else {
 							// Manejar el caso en el que no haya token disponible, usuario sin logear
-							console.log("El usuario no esta logeado, calificaciones no guardadas en base de datos");
+							console.log(
+								"El usuario no esta logeado, calificaciones no guardadas en base de datos"
+							);
 						}
 
 						/* Leer más sobre isConfirmed, isDenied a continuación `Tu puntaje fue ${respuestasCorrectas}/5`*/
@@ -159,20 +161,22 @@ const QuizArquitectura = () => {
 								container: "font-text", // Cambiar la fuente del título
 							},
 						}).then(async (result) => {
-
-							
 							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
-							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
+							if (respuestasCorrectas >= 3 && (result.isConfirmed || result.isDenied)) {
+								//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
 								//aumentar el localStorage en requests y no aqui
 								//en localStorage aumentar la exp y el nivel
 								//aumentar experiencia (aumentar nivel de una vez)
 								//se usa el valor de la experiencia en el localstorage
-								const updateRes = await updateUserBecauseOfNewAchivement('logro_arquitectura', token);
+								const updateRes = await updateUserBecauseOfNewAchivement(
+									"logro_arquitectura",
+									token
+								);
 								Swal.fire({
-									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
+									title: "Vaya, ¡Has aumentado tu experiencia en 500XP!",
 									width: 600,
-									padding: '3em',
-									color: '#716add',
+									padding: "3em",
+									color: "#716add",
 									html: `<div class="swal2-content-container">
 											  <img src="${gifarquitectura}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
 											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Panem et circenses (Bread and circuses)</p>
@@ -186,16 +190,15 @@ const QuizArquitectura = () => {
 									  left top
 									  no-repeat
 									`,
-									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
+									timer: 20000, // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
 								}).then((result) => {
-
 									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
-									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
+									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"));
 									Swal.fire({
-										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
+										title: `¡WoW! ¡Has llegado al nivel ${nuevoNivel}!`,
 										width: 600,
-										padding: '3em',
-										color: '#716add',
+										padding: "3em",
+										color: "#716add",
 										customClass: {
 											container: "font-text",
 										},
@@ -204,13 +207,10 @@ const QuizArquitectura = () => {
 										  url("${gifNyanCat}")
 										  left top
 										  no-repeat
-										`
-									}).then((result) => {
-
-									});
+										`,
+									}).then((result) => {});
 									//}
 								});
-
 							}
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
@@ -220,7 +220,6 @@ const QuizArquitectura = () => {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
 						});
-
 					}
 				});
 			}
@@ -237,7 +236,7 @@ const QuizArquitectura = () => {
 
 	return (
 		<div className="font-text">
-			<Navbar inQuiz={true}/>
+			<Navbar inQuiz={true} />
 			<QuizQuestion
 				question={INFORMATION[questionNumber].title}
 				preguntaSeleccionada={questionNumber}
