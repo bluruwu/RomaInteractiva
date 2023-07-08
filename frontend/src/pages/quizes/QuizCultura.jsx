@@ -119,7 +119,7 @@ const QuizCultura = () => {
 
 						//Objeto para enviar respuestas al backend
 						const formData = {
-							id_quiz: JSON.parse("3"), //El id_quiz=3 pertence a imperio
+							id_quiz: JSON.parse("6"), //El id_quiz=3 pertence a imperio
 							respuesta0: JSON.parse(localStorage.getItem("culturaOpcion0")),
 							respuesta1: JSON.parse(localStorage.getItem("culturaOpcion1")),
 							respuesta2: JSON.parse(localStorage.getItem("culturaOpcion2")),
