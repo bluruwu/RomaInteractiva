@@ -22,7 +22,10 @@ const LessonNav = ({
 			return JSON.parse(localStorage.getItem("republicaResuelto"));
 		} else if (quiz == "personajes") {
 			return JSON.parse(localStorage.getItem("personajesResuelto"));
+		} else if (quiz == "arquitectura") {
+			return JSON.parse(localStorage.getItem("arquitecturaResuelto"));
 		}
+		
 	};
 
 	//Manejar si un usuario ya ha hecho el quiz -> Preguntar si quiere hacer revision de las preguntas
@@ -103,9 +106,8 @@ const LessonNav = ({
 				<img
 					src={require(`../../media/${mediabef}`)}
 					alt="Anterior leccion"
-					className={`block w-full h-full object-cover ${
-						isHoveredPrev ? "scale-110 transition-all duration-500" : ""
-					}${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+					className={`block w-full h-full object-cover ${isHoveredPrev ? "scale-110 transition-all duration-500" : ""
+						}${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
 					style={{
 						transformOrigin: "center center",
 						transformStyle: "preserve-3d",
@@ -113,24 +115,21 @@ const LessonNav = ({
 				/>
 				{/* Opacidad de la imagen */}
 				<div
-					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
-						isHoveredPrev ? "opacity-70" : "opacity-40"
-					}`}
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${isHoveredPrev ? "opacity-70" : "opacity-40"
+						}`}
 				></div>
 
 				{/* Texto que aparece sobre la imagen */}
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 					<p
-						className={`text-lg font-bold text-white ${
-							isHoveredPrev ? "scale-110 transition-all duration-500" : ""
-						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+						className={`text-lg font-bold text-white ${isHoveredPrev ? "scale-110 transition-all duration-500" : ""
+							} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						Anterior
 					</p>
 					<p
-						className={`text-lg font-bold text-white ${
-							isHoveredPrev ? "scale-110 transition-all duration-500" : ""
-						} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
+						className={`text-lg font-bold text-white ${isHoveredPrev ? "scale-110 transition-all duration-500" : ""
+							} ${!isHoveredPrev ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						{titlebef}
 					</p>
@@ -147,30 +146,26 @@ const LessonNav = ({
 				<img
 					src={require(`../../media/${medianxt}`)}
 					alt="Siguiente leccion"
-					className={`block w-full h-full object-cover ${
-						isHoveredNext ? "scale-110 transition-all duration-500" : ""
-					}${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
+					className={`block w-full h-full object-cover ${isHoveredNext ? "scale-110 transition-all duration-500" : ""
+						}${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 				/>
 				{/* Opacidad de la imagen */}
 				<div
-					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${
-						isHoveredNext ? "opacity-70" : "opacity-40"
-					}`}
+					className={`absolute inset-0 transition-opacity duration-1000 bg-black ${isHoveredNext ? "opacity-70" : "opacity-40"
+						}`}
 				></div>
 
 				{/* Texto que aparece sobre la imagen */}
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
 					<p
-						className={`text-lg font-bold text-white ${
-							isHoveredNext ? "scale-110 transition-all duration-500" : ""
-						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
+						className={`text-lg font-bold text-white ${isHoveredNext ? "scale-110 transition-all duration-500" : ""
+							} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						Siguiente
 					</p>
 					<p
-						className={`text-lg font-bold text-white ${
-							isHoveredNext ? "scale-110 transition-all duration-500" : ""
-						} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
+						className={`text-lg font-bold text-white ${isHoveredNext ? "scale-110 transition-all duration-500" : ""
+							} ${!isHoveredNext ? "scale-100 transition-all duration-500" : ""}`}
 					>
 						{titlenxt}
 					</p>

@@ -83,6 +83,10 @@ const HomePage = () => {
 			// Si no existe, agregarla al almacenamiento local
 			localStorage.setItem("imperioResuelto", JSON.stringify(false));
 		}
+		if (!localStorage.getItem("arquitecturaResuelto")) {
+			// Si no existe, agregarla al almacenamiento local
+			localStorage.setItem("arquitecturaResuelto", JSON.stringify(false));
+		}
 	}, []);
 
 	// Componente de titulo que sale al principio, con una imagen de fondo y mensaje de bienvenida
