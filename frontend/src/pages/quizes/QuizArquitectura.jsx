@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 import { postQuiz } from "../../conections/requests";
 import { INFORMATION } from "../../utilities/arquitecturaInfo";
 import { useNavigate } from "react-router-dom";
-
+import gifNyanCat from "../../media/nyan-cat.gif"; // Ruta de la imagen
+import gifarquitectura from "../../media/logros/gifarquitectura.gif";
+import { updateUserBecauseOfNewAchivement } from "../../conections/requests";
 const QuizArquitectura = () => {
 	const navigate = useNavigate();
 
@@ -156,8 +158,60 @@ const QuizArquitectura = () => {
 							customClass: {
 								container: "font-text", // Cambiar la fuente del título
 							},
-						}).then((result) => {
-							/* Read more about isConfirmed, isDenied below */
+						}).then(async (result) => {
+
+							
+							//logro se da si y solo si se completa un quiz en 5 respuestas correctas
+							if ((respuestasCorrectas >= 3) && (result.isConfirmed || result.isDenied)) {//CAMBIAR EL TRUE, POR: respuestasCorrectas == 5
+								//aumentar el localStorage en requests y no aqui
+								//en localStorage aumentar la exp y el nivel
+								//aumentar experiencia (aumentar nivel de una vez)
+								//se usa el valor de la experiencia en el localstorage
+								const updateRes = await updateUserBecauseOfNewAchivement('logro_arquitectura', token);
+								Swal.fire({
+									title: 'Vaya! Has aumentado tu experiencia en 500xp!!',
+									width: 600,
+									padding: '3em',
+									color: '#716add',
+									html: `<div class="swal2-content-container">
+											  <img src="${gifarquitectura}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
+											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Panem et circenses (Bread and circuses)</p>
+										   </div>`,
+									customClass: {
+										container: "font-text",
+									},
+									backdrop: `
+									  rgba(0,0,123,0.4)
+									  url("${gifNyanCat}")
+									  left top
+									  no-repeat
+									`,
+									timer: 20000 // Cerrar automáticamente después de 20 segundos (20000 milisegundos)
+								}).then((result) => {
+
+									//if (updateRes === "Se produjo un cambio de nivel correctamente") {
+									const nuevoNivel = JSON.parse(localStorage.getItem("nivel"))
+									Swal.fire({
+										title: `WoW! Has llegado al nivel ${nuevoNivel}!!`,
+										width: 600,
+										padding: '3em',
+										color: '#716add',
+										customClass: {
+											container: "font-text",
+										},
+										backdrop: `
+										  rgba(0,0,123,0.4)
+										  url("${gifNyanCat}")
+										  left top
+										  no-repeat
+										`
+									}).then((result) => {
+
+									});
+									//}
+								});
+
+							}
 							if (result.isConfirmed) {
 								setQuestionNumber(0);
 								setSelectedOption(null);
@@ -166,6 +220,7 @@ const QuizArquitectura = () => {
 								navigate(INFORMATION[questionNumber].urlnxt);
 							}
 						});
+
 					}
 				});
 			}
