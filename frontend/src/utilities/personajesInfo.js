@@ -46,6 +46,6 @@ export const INFORMATION = [
 		option3: "La Era de Augusto",
 		option4: "La Edad de Oro de Roma​",
 		respuesta: 2,
-		urlnxt: "/coliseo_romano",
+		urlnxt: "/home",
 	},
 ];

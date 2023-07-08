@@ -44,6 +44,6 @@ export const INFORMATION = [
 		option3: "312 a.C.",
 		option4: "753 a.C.​",
 		respuesta: 2,
-		urlnxt: "/fundacion_republica",
+		urlnxt: "/home",
 	},
 ];

@@ -47,6 +47,6 @@ export const INFORMATION = [
 		option3: "La ambición de líderes militares",
 		option4: "El adopción de un sistema político más justo",
 		respuesta: 3,
-		urlnxt: "/cristianismo_imperio",
+		urlnxt: "/home",
 	},
 ];

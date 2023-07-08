@@ -47,6 +47,6 @@ export const INFORMATION = [
 		option3: "Proporcionar energía hidroeléctrica a la ciudad",
 		option4: "Ser el medio de comunicación entre ciudades",
 		respuesta: 1,
-		urlnxt: "/Viviendas",
+		urlnxt: "/home",
 	},
 ];
