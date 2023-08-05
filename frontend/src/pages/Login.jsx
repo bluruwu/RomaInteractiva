@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postLogin, getPrueba } from "../conections/requests";
+import { postLogin, postLoginGoogle, getPrueba } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
 import "./css/login.css";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -50,6 +51,32 @@ const Login = () => {
 						container: "font-text",
 					},
 				});
+			}
+		};
+		myresponse(); // Ejecutar la función asíncrona myresponse
+	};
+
+	const handleGoogleLogin = (credentialResponse) => {
+		console.log(credentialResponse); // Imprimir los datos del formulario en la consola
+		const myresponse = async () => {
+			// Realizar solicitud de inicio de sesión utilizando los datos del formulario
+			const req_succesful = await postLoginGoogle({
+				credentialResponse,
+			});
+
+			console.log(req_succesful);
+			if (req_succesful === "Inicio de sesión exitoso") {
+				// Si las credenciales son correctas, mostrar una alerta de éxito y navegar a la página de inicio ("/home")
+				Swal.fire({
+					title: "Welcome!",
+					text: "You have succesfully been logged!",
+					icon: "success",
+					customClass: {
+						container: "font-text",
+					},
+				});
+
+				navigate("/home");
 			}
 		};
 		myresponse(); // Ejecutar la función asíncrona myresponse
@@ -122,6 +149,16 @@ const Login = () => {
 						>
 							Don't have an account?
 						</p>
+
+						{/* LOGIN CON GOOGLE */}
+						<GoogleLogin
+							onSuccess={(credentialResponse) => {
+								handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
+							}}
+							onError={() => {
+								console.log("Login Failed");
+							}}
+						/>
 					</div>
 				</div>
 			</form>
