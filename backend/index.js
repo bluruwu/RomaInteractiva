@@ -4,13 +4,14 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const multer = require('multer');
-const { google } = require('googleapis');
-const fs = require("fs")
-const { Readable } = require('stream');
+const multer = require("multer");
+const { google } = require("googleapis");
+const fs = require("fs");
+const { Readable } = require("stream");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
+const { OAuth2Client } = require("google-auth-library");
 
 // Credenciales supabase
 const supabaseUrl = "https://yciwytjuvbslrghfniat.supabase.co";
@@ -19,12 +20,12 @@ const supabaseKey = process.env.SUPABASE_KEY;
 const secretKey = process.env.SECRET_KEY_JWT;
 
 // Credenciales Google Drive
-const googleCredentials = require('./credenciales.json');
+const googleCredentials = require("./credenciales.json");
 const { file } = require("googleapis/build/src/apis/file");
 
 // Middleware for parsing JSON bodies
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Allow all the incoming IP addresses
 //app.use(cors());
@@ -40,40 +41,28 @@ app.use((req, res, next) => {
 	next();
 });
 
-
 const supabase = createClient(supabaseUrl, supabaseKey);
-
 
 // Configuración de autenticación de Google Drive
 const auth = new google.auth.GoogleAuth({
 	credentials: googleCredentials,
-	scopes: ['https://www.googleapis.com/auth/drive.file'],
+	scopes: ["https://www.googleapis.com/auth/drive.file"],
 });
 
-
-
-const drive = google.drive({ version: 'v3', auth });
+const drive = google.drive({ version: "v3", auth });
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage }).single('file');
+const upload = multer({ storage }).single("file");
 
+const folderId = "1AguL3BshwwbjoW5BLst8Ynanu4n4u91r";
 
-
-
-
-
-
-
-
-const folderId = '1AguL3BshwwbjoW5BLst8Ynanu4n4u91r'
-
-app.post('/upload', upload, async (req, res) => {
+app.post("/upload", upload, async (req, res) => {
 	try {
 		const file = req.file;
 		const fileName = file.originalname;
-		console.log(file)
+		console.log(file);
 		// Crear el objeto de metadatos del archivo
-		const lastId = await getLastId()
+		const lastId = await getLastId();
 		const fileMetadata = {
 			name: `avatar${lastId + 1}.jpg`,
 			parents: [folderId], // Reemplaza con el ID de la carpeta en Google Drive
@@ -87,10 +76,10 @@ app.post('/upload', upload, async (req, res) => {
 		const response = await drive.files.create({
 			resource: fileMetadata,
 			media: media,
-			fields: 'id',
+			fields: "id",
 		});
 
-		console.log('File ID:', response.data.id);
+		console.log("File ID:", response.data.id);
 
 		res.json(lastId + 1);
 	} catch (error) {
@@ -107,36 +96,33 @@ async function getLastId() {
 		// Obtener la lista de archivos en la carpeta de Google Drive
 		const response = await drive.files.list({
 			q: `'${folderId}' in parents and mimeType contains 'image/'`,
-			fields: 'files(name)',
+			fields: "files(name)",
 		});
 
 		const files = response.data.files;
 
 		// Obtener los nombres de las imágenes
-		imageNames = files.map(file => file.name);
-
+		imageNames = files.map((file) => file.name);
 	} catch (error) {
 		console.error(error);
-
 	}
-	let allFileNames = imageNames
-	let id = 6
+	let allFileNames = imageNames;
+	let id = 6;
 	for (let i in allFileNames) {
-		if (id <= parseInt(allFileNames[i].substr(6, allFileNames[i].search('.') + 2)))
-			id = parseInt(allFileNames[i].substr(6, allFileNames[i].search('.') + 2))
+		if (id <= parseInt(allFileNames[i].substr(6, allFileNames[i].search(".") + 2)))
+			id = parseInt(allFileNames[i].substr(6, allFileNames[i].search(".") + 2));
 	}
-	return id
+	return id;
 }
 
-
-app.get('/image/:name', async (req, res) => {
+app.get("/image/:name", async (req, res) => {
 	try {
 		const fileName = req.params.name;
 
 		// Buscar el archivo por nombre en la carpeta de Google Drive
 		const response = await drive.files.list({
 			q: `name='${fileName}' and '${folderId}' in parents`,
-			fields: 'files(id)',
+			fields: "files(id)",
 		});
 
 		const files = response.data.files;
@@ -146,37 +132,39 @@ app.get('/image/:name', async (req, res) => {
 			const fileId = files[0].id;
 
 			// Obtener los datos del archivo
-			const fileResponse = await drive.files.get({
-				fileId: fileId,
-				alt: 'media',
-			}, { responseType: 'stream' });
+			const fileResponse = await drive.files.get(
+				{
+					fileId: fileId,
+					alt: "media",
+				},
+				{ responseType: "stream" }
+			);
 
 			// Establecer los encabezados de la respuesta
 			res.set({
-				'Content-Type': fileResponse.headers['content-type'],
-				'Content-Length': fileResponse.headers['content-length'],
+				"Content-Type": fileResponse.headers["content-type"],
+				"Content-Length": fileResponse.headers["content-length"],
 			});
 
 			// Enviar el contenido de la imagen como respuesta
 			fileResponse.data.pipe(res);
 		} else {
-			res.status(404).json({ error: 'Imagen no encontrada.' });
+			res.status(404).json({ error: "Imagen no encontrada." });
 		}
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+		res.status(500).json({ error: "Error al buscar la imagen en Google Drive." });
 	}
 });
 
-
-app.get('/image/:name', async (req, res) => {
+app.get("/image/:name", async (req, res) => {
 	try {
 		const fileName = req.params.name;
 
 		// Buscar el archivo por nombre en la carpeta de Google Drive
 		const response = await drive.files.list({
 			q: `name='${fileName}' and '${folderId}' in parents`,
-			fields: 'files(id)',
+			fields: "files(id)",
 		});
 
 		const files = response.data.files;
@@ -186,86 +174,73 @@ app.get('/image/:name', async (req, res) => {
 			const fileId = files[0].id;
 
 			// Obtener los datos del archivo
-			const fileResponse = await drive.files.get({
-				fileId: fileId,
-				alt: 'media',
-			}, { responseType: 'stream' });
+			const fileResponse = await drive.files.get(
+				{
+					fileId: fileId,
+					alt: "media",
+				},
+				{ responseType: "stream" }
+			);
 
 			// Establecer los encabezados de la respuesta
 			res.set({
-				'Content-Type': fileResponse.headers['content-type'],
-				'Content-Length': fileResponse.headers['content-length'],
+				"Content-Type": fileResponse.headers["content-type"],
+				"Content-Length": fileResponse.headers["content-length"],
 			});
 
 			// Enviar el contenido de la imagen como respuesta
 			fileResponse.data.pipe(res);
 		} else {
-			res.status(404).json({ error: 'Imagen no encontrada.' });
+			res.status(404).json({ error: "Imagen no encontrada." });
 		}
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: 'Error al buscar la imagen en Google Drive.' });
+		res.status(500).json({ error: "Error al buscar la imagen en Google Drive." });
 	}
 });
 
 // Configura el transporte de nodemailer con tus credenciales de Gmail
 const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	host: 'smtp.gmail.com',
+	service: "gmail",
+	host: "smtp.gmail.com",
 	port: 465,
 	secure: true,
 	auth: {
-		user: 'romainteractiva@gmail.com',
-		pass: 'moqkwrtblblthnaw'
-	}
+		user: "romainteractiva@gmail.com",
+		pass: "moqkwrtblblthnaw",
+	},
 });
 
-
 // Ruta para enviar el correo electrónico
-app.post('/sendrecoveryemail', async (req, res) => {
-
+app.post("/sendrecoveryemail", async (req, res) => {
 	const { to, subject, body } = req.body;
 
-	newData = {}
+	newData = {};
 
 	newData["contrasena"] = Math.random().toString(36).slice(-8);
 
 	const mailOptions = {
-		from: 'romainteractiva@gmail.com',
+		from: "romainteractiva@gmail.com",
 		to,
 		subject,
-		html: body + newData["contrasena"]
+		html: body + newData["contrasena"],
 	};
 
 	newData["contrasena"] = await bcrypt.hash(newData["contrasena"], 10);
 
-	const { error: queryError } = await supabase
-		.from("usuarios")
-		.update(newData)
-		.eq("email", to);
-
+	const { error: queryError } = await supabase.from("usuarios").update(newData).eq("email", to);
 
 	// Envía el correo electrónico utilizando nodemailer
 	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
-			console.error('Error al enviar el correo electrónico:', error);
-			res.status(500).json('Ocurrió un error al enviar el correo electrónico');
+			console.error("Error al enviar el correo electrónico:", error);
+			res.status(500).json("Ocurrió un error al enviar el correo electrónico");
 		} else {
-			console.log('Correo electrónico enviado:', info.response);
-			res.status(200).json({ message: 'Correo electrónico enviado exitosamente' });
+			console.log("Correo electrónico enviado:", info.response);
+			res.status(200).json({ message: "Correo electrónico enviado exitosamente" });
 		}
 	});
 });
-
-
-
-
-
-
-
-
-
-
 
 //POST para el inicio de sesion de los usuarios
 app.post("/login", async (req, res) => {
@@ -294,6 +269,77 @@ app.post("/login", async (req, res) => {
 		// Si las contraseñas no coinciden, se envía una respuesta de error
 		if (!match) {
 			throw new Error("Credenciales de inicio de sesión inválidas");
+		}
+
+		const user = {
+			id_usuario: usuarioData.id_usuario,
+			email: usuarioData.email,
+			nickname: usuarioData.nickname,
+		};
+
+		// Generar token JWT con el id_usuario email y nickname del usuario
+		const token = jwt.sign(user, secretKey);
+
+		// Enviar el token al frontend con los datos del usuario y un mensaje de confirmacion
+		res.json({ usuarioData, token, message: "Inicio de sesión exitoso" });
+	} catch (error) {
+		console.error("Error al iniciar sesión:", error);
+		res.status(500).json({ error: "Credenciales de inicio de sesión inválidas" });
+	}
+});
+
+//POST LOGIN WITH GOOGLE
+app.post("/logingoogle", async (req, res) => {
+	try {
+		const { credentialResponse } = req.body;
+
+		const clientId = credentialResponse.clientId;
+		const credential = credentialResponse.credential;
+
+		// Verificar el token con la función verifyTokenGoogle
+		const payload = await verifyTokenGoogle(clientId, credential);
+
+		console.log("payload", payload);
+
+		const { email, name, picture, given_name } = payload;
+
+		console.log(email, name, picture, given_name);
+
+		//Email a verificar
+		const emailToCheck = email;
+
+		//Consulta para verificar si el email existe
+		const { data: usuariosData, error: queryError } = await supabase
+			.from("usuarios")
+			.select()
+			.eq("email", emailToCheck);
+
+		if (queryError) {
+			console.error("Error en la consulta:", queryError);
+		} else {
+			if (usuariosData.length > 0) {
+				// Realizar la consulta para obtener todos los datos del usuario en la base de datos
+				// const { data: usuarioData, error: queryError } = await supabase
+				// 	.from("usuarios")
+				// 	.select("*")
+				// 	.eq("email", email)
+				// 	.single();
+				console.log("El correo electrónico ya está registrado en la tabla.");
+			} else {
+				console.log("El correo electrónico no está registrado en la tabla.");
+			}
+		}
+
+		const { usuarioData, error: queryErrorr } = await supabase
+			.from("usuarios")
+			.upsert({ email: email, nombre_usuario: name, nickname: given_name })
+			.select();
+
+		console.log(usuarioData);
+
+		// Si hay un error durante la consulta
+		if (queryError) {
+			throw new Error(queryError.message);
 		}
 
 		const user = {
@@ -347,6 +393,22 @@ function verifyToken(req, res, next) {
 		//Invoca siguiente funcion de middleware
 		next();
 	});
+}
+
+//Verify token with Google sign in
+async function verifyTokenGoogle(client_id, jwtToken) {
+	const client = new OAuth2Client(client_id);
+	// Call the verifyIdToken to
+	// varify and decode it
+	const ticket = await client.verifyIdToken({
+		idToken: jwtToken,
+		audience: client_id,
+	});
+	// Get the JSON with all the user info
+	const payload = ticket.getPayload();
+	// This is a JSON object that contains
+	// all the user info
+	return payload;
 }
 
 //POST para el registro de usuarios
@@ -461,9 +523,21 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	// Obtener el ID de usuario del token decodificado
 	const id_usuario = req.user.id_usuario;
 
-	const { nombre_usuario, nickname, contrasena, nueva_contrasena, avatar_id,
-		logro_monarquia, logro_republica, logro_imperio, logro_personajes,
-		logro_arquitectura, logro_cultura, nivel, experiencia } = req.body;
+	const {
+		nombre_usuario,
+		nickname,
+		contrasena,
+		nueva_contrasena,
+		avatar_id,
+		logro_monarquia,
+		logro_republica,
+		logro_imperio,
+		logro_personajes,
+		logro_arquitectura,
+		logro_cultura,
+		nivel,
+		experiencia,
+	} = req.body;
 
 	newData = {};
 	if (nombre_usuario && nombre_usuario != "") newData["nombre_usuario"] = nombre_usuario;
@@ -495,9 +569,8 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	 */
 	console.log(contrasena_db);
 	if (contrasena) {
-
-		const verificacionHash = await bcrypt.compare(contrasena, contrasena_db)
-		console.log(verificacionHash)
+		const verificacionHash = await bcrypt.compare(contrasena, contrasena_db);
+		console.log(verificacionHash);
 
 		if (verificacionHash) {
 			if (nueva_contrasena) {
@@ -522,7 +595,6 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	res.status(280).json("Perfil actualizado correctamente");
 	return;
 });
-
 
 // Iniciar el servidor
 app.listen(9000, () => {
