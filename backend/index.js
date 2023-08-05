@@ -277,6 +277,7 @@ app.post("/login", async (req, res) => {
 			nickname: usuarioData.nickname,
 		};
 
+		console.log("user", user, "usuarioData", usuarioData);
 		// Generar token JWT con el id_usuario email y nickname del usuario
 		const token = jwt.sign(user, secretKey);
 
@@ -299,49 +300,48 @@ app.post("/logingoogle", async (req, res) => {
 		// Verificar el token con la función verifyTokenGoogle
 		const payload = await verifyTokenGoogle(clientId, credential);
 
-		console.log("payload", payload);
-
+		//Obtener datos del usuario
 		const { email, name, picture, given_name } = payload;
 
-		console.log(email, name, picture, given_name);
-
-		//Email a verificar
+		//Email a verificar si ya existe en la base de datos
 		const emailToCheck = email;
 
-		//Consulta para verificar si el email existe
-		const { data: usuariosData, error: queryError } = await supabase
+		//Consulta para verificar si el email existe en la base de datos
+		const { data: userData, error: queryError } = await supabase
 			.from("usuarios")
-			.select()
+			.select("*")
 			.eq("email", emailToCheck);
 
 		if (queryError) {
 			console.error("Error en la consulta:", queryError);
 		} else {
-			if (usuariosData.length > 0) {
-				// Realizar la consulta para obtener todos los datos del usuario en la base de datos
-				// const { data: usuarioData, error: queryError } = await supabase
-				// 	.from("usuarios")
-				// 	.select("*")
-				// 	.eq("email", email)
-				// 	.single();
-				console.log("El correo electrónico ya está registrado en la tabla.");
-			} else {
-				console.log("El correo electrónico no está registrado en la tabla.");
+			//Si el correo electrónico NO está registrado en la tabla
+			if (userData.length == 0) {
+				// Guardar los datos del usuario en la tabla 'usuarios'
+				const { data, error: insertError } = await supabase
+					.from("usuarios")
+					.insert([{ email: email, nickname: given_name, nombre_usuario: name }]);
+
+				//Si hay un error durante la insercion de los datos del usuario
+				if (insertError) {
+					throw new Error(insertError.message);
+				}
 			}
 		}
 
-		const { usuarioData, error: queryErrorr } = await supabase
+		// Realizar la consulta para obtener todos los datos del usuario en la base de datos
+		const { data: usuarioData, error: error } = await supabase
 			.from("usuarios")
-			.upsert({ email: email, nombre_usuario: name, nickname: given_name })
-			.select();
-
-		console.log(usuarioData);
+			.select("*")
+			.eq("email", email)
+			.single();
 
 		// Si hay un error durante la consulta
-		if (queryError) {
+		if (error) {
 			throw new Error(queryError.message);
 		}
 
+		//Datos para poner en el token
 		const user = {
 			id_usuario: usuarioData.id_usuario,
 			email: usuarioData.email,

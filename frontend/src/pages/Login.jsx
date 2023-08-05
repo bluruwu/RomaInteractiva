@@ -134,6 +134,22 @@ const Login = () => {
 						</button>
 
 						<br />
+
+						<p>O continúa con</p>
+
+						<br />
+
+						{/* LOGIN CON GOOGLE */}
+						<GoogleLogin
+							onSuccess={(credentialResponse) => {
+								handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
+							}}
+							onError={() => {
+								console.log("Login Failed");
+							}}
+						/>
+
+						<br />
 						<p
 							id="recover"
 							className="link cursor-pointer"
@@ -149,16 +165,6 @@ const Login = () => {
 						>
 							Don't have an account?
 						</p>
-
-						{/* LOGIN CON GOOGLE */}
-						<GoogleLogin
-							onSuccess={(credentialResponse) => {
-								handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
-							}}
-							onError={() => {
-								console.log("Login Failed");
-							}}
-						/>
 					</div>
 				</div>
 			</form>
