@@ -16,6 +16,7 @@ const Login = () => {
 		contrasena: "",
 	}); // Estado para almacenar los datos del formulario de inicio de sesión
 
+	//MANEJAR EL LOGIN NORMAL (SIN GOOGLE)
 	const handleSubmit = (event) => {
 		event.preventDefault(); // Prevenir comportamiento de envío predeterminado
 		const lowercaseEmail = formData.email.toLowerCase(); // Convertir el campo de email a minúsculas
@@ -56,6 +57,7 @@ const Login = () => {
 		myresponse(); // Ejecutar la función asíncrona myresponse
 	};
 
+	//MANEJAR EL LOGIN CON GOOGLE
 	const handleGoogleLogin = (credentialResponse) => {
 		console.log(credentialResponse); // Imprimir los datos del formulario en la consola
 		const myresponse = async () => {
