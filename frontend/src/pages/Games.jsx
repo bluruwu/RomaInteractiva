@@ -31,10 +31,10 @@ const Games = () => {
 		<div className="font-text flex flex-col min-h-screen">
 			<Navbar />
 
-			<div className="flex flex-col grow md:flex-row">
+			<div className="bg-red-100 flex flex-col h-screen grow md:flex-row">
 				{/* Juego Rompecabezas */}
 				<div
-					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
+					className="w-full flex-grow md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/puzzle")}
 					onMouseEnter={handleHoverPuzzle}
 					onMouseLeave={handleMouseLeavePuzzle}
@@ -78,7 +78,7 @@ const Games = () => {
 				{/* //////////////////////////////////////////////////////////////////////// */}
 				{/* Juego Crucigrama */}
 				<div
-					className="w-full md:w-1/2 relative cursor-pointer overflow-hidden"
+					className="w-full flex-grow md:w-1/2 relative cursor-pointer overflow-hidden"
 					onClick={() => navigate("/crossword")}
 					onMouseEnter={handleHoverCrossword}
 					onMouseLeave={handleMouseLeaveCrossword}
