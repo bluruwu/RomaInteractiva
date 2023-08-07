@@ -151,6 +151,9 @@ const Login = () => {
 								onError={() => {
 									console.log("Login Failed");
 								}}
+								theme="filled_blue"
+								shape="circle"
+								useOneTap
 							/>
 						</GoogleOAuthProvider>
 
