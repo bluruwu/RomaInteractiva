@@ -116,7 +116,7 @@ const HomePage = () => {
 				/>
 
 				<div className="relative z-10 flex items-center justify-center h-full">
-					<h1 className="font-bold text-4xl text-white">
+					<h1 className="font-bold text-4xl text-white text-center">
 						¡Bienvenido a nuestra página sobre la gloriosa cultura Romana!
 					</h1>
 				</div>
@@ -142,8 +142,8 @@ const HomePage = () => {
 			<main className="flex flex-col gap-y-20 m-12 mb-[160px]">
 				{/* Seccion ETAPAS */}
 				<section>
-					<h1 className="font-bold text-3xl text-black"> Etapas</h1>
-					<div className="flex justify-center gap-x-24 mt-8">
+					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Etapas</h1>
+					<div className="flex flex-col md:flex-row justify-center items-center gap-x-24 gap-y-12 mt-12">
 						<Button
 							id="monarquia"
 							image={"images/monarquia.jpeg"}
@@ -173,8 +173,8 @@ const HomePage = () => {
 
 				{/* Seccion LOS ROMANOS */}
 				<section>
-					<h1 className="font-bold text-3xl text-black"> Los Romanos</h1>
-					<div className="flex justify-center gap-x-24 mt-8">
+					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Los Romanos</h1>
+					<div className="flex flex-col md:flex-row justify-center items-center gap-x-24 gap-y-12 mt-12">
 						<Button
 							id="personajes"
 							image={"images/Julio.png"}
@@ -203,8 +203,8 @@ const HomePage = () => {
 				</section>
 				{/* Sección de LÍNEA DEL TIEMPO */}
 				<section>
-					<h1 className="font-bold text-3xl text-black"> Línea del tiempo</h1>
-					<div className="mt-5">
+					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Línea del tiempo</h1>
+					<div className="mt-12">
 						<Timeline />
 					</div>
 				</section>
