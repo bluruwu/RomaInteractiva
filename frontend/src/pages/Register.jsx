@@ -177,6 +177,7 @@ const Register = () => {
 						</div>
 						<div className="divfields">
 							<input
+								id="password"
 								type="password"
 								className="inputfields"
 								placeholder="Password"
@@ -192,12 +193,12 @@ const Register = () => {
 							/>
 						</div>
 						<div className="divfields">
-							<button type="submit" className="registerbutton">
+							<button id="submit" type="submit" className="registerbutton">
 								Register
 							</button>
 						</div>
 						<br />
-						<p className="link cursor-pointer" onClick={() => navigate("/login")}>
+						<p id="gotologin" className="link cursor-pointer" onClick={() => navigate("/login")}>
 							Already have an account?
 						</p>
 					</div>
