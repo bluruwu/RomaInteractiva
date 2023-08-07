@@ -10,12 +10,12 @@ const LessonPuzzle = () => {
 
 			<div className="flex flex-col grow md:flex-row">
 				{/* Imagen izquierda */}
-				<div className="w-full md:w-1/2 flex flex-grow">
+				<div className="w-full md:w-1/2 flex flex-grow hidden lg:block">
 					<img src={Image} alt="Imagen del Coliseo" className="w-full h-full object-cover" />
 				</div>
 
 				{/* Juego puzzle */}
-				<div className="w-full md:w-1/2 flex flex-grow flex-col items-center space-y-4">
+				<div className="w-full md:w-1/2 flex flex-grow flex-col items-center space-y-4 mb-8">
 					{/* Titulo */}
 					<div className="w-full mt-10 mb-10 justify-center items-center">
 						<p className="font-bold text-3xl text-center filter drop-shadow-lg">

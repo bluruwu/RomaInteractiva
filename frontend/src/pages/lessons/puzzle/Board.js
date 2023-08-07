@@ -78,7 +78,7 @@ function Board({ imageUrl, imageName }) {
 
 			{/* Si no ha iniciado el juego INICIAR JUEGO */}
 			{!isStarted ? (
-				<div className="flex justify-center items-center mt-8 mb-8">
+				<div className="flex justify-center items-center mt-8">
 					<button
 						onClick={() => handleStartClick()}
 						className="bg-custom-doradodark hover:bg-custom-doradonormal text-white font-bold py-2 px-4 rounded-xl shadow-md transform transition duration-300 hover:scale-110"

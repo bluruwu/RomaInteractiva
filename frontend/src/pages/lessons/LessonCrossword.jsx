@@ -81,7 +81,7 @@ const LessonCrossword = () => {
 
 				{/* Mostrar crucigrama */}
 				<div className="w-full h-2/4 flex justify-center">
-					<div className="flex mx-auto w-2/4 ">
+					<div className="lg:flex lg:mx-auto lg:w-1/2 ">
 						{/* Se le envia los datos del crucigrama y el funcionamiento cuando se resuelve correctamente el crucigrama */}
 						<Crossword data={crosswordData} onCrosswordCorrect={handleCorrect} />
 					</div>
