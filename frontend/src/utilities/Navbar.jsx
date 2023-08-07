@@ -98,7 +98,7 @@ const Navbar = ({ inQuiz }) => {
 		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
 			<div className="flex justify-between mx-4 md:mx-20">
 				{/* Logo y titulo */}
-				<div className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
+				<div id="logo" className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>
 						<img
 							src={logo}
@@ -118,6 +118,7 @@ const Navbar = ({ inQuiz }) => {
 					{/* Boton que redirige al menu con los diferentes juegos */}
 					<li className="mr-12">
 						<button
+							id="juegos"
 							className="text-custom-doradonormal hover:text-white font-text font-regular"
 							onClick={() => navigate("/games")}
 						>

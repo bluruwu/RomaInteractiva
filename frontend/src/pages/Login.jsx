@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
 import "./css/login.css";
 import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const Login = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -142,14 +143,16 @@ const Login = () => {
 						<br />
 
 						{/* LOGIN CON GOOGLE */}
-						<GoogleLogin
-							onSuccess={(credentialResponse) => {
-								handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
-							}}
-							onError={() => {
-								console.log("Login Failed");
-							}}
-						/>
+						<GoogleOAuthProvider clientId="880689041530-1g2pd7csm5mbrrqaha8rh60s6bvntlsv.apps.googleusercontent.com">
+							<GoogleLogin
+								onSuccess={(credentialResponse) => {
+									handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
+								}}
+								onError={() => {
+									console.log("Login Failed");
+								}}
+							/>
+						</GoogleOAuthProvider>
 
 						<br />
 						<p
