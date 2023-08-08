@@ -31,7 +31,7 @@ const Games = () => {
 		<div className="font-text flex flex-col min-h-screen">
 			<Navbar />
 
-			<div className="bg-red-100 flex flex-col h-screen grow md:flex-row">
+			<div className="flex flex-col h-screen md:h-auto grow md:flex-row">
 				{/* Juego Rompecabezas */}
 				<div
 					className="w-full flex-grow md:w-1/2 relative cursor-pointer overflow-hidden"

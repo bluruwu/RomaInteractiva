@@ -9,7 +9,7 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 	};
 
 	return (
-		<div className="w-full h-[200vw] sm:h-[700vw] md:h-[50vw] lg:h-auto lg:w-1/2 p-8 md:p-12 lg:p-21 relative">
+		<div className="w-full h-[200vw] sm:h-[75vw] md:h-[90vw] lg:h-auto lg:p-12 md:w-1/2 p-6  lg:p-21 relative">
 			{/* Titulo de la leccion */}
 			<div className="mb-10 text-3xl">
 				<p className="font-bold text-center filter drop-shadow-lg">{title}</p>
