@@ -12,7 +12,7 @@ const LessonModel = ({ description, titleModel, source }) => {
 	};
 	return (
 		<div
-			className="w-full lg:w-1/2 flex sketchfab-embed-wrapper"
+			className="w-full md:w-1/2  flex sketchfab-embed-wrapper"
 			onMouseEnter={handleHover}
 			onMouseLeave={handleMouseLeave}
 		>
@@ -29,7 +29,7 @@ const LessonModel = ({ description, titleModel, source }) => {
 				execution-while-not-rendered
 				web-share
 				src={source}
-				className="w-full"
+				className="w-full h-[110vw] sm:h-[50vw] md:h-full"
 			></iframe>
 			{/* Descripcion del modelo 3D */}
 			<div
