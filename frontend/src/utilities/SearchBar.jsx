@@ -27,11 +27,14 @@ const SearchBar = () => {
 						type="text"
 						value={searchTerm}
 						onChange={(event) => setSearchTerm(event.target.value)}
-						className="px-4 py-2 w-56 border border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+						className="px-6 py-2 w-[12rem] lg:w-56 border-1 border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
 						id="busqueda"
 						aria-labelledby="search"
 					/>
-					<button type="submit" className="px-4 py-3 min-w-[52px] min-h-[41px] bg-white text-black rounded-r-full">
+					<button
+						type="submit"
+						className="px-4 py-3 min-w-[52px] min-h-[41px] bg-white text-black rounded-r-full  border-gray-300"
+					>
 						<img src={lupa} alt="Lupa" className="w-5 min-w-[11px]"></img>
 					</button>
 				</div>
