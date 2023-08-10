@@ -116,7 +116,7 @@ const HomePage = () => {
 				/>
 
 				<div className="relative z-10 flex items-center justify-center h-full">
-					<h1 className="font-bold text-4xl text-white text-center">
+					<h1 className="font-bold text-2xl md:text-4xl mx-4 text-white text-center">
 						¡Bienvenido a nuestra página sobre la gloriosa cultura Romana!
 					</h1>
 				</div>

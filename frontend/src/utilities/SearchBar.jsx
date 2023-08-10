@@ -22,12 +22,12 @@ const SearchBar = () => {
 	return (
 		<>
 			<form>
-				<div className="flex items-center py-4">
+				<div className="flex items-center">
 					<input
 						type="text"
 						value={searchTerm}
 						onChange={(event) => setSearchTerm(event.target.value)}
-						className="px-6 py-2 w-[12rem] lg:w-56 border-1 border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+						className="w-48 my-4  lg:my-0 lg:px-4 lg:py-2 lg:w-56 border-1 border-gray-300 rounded-l-full focus:outline-none  focus:ring-blue-500 focus:border-blue-500"
 						id="busqueda"
 						aria-labelledby="search"
 					/>
@@ -41,7 +41,7 @@ const SearchBar = () => {
 			</form>
 			{searchTerm && (
 				<div className="relative mt-2">
-					<div className="absolute z-20 w-full bg-white rounded-md shadow-lg py-1">
+					<div className="border absolute z-20 w-full bg-white rounded-md shadow-lg py-1">
 						{filteredLessons.length > 0 ? (
 							filteredLessons.map((lesson, index) => (
 								<Link
