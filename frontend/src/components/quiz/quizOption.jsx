@@ -46,7 +46,7 @@ const Option = ({
 			return "bg-[#e69200]";
 		} else return "bg-custom-rojo";
 	};
-	
+
 	// Función para mostrar un icono de revisión en el botón
 	const iconReview = () => {
 		if (resolved) {
@@ -55,7 +55,7 @@ const Option = ({
 					<img
 						src={process.env.PUBLIC_URL + "icons/check.svg"}
 						alt="Check"
-						className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
+						className="h-6 w-6 sm:h-8 sm:w-8 absolute top-1/2 left-[15rem] md:left-[25rem] transform -translate-y-1/2"
 					/>
 				);
 			} else if (savedSelection === optionNumber)
@@ -63,7 +63,7 @@ const Option = ({
 					<img
 						src={process.env.PUBLIC_URL + "/icons/x.svg"}
 						alt="X"
-						className="h-8 w-8 absolute top-1/2 left-[25rem] transform -translate-y-1/2"
+						className="h-6 w-6 sm:h-8 sm:w-8 absolute top-1/2 left-[15rem] md:left-[25rem] transform -translate-y-1/2"
 					/>
 				);
 		} else return "";
@@ -72,7 +72,7 @@ const Option = ({
 	return (
 		// Botón de opción
 		<button
-			className={`mb-4 h-10 border relative text-white rounded-3xl shadow-xl transform transition w-96 duration-300 ${hoverScale()} ${enlargeButton()}
+			className={`mb-4 h-10 border relative text-white text-xs sm:text-sm md:text-base rounded-3xl shadow-xl transform transition w-60 md:w-96 duration-300 ${hoverScale()} ${enlargeButton()}
 			${activeColor()}`}
 			onClick={() => handleOptionSelect(optionNumber)}
 		>
