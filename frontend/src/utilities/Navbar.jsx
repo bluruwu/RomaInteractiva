@@ -104,7 +104,7 @@ const Navbar = ({ inQuiz }) => {
 						<img
 							src={logo}
 							alt="Logo"
-							className="w-20 md:w-32 md:h-auto h-auto min-h-[40px] min-w-[70px]"
+							className="w-20 md:w-32 py-2 md:py-1 md:h-auto h-auto min-h-[40px] min-w-[70px]"
 						></img>
 					</button>
 					<button>
@@ -117,16 +117,16 @@ const Navbar = ({ inQuiz }) => {
 				{/* Barra de busqueda, texto y avatar */}
 				<ul className="flex space-x-4 items-center">
 					{/* Boton que redirige al menu con los diferentes juegos */}
-					<div className="hidden lg:block">
+					<div className="hidden xl:block">
 						<NavBarGames text="Juegos" path="/games" />
 					</div>
 
 					{/* Barra de busqueda */}
-					<div className="hidden lg:block">
+					<div className="hidden xl:block">
 						<BusquedaAleatoria />
 					</div>
 
-					<li className="ml-20 mr-20 hidden lg:block">
+					<li className="ml-20 mr-20 hidden xl:block">
 						<SearchBar />
 					</li>
 
@@ -135,14 +135,14 @@ const Navbar = ({ inQuiz }) => {
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white hidden cursor-pointer lg:block"
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden cursor-pointer xl:block"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
 					</li>
 
 					{/* Avatar */}
-					<li className="relative block lg:hidden">
+					<li className="relative block xl:hidden">
 						{/* Popover para mostrar el menu de "Mi Perfil" y "Cerrar sesion" usando liberia HEADLESSUI*/}
 						<Popover position="relative">
 							{({ open }) => (
@@ -238,7 +238,7 @@ const Navbar = ({ inQuiz }) => {
 
 					{/* /////////////////// */}
 					{/* Avatar */}
-					<li className="relative  hidden lg:block">
+					<li className="relative  hidden xl:block">
 						{/* Popover para mostrar el menu de "Mi Perfil" y "Cerrar sesion" usando liberia HEADLESSUI*/}
 						<Popover position="relative">
 							{({ open }) => (
@@ -284,7 +284,7 @@ const Navbar = ({ inQuiz }) => {
 											{/* Menu que se muestra al hacer clic */}
 											<Popover.Panel
 												static
-												className="z-20 absolute bg-white rounded border-2 shadow-lg w-48"
+												className="z-20 absolute bg-white rounded border-2 shadow-xl w-48"
 												style={{ right: "0", marginTop: "1rem" }}
 											>
 												{/* Botones que se encuentran en el popover */}
