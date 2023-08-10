@@ -4,7 +4,6 @@ import { postLogin, postLoginGoogle, getPrueba } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
-import "./css/login.css";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
