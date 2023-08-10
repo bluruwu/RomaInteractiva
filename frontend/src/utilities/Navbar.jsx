@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../media/logos/logo.png";
 import SearchBar from "./SearchBar";
+import NavBarGames from "../components/navbar/NavBarGames";
 import BusquedaAleatoria from "./randomSearch";
 import Swal from "sweetalert2";
 import { Popover, Transition } from "@headlessui/react";
@@ -116,33 +117,128 @@ const Navbar = ({ inQuiz }) => {
 				{/* Barra de busqueda, texto y avatar */}
 				<ul className="flex space-x-4 items-center">
 					{/* Boton que redirige al menu con los diferentes juegos */}
-					<li className="mr-12">
-						<button
-							id="juegos"
-							className="text-custom-doradonormal hover:text-white font-text font-regular"
-							onClick={() => navigate("/games")}
-						>
-							Juegos
-						</button>
-					</li>
+					<div className="hidden lg:block">
+						<NavBarGames text="Juegos" path="/games" />
+					</div>
+
 					{/* Barra de busqueda */}
-					<BusquedaAleatoria />
-					<li className="ml-20 mr-20 hidden md:block">
+					<div className="hidden lg:block">
+						<BusquedaAleatoria />
+					</div>
+
+					<li className="ml-20 mr-20 hidden lg:block">
 						<SearchBar />
 					</li>
+
 					{/* Texto que muestra "Iniciar sesion" o el nickname del usuario si esta logeado */}
 					<li>
 						<a
 							id="iniciarsesion"
 							onClick={handleNavigation}
-							className="font-text font-regular text-custom-doradonormal hover:text-white hidden md:block cursor-pointer sm:hidden"
+							className="font-text font-regular text-custom-doradonormal hover:text-white hidden cursor-pointer lg:block"
 						>
 							{nickname ? nickname : "Iniciar sesión"}
 						</a>
 					</li>
 
 					{/* Avatar */}
-					<li className="relative">
+					<li className="relative block lg:hidden">
+						{/* Popover para mostrar el menu de "Mi Perfil" y "Cerrar sesion" usando liberia HEADLESSUI*/}
+						<Popover position="relative">
+							{({ open }) => (
+								<>
+									{/* Activar el popover */}
+									<Popover.Button className="focus:outline-none cursor-pointer">
+										{/* Si el usuario esta logeado, mostrar su avatar, si no mostrar el avatar generico */}
+										<button className="text-white">
+											<svg
+												className="w-8 h-8"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth="2"
+													d="M4 6h16M4 12h16M4 18h16"
+												/>
+											</svg>
+										</button>
+									</Popover.Button>
+									{/* // Animacion del popover */}
+									<Transition
+										show={open}
+										as={Fragment}
+										enter="transition ease-out duration-200"
+										enterFrom="opacity-0 scale-95"
+										enterTo="opacity-100 scale-100"
+										leave="transition ease-in duration-150"
+										leaveFrom="opacity-100 scale-100"
+										leaveTo="opacity-0 scale-95"
+									>
+										{/* Menu que se muestra al hacer clic */}
+										<Popover.Panel
+											static
+											className="z-20 absolute bg-white rounded border-2 border-gray-300 shadow-xl p-4 rounded-xl"
+											style={{ right: "0", marginTop: "1rem" }}
+										>
+											{/* NOMBRE DE USUARIO (O LOGIN) Y AVATAR */}
+											<div className="flex items-center justify-between">
+												<a
+													id="iniciarsesion"
+													onClick={handleNavigation}
+													className="text-custom-doradodark cursor-pointer"
+												>
+													{nickname ? nickname : "Iniciar sesión"}
+												</a>
+
+												<div className="w-14 h-14 rounded-full bg-gray-200">
+													{idAvatar ? (
+														<img
+															alt="Avatar del usuario"
+															src={
+																idAvatar < 7
+																	? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+																	: `${API_URL}/image/avatar${idAvatar}.jpg`
+															}
+															className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
+														/>
+													) : (
+														<img
+															alt="Avatar del usuario"
+															src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
+															className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
+															//Si no hay avatar
+															onClick={handleNavigationLoggedOut}
+														/>
+													)}
+												</div>
+											</div>
+
+											<div className="">
+												<SearchBar />
+											</div>
+
+											<div className="flex justify-end py-2">
+												<BusquedaAleatoria />
+											</div>
+
+											{/* BOTON PARA IR A JUEGOS */}
+											<div className="flex justify-end">
+												<NavBarGames text="Juegos" path="/games" />
+											</div>
+										</Popover.Panel>
+									</Transition>
+								</>
+							)}
+						</Popover>
+					</li>
+
+					{/* /////////////////// */}
+					{/* Avatar */}
+					<li className="relative  hidden lg:block">
 						{/* Popover para mostrar el menu de "Mi Perfil" y "Cerrar sesion" usando liberia HEADLESSUI*/}
 						<Popover position="relative">
 							{({ open }) => (

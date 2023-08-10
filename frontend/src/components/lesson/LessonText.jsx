@@ -9,7 +9,7 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 	};
 
 	return (
-		<div className="w-full h-[200vw] sm:h-[75vw] md:h-[90vw] lg:h-auto lg:p-12 md:w-1/2 p-6  lg:p-21 relative">
+		<div className="w-full h-[45rem] sm:h-[75vw] md:h-[90vw] lg:h-auto lg:p-12 md:w-1/2 p-6  lg:p-21 relative">
 			{/* Titulo de la leccion */}
 			<div className="mb-10 text-3xl">
 				<p className="font-bold text-center filter drop-shadow-lg">{title}</p>
@@ -50,7 +50,7 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 					))}
 				</div>
 				{/* Si se le pasa el dropdownMenu para cambiar entre modelos, lo muestra en el div */}
-				<div className="bottom-1 pt-10 pr-8 md:pr-14 flex">{dropdownMenu}</div>
+				<div className="bottom-1 pt-6 md:pt-8 pr-8 md:pr-14 flex">{dropdownMenu}</div>
 			</div>
 		</div>
 	);

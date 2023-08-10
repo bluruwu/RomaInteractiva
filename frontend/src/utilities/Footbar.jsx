@@ -4,14 +4,24 @@ import React from "react";
 const Footbar = () => {
 	return (
 		<footer className="bg-black py-8 bottom-0 w-full">
-			<div className="flex justify-between mx-20">
-				<div className=" font-regular font-text">
-					<p className="text-white text-center"> Sobre nosotros </p>
-					<p className="text-white"> github.com/bluruwu/romainteractiva </p>
+			<div className="flex flex-col md:flex-row justify-between font-text text-center text-white md:mx-20">
+				{/* SOBRE NOSOTROS  */}
+				<div className="pb-8 md:pb-0">
+					<p className="font-bold"> Sobre nosotros </p>
+					<a
+						href="https://github.com/bluruwu/romainteractiva"
+						className="text-sm md:text-base"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						github.com/bluruwu/romainteractiva
+					</a>
 				</div>
+
+				{/* CONTACTO */}
 				<div>
-					<p className="text-white text-center"> Contáctanos </p>
-					<p className="text-white"> romainteractiva@gmail.com </p>
+					<p className="font-bold"> Contáctanos </p>
+					<p className="text-sm md:text-base"> romainteractiva@gmail.com </p>
 				</div>
 			</div>
 		</footer>
