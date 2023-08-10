@@ -46,7 +46,7 @@ const Option = ({
 			return "bg-[#e69200]";
 		} else return "bg-custom-rojo";
 	};
-	
+
 	// Función para mostrar un icono de revisión en el botón
 	const iconReview = () => {
 		if (resolved) {
@@ -72,7 +72,7 @@ const Option = ({
 	return (
 		// Botón de opción
 		<button
-			className={`mb-4 h-10 border relative text-white rounded-3xl shadow-xl transform transition w-96 duration-300 ${hoverScale()} ${enlargeButton()}
+			className={`mb-4 h-10 border relative text-white text-xs sm:text-sm md:text-base rounded-3xl shadow-xl transform transition w-9/12 md:w-96 duration-300 ${hoverScale()} ${enlargeButton()}
 			${activeColor()}`}
 			onClick={() => handleOptionSelect(optionNumber)}
 		>

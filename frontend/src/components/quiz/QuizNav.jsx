@@ -15,7 +15,7 @@ const QuizNav = ({ buttonbef, buttonnxt, urlbef, urlnxt }) => {
 		<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
 			{/* Botón "Anterior" */}
 			<button
-				className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
+				className="max-w-80 mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
 				onClick={() => navigate(urlbef)}
 				style={{ minWidth: "15rem" }}
 			>
@@ -24,7 +24,7 @@ const QuizNav = ({ buttonbef, buttonnxt, urlbef, urlnxt }) => {
 
 			{/* Botón "Siguiente" */}
 			<button
-				className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110"
+				// className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl md:hover:bg-custom-doradodark shadow-md md:transform md:transition md:duration-300 md:hover:scale-110"
 				style={{ minWidth: "15rem" }}
 				onClick={() => navigate(urlnxt)}
 			>

@@ -284,9 +284,9 @@ const QuizPersonajes = () => {
 					savedSelection={JSON.parse(localStorage.getItem(`personajesOpcion${questionNumber}`))}
 				/>
 			</div>
-			<div className="flex flex-col md:flex-row justify-between mx-auto px-8 md:px-80">
+			<div className="flex flex-col items-center sm:flex-row justify-evenly mx-auto px-8 lg:px-40">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
+					className="w-60 mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-3xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					onClick={handleClickButton1}
 					style={{ minWidth: "15rem" }}
 				>
@@ -294,7 +294,7 @@ const QuizPersonajes = () => {
 				</button>
 				<button
 					id="nextButton"
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
+					className="w-60 mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-3xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-105"
 					style={{ minWidth: "15rem" }}
 					onClick={handleClickButton2}
 				>

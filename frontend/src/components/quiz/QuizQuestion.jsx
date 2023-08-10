@@ -8,137 +8,136 @@ import { INFORMATION as arquitecturaInformation } from "../../utilities/arquitec
 import { INFORMATION as culturaInformation } from "../../utilities/culturaInfo";
 
 const QuizQuestion = ({
-  question,
-  preguntaSeleccionada,
-  quiz,
-  quizResuelto,
-  respuesta1,
-  respuesta2,
-  respuesta3,
-  respuesta4,
-  respuesta5,
+	question,
+	preguntaSeleccionada,
+	quiz,
+	quizResuelto,
+	respuesta1,
+	respuesta2,
+	respuesta3,
+	respuesta4,
+	respuesta5,
 }) => {
-  const totalPreguntas = 5;
+	const totalPreguntas = 5;
 
-  // Determinar el estilo de borde para el círculo de pregunta seleccionado
-  const borde = (pregunta) =>{
-    if(pregunta == preguntaSeleccionada + 1) {
-        return " border-black border-[3px]"
-      }
-      else return " "
-  }
+	// Determinar el estilo de borde para el círculo de pregunta seleccionado
+	const borde = (pregunta) => {
+		if (pregunta == preguntaSeleccionada + 1) {
+			return " border-black border-[3px]";
+		} else return " ";
+	};
 
-  // Determinar el color de texto según si el quiz está resuelto o no
-  const textColor = () => {
-    if (quizResuelto) {
-      return "text-white"
-    }
-    else return "text-black"
-  }
+	// Determinar el color de texto según si el quiz está resuelto o no
+	const textColor = () => {
+		if (quizResuelto) {
+			return "text-white";
+		} else return "text-black";
+	};
 
-  // Determinar el color de fondo de los círculos de pregunta
-  const color = (pregunta) => {
-    if (quizResuelto){
-      if (quiz == 1){
-        if (JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta-1}`)) == MonarquiaInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-      else if (quiz == 2) {
-        if (JSON.parse(localStorage.getItem(`republicaOpcion${pregunta-1}`)) == RepublicaInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-      else if (quiz == 3) {
-        if (JSON.parse(localStorage.getItem(`personajesOpcion${pregunta-1}`)) == PersonajesInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-      else if (quiz == 4){
-        if (JSON.parse(localStorage.getItem(`imperioOpcion${pregunta-1}`)) == ImperioInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-      else if (quiz == 5){
-        if (JSON.parse(localStorage.getItem(`arquitecturaOpcion${pregunta-1}`)) == arquitecturaInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-      else if (quiz == 6){
-        if (JSON.parse(localStorage.getItem(`culturaOpcion${pregunta-1}`)) == culturaInformation[pregunta-1].respuesta) {
-          return " bg-green-400"
-        }
-        else return " bg-custom-rojo"
-      }
-    }
-    else {
-      if (pregunta == 1){
-        if (respuesta1 != 0 && respuesta1 != null) {
-          return " bg-[#e69200]"
-        }
-        else return " bg-white "
-      }
-      else if (pregunta == 2 ) {
-        if (respuesta2 != 0 && respuesta1 != null) {
-          return " bg-[#e69200]"
-        }
-        else return " bg-white"
-      }
-      else if (pregunta == 3 ) {
-        if (respuesta3 != 0 && respuesta1 != null) {
-          return " bg-[#e69200]"
-        }
-        else return " bg-white"
-      }
-      else if (pregunta == 4 ) {
-        if (respuesta4 != 0 && respuesta1 != null) {
-          return " bg-[#e69200]"
-        }
-        else return " bg-white"
-      }
-      else if (pregunta == 5 ) {
-        if (respuesta5 != 0 && respuesta1 != null) {
-          return " bg-[#e69200]"
-        }
-        else return " bg-white"
-      }
-    }
-  }
+	// Determinar el color de fondo de los círculos de pregunta
+	const color = (pregunta) => {
+		if (quizResuelto) {
+			if (quiz == 1) {
+				if (
+					JSON.parse(localStorage.getItem(`monarquiaOpcion${pregunta - 1}`)) ==
+					MonarquiaInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			} else if (quiz == 2) {
+				if (
+					JSON.parse(localStorage.getItem(`republicaOpcion${pregunta - 1}`)) ==
+					RepublicaInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			} else if (quiz == 3) {
+				if (
+					JSON.parse(localStorage.getItem(`personajesOpcion${pregunta - 1}`)) ==
+					PersonajesInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			} else if (quiz == 4) {
+				if (
+					JSON.parse(localStorage.getItem(`imperioOpcion${pregunta - 1}`)) ==
+					ImperioInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			} else if (quiz == 5) {
+				if (
+					JSON.parse(localStorage.getItem(`arquitecturaOpcion${pregunta - 1}`)) ==
+					arquitecturaInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			} else if (quiz == 6) {
+				if (
+					JSON.parse(localStorage.getItem(`culturaOpcion${pregunta - 1}`)) ==
+					culturaInformation[pregunta - 1].respuesta
+				) {
+					return " bg-green-400";
+				} else return " bg-custom-rojo";
+			}
+		} else {
+			if (pregunta == 1) {
+				if (respuesta1 != 0 && respuesta1 != null) {
+					return " bg-[#e69200]";
+				} else return " bg-white ";
+			} else if (pregunta == 2) {
+				if (respuesta2 != 0 && respuesta1 != null) {
+					return " bg-[#e69200]";
+				} else return " bg-white";
+			} else if (pregunta == 3) {
+				if (respuesta3 != 0 && respuesta1 != null) {
+					return " bg-[#e69200]";
+				} else return " bg-white";
+			} else if (pregunta == 4) {
+				if (respuesta4 != 0 && respuesta1 != null) {
+					return " bg-[#e69200]";
+				} else return " bg-white";
+			} else if (pregunta == 5) {
+				if (respuesta5 != 0 && respuesta1 != null) {
+					return " bg-[#e69200]";
+				} else return " bg-white";
+			}
+		}
+	};
 
-  // Generar los círculos de pregunta
-  const renderCirculos = () => {
-    const circulos = [];
+	// Generar los círculos de pregunta
+	const renderCirculos = () => {
+		const circulos = [];
 
-    for (let i = 1; i <= totalPreguntas; i++) {
-      let styles = `rounded-full h-8 w-8 flex items-center justify-center text-base border ${borde(i)} ${color(i)} ${textColor()}`
-      circulos.push(
-        <div key={i} className={styles}>
-          {i}
-        </div>
-      );
-    }
+		for (let i = 1; i <= totalPreguntas; i++) {
+			let styles = `rounded-full h-7 w-7 xl:h-8 xl:w-8 flex items-center justify-center text-base border ${borde(
+				i
+			)} ${color(i)} ${textColor()}`;
+			circulos.push(
+				<div key={i} className={styles}>
+					{i}
+				</div>
+			);
+		}
 
-    return circulos;
-  };
+		return circulos;
+	};
 
-  return (
-    <div className="grid grid-cols-3 justify-center items-center">
-      <div className="p-14">
-        <HomeButton />
-      </div>
+	return (
+		<div className="grid grid-cols-1 py-4 lg:grid-cols-3 justify-center items-center">
+			<div className="hidden lg:block p-14 lg:order-1">
+				<HomeButton />
+			</div>
 
-      <div className="flex-grow text-3xl text-center">
-        <p className="font-bold filter drop-shadow-lg">{question}</p>
-      </div>
+			<div className="flex gap-4  justify-center p-4 lg:p-0 lg:ml-40 lg:order-3">
+				{renderCirculos()}
+			</div>
 
-      <div className="flex gap-4 ml-40">{renderCirculos()}</div>
-    </div>
-  );
+			<div className="flex-grow text-xl p-4 lg:p-0 md:text-2xl lg:text-3xl text-center lg:order-2">
+				<p className="font-bold filter drop-shadow-lg">{question}</p>
+			</div>
+		</div>
+	);
 };
 
 export default QuizQuestion;
