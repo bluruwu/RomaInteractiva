@@ -90,92 +90,91 @@ const Login = () => {
 		<div id="login" className="font-text">
 			{showAlert && <Alert />}
 
-			<form onSubmit={handleSubmit}>
-				<div className="form">
-					<div className="flex-1.6  justify-center items-center">
-						<img
-							src={require("../media/plazaSanPedro.jpg")}
-							alt="Imagen de fondo"
-							className="block w-full h-full object-cover"
-						/>
-					</div>
-					<div className="homebutton">
-						<div className="self-end justify-end items-end">
+			<div className="md:flex md:flex-row w-full md:h-screen">
+				{/* IMAGEN DE FONDO IZQUIERDA */}
+				<div className="hidden md:block md:w-1/2 lg:w-7/12 justify-center items-center h-full w-full">
+					<img
+						src={require("../media/plazaSanPedro.jpg")}
+						alt="Imagen de fondo"
+						className="block w-full h-full object-cover"
+					/>
+				</div>
+
+				{/* PARTE DERECHA */}
+				<form className="md:w-1/2 lg:w-5/12 justify-center" onSubmit={handleSubmit}>
+					<div className="flex p-4 flex flex-col justify-center h-full w-full">
+						{/* HOMEBUTTON */}
+						<div className="flex self-end justify-end items-end pb-4 md:pr-[calc((100%-22rem)/2)]">
 							<HomeButton />
 						</div>
 
-						<img
-							src={require("../media/iconos/luperca.png")}
-							alt="Imagen en el top right"
-							className="welcomeimage"
-						/>
-						<div className="divfields">
+						{/* IMAGEN DEL LOGIN */}
+						<div className="flex justify-center mb-4">
+							<img src={require("../media/iconos/luperca.png")} alt="Imagen en el top right" />
+						</div>
+
+						{/* CAMPO DE EMAIL, PASSWORD, BOTON DE LOGIN */}
+						<div className="flex flex-col items-center justify-center">
 							<input
 								id="email"
 								type="text"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4"
 								placeholder="Email"
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
-						</div>
-						<div className="divfields">
 							<input
 								id="password"
 								type="password"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl border focus:outline-none mb-4"
 								placeholder="Password"
 								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
 							/>
+
+							<button
+								id="submit"
+								type="submit"
+								className="max-w-sm bg-custom-rojo text-white w-full h-full text-center border-2 rounded-3xl border focus:outline-none py-2 mb-4"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								Login
+							</button>
 						</div>
-						<button
-							id="submit"
-							type="submit"
-							className="loginbutton"
-							onSubmit={(e) => e.preventDefault()}
-						>
-							Login
-						</button>
 
-						<br />
+						{/* ELEMENTOS DE LOGIN CON GOOGLE, RECUPERAR CONTRASENA Y REGISTRARSE */}
+						<div className="flex flex-col items-center">
+							<p className="mb-4">O continúa con</p>
 
-						<p>O continúa con</p>
+							{/* LOGIN CON GOOGLE */}
+							<div className="mb-8">
+								<GoogleOAuthProvider clientId="880689041530-1g2pd7csm5mbrrqaha8rh60s6bvntlsv.apps.googleusercontent.com">
+									<GoogleLogin
+										onSuccess={(credentialResponse) => {
+											handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
+										}}
+										onError={() => {
+											console.log("Login Failed");
+										}}
+										theme="filled_blue"
+										shape="circle"
+										useOneTap
+									/>
+								</GoogleOAuthProvider>
+							</div>
 
-						<br />
-
-						{/* LOGIN CON GOOGLE */}
-						<GoogleOAuthProvider clientId="880689041530-1g2pd7csm5mbrrqaha8rh60s6bvntlsv.apps.googleusercontent.com">
-							<GoogleLogin
-								onSuccess={(credentialResponse) => {
-									handleGoogleLogin(credentialResponse); // Pasar credentialResponse como argumento
-								}}
-								onError={() => {
-									console.log("Login Failed");
-								}}
-								theme="filled_blue"
-								shape="circle"
-								useOneTap
-							/>
-						</GoogleOAuthProvider>
-
-						<br />
-						<p
-							id="recover"
-							className="link cursor-pointer"
-							onClick={() => navigate("/recoverpassword")}
-						>
-							Recover password
-						</p>
-						<br />
-						<p
-							id="navregistro"
-							className="link cursor-pointer"
-							onClick={() => navigate("/register")}
-						>
-							Don't have an account?
-						</p>
+							<button
+								id="recover"
+								className="mb-4 underline"
+								onClick={() => navigate("/recoverpassword")}
+							>
+								Recover password
+							</button>
+							<button id="navregistro" className="underline " onClick={() => navigate("/register")}>
+								Don't have an account?
+							</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	);
 };
