@@ -22,12 +22,12 @@ const SearchBar = () => {
 	return (
 		<>
 			<form>
-				<div className="flex items-center">
+				<div className="flex items-center justify-end pr-0">
 					<input
 						type="text"
 						value={searchTerm}
 						onChange={(event) => setSearchTerm(event.target.value)}
-						className="w-48 my-4  lg:my-0 lg:px-4 lg:py-2 lg:w-56 border-1 border-gray-300 rounded-l-full focus:outline-none  focus:ring-blue-500 focus:border-blue-500"
+						className=" my-4 xl:my-0 lg:px-4 lg:py-2 w-60 border-1 border-gray-300 rounded-l-full focus:outline-none  focus:ring-blue-500 focus:border-blue-500"
 						id="busqueda"
 						aria-labelledby="search"
 					/>

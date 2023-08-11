@@ -48,7 +48,7 @@ const Navbar = ({ inQuiz }) => {
 	//Si no hay avatar, verificar si el usuario no esta logeado para redirigirlo a LOGIN
 	const handleNavigationLoggedOut = () => {
 		if (!nickname) {
-			navigate("/perfil");
+			navigate("/login");
 		}
 	};
 
@@ -83,7 +83,6 @@ const Navbar = ({ inQuiz }) => {
 	if (cerrarSesion) {
 		//Limpiar toda la informacion del usuario incluido el token
 		localStorage.clear();
-		window.location.reload();
 		window.localStorage.clear(); //try this to clear all local storage
 
 		//Si esta en la pagina de perfil, redirigir al home
@@ -141,15 +140,13 @@ const Navbar = ({ inQuiz }) => {
 						</a>
 					</li>
 
-					{/* Avatar */}
+					{/* MENU DE HAMBURGUESA */}
 					<li className="relative block xl:hidden">
-						{/* Popover para mostrar el menu de "Mi Perfil" y "Cerrar sesion" usando liberia HEADLESSUI*/}
 						<Popover position="relative">
 							{({ open }) => (
 								<>
 									{/* Activar el popover */}
 									<Popover.Button className="focus:outline-none cursor-pointer">
-										{/* Si el usuario esta logeado, mostrar su avatar, si no mostrar el avatar generico */}
 										<button className="text-white">
 											<svg
 												className="w-8 h-8"
@@ -181,15 +178,14 @@ const Navbar = ({ inQuiz }) => {
 										{/* Menu que se muestra al hacer clic */}
 										<Popover.Panel
 											static
-											className="z-20 absolute bg-white rounded border-2 border-gray-300 shadow-xl p-4 rounded-xl"
-											style={{ right: "0", marginTop: "1rem" }}
+											className="z-20 absolute bg-gray-100  shadow-xl p-4 w-screen md:w-max mt-3 -right-4 md:mt-5 md:rounded-xl bg-opacity-70 backdrop-blur-md"
 										>
 											{/* NOMBRE DE USUARIO (O LOGIN) Y AVATAR */}
-											<div className="flex items-center justify-between">
+											<div className="flex justify-end items-center ">
 												<a
 													id="iniciarsesion"
 													onClick={handleNavigation}
-													className="text-custom-doradodark cursor-pointer"
+													className="text-black cursor-pointer pr-3"
 												>
 													{nickname ? nickname : "Iniciar sesión"}
 												</a>
@@ -203,7 +199,7 @@ const Navbar = ({ inQuiz }) => {
 																	? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
 																	: `${API_URL}/image/avatar${idAvatar}.jpg`
 															}
-															className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
+															className="w-14 h-14 border-2 inline border border-custom-doradodark rounded-full"
 														/>
 													) : (
 														<img
@@ -221,14 +217,25 @@ const Navbar = ({ inQuiz }) => {
 												<SearchBar />
 											</div>
 
-											<div className="flex justify-end py-2">
+											<div className="flex justify-end py-1">
 												<BusquedaAleatoria />
 											</div>
 
 											{/* BOTON PARA IR A JUEGOS */}
-											<div className="flex justify-end">
+											<div className="flex justify-end py-2">
 												<NavBarGames text="Juegos" path="/games" />
 											</div>
+
+											{nickname && (
+												<div className="flex justify-end">
+													<button
+														className="py-3 cursor-pointer text-xs whitespace-nowrap mt-2 z-20"
+														onClick={setCerrarSesion}
+													>
+														Cerrar sesión
+													</button>
+												</div>
+											)}
 										</Popover.Panel>
 									</Transition>
 								</>

@@ -5,9 +5,9 @@ const NavBarGames = ({ text, path }) => {
 	const navigate = useNavigate();
 
 	return (
-		<li className="lg:mr-12">
+		<li className="xl:mr-12">
 			<button
-				className="text-custom-doradodark lg:text-custom-doradonormal lg:hover:text-white font-text font-regular"
+				className="xl:text-custom-doradonormal lg:hover:text-white font-text font-regular"
 				onClick={() => navigate(path)}
 			>
 				{text}
