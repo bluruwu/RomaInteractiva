@@ -40,8 +40,8 @@ const SearchBar = () => {
 				</div>
 			</form>
 			{searchTerm && (
-				<div className="relative mt-2">
-					<div className="border absolute z-20 w-full bg-white rounded-md shadow-lg py-1">
+				<div className="relative mt-1">
+					<div className="border absolute z-20 w-60 right-10 bg-white rounded-md shadow-lg py-1">
 						{filteredLessons.length > 0 ? (
 							filteredLessons.map((lesson, index) => (
 								<Link

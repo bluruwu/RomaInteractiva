@@ -213,7 +213,7 @@ const Navbar = ({ inQuiz }) => {
 												</div>
 											</div>
 
-											<div className="">
+											<div>
 												<SearchBar />
 											</div>
 
