@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tile from "./Tile";
-import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "./constants";
+import { TILE_COUNT, GRID_SIZE } from "./constants";
 import { canSwap, shuffle, swap, isSolved } from "./helpers";
 import Swal from "sweetalert2";
 
@@ -33,6 +33,18 @@ function Board({ imageUrl, imageName }) {
 		shuffleTiles();
 		setIsStarted(true);
 	};
+	const windowWidth = window.innerWidth; //Obtener el ancho de la pantalla
+	const windowHeight = window.innerHeight - 305; //Obtener el alto de la pantalla
+
+	let BOARD_SIZE;
+
+	const minSize = Math.min(windowWidth, windowHeight); // Obtener el valor mas pequeno entre el alto y el ancho
+	BOARD_SIZE = minSize * 0.913; //Segun el area maxima que puede tomar el rompecabezas, tomar el 91%
+
+	//El rompecabezas debe tener un tamano maximo de 425
+	if (BOARD_SIZE > 425) {
+		BOARD_SIZE = 425;
+	}
 
 	const pieceWidth = Math.round(BOARD_SIZE / GRID_SIZE);
 	const pieceHeight = Math.round(BOARD_SIZE / GRID_SIZE);
@@ -72,6 +84,7 @@ function Board({ imageUrl, imageName }) {
 						width={pieceWidth}
 						height={pieceHeight}
 						handleTileClick={handleTileClick}
+						BOARD_SIZE={BOARD_SIZE}
 					/>
 				))}
 			</ul>

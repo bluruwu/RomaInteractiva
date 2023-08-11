@@ -4,7 +4,6 @@ import { sendRecoveryEmail } from "../conections/requests";
 import { Alert } from "../components/alerts/alerts";
 import Swal from "sweetalert2";
 import HomeButton from "../utilities/HomeButton";
-import "./css/recover.css";
 
 const Recover = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -24,7 +23,7 @@ const Recover = () => {
 			const req_succesful = await sendRecoveryEmail({
 				to: lowercaseEmail,
 				subject: "Recuperacion de contraseña",
-				body: "Tu nueva contraseña es: "
+				body: "Tu nueva contraseña es: ",
 			});
 
 			console.log(req_succesful);
@@ -45,7 +44,7 @@ const Recover = () => {
 				Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: 'No pudimos enviarte tu nueva contraseña 😭',
+					text: "No pudimos enviarte tu nueva contraseña 😭",
 					customClass: {
 						container: "font-text",
 					},
@@ -60,49 +59,61 @@ const Recover = () => {
 		<div id="recover" className="font-text">
 			{showAlert && <Alert />}
 
-			<form onSubmit={handleSubmit}>
-				<div className="form">
-					<div className="flex-1.6  justify-center items-center">
-						<img
-							src={require("../media/caida.jpg")}
-							alt="Imagen de fondo"
-							className="block w-full h-full object-cover"
-						/>
-					</div>
-					<div className="homebutton">
-						<div className="self-end justify-end items-end">
+			<div className="md:flex md:flex-row w-full md:h-screen">
+				{/* IMAGEN PRINCIPAL IZQUIERDA */}
+				<div className="hidden md:block md:w-1/2 lg:w-7/12 justify-center items-center h-full w-full">
+					<img
+						src={require("../media/caida.jpg")}
+						alt="Imagen de fondo"
+						className="block w-full h-full object-cover"
+					/>
+				</div>
+
+				{/* PANEL DERECHO */}
+				<form onSubmit={handleSubmit} className="md:w-1/2 lg:w-5/12 justify-center">
+					<div className="flex p-4 flex flex-col justify-center h-full w-full">
+						<div className="flex self-end justify-end items-end pb-4 md:pr-[calc((100%-22rem)/2)]">
 							<HomeButton />
 						</div>
 
-						<img
-							src={require("../media/iconos/a.png")}
-							alt="Imagen en el top right"
-							className="welcomeimage"
-						/>
-						<div className="divfields">
-							<input
-								id="email"
-								type="text"
-								className="inputfields"
-								placeholder="Email"
-								onChange={(e) => setFormData({ email: e.target.value })}
+						{/* IMAGEN TOP RIGHT */}
+						<div className="flex w-full justify-center items-center mb-4 ">
+							<img
+								src={require("../media/iconos/a.png")}
+								alt="Imagen en el top right"
+								className="max-w-xs md:max-w-sm"
 							/>
 						</div>
 
-						<button
-							id="submit"
-							type="submit"
-							className="recoverbutton"
-							onSubmit={(e) => e.preventDefault()}
-						>
-							Send email
-						</button>
+						{/* CAMPO DEL CORREO */}
 
-						<br />
-						
+						<div className="flex flex-col items-center justify-center">
+							<input
+								id="email"
+								type="text"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
+								placeholder="Email"
+								onChange={(e) => setFormData({ email: e.target.value })}
+							/>
+
+							<button
+								id="submit"
+								type="submit"
+								className="max-w-sm bg-custom-rojo text-white w-full h-full text-center border-2 rounded-3xl border focus:outline-none py-2 mb-8"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								Send email
+							</button>
+						</div>
+
+						<div className="flex flex-col items-center">
+							<button id="gotologin" className="mb-4 underline" onClick={() => navigate("/login")}>
+								Return to login
+							</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	);
 };

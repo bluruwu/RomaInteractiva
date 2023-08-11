@@ -117,14 +117,14 @@ const Login = () => {
 							<input
 								id="email"
 								type="text"
-								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl border focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Email"
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
 							<input
 								id="password"
 								type="password"
-								className="max-w-sm w-full h-full text-center border-2 rounded-3xl border focus:outline-none mb-4"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl border focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Password"
 								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
 							/>

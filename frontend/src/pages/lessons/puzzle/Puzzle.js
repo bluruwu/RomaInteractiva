@@ -24,7 +24,7 @@ function Puzzle() {
 	}, []);
 
 	return (
-		<div>
+		<div className="">
 			{/* Mostrar tablero con la imagen seleccionada*/}
 			{selectedImage && <Board imageUrl={selectedImage.url} imageName={selectedImage.name} />}
 		</div>

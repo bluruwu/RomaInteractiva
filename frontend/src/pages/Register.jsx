@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../conections/requests";
 import HomeButton from "../utilities/HomeButton";
 import Swal from "sweetalert2";
-import "./css/register.css";
 
 const Register = () => {
 	const navigate = useNavigate(); // Hook de navegación
@@ -124,86 +123,84 @@ const Register = () => {
 	};
 	// Render de la pagina con sus componentes. Una imagen de fondo, un logo, y los campos necesarios para registrarse. Además del botón de submit y el botón que lleva a Login y Home
 	return (
-		<div id="register" className="font-text flex flex-col ">
-			<form onSubmit={handleSubmit}>
-				<div className="flex flex-col grow max-h-screen md:flex-row">
-					{/* Imagen de fondo */}
-					<div className="w-2/3 md:w-2/3 flex flex-grow">
-						<img
-							src={require("../media/coliseo.jpg")}
-							alt="Imagen de fondo"
-							className="block w-full h-full object-cover"
-						/>
-					</div>
+		<div id="register" className="font-text">
+			<div className="md:flex md:flex-row w-full md:h-screen">
+				{/* IMAGEN DE FONDO IZQUIERDA*/}
+				<div className="hidden md:block md:w-1/2 lg:w-7/12 justify-center items-center h-full w-full">
+					<img
+						src={require("../media/coliseo.jpg")}
+						alt="Imagen de fondo"
+						className="block w-full h-full object-cover"
+					/>
+				</div>
 
-					{/* Panel derecho */}
-					<div className="panelderecho ">
+				{/* Panel derecho */}
+				<form onSubmit={handleSubmit} className="md:w-1/2 lg:w-5/12 justify-center">
+					<div className="flex p-4 flex flex-col justify-center h-full w-full">
 						{/* HomeButton */}
-						<div className="self-end items-end mb-4 pr-0">
+						<div className="flex self-end justify-end items-end pb-4 md:pr-[calc((100%-22rem)/2)]">
 							<HomeButton />
 						</div>
 
 						{/* Logo */}
-						<img
-							src={require("../media/logos/logo.png")}
-							alt="Imagen en el top right"
-							className="welcomeimage mb-4"
-						/>
+						<div className="flex w-full justify-center items-center mb-4 ">
+							<img
+								src={require("../media/logos/logo.png")}
+								alt="Imagen en el top right"
+								className="max-w-xs md:max-w-sm"
+							/>
+						</div>
 
 						{/* Formulario */}
-						<div className="divfields">
+						<div className="flex flex-col items-center justify-center">
 							<input
 								type="text"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Full name"
 								onChange={(e) => setFormData({ ...formData, nombre_usuario: e.target.value })}
 							/>
-						</div>
-						<div className="divfields">
 							<input
 								type="text"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Nickname"
 								onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
 							/>
-						</div>
-						<div className="divfields">
 							<input
 								type="email"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Email"
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 							/>
-						</div>
-						<div className="divfields">
 							<input
 								id="password"
 								type="password"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Password"
 								onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
 							/>
-						</div>
-						<div className="divfields">
 							<input
 								type="password"
-								className="inputfields"
+								className="max-w-sm w-full h-full text-center border-2 rounded-3xl focus:outline-none mb-4 focus:border-custom-rojo focus:ring-0"
 								placeholder="Repeat Password"
 								onChange={(e) => setConfirmedPassword(e.target.value)}
 							/>
-						</div>
-						<div className="divfields">
-							<button id="submit" type="submit" className="registerbutton">
+							<button
+								id="submit"
+								type="submit"
+								className="max-w-sm bg-custom-rojo text-white w-full h-full text-center border-2 rounded-3xl border focus:outline-none py-2 mb-4"
+							>
 								Register
 							</button>
 						</div>
-						<br />
-						<p id="gotologin" className="link cursor-pointer" onClick={() => navigate("/login")}>
-							Already have an account?
-						</p>
+
+						<div className="flex flex-col items-center">
+							<button id="gotologin" className="mb-4 underline" onClick={() => navigate("/login")}>
+								Already have an account?
+							</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	);
 };
