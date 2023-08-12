@@ -96,7 +96,7 @@ const Navbar = ({ inQuiz }) => {
 
 	return (
 		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
-			<div className="flex justify-between mx-4 md:mx-20">
+			<div className="flex justify-between mx-4 md:mx-20 2xl:mx-[calc((100%-1400px)/2)]">
 				{/* Logo y titulo */}
 				<div id="logo" className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>

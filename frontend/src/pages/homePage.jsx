@@ -142,7 +142,10 @@ const HomePage = () => {
 			<main className="flex flex-col gap-y-20 m-12 mb-[160px]">
 				{/* Seccion ETAPAS */}
 				<section>
-					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Etapas</h1>
+					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black xl:pl-[calc((100%-1400px)/2)]">
+						{" "}
+						Etapas
+					</h1>
 					<div className="flex flex-col md:flex-row justify-center items-center gap-x-24 gap-y-12 mt-12">
 						<Button
 							id="monarquia"
@@ -173,7 +176,10 @@ const HomePage = () => {
 
 				{/* Seccion LOS ROMANOS */}
 				<section>
-					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Los Romanos</h1>
+					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black xl:pl-[calc((100%-1400px)/2)]">
+						{" "}
+						Los Romanos
+					</h1>
 					<div className="flex flex-col md:flex-row justify-center items-center gap-x-24 gap-y-12 mt-12">
 						<Button
 							id="personajes"
@@ -203,7 +209,10 @@ const HomePage = () => {
 				</section>
 				{/* Sección de LÍNEA DEL TIEMPO */}
 				<section>
-					<h1 className="xl:pl-[8vw] font-bold text-3xl text-black"> Línea del tiempo</h1>
+					<h1 className="font-bold text-3xl text-black xl:pl-[calc((100%-1400px)/2)]">
+						{" "}
+						Línea del tiempo
+					</h1>
 					<div className="mt-12">
 						<Timeline />
 					</div>
