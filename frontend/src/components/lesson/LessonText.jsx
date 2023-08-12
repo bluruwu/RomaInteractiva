@@ -16,19 +16,21 @@ const LessonText = ({ title, paragraphs, dropdownMenu }) => {
 			</div>
 
 			{/* Párrafo actual */}
-			<div className="relative text-justify">
-				{paragraphs.map((paragraph, index) => (
-					<p
-						key={index}
-						className={`absolute top-0 left-0 w-full h-full transform ${
-							currentParagraph === index
-								? "opacity-100 translate-x-0"
-								: "-translate-x-full opacity-0"
-						} transition-all duration-300`}
-					>
-						{paragraph}
-					</p>
-				))}
+			<div>
+				<div className="relative text-justify">
+					{paragraphs.map((paragraph, index) => (
+						<p
+							key={index}
+							className={`absolute top-0 left-0 w-full h-full transform ${
+								currentParagraph === index
+									? "opacity-100 translate-x-0"
+									: "-translate-x-full opacity-0"
+							} transition-all duration-300`}
+						>
+							{paragraph}
+						</p>
+					))}
+				</div>
 			</div>
 
 			{/* BOTONES DE LOS PARRAFOS Y BOTON DE CAMBIAR ENTRE MODELOS */}

@@ -164,54 +164,38 @@ const Perfil = () => {
 	//Obtener la imagen del avatar
 	const getAvatar = () => {
 		//Si el usuario tiene un avatar_id se busca la imagen que le corresponde
-		if (idAvatar != null) {
-			return (
-				//  AVATAR, CAMBIAR AVATAR, MIS CALIFICACIONES
-				<div className="flex flex-col place-items-center w-full pt-10 md:order-3">
-					{/* DIV CON AVATAR Y BOTON PARA SUBIR IMAGEN */}
-					<div className="relative mb-6">
-						{/* AVATAR */}
-						<img
-							src={
-								idAvatar < 7
+		return (
+			<div className="flex flex-col place-items-center w-full pt-10 md:order-3">
+				{/* DIV CON AVATAR Y BOTON PARA SUBIR IMAGEN */}
+				<div className="relative mb-6">
+					{/* AVATAR */}
+					<img
+						src={
+							idAvatar != null
+								? idAvatar < 7
 									? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
 									: `${API_URL}/image/avatar${idAvatar}.jpg`
-							}
-							className="w-36 h-36 rounded-full border-4 rounded border-custom-doradodark"
-						/>
+								: process.env.PUBLIC_URL + `/avatars/usericon.png` //Si el usuario no tiene ningun avatar_id se pone el avatar generico
+						}
+						className="w-36 h-36 rounded-full border-4 rounded border-custom-doradodark"
+					/>
 
-						{/* BOTON PARA SUBIR IMAGEN */}
-						<button className="absolute right-0 bottom-0 w-10 h-10 overflow-hidden rounded-full">
-							<img
-								src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
-								className="object-cover w-full h-full"
-								onClick={(e) => updloadAvatar()}
-							/>
-						</button>
-					</div>
-					{/* MODAL PARA SELECCIONAR AVATARES PREDEFINIDOS */}
-					<div className="flex flex-col items-center justify-center mb-5">
-						<ModalAvatar saveAvatar={setIdAvatar} />
-						<Modal />
-					</div>
+					{/* BOTON PARA SUBIR IMAGEN */}
+					<button className="absolute right-0 bottom-0 w-10 h-10 overflow-hidden rounded-full">
+						<img
+							src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
+							className="object-cover w-full h-full"
+							onClick={(e) => updloadAvatar()}
+						/>
+					</button>
 				</div>
-			);
-		} else {
-			//Si el usuario no tiene ningun avatar_id se pone el avatar generico
-			return (
-				<div>
-					<img
-						src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
-						className="inline  object-cover w-32 h-32 mb-2 rounded-full"
-					/>
-					<img
-						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
-						className="border-2 border-custom-red"
-						onClick={(e) => updloadAvatar()}
-					/>
+				{/* MODAL PARA SELECCIONAR AVATARES PREDEFINIDOS */}
+				<div className="flex flex-col items-center justify-center mb-5">
+					<ModalAvatar saveAvatar={setIdAvatar} />
+					<Modal />
 				</div>
-			);
-		}
+			</div>
+		);
 	};
 
 	async function updloadAvatar() {

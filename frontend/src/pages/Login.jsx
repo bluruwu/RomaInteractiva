@@ -162,12 +162,16 @@ const Login = () => {
 
 							<button
 								id="recover"
-								className="mb-4 underline"
+								className="p-2 underline"
 								onClick={() => navigate("/recoverpassword")}
 							>
 								Recover password
 							</button>
-							<button id="navregistro" className="underline " onClick={() => navigate("/register")}>
+							<button
+								id="navregistro"
+								className="underline p-2"
+								onClick={() => navigate("/register")}
+							>
 								Don't have an account?
 							</button>
 						</div>

@@ -7,7 +7,7 @@ const NavBarGames = ({ text, path }) => {
 	return (
 		<li className="xl:mr-12">
 			<button
-				className="xl:text-custom-doradonormal lg:hover:text-white font-text font-regular"
+				className="xl:text-custom-doradonormal lg:hover:text-white font-text font-regular py-2"
 				onClick={() => navigate(path)}
 			>
 				{text}

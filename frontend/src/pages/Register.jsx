@@ -187,14 +187,14 @@ const Register = () => {
 							<button
 								id="submit"
 								type="submit"
-								className="max-w-sm bg-custom-rojo text-white w-full h-full text-center border-2 rounded-3xl border focus:outline-none py-2 mb-4"
+								className="max-w-sm bg-custom-rojo text-white w-full h-full text-center border-2 rounded-3xl border focus:outline-none py-2 mb-2"
 							>
 								Register
 							</button>
 						</div>
 
 						<div className="flex flex-col items-center">
-							<button id="gotologin" className="mb-4 underline" onClick={() => navigate("/login")}>
+							<button id="gotologin" className="p-2 underline" onClick={() => navigate("/login")}>
 								Already have an account?
 							</button>
 						</div>
