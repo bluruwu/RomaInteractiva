@@ -21,7 +21,7 @@ export default function ModalAvatar({ saveAvatar }) {
 	return (
 		<>
 			{/*<ButtonBack texto='abrir' onClick={() => { setShowModal(true) }} />*/}
-			<div className="mb-4 md:mb-0 h-8 rounded-xl transform transition duration-300 hover:scale-110 underline cursor-pointer">
+			<div className="mb-2 md:mb-0 h-8 rounded-xl transform transition duration-300 hover:scale-110 underline cursor-pointer">
 				<a
 					onClick={() => {
 						setShowModal(true);

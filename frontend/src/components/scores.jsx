@@ -208,7 +208,7 @@ export default function Modal() {
 	return (
 		<>
 			{/*<ButtonBack texto='abrir' onClick={() => { setShowModal(true) }} />*/}
-			<div className="text-sm mb-4 md:mb-0 h-8  rounded-xl transform transition duration-300 hover:scale-110 underline cursor-pointer">
+			<div className="text-sm md:mb-0 h-8  rounded-xl transform transition duration-300 hover:scale-110 underline cursor-pointer">
 				<a
 					onClick={() => {
 						setShowModal(true);
@@ -248,7 +248,6 @@ export default function Modal() {
 												<Button texto={getText(4)} onClick={() => getScore(4)} />
 
 												<Button texto={getText(5)} onClick={() => getScore(5)} />
-
 											</div>
 										</div>
 									</div>

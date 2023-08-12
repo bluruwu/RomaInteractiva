@@ -5,7 +5,6 @@ import Modal from "../components/scores";
 import ModalAvatar from "../components/chooseAvatar";
 import { putActualizarPerfil, getAPI_URL } from "../conections/requests";
 import Swal from "sweetalert2";
-import "./css/perfil.css";
 import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
@@ -167,20 +166,34 @@ const Perfil = () => {
 		//Si el usuario tiene un avatar_id se busca la imagen que le corresponde
 		if (idAvatar != null) {
 			return (
-				<div>
-					<img
-						src={
-							idAvatar < 7
-								? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
-								: `${API_URL}/image/avatar${idAvatar}.jpg`
-						}
-						className="overlayed-image-1"
-					/>
-					<img
-						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
-						className="overlayed-image-2"
-						onClick={(e) => updloadAvatar()}
-					/>
+				//  AVATAR, CAMBIAR AVATAR, MIS CALIFICACIONES
+				<div className="flex flex-col place-items-center w-full pt-10 md:order-3">
+					{/* DIV CON AVATAR Y BOTON PARA SUBIR IMAGEN */}
+					<div className="relative mb-6">
+						{/* AVATAR */}
+						<img
+							src={
+								idAvatar < 7
+									? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+									: `${API_URL}/image/avatar${idAvatar}.jpg`
+							}
+							className="w-36 h-36 rounded-full border-4 rounded border-custom-doradodark"
+						/>
+
+						{/* BOTON PARA SUBIR IMAGEN */}
+						<button className="absolute right-0 bottom-0 w-10 h-10 overflow-hidden rounded-full">
+							<img
+								src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
+								className="object-cover w-full h-full"
+								onClick={(e) => updloadAvatar()}
+							/>
+						</button>
+					</div>
+					{/* MODAL PARA SELECCIONAR AVATARES PREDEFINIDOS */}
+					<div className="flex flex-col items-center justify-center mb-5">
+						<ModalAvatar saveAvatar={setIdAvatar} />
+						<Modal />
+					</div>
 				</div>
 			);
 		} else {
@@ -193,7 +206,7 @@ const Perfil = () => {
 					/>
 					<img
 						src={process.env.PUBLIC_URL + `/avatars/smallcamera.png`}
-						className="overlayed-image-2"
+						className="border-2 border-custom-red"
 						onClick={(e) => updloadAvatar()}
 					/>
 				</div>
@@ -215,116 +228,127 @@ const Perfil = () => {
 	}
 
 	return (
-		<div id="perfil" className="font-text  h-screen">
+		<div id="perfil" className="font-text h-screen ">
 			<Navbar />
-			{/* Contenido de la leccion y modelo */}
-			{/* <div className="mt-10 ml-10">
-				<HomeButton />
-			</div> */}
 
-			<div className="p-10"></div>
-
-			<div className="logrosyperfil">
-				<img
-					src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
-					className="imagesLeft"
-				/>
-
-				<img
-					src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
-					className="imagesLeft"
-				/>
-
-				<img
-					src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
-					className="imagesLeft"
-				/>
-
+			{/* PARTE SUPERIOR CON LOS LOGROS Y EL AVATAR DE PERFIL */}
+			<div className="flex flex-col md:grid md:grid-cols-3 md:flex-row lg:mx-2/5">
+				{/* AVATAR, CAMBIAR AVATAR, MIS CALIFICACIONES */}
 				{getAvatar()}
 
-				<img
-					src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
-					className="imagesRight"
-				/>
+				{/* PRIMER BLOQUE DE LOGROS */}
+				<div className="flex flex-row items-center justify-center md:order-2 h-full md:mt-[-42px] lg:justify-end">
+					<img
+						src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
+						className="w-20"
+					/>
 
-				<img
-					src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
-					className="imagesRight"
-				/>
+					<img
+						src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
+						className="w-20"
+					/>
 
-				<img
-					src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
-					className="imagesRight"
-				/>
-			</div>
-
-			{/* Modal para mostrar los avatares disponibles */}
-			<div className="flex flex-col items-center justify-center mb-5">
-				<ModalAvatar saveAvatar={setIdAvatar} />
-				<Modal />
-			</div>
-
-			{/* Campos con la informacion del usuario */}
-			<div class="grid">
-				<div>
-					<div className="first-column ">
-						<p>Nombre completo</p>
-						<input
-							type="text"
-							className="inputClassName"
-							onChange={(e) => setNombreCompleto(e.target.value)}
-							value={nombreCompleto}
-						/>
-					</div>
+					<img
+						src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
+						className="w-20"
+					/>
 				</div>
-				<div>
-					<p>Apodo</p>
+
+				{/* SEGUNDO BLOQUE DE LOGROS */}
+				<div className="flex flex-row items-center justify-center md:order-4 h-full md:mt-[-42px] lg:justify-start">
+					<img
+						src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
+						className="w-20"
+					/>
+
+					<img
+						src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
+						className="w-20"
+					/>
+
+					<img
+						src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
+						className="w-20"
+					/>
+				</div>
+			</div>
+
+			{/* CAMPOS (6) CON LA INFORMACION DEL USUARIO */}
+			<div className="flex flex-col items-center px-3 py-4 lg:grid lg:grid-cols-2 lg:max-w-4xl lg:mx-[calc((100%-768px)/2)] lg:gap-x-4">
+				{/* NOMBRE */}
+				<div className="w-full max-w-sm mb-4 lg:mr-2">
+					<p className="font-bold pb-2">Nombre completo</p>
 					<input
 						type="text"
-						className="inputClassName"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
+						onChange={(e) => setNombreCompleto(e.target.value)}
+						value={nombreCompleto}
+					/>
+				</div>
+
+				{/* APODO */}
+				<div className="w-full max-w-sm mb-4">
+					<p className="font-bold pb-2">Apodo</p>
+					<input
+						type="text"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
 						onChange={(e) => setNickname(e.target.value)}
 						value={nickname}
 					/>
 				</div>
-				<div>
-					<div className="first-column">
-						<p>Contraseña</p>
-						<input
-							type="text"
-							className="inputClassName"
-							onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
-							onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
-							style={{ WebkitTextSecurity: "disc" }}
-							value={localStorage.getItem("token") ? contrasena : ""}
-						/>
-					</div>
-				</div>
-				<div>
-					<p>Correo electrónico</p>
+
+				{/* CORREO ELECTRONICO */}
+				<div className="w-full max-w-sm mb-4">
+					<p className="font-bold pb-2">Correo electrónico</p>
 					<input
 						type="text"
-						className="inputClassName"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
 						onChange={(e) => setEmail(e.target.value)}
 						value={email}
 						disabled
 					/>
 				</div>
-				<div>
-					<div className="first-column">
-						<p>Nivel</p>
-						<input type="text" className="inputClassName" value={nivel} disabled />
-					</div>
+
+				{/* CONTRASENA */}
+				<div className="w-full max-w-sm mb-4">
+					<p className="font-bold pb-2">Contraseña</p>
+					<input
+						type="text"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
+						onChange={(e) => cambiarContraseñaDialogue(e.target.value)}
+						onClick={(e) => cambiarContraseñaDialogue(e.target.value)}
+						style={{ WebkitTextSecurity: "disc" }}
+						value={localStorage.getItem("token") ? contrasena : ""}
+					/>
 				</div>
-				<div>
-					<p>Experiencia</p>
-					<input type="text" className="inputClassName" value={experiencia} disabled />
+
+				{/* NIVEL */}
+				<div className="w-full max-w-sm mb-4">
+					<p className="font-bold pb-2">Nivel</p>
+					<input
+						type="text"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
+						value={nivel}
+						disabled
+					/>
+				</div>
+
+				{/* EXPERIENCIA */}
+				<div className="w-full max-w-sm mb-4">
+					<p className="font-bold pb-2">Experiencia</p>
+					<input
+						type="text"
+						className="w-full border-2 rounded-3xl focus:outline-none focus:border-custom-rojo focus:ring-0"
+						value={experiencia}
+						disabled
+					/>
 				</div>
 			</div>
 
 			{/* Boton guardar cambios */}
 			<div className="flex flex-col items-center pb-20">
 				<button
-					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-xl font-bold drop-shadow-xl hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110 "
+					className="mb-4 md:mb-0 h-8 bg-custom-doradonormal rounded-3xl font-bold drop-shadow-xl lg:hover:bg-custom-doradodark shadow-md transform transition duration-300 hover:scale-110 "
 					style={{ minWidth: "15rem" }}
 					onClick={handleButtonClick}
 				>

@@ -4,7 +4,7 @@ import React from "react";
 const Footbar = () => {
 	return (
 		<footer className="bg-black py-8 bottom-0 w-full">
-			<div className="flex flex-col md:flex-row justify-between font-text text-center text-white md:mx-20">
+			<div className="flex flex-col md:flex-row justify-between font-text text-center text-white md:mx-20 2xl:mx-[calc((100%-1400px)/2)]">
 				{/* SOBRE NOSOTROS  */}
 				<div className="pb-8 md:pb-0">
 					<p className="font-bold"> Sobre nosotros </p>
