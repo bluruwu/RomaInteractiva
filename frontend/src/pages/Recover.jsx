@@ -107,7 +107,7 @@ const Recover = () => {
 						</div>
 
 						<div className="flex flex-col items-center">
-							<button id="gotologin" className="mb-4 underline" onClick={() => navigate("/login")}>
+							<button id="gotologin" className="p-2 underline" onClick={() => navigate("/login")}>
 								Return to login
 							</button>
 						</div>

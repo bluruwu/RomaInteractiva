@@ -96,7 +96,7 @@ const Navbar = ({ inQuiz }) => {
 
 	return (
 		<nav className={`bg-custom-rojo ${isHome ? "sticky top-0 left-0 w-full z-50" : ""}`}>
-			<div className="flex justify-between mx-4 md:mx-20 2xl:mx-[calc((100%-1400px)/2)]">
+			<div className="flex justify-between mx-4 md:mx-20 ">
 				{/* Logo y titulo */}
 				<div id="logo" className="flex items-center -space-x-3 cursor-pointer" onClick={setGoHome}>
 					<button>
@@ -178,7 +178,7 @@ const Navbar = ({ inQuiz }) => {
 										{/* Menu que se muestra al hacer clic */}
 										<Popover.Panel
 											static
-											className="z-20 absolute bg-gray-100  shadow-xl p-4 w-screen md:w-max mt-3 -right-4 md:mt-5 md:rounded-xl bg-opacity-70 backdrop-blur-md"
+											className="z-20 absolute bg-gray-100 shadow-xl p-4 w-screen sm:w-max mt-3 sm:right-0 -right-4 sm:mt-5 sm:rounded-xl bg-opacity-70 backdrop-blur-md"
 										>
 											{/* NOMBRE DE USUARIO (O LOGIN) Y AVATAR */}
 											<div className="flex justify-end items-center ">
@@ -190,7 +190,10 @@ const Navbar = ({ inQuiz }) => {
 													{nickname ? nickname : "Iniciar sesión"}
 												</a>
 
-												<div className="w-14 h-14 rounded-full bg-gray-200">
+												<div
+													className="w-14 h-14 rounded-full bg-gray-200"
+													onClick={handleNavigation}
+												>
 													{idAvatar ? (
 														<img
 															alt="Avatar del usuario"
@@ -206,8 +209,6 @@ const Navbar = ({ inQuiz }) => {
 															alt="Avatar del usuario"
 															src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 															className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
-															//Si no hay avatar
-															onClick={handleNavigationLoggedOut}
 														/>
 													)}
 												</div>
@@ -229,7 +230,7 @@ const Navbar = ({ inQuiz }) => {
 											{nickname && (
 												<div className="flex justify-end">
 													<button
-														className="py-3 cursor-pointer text-xs whitespace-nowrap mt-2 z-20"
+														className="py-2 cursor-pointer whitespace-nowrap mt-2 z-20 font-bold"
 														onClick={setCerrarSesion}
 													>
 														Cerrar sesión
