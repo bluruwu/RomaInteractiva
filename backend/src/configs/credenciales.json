@@ -1,0 +1,13 @@
+{
+	"type": "service_account",
+	"project_id": "roma-interactiva",
+	"private_key_id": "e5c6f1ca1de97c7576af2d6c44331668f5ea8407",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCJKXzLBT/45yeU\njCdEuBwtVp3OxWUwGPDtWk1SjzLqAHScRYHnUVmLn9uheRqxcD4nGf0XIFDbrkQk\n+Kc/WK6h4ghiwpJp0I6ljXWxKpiKTAwvk/NXLkj2xWEjiYorJ/HQUWsJ821cGzhb\nwNfjpLXkUq5cuuKswnKFA617zxgw5Z7b9pISIJ6+EHtLUcAClMX1gP2cfSw+1o2E\nTraZ2cdaxiiAWT7mAI+lkq72uksRC4gW6lDKDD1gsT4cT5bRVEkudc2Z5FYS2SHN\nY2s96Vs3yURQg7oTK4wueIEecMixL+vwVAALWq0Rfnf0rcFVYNLEtaEowpuXom7o\n6l6M2Nb9AgMBAAECggEAAPjX8mnI3IcQC+VoLaLYlkZEuFXdsMPSFa7vMqYJQEj9\nCpKs7nP9Fh6tp1ambQcxdZFhiD15igXRfbaVm6VEy/WZxbaalyCvTINbLmrk6Y2Y\nHeoAdNSpfgNp+97wnJVib62Ob31eMzBay6TeX5wuKtGE/IS/8JjKYXo92ECga5yu\nUl0zwXq0JjhCA0cysiJdDl8GEsuXbsYcsXhGsAJLD1I0QrRDlqExz5EErGzjNhp7\ngSG25b3iSeZM/seXWXBUBvA5hLqMOwQVAm4uXaHaZejOF9QAto+6MEraRa8qC9U7\n3Mex8P0uuODlcSBCZXjPGtthM24vUBLId3/h1M4oEQKBgQDA4Pt6xWXtQtwLmohd\nD0Q+29afcmhvJruPbuj59MS5RTqUoFkkmlBaFm2Kx/LPOVwRksYZNlzeOYiciPpJ\nb5vHhKTV72caMeGr2Y3H6n++O5Lx9HtmcU9jpzlPEXfNFOa+2NamgxjBT/6+8Y2z\nDcpDvt2bZg+Q/lUzb2JvIQDC8QKBgQC2DKksXYkK+0UQc+bcqbKzLSIzDQZre2e1\na1EzdkTxahcJ6F1sV/0+QwmPT1kytGKYYQUyVlICz2pH2kdeZZ50O5PPJtQftJbE\noL90aYhMOqH3ucO8Z9MzkZ0xXnIlJOi/gfKhjc+1Ud9z/bH/mcuKcGzBtetujXQR\nrTSiLdB8zQKBgFPMK1YOlxb6ulFMRTxxGoxYxKkncpn/8PMDE7MtFZ8MpcPW2oPd\ni1VocxUdg69mU0rLQsfHZ5eg1Wp01JC9LagER/0uctPdohcggMm/ZtqGVXRLbKV4\nSy6Xg32HsE3oa8u0t6VGRaYPFDVvCsolDqBaNzuBnve2l9ut4802QHdxAoGBAKuG\nOk7mwhxqqqPZ0AbQjOJs//ABsa7LUueH+bX3FPYw8wwOtxdBwAVNvFAefvhbJRpV\nL0RCOHsVWhng+6VhMW5qQ9XFy88jo3oXysuwMw8/nyN9D4MQf9nytJyzU/DTWcg2\nc5jruGwqe9MZkQA2s6P4UUAiW3SKKnYNL64uZGVxAoGAcYvS6lIzbVQ92LOQFPfD\nkOBecrQkKLSqAE7d5SrTN85Vd9Gh9JE5vXb5DGq1oMLPTf2Fem4R7R6095UJ9x59\nbfcEWWpfboD5xjnxrT+Et06KQsLd2mnfoekmJOq8OkLtgnDDzqhMgaLRcImO431H\nXInKpxLUkIreQa5MuUx0gZI=\n-----END PRIVATE KEY-----\n",
+	"client_email": "roma-interactiva@roma-interactiva.iam.gserviceaccount.com",
+	"client_id": "106286605366085172132",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://oauth2.googleapis.com/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/roma-interactiva%40roma-interactiva.iam.gserviceaccount.com",
+	"universe_domain": "googleapis.com"
+}

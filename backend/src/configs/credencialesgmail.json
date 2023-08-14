@@ -1,0 +1,10 @@
+{
+	"web": {
+		"client_id": "1009519224600-3h16f1u41d28n6d8ssutnc7o8daorafn.apps.googleusercontent.com",
+		"project_id": "roma-interactiva",
+		"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+		"token_uri": "https://oauth2.googleapis.com/token",
+		"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+		"client_secret": "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"
+	}
+}
