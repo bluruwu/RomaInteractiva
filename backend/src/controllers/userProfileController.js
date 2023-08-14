@@ -1,10 +1,16 @@
+/**
+ * Controladores para el manejo de los datos del perfil de los usuarios
+ */
+const { getUserPassword, updateUserPassword } = require("../models/UsuariosModel");
+const bcrypt = require("bcryptjs");
+
 // Actualizar Datos editables en el perfil de un usuario
 /**
  * Envia un json stado acorde y con un string.
  * {status: 280, Perfil actualizado correctamente}
  * {status: 480, "Las contraseña actual no es valida"}
  */
-app.put("/actualizarperfil", verifyToken, async (req, res) => {
+async function updateUserProfile(req, res) {
 	// Obtener el ID de usuario del token decodificado
 	const id_usuario = req.user.id_usuario;
 
@@ -38,12 +44,7 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 	if (nivel) newData["nivel"] = nivel;
 	if (experiencia) newData["experiencia"] = experiencia;
 
-	//Consulata a la base de datos para obtener el usuario con el id del token
-	const { data, error } = await supabase
-		.from("usuarios")
-		.select("contrasena")
-		.eq("id_usuario", id_usuario);
-
+	const data = await getUserPassword(id_usuario);
 	//se obtiene la contraseña del usuario en la bd
 	const contrasena_db = data[0]["contrasena"];
 
@@ -67,16 +68,12 @@ app.put("/actualizarperfil", verifyToken, async (req, res) => {
 		}
 	}
 
-	const { error: queryError } = await supabase
-		.from("usuarios")
-		.update(newData)
-		.eq("id_usuario", id_usuario);
-
-	//Si hay un error durante la actualizacion
-	if (queryError) {
-		throw new Error(queryError.message);
-	}
+	const updatePassword = await updateUserPassword(newData, id_usuario);
 
 	res.status(280).json("Perfil actualizado correctamente");
 	return;
-});
+}
+
+module.exports = {
+	updateUserProfile,
+};

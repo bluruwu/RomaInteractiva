@@ -1,3 +1,7 @@
+/**
+ * MANEJO DE LAS SOLICITUDES A LA BASE DE DATOS DE LA TABLA DE "calificaciones"
+ */
+
 const { supabase } = require("../configs/databaseConfig");
 
 //Guardar calificacio del usuario

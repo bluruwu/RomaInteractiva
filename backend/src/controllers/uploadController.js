@@ -1,9 +1,14 @@
+/**
+ * Controladores para manejar la subida de las imagenes a Google
+ */
+
 const { Readable } = require("stream");
-const multer = require("multer");
 
 // Credenciales Google Drive
-const googleCredentials = require("./credenciales.json");
-const { file } = require("googleapis/build/src/apis/file");
+const googleCredentials = require("../configs/credenciales.json");
+
+const { google } = require("googleapis");
+// const fs = require("fs");
 
 // Configuración de autenticación de Google Drive
 const auth = new google.auth.GoogleAuth({
@@ -12,12 +17,10 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const drive = google.drive({ version: "v3", auth });
-const storage = multer.memoryStorage();
-const upload = multer({ storage }).single("file");
 
 const folderId = "1AguL3BshwwbjoW5BLst8Ynanu4n4u91r";
 
-app.post("/upload", upload, async (req, res) => {
+async function uploadImage(req, res) {
 	try {
 		const file = req.file;
 		const fileName = file.originalname;
@@ -47,7 +50,7 @@ app.post("/upload", upload, async (req, res) => {
 		//console.error(error);
 		res.json(error.message);
 	}
-});
+}
 
 //funcion que me retorna el avatar con el ultimo id
 //esto sirve para añadir imagenes al server de forma ordenada
@@ -76,7 +79,7 @@ async function getLastId() {
 	return id;
 }
 
-app.get("/image/:name", async (req, res) => {
+async function getImage(req, res) {
 	try {
 		const fileName = req.params.name;
 
@@ -116,8 +119,10 @@ app.get("/image/:name", async (req, res) => {
 		console.error(error);
 		res.status(500).json({ error: "Error al buscar la imagen en Google Drive." });
 	}
-});
+}
 
 module.exports = {
 	getLastId,
+	uploadImage,
+	getImage,
 };

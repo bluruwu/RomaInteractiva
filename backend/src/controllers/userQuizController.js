@@ -1,3 +1,6 @@
+/**
+ * Controladores para el manejo de las calificaciones de los quizzes de los usuarios
+ */
 const { insertCalificacion, getCalificacionesUsuario } = require("../models/CalificacionesModel");
 
 // POST para el registro de calificacion de un quiz de un usuario en la base de datos

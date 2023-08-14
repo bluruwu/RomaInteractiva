@@ -1,3 +1,7 @@
+/**
+ * Controladores de autenticacion, manejo de las cuentas de usuario
+ */
+
 const {
 	getUserByEmail,
 	getUsers,
