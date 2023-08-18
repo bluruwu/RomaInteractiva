@@ -4,7 +4,7 @@
 //Usar API_URL de vercel antes de hacer pull request a main para hacer el despliegue
 const API_URL = "https://roma-interactiva-back-edinsonuwu.vercel.app";
 //Usar la API_URL del puerto 9000 si se va a trabajar local
-// const API_URL = "http://127.0.0.1:9000";
+//const API_URL = "http://127.0.0.1:9000";
 
 export function getAPI_URL() {
 	return API_URL;
