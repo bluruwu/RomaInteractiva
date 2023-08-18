@@ -171,7 +171,7 @@ const Perfil = () => {
 					{/* AVATAR */}
 					<img
 						src={
-							idAvatar != null
+							(idAvatar != null) || (idAvatar == 0)
 								? idAvatar < 8
 									? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
 									: `${API_URL}/image/avatar${idAvatar}.jpg`

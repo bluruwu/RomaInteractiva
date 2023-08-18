@@ -194,19 +194,21 @@ const Navbar = ({ inQuiz }) => {
 													className="w-14 h-14 rounded-full bg-gray-200"
 													onClick={handleNavigation}
 												>
-													{idAvatar ? (
+													{((idAvatar != null) || (idAvatar == 0)) ? (
 														<img
-															alt="Avatar del usuario"
+															alt="Avatar del usuario 1"
 															src={
-																idAvatar < 7
-																	? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
-																	: `${API_URL}/image/avatar${idAvatar}.jpg`
+																((idAvatar != null) || (idAvatar == 0))
+																	? idAvatar < 8
+																		? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+																		: `${API_URL}/image/avatar${idAvatar}.jpg`
+																	: process.env.PUBLIC_URL + `/avatars/usericon.png` //Si el usuario no tiene ningun avatar_id se pone el avatar generico
 															}
 															className="w-14 h-14 border-2 inline border border-custom-doradodark rounded-full"
 														/>
 													) : (
 														<img
-															alt="Avatar del usuario"
+															alt="Avatar del usuario 2"
 															src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 															className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 														/>
@@ -255,19 +257,21 @@ const Navbar = ({ inQuiz }) => {
 									<Popover.Button className="focus:outline-none cursor-pointer">
 										{/* Si el usuario esta logeado, mostrar su avatar, si no mostrar el avatar generico */}
 										<div className="w-14 h-14 rounded-full bg-gray-200">
-											{idAvatar ? (
+											{((idAvatar != null) || (idAvatar == 0)) ? (
 												<img
-													alt="Avatar del usuario"
+													alt="Avatar del usuario 3"
 													src={
-														idAvatar < 7
-															? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
-															: `${API_URL}/image/avatar${idAvatar}.jpg`
+														((idAvatar != null) || (idAvatar == 0))
+															? idAvatar < 8
+																? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
+																: `${API_URL}/image/avatar${idAvatar}.jpg`
+															: process.env.PUBLIC_URL + `/avatars/usericon.png` //Si el usuario no tiene ningun avatar_id se pone el avatar generico
 													}
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 												/>
 											) : (
 												<img
-													alt="Avatar del usuario"
+													alt="Avatar del usuario 4"
 													src={process.env.PUBLIC_URL + `/avatars/usericon.png`}
 													className="w-14 h-14 border-2 inline border-custom-doradodark rounded-full"
 													//Si no hay avatar
