@@ -71,7 +71,7 @@ async function getLastId() {
 		console.error(error);
 	}
 	let allFileNames = imageNames;
-	let id = 6;
+	let id = 8;
 	for (let i in allFileNames) {
 		if (id <= parseInt(allFileNames[i].substr(6, allFileNames[i].search(".") + 2)))
 			id = parseInt(allFileNames[i].substr(6, allFileNames[i].search(".") + 2));
