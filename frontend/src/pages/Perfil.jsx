@@ -172,7 +172,7 @@ const Perfil = () => {
 					<img
 						src={
 							idAvatar != null
-								? idAvatar < 7
+								? idAvatar < 8
 									? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
 									: `${API_URL}/image/avatar${idAvatar}.jpg`
 								: process.env.PUBLIC_URL + `/avatars/usericon.png` //Si el usuario no tiene ningun avatar_id se pone el avatar generico
