@@ -165,13 +165,13 @@ const Perfil = () => {
 	const getAvatar = () => {
 		//Si el usuario tiene un avatar_id se busca la imagen que le corresponde
 		return (
-			<div className="flex flex-col place-items-center w-full pt-10 md:order-3">
+			<div className="flex flex-col place-items-center w-full pt-10">
 				{/* DIV CON AVATAR Y BOTON PARA SUBIR IMAGEN */}
 				<div className="relative mb-6">
 					{/* AVATAR */}
 					<img
 						src={
-							(idAvatar != null) || (idAvatar == 0)
+							idAvatar != null || idAvatar == 0
 								? idAvatar < 8
 									? process.env.PUBLIC_URL + `/avatars/avatar${idAvatar}.svg`
 									: `${API_URL}/image/avatar${idAvatar}.jpg`
@@ -189,11 +189,18 @@ const Perfil = () => {
 						/>
 					</button>
 				</div>
-				{/* MODAL PARA SELECCIONAR AVATARES PREDEFINIDOS */}
-				<div className="flex flex-col items-center justify-center mb-5">
-					<ModalAvatar saveAvatar={setIdAvatar} />
-					<Modal />
-				</div>
+			</div>
+		);
+	};
+
+	const getMenus = () => {
+		{
+			/* MODAL PARA SELECCIONAR AVATARES PREDEFINIDOS */
+		}
+		return (
+			<div className="flex flex-col items-center justify-center mb-5">
+				<ModalAvatar saveAvatar={setIdAvatar} />
+				<Modal />
 			</div>
 		);
 	};
@@ -215,45 +222,55 @@ const Perfil = () => {
 		<div id="perfil" className="font-text h-screen ">
 			<Navbar />
 
-			{/* PARTE SUPERIOR CON LOS LOGROS Y EL AVATAR DE PERFIL */}
-			<div className="flex flex-col md:grid md:grid-cols-3 md:flex-row lg:mx-2/5">
+			{/* PARTE SUPERIOR CON EL AVATAR DE PERFIL */}
+			<div className="flex flex-col">
 				{/* AVATAR, CAMBIAR AVATAR, MIS CALIFICACIONES */}
 				{getAvatar()}
+				{getMenus()}
+			</div>
 
-				{/* PRIMER BLOQUE DE LOGROS */}
-				<div className="flex flex-row items-center justify-center md:order-2 h-full md:mt-[-42px] lg:justify-end">
-					<img
-						src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
-						className="w-20"
-					/>
+			{/* LOGROS */}
+			<div className="flex flex-col items-center w-full mb-5 px-3">
+				<div className="w-full max-w-sm lg:max-w-3xl lg:py-4">
+					<p className="font-bold pb-6 lg:px-3">Logros</p>
+					{/* 6 INSIGNIAS DE LOGROS */}
+					<div className="flex flex-col items-center lg:flex-row justify-center lg:space-x-4">
+						{/* PRIMER BLOQUE DE LOGROS */}
+						<div className="flex space-x-2 lg:space-x-4 py-2">
+							<img
+								src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
+								className="w-20 h-20 rounded-full"
+							/>
 
-					<img
-						src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
-						className="w-20"
-					/>
+							<img
+								src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
+								className="w-20 h-20 rounded-full"
+							/>
 
-					<img
-						src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
-						className="w-20"
-					/>
-				</div>
+							<img
+								src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
+								className="w-20 h-20 rounded-full"
+							/>
+						</div>
 
-				{/* SEGUNDO BLOQUE DE LOGROS */}
-				<div className="flex flex-row items-center justify-center md:order-4 h-full md:mt-[-42px] lg:justify-start">
-					<img
-						src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
-						className="w-20"
-					/>
+						{/* SEGUNDO BLOQUE DE LOGROS */}
+						<div className="flex space-x-2 lg:space-x-4 py-2">
+							<img
+								src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
+								className="w-20 h-20 rounded-full "
+							/>
 
-					<img
-						src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
-						className="w-20"
-					/>
+							<img
+								src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
+								className="w-20 h-20 rounded-full"
+							/>
 
-					<img
-						src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
-						className="w-20"
-					/>
+							<img
+								src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
+								className="w-20 h-20 rounded-full"
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 
