@@ -1,0 +1,32 @@
+/* Custom Tooltip Styles */
+.tooltip {
+    position: relative;
+  }
+  
+  .tooltip::before,
+  .tooltip::after {
+    content: '';
+    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .tooltip::before {
+    content: attr(data-title);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    bottom: calc(100% + 8px); /* Adjust this value for vertical spacing */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip:hover::before,
+  .tooltip:hover::after {
+    display: block;
+    opacity: 1;
+  }

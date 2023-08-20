@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useNavigate, Navigate, json } from "react-router-dom";
 import UploadTheImage from "../utilities/UploadTheImage";
 import uploadImageToServer from "../utilities/start";
-
+import "./perfil.css"
 import imageNoLogro from "../media/logros/nologro.png";
 import gifarquitectura from "../media/logros/gifarquitectura.gif";
 import gifcultura from "../media/logros/gifcultura.gif";
@@ -235,44 +235,104 @@ const Perfil = () => {
 					<p className="font-bold pb-6 lg:px-3">Logros</p>
 					{/* 6 INSIGNIAS DE LOGROS */}
 					<div className="flex flex-col items-center lg:flex-row justify-center lg:space-x-4">
-						{/* PRIMER BLOQUE DE LOGROS */}
 						<div className="flex space-x-2 lg:space-x-4 py-2">
-							<img
-								src={logrosParaMostrar.logroMonarquia == true ? gifmonarquia : imageNoLogro}
-								className="w-20 h-20 rounded-full"
-							/>
-
-							<img
-								src={logrosParaMostrar.logroRepublica == true ? gifrepublica : imageNoLogro}
-								className="w-20 h-20 rounded-full"
-							/>
-
-							<img
-								src={logrosParaMostrar.logroImperio == true ? gifimperio : imageNoLogro}
-								className="w-20 h-20 rounded-full"
-							/>
+							{/* Monarquia Image */}
+							<div className="tooltip" data-title="Monarchy: You are a true king!">
+								<img
+									src={
+										logrosParaMostrar.logroMonarquia == true
+											? gifmonarquia
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
+							{/* Republica Image */}
+							<div className="tooltip" data-title="Republic: Who better to rule us, than you?">
+								<img
+									src={
+										logrosParaMostrar.logroRepublica == true
+											? gifrepublica
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
+							{/* Imperio Image */}
+							<div className="tooltip" data-title="Empire: Armored Gladiator">
+								<img
+									src={
+										logrosParaMostrar.logroImperio == true
+											? gifimperio
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
 						</div>
-
-						{/* SEGUNDO BLOQUE DE LOGROS */}
 						<div className="flex space-x-2 lg:space-x-4 py-2">
-							<img
-								src={logrosParaMostrar.logroPersonajes == true ? gifpersonajes : imageNoLogro}
-								className="w-20 h-20 rounded-full "
-							/>
-
-							<img
-								src={logrosParaMostrar.logroArquitectura == true ? gifarquitectura : imageNoLogro}
-								className="w-20 h-20 rounded-full"
-							/>
-
-							<img
-								src={logrosParaMostrar.logroCultura == true ? gifcultura : imageNoLogro}
-								className="w-20 h-20 rounded-full"
-							/>
+							{/* Personajes Image */}
+							<div className="tooltip" data-title="Characters: Gaius Julius Caesar">
+								<img
+									src={
+										logrosParaMostrar.logroPersonajes == true
+											? gifpersonajes
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
+							{/* Arquitectura Image */}
+							<div className="tooltip" data-title="Architecture: Panem et circenses (Bread and circuses)">
+								<img
+									src={
+										logrosParaMostrar.logroArquitectura == true
+											? gifarquitectura
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
+							{/* Cultura Image */}
+							<div className="tooltip" data-title="Culture: My name is Maximus Decimus Meridius">
+								<img
+									src={
+										logrosParaMostrar.logroCultura == true
+											? gifcultura
+											: imageNoLogro
+									}
+									className="w-20 h-20 rounded-full"
+									style={{
+										position: "relative",
+										display: "inline-block",
+									}}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 
 			{/* CAMPOS (6) CON LA INFORMACION DEL USUARIO */}
 			<div className="flex flex-col items-center px-3 py-4 lg:grid lg:grid-cols-2 lg:max-w-4xl lg:mx-[calc((100%-768px)/2)] lg:gap-x-4">

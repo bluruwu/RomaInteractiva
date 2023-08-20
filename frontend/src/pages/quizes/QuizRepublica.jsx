@@ -171,7 +171,7 @@ const QuizRepublica = () => {
 									color: "#716add",
 									html: `<div class="swal2-content-container">
 												  <img src="${gifrepublica}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-												  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Who better to rule us, than you.</p>
+												  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Who better to rule us, than you?</p>
 											   </div>`,
 									customClass: {
 										container: "font-text",
