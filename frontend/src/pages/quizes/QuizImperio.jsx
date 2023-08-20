@@ -175,7 +175,7 @@ const QuizImperio = () => {
 									color: "#716add",
 									html: `<div class="swal2-content-container">
 											  <img src="${gifimperio}" style="display: block; margin: 0 auto; max-width: 100%; max-height: 100%;" />
-											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Gladiador Acorazado</p>
+											  <p style="text-align: left; font-family: 'Merryweather', sans-serif; font-size: 12px; color: #000000; margin-top: 10px;margin-left: 30px;">Logro: Armored Gladiator</p>
 										   </div>`,
 									customClass: {
 										container: "font-text",
